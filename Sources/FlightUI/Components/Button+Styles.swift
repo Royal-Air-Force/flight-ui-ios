@@ -44,9 +44,9 @@ struct ButtonStyles_Previews: PreviewProvider {
                 }
             })
             .previewDisplayName("Primary Button with Icon (dark)")
-            .preferredColorScheme(.dark)
             .buttonStyle(.primary)
         }
+        .preferredColorScheme(.dark)
         .padding()
     }
 }
