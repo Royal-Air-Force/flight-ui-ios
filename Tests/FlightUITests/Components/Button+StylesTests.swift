@@ -12,7 +12,7 @@ import SwiftUI
 @testable import FlightUI
 
 class ButtonStyleTests: XCTestCase {
-    func test_PrimaryButton() {
+    func test_primaryButton() {
         let button = Button(action: { }) {
             Text("NOPE")
         }
