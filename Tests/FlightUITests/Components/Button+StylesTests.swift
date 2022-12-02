@@ -9,15 +9,19 @@
 import XCTest
 import SwiftUI
 
+import ViewInspector
+
 @testable import FlightUI
 
 class ButtonStyleTests: XCTestCase {
-    func test_primaryButton() {
+    func test_primaryButton() throws {
         let button = Button(action: { }) {
-            Text("NOPE")
+            Text("Primary")
         }
         .buttonStyle(.primary)
 
-        XCTAssertNotNil(button)
+        let caption = try button.inspect().button().labelView().text().string()
+
+        XCTAssertEqual(caption, "Primary")
     }
 }
