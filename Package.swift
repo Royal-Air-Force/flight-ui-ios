@@ -21,8 +21,5 @@ let package = Package(
         .target(
             name: "FlightUI",
             dependencies: []),
-        .testTarget(
-            name: "FlightUITests",
-            dependencies: ["FlightUI"]),
     ]
 )
