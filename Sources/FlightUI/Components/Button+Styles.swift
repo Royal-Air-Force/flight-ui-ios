@@ -34,14 +34,19 @@ extension ButtonStyle where Self == PrimaryButtonStyle {
 
 struct ButtonStyles_Previews: PreviewProvider {
     static var previews: some View {
-        Button(action: {}, label: {
-            HStack {
-                Image(systemName: "pencil")
-                Text("Edit")
-            }
-        })
-        .previewDisplayName("Primary Button with Icon (dark)")
-        .buttonStyle(.primary)
-        .preferredColorScheme(.dark)
+        VStack {
+            Button(action: {}, label: {
+                HStack {
+                    Image(systemName: "pencil")
+                        .foregroundColor(.white)
+
+                    Text("Edit")
+                }
+            })
+            .previewDisplayName("Primary Button with Icon (dark)")
+            .preferredColorScheme(.dark)
+            .buttonStyle(.primary)
+        }
+        .padding()
     }
 }
