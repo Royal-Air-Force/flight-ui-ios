@@ -2,72 +2,72 @@ import SwiftUI
 
 // MARK: - View Modifier Structs -
 
-struct Header1: ViewModifier {
-    func body(content: Content) -> some View {
+public struct Header1: ViewModifier {
+    public func body(content: Content) -> some View {
         content
             .font(.system(size: 28, weight: .bold))
             .foregroundColor(.ballisticPrimary)
     }
 }
 
-struct Header2: ViewModifier {
-    func body(content: Content) -> some View {
+public struct Header2: ViewModifier {
+    public func body(content: Content) -> some View {
         content
             .font(.system(size: 20, weight: .bold))
             .foregroundColor(.ballisticPrimary)
     }
 }
 
-struct Header3: ViewModifier {
-    func body(content: Content) -> some View {
+public struct Header3: ViewModifier {
+    public func body(content: Content) -> some View {
         content
             .font(.system(size: 16, weight: .regular))
             .foregroundColor(.ballisticPrimary)
     }
 }
 
-struct Input: ViewModifier {
-    func body(content: Content) -> some View {
+public struct Input: ViewModifier {
+    public func body(content: Content) -> some View {
         content
             .font(.system(size: 16, weight: .bold))
             .foregroundColor(.neutralBlue)
     }
 }
 
-struct ResultTypography: ViewModifier {
-    func body(content: Content) -> some View {
+public struct ResultTypography: ViewModifier {
+    public func body(content: Content) -> some View {
         content
             .font(.system(size: 16, weight: .bold))
             .foregroundColor(.ballisticSecondary)
     }
 }
 
-struct ButtonTypography: ViewModifier {
-    func body(content: Content) -> some View {
+public struct ButtonTypography: ViewModifier {
+    public func body(content: Content) -> some View {
         content
             .font(.system(size: 18, weight: .bold))
             .foregroundColor(.ballisticPrimary)
     }
 }
 
-struct Caption: ViewModifier {
-    func body(content: Content) -> some View {
+public struct Caption: ViewModifier {
+    public func body(content: Content) -> some View {
         content
             .font(.system(size: 16, weight: .regular))
             .foregroundColor(.ballisticPrimary)
     }
 }
 
-struct EmptyField: ViewModifier {
-    func body(content: Content) -> some View {
+public struct EmptyField: ViewModifier {
+    public func body(content: Content) -> some View {
         content
             .font(.system(size: 16, weight: .regular))
             .foregroundColor(.neutralLightGray)
     }
 }
 
-struct DropDownOptions: ViewModifier {
-    func body(content: Content) -> some View {
+public struct DropDownOptions: ViewModifier {
+    public func body(content: Content) -> some View {
         content
             .font(.system(size: 16, weight: .regular))
             .foregroundColor(.neutralBlue)
@@ -76,9 +76,9 @@ struct DropDownOptions: ViewModifier {
 
 // MARK: - View Extention Function -
 
-enum Typography: CaseIterable { case h1, h2, h3, input, result, button, caption, emptyField, dropDownOptions }
+public enum Typography: CaseIterable { case h1, h2, h3, input, result, button, caption, emptyField, dropDownOptions }
 
-extension View {
+public extension View {
     @ViewBuilder
     func typography(_ typography: Typography) -> some View {
         switch typography {
