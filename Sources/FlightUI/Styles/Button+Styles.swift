@@ -1,28 +1,20 @@
-//
-//  Button+Styles.swift
-//  FlightUI
-//  
-//
-//  Created by Alan Gorton on 02/12/2022.
-//
-
 import SwiftUI
 
-fileprivate let horizontalPadding = 48.0
-fileprivate let cornerRadius = 28.0
+fileprivate let horizontalPadding = 50.0
+fileprivate let verticalPadding = 12.0
 fileprivate let borderWidth = 3.0
 
 public struct PrimaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding()
-            .font(.title2.bold())
-            .foregroundColor(Color(uiColor: .black))
             .padding([.leading, .trailing], horizontalPadding)
-            .background(
-                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .fill(Color(uiColor: .systemGreen))
-            )
+            .padding([.top, .bottom], verticalPadding)
+            .font(.title2.bold())
+            .foregroundColor(Color.neutralBlack)
+            .background(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondary.opacity(0.5))
+            .clipShape(Capsule())
     }
 }
 
@@ -33,15 +25,19 @@ public extension ButtonStyle where Self == PrimaryButtonStyle {
 }
 
 public struct SecondaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding()
-            .font(.title2.bold())
-            .foregroundColor(Color(uiColor: .systemGreen))
             .padding([.leading, .trailing], horizontalPadding)
-            .background(
-                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .stroke(Color(uiColor: .systemGreen), lineWidth: borderWidth)
+            .padding([.top, .bottom], verticalPadding)
+            .font(.title2.bold())
+            .foregroundColor(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondary.opacity(0.5))
+            .clipShape(Capsule())
+            .overlay(
+                Capsule(style: .circular)
+                    .strokeBorder(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondary.opacity(0.5),
+                                  style: StrokeStyle(lineWidth: borderWidth))
             )
     }
 }
@@ -52,36 +48,76 @@ public extension ButtonStyle where Self == SecondaryButtonStyle {
     }
 }
 
+
+public struct TertiaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding([.leading, .trailing], horizontalPadding)
+            .padding([.top, .bottom], verticalPadding)
+            .font(.title2.bold())
+            .foregroundColor(isEnabled ? Color.ballisticPrimary : Color.ballisticPrimary.opacity(0.5))
+    }
+}
+
+public extension ButtonStyle where Self == TertiaryButtonStyle {
+    static var tertiary: Self {
+        return .init()
+    }
+}
+
+
 struct Button_Previews: PreviewProvider {
+    private static var buttonList: some View {
+        VStack {
+            Button("Primary", action: {})
+                .buttonStyle(.primary)
+            
+            Button(action: {}, label: {
+                HStack {
+                    Image(systemName: "pencil")
+                    Text("Primary with Icon")
+                }
+            })
+            .buttonStyle(.primary)
+            
+            Button("Primary Disabled", action: {})
+                .buttonStyle(.primary)
+                .disabled(true)
+            
+            Button(action: {}, label: {
+                HStack {
+                    Image(systemName: "pencil")
+                    Text("Primary with Icon Disabled")
+                }
+            })
+            .buttonStyle(.primary)
+            .disabled(true)
+            
+            Button("Secondary", action: {})
+                .buttonStyle(.secondary)
+            
+            Button("Secondary Disabled", action: {})
+                .buttonStyle(.secondary)
+                .disabled(true)
+            
+            Button("Tertiary", action: {})
+                .buttonStyle(.tertiary)
+            
+            Button("Tertiary Disabled", action: {})
+                .buttonStyle(.tertiary)
+                .disabled(true)
+        }
+    }
+    
     static var previews: some View {
-        Button(action: {}, label: {
-            HStack {
-                Image(systemName: "pencil")
-                Text("Edit")
-            }
-        })
-        .previewDisplayName("Primary Button with Icon (dark)")
-        .buttonStyle(.primary)
-        .preferredColorScheme(.dark)
-
-        Button(action: {}, label: {
-            HStack {
-                Image(systemName: "pencil")
-                Text("Edit")
-            }
-        })
-        .previewDisplayName("Primary Button with Icon (light)")
-        .buttonStyle(.primary)
-        .preferredColorScheme(.light)
-
-        Button("Reset", action: {})
-            .previewDisplayName("Secondary Button (dark)")
-            .buttonStyle(.secondary)
+        buttonList
+            .previewDisplayName("All Buttons (Dark)")
             .preferredColorScheme(.dark)
-
-        Button("Reset", action: {})
-            .previewDisplayName("Secondary Button (light)")
-            .buttonStyle(.secondary)
+        
+        buttonList
+            .previewDisplayName("All Buttons (Light)")
             .preferredColorScheme(.light)
     }
 }
