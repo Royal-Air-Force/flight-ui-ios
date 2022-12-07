@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Kaiman Mehmet on 06/12/2022.
-//
-
 import SwiftUI
 
 fileprivate let smallFieldWidth = 84.0

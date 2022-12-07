@@ -1,8 +1,11 @@
 import SwiftUI
 
+// TODO: Move to theme
 fileprivate let horizontalPadding = 50.0
 fileprivate let verticalPadding = 12.0
 fileprivate let borderWidth = 3.0
+
+// MARK: - Button Style Structs & Leading dot initialisers -
 
 public struct PrimaryButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -11,8 +14,8 @@ public struct PrimaryButtonStyle: ButtonStyle {
         configuration.label
             .padding([.leading, .trailing], horizontalPadding)
             .padding([.top, .bottom], verticalPadding)
-            .font(.title2.bold())
             .foregroundColor(Color.neutralBlack)
+            .typography(.button)
             .background(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondary.opacity(0.5))
             .clipShape(Capsule())
     }
@@ -31,8 +34,8 @@ public struct SecondaryButtonStyle: ButtonStyle {
         configuration.label
             .padding([.leading, .trailing], horizontalPadding)
             .padding([.top, .bottom], verticalPadding)
-            .font(.title2.bold())
             .foregroundColor(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondary.opacity(0.5))
+            .typography(.button)
             .clipShape(Capsule())
             .overlay(
                 Capsule(style: .circular)
@@ -56,8 +59,8 @@ public struct TertiaryButtonStyle: ButtonStyle {
         configuration.label
             .padding([.leading, .trailing], horizontalPadding)
             .padding([.top, .bottom], verticalPadding)
-            .font(.title2.bold())
             .foregroundColor(isEnabled ? Color.ballisticPrimary : Color.ballisticPrimary.opacity(0.5))
+            .typography(.button)
     }
 }
 
@@ -67,12 +70,17 @@ public extension ButtonStyle where Self == TertiaryButtonStyle {
     }
 }
 
+// MARK: - Preview Code -
 
 struct Button_Previews: PreviewProvider {
     private static var buttonList: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Button("Primary", action: {})
                 .buttonStyle(.primary)
+            
+            Button("Primary Disabled", action: {})
+                .buttonStyle(.primary)
+                .disabled(true)
             
             Button(action: {}, label: {
                 HStack {
@@ -81,10 +89,6 @@ struct Button_Previews: PreviewProvider {
                 }
             })
             .buttonStyle(.primary)
-            
-            Button("Primary Disabled", action: {})
-                .buttonStyle(.primary)
-                .disabled(true)
             
             Button(action: {}, label: {
                 HStack {
