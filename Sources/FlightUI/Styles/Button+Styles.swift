@@ -16,7 +16,7 @@ public struct PrimaryButtonStyle: ButtonStyle {
             .padding([.top, .bottom], verticalPadding)
             .foregroundColor(Color.neutralBlack)
             .typography(.button)
-            .background(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondary.opacity(0.5))
+            .background(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondaryDisabled)
             .clipShape(Capsule())
     }
 }
@@ -34,12 +34,12 @@ public struct SecondaryButtonStyle: ButtonStyle {
         configuration.label
             .padding([.leading, .trailing], horizontalPadding)
             .padding([.top, .bottom], verticalPadding)
-            .foregroundColor(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondary.opacity(0.5))
+            .foregroundColor(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondaryDisabled)
             .typography(.button)
             .clipShape(Capsule())
             .overlay(
                 Capsule(style: .circular)
-                    .strokeBorder(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondary.opacity(0.5),
+                    .strokeBorder(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondaryDisabled,
                                   style: StrokeStyle(lineWidth: borderWidth))
             )
     }
@@ -59,7 +59,7 @@ public struct TertiaryButtonStyle: ButtonStyle {
         configuration.label
             .padding([.leading, .trailing], horizontalPadding)
             .padding([.top, .bottom], verticalPadding)
-            .foregroundColor(isEnabled ? Color.ballisticPrimary : Color.ballisticPrimary.opacity(0.5))
+            .foregroundColor(isEnabled ? Color.ballisticPrimary : Color.neutralLightGray)
             .typography(.button)
     }
 }

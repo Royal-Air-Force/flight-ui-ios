@@ -5,6 +5,7 @@ import SwiftUI
 public extension Color {
     static let ballisticPrimary = Color("ballisticPrimary", bundle: .module)
     static let ballisticSecondary = Color("ballisticSecondary", bundle: .module)
+    static let ballisticSecondaryDisabled = Color("ballisticSecondaryDisabled", bundle: .module)
     static let neutralBlack = Color("neutralBlack", bundle: .module)
     static let neutralDarkGray = Color("neutralDarkGray", bundle: .module)
     static let neutralLightGray = Color("neutralLightGray", bundle: .module)
@@ -30,6 +31,7 @@ fileprivate extension Color {
     
     static let customColors: [Color] = [.ballisticPrimary,
                                         .ballisticSecondary,
+                                        .ballisticSecondaryDisabled,
                                         .neutralBlack,
                                         .neutralDarkGray,
                                         .neutralLightGray,
