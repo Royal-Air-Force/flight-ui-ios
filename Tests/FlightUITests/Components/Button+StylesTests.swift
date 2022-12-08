@@ -1,11 +1,3 @@
-//
-//  Button+StylesTests.swift
-//  FlightUI
-//  
-//
-//  Created by Alan Gorton on 02/12/2022.
-//
-
 import XCTest
 import SwiftUI
 

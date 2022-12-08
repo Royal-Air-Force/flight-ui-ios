@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Alan Gorton on 08/12/2022.
-//
-
 import SwiftUI
 
 fileprivate let fieldCornerRadius = 5.0
