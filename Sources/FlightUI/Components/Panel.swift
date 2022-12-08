@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: - Panel Structs -
+
 public struct Panel<Content: View>: View {
     @State private var expanded = false
 
@@ -94,13 +96,16 @@ public struct Panel<Content: View>: View {
     }
 }
 
+// MARK: - Preview Code -
+
+#if DEBUG
 struct Panel_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             Panel {
                 content
             }
-            .previewDisplayName("Content Only (dark)")
+            .previewDisplayName("Content Only")
             .preferredColorScheme(.dark)
 
 
@@ -124,3 +129,4 @@ struct Panel_Previews: PreviewProvider {
             .font(.title)
     }
 }
+#endif

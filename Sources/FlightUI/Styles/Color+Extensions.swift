@@ -15,6 +15,7 @@ public extension Color {
 
 // MARK: - FilePrivate Preview Code -
 
+#if DEBUG
 fileprivate extension Color {
     var name: String {
         let description = self.description
@@ -58,6 +59,7 @@ struct Color_Previews: PreviewProvider {
     static var previews: some View {
         colorList
             .preferredColorScheme(.dark)
-            .previewDisplayName("All Colors (Dark)")        
+            .previewDisplayName("All Colors")        
     }
 }
+#endif

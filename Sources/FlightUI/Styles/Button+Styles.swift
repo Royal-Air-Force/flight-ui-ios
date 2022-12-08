@@ -72,6 +72,7 @@ public extension ButtonStyle where Self == TertiaryButtonStyle {
 
 // MARK: - Preview Code -
 
+#if DEBUG
 struct Button_Previews: PreviewProvider {
     private static var buttonList: some View {
         VStack(alignment: .leading) {
@@ -117,7 +118,8 @@ struct Button_Previews: PreviewProvider {
     
     static var previews: some View {
         buttonList
-            .previewDisplayName("All Buttons (Dark)")
+            .previewDisplayName("All Buttons")
             .preferredColorScheme(.dark)
     }
 }
+#endif

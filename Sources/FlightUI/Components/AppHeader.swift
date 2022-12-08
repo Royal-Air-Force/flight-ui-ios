@@ -1,11 +1,6 @@
-//
-//  AppHeader.swift
-//  eTanker
-//
-//  Created by Alan Gorton on 21/11/2022.
-//
-
 import SwiftUI
+
+// MARK: - AppHeader Structs -
 
 public struct AppHeader<Content: View>: View {
     private var content: () -> Content
@@ -27,6 +22,9 @@ public struct AppHeader<Content: View>: View {
     }
 }
 
+// MARK: - Preview Code -
+
+#if DEBUG
 struct AppHeader_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
@@ -36,7 +34,8 @@ struct AppHeader_Previews: PreviewProvider {
 
             Spacer()
         }
-        .previewDisplayName("Tanker (dark)")
+        .previewDisplayName("Header")
         .preferredColorScheme(.dark)
     }
 }
+#endif

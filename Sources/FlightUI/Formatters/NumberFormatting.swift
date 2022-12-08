@@ -1,10 +1,3 @@
-//
-//  NumberFormatters.swift
-//  eTanker
-//
-//  Created by Alan Gorton on 23/11/2022.
-//
-
 import Foundation
 
 public enum NumberFormatting {

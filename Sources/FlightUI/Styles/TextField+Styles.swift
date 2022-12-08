@@ -4,12 +4,14 @@ fileprivate let smallFieldWidth = 84.0
 fileprivate let mediumFieldWidth = 146.0
 fileprivate let fieldCornerRadius = 5.0
 
+// MARK: - TextField Style Structs & Leading dot initialisers -
+
 public enum TextFieldValueType {
     case text
     case decimal
 }
 
-public enum TextFieldSize{
+public enum TextFieldSize {
     case small
     case medium
     case infinity
@@ -68,6 +70,9 @@ public extension TextFieldStyle where Self == TextFieldType {
     }
 }
 
+// MARK: - Preview Code -
+
+#if DEBUG
 struct TextFieldViewModifiers_ContentPreview: PreviewProvider {
     @State private static var emptyText = ""
     @State private static var text = "Hello World"
@@ -100,3 +105,4 @@ struct TextFieldViewModifiers_ContentPreview: PreviewProvider {
         .padding()
     }
 }
+#endif
