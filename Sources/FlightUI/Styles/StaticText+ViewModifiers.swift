@@ -14,21 +14,21 @@ fileprivate let fieldBorderWidth = 5.0
 
 struct StaticTextOptionSet: OptionSet {
     let rawValue: UInt8
-
+    
     static let background = StaticTextOptionSet(rawValue: 0x1)
     static let bordered = StaticTextOptionSet(rawValue: 0x2)
-
+    
     static let none = StaticTextOptionSet([])
     static let all: StaticTextOptionSet = [.background, .bordered]
 }
 
 struct StaticTextStyle: ViewModifier {
     private let options: StaticTextOptionSet
-
+    
     init(options: StaticTextOptionSet = .none) {
         self.options = options
     }
-
+    
     func body(content: Content) -> some View {
         content
             .padding()
@@ -40,10 +40,10 @@ struct StaticTextStyle: ViewModifier {
             .when(options.contains(.bordered)) { view in
                 view
                     .background(
-                    // TODO: move cornerRadius and lineWidth to Theme
-                    RoundedRectangle(cornerRadius: fieldCornerRadius, style: .continuous)
-                        .stroke(Color.ballisticPrimary, lineWidth: 3.0)
-                )
+                        // TODO: move cornerRadius and lineWidth to Theme
+                        RoundedRectangle(cornerRadius: fieldCornerRadius, style: .continuous)
+                            .stroke(Color.ballisticPrimary, lineWidth: 3.0)
+                    )
             }
     }
 }
@@ -66,16 +66,16 @@ struct StaticText_Previews: PreviewProvider {
             Text("Plain")
                 .staticTextStyle(StaticTextStyle(options: .none))
                 .font(.title)
-
+            
             Text("Background")
                 .staticTextStyle(StaticTextStyle(options: .background))
                 .font(.title)
-
+            
             Text("Bordered")
                 .staticTextStyle(StaticTextStyle(options: .bordered))
                 .font(.title)
                 .fontWeight(.heavy)
-
+            
             Text("All Options")
                 .staticTextStyle(StaticTextStyle(options: .all))
                 .font(.title)
