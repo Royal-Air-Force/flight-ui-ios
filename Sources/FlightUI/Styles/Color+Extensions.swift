@@ -50,8 +50,10 @@ struct Color_Previews: PreviewProvider {
                         .background(color)
                         .frame(width: 75, height: 75)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
+
                     Text("\(color.name)")
                         .font(.title2)
+                        .padding()
                 }
             }
             .navigationTitle("Colors")
@@ -61,7 +63,8 @@ struct Color_Previews: PreviewProvider {
     static var previews: some View {
         colorList
             .preferredColorScheme(.dark)
-            .previewDisplayName("All Colors")        
+            .previewDisplayName("All Colors")
+            .padding()
     }
 }
 #endif
