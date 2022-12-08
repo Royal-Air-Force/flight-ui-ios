@@ -27,11 +27,5 @@ struct FieldLabel_Previews: PreviewProvider {
         }
         .padding()
         .preferredColorScheme(.dark)
-
-        VStack(alignment: .leading) {
-            FieldLabel("Example label")
-        }
-        .padding()
-        .preferredColorScheme(.light)
     }
 }

@@ -38,16 +38,5 @@ struct AppHeader_Previews: PreviewProvider {
         }
         .previewDisplayName("Tanker (dark)")
         .preferredColorScheme(.dark)
-
-        VStack {
-            AppHeader {
-                Text("Light Header")
-
-            }
-
-            Spacer()
-        }
-        .previewDisplayName("Tanker (light)")
-        .preferredColorScheme(.light)
     }
 }

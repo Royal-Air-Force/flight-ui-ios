@@ -58,11 +58,6 @@ struct Color_Previews: PreviewProvider {
     static var previews: some View {
         colorList
             .preferredColorScheme(.dark)
-            .previewDisplayName("All Colors (Dark)")
-        
-        colorList
-            .preferredColorScheme(.light)
-            .previewDisplayName("All Colors (Light)")
-        
+            .previewDisplayName("All Colors (Dark)")        
     }
 }

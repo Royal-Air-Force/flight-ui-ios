@@ -110,12 +110,6 @@ struct FlightPanel_Previews: PreviewProvider {
             .previewDisplayName("Content Only (dark)")
             .preferredColorScheme(.dark)
 
-            FlightPanel {
-                content
-            }
-            .previewDisplayName("Content Only (light)")
-            .preferredColorScheme(.light)
-
 
             FlightPanel(title: "Preferences") {
                 content

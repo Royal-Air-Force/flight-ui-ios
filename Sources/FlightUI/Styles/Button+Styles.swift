@@ -119,9 +119,5 @@ struct Button_Previews: PreviewProvider {
         buttonList
             .previewDisplayName("All Buttons (Dark)")
             .preferredColorScheme(.dark)
-        
-        buttonList
-            .previewDisplayName("All Buttons (Light)")
-            .preferredColorScheme(.light)
     }
 }

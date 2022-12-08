@@ -147,9 +147,5 @@ struct Typography_Previews: PreviewProvider {
         typographyList
             .previewDisplayName("All Typography (Dark)")
             .preferredColorScheme(.dark)
-        
-        typographyList
-            .previewDisplayName("All Typography (Light)")
-            .preferredColorScheme(.light)
     }
 }
