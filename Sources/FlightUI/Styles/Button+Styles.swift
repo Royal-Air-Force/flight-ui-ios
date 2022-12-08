@@ -30,16 +30,20 @@ public extension ButtonStyle where Self == PrimaryButtonStyle {
 public struct SecondaryButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
     
+    var foregroundColor: Color {
+        isEnabled ? Color.ballisticSecondary : Color.ballisticSecondaryDisabled
+    }
+    
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], horizontalPadding)
             .padding([.top, .bottom], verticalPadding)
-            .foregroundColor(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondaryDisabled)
+            .foregroundColor(foregroundColor)
             .typography(.button)
             .clipShape(Capsule())
             .overlay(
                 Capsule(style: .circular)
-                    .strokeBorder(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondaryDisabled,
+                    .strokeBorder(foregroundColor,
                                   style: StrokeStyle(lineWidth: borderWidth))
             )
     }
