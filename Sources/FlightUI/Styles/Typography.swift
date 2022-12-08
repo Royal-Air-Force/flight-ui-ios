@@ -5,7 +5,7 @@ import SwiftUI
 public struct Header1: ViewModifier {
     public func body(content: Content) -> some View {
         content
-            .font(.system(size: 28, weight: .bold))
+            .font(.title.bold())
             .foregroundColor(.ballisticPrimary)
     }
 }
@@ -13,7 +13,7 @@ public struct Header1: ViewModifier {
 public struct Header2: ViewModifier {
     public func body(content: Content) -> some View {
         content
-            .font(.system(size: 20, weight: .bold))
+            .font(.title3.bold())
             .foregroundColor(.ballisticPrimary)
     }
 }
@@ -21,7 +21,7 @@ public struct Header2: ViewModifier {
 public struct Header3: ViewModifier {
     public func body(content: Content) -> some View {
         content
-            .font(.system(size: 16, weight: .regular))
+            .font(.callout)
             .foregroundColor(.ballisticPrimary)
     }
 }
@@ -29,7 +29,7 @@ public struct Header3: ViewModifier {
 public struct Input: ViewModifier {
     public func body(content: Content) -> some View {
         content
-            .font(.system(size: 16, weight: .bold))
+            .font(.callout.bold())
             .foregroundColor(.neutralBlue)
     }
 }
@@ -37,7 +37,7 @@ public struct Input: ViewModifier {
 public struct ResultTypography: ViewModifier {
     public func body(content: Content) -> some View {
         content
-            .font(.system(size: 16, weight: .bold))
+            .font(.callout.bold())
             .foregroundColor(.ballisticSecondary)
     }
 }
@@ -45,7 +45,7 @@ public struct ResultTypography: ViewModifier {
 public struct ButtonTypography: ViewModifier {
     public func body(content: Content) -> some View {
         content
-            .font(.system(size: 18, weight: .bold))
+            .font(.body.bold())
             .foregroundColor(.ballisticPrimary)
     }
 }
@@ -53,7 +53,7 @@ public struct ButtonTypography: ViewModifier {
 public struct Caption: ViewModifier {
     public func body(content: Content) -> some View {
         content
-            .font(.system(size: 16, weight: .regular))
+            .font(.callout)
             .foregroundColor(.ballisticPrimary)
     }
 }
@@ -61,7 +61,7 @@ public struct Caption: ViewModifier {
 public struct EmptyField: ViewModifier {
     public func body(content: Content) -> some View {
         content
-            .font(.system(size: 16, weight: .regular))
+            .font(.callout)
             .foregroundColor(.neutralLightGray)
     }
 }
@@ -69,7 +69,7 @@ public struct EmptyField: ViewModifier {
 public struct DropDownOptions: ViewModifier {
     public func body(content: Content) -> some View {
         content
-            .font(.system(size: 16, weight: .regular))
+            .font(.callout)
             .foregroundColor(.neutralBlue)
     }
 }
