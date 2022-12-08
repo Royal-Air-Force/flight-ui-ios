@@ -5,20 +5,21 @@ import SwiftUI
 public struct Panel<Content: View>: View {
     @State private var expanded = false
 
-    private let title: String?
-    private let expandable: Bool
+    private var title: String?
+    private var expandable: Bool
 
-    private var content: () -> Content
+    private let content: () -> Content
 
     private let cornerRadius = 16.0
     private let lineWidth = 6.0
 
     private let panelColor = Color.neutralDarkGray
 
-    public init(title: String? = nil, expandable: Bool = false, @ViewBuilder content: @escaping () -> Content) {
+    public init(title: String? = nil, expandable: Bool = false, expanded isExpanded: Bool = false, @ViewBuilder content: @escaping () -> Content) {
 
         self.title = title
         self.expandable = expandable
+        self.expanded = isExpanded
         self.content = content
     }
 
@@ -38,13 +39,6 @@ public struct Panel<Content: View>: View {
         .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
             .strokeBorder(panelColor, lineWidth: lineWidth)
             .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous).fill(Color.black)))
-        .onTapGesture {
-            guard expandable else { return }
-
-            withAnimation {
-                expanded.toggle()
-            }
-        }
     }
 
     private var panelHeaderView: some View {
@@ -83,11 +77,18 @@ public struct Panel<Content: View>: View {
             .foregroundColor(Color.ballisticPrimary)
             .rotationEffect(.degrees(expanded ? -180.0 : 0.0))
             .padding()
+            .onTapGesture {
+                guard expandable else { return }
+
+                withAnimation {
+                    expanded.toggle()
+                }
+            }
     }
 
     private var panelContentView: some View {
         content()
-            .padding(.top, cornerRadius / 2)
+            .padding(.top, title == nil ? 0.0 : -1.0)
             .padding([.leading, .trailing, .bottom])
     }
 
@@ -101,26 +102,35 @@ public struct Panel<Content: View>: View {
 #if DEBUG
 struct Panel_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        VStack(spacing: 32) {
             Panel {
                 content
             }
-            .previewDisplayName("Content Only")
-            .preferredColorScheme(.dark)
-
 
             Panel(title: "Preferences") {
                 content
             }
-            .previewDisplayName("Title")
-            .preferredColorScheme(.dark)
 
-            Panel(title: "Preferences", expandable: true) {
+            Panel(title: "Preferences (not expanded)", expandable: true) {
                 content
             }
-            .previewDisplayName("Expandable")
-            .preferredColorScheme(.dark)
+
+            Panel(title: "Preferences (expanded)", expandable: true, expanded: true) {
+                content
+            }
+
+            HStack {
+                Panel {
+                    return Text("Side by Side")
+                        .font(.title)
+                }
+
+                Panel(title: "Side by Side", expandable: true) {
+                    content
+                }
+            }
         }
+        .preferredColorScheme(.dark)
         .padding()
     }
 
