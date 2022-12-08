@@ -23,7 +23,7 @@ public struct AppHeader<Content: View>: View {
             Spacer()
         }
         .padding()
-        .background(Color(uiColor: .secondarySystemBackground))
+        .background(Color.neutralBlack)
     }
 }
 

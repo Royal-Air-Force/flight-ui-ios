@@ -43,8 +43,8 @@ public struct TextFieldType: TextFieldStyle {
         configuration
             .fontWeight(.bold)
             .padding()
-            .background(Color(uiColor: .secondarySystemBackground))
-            .foregroundColor(Color(uiColor: .systemGreen))
+            .background(Color.neutralDarkGray)
+            .foregroundColor(Color.neutralBlue)
             .frame(width: size.width)
             .cornerRadius(fieldCornerRadius)
             .multilineTextAlignment(alignment)
@@ -95,6 +95,7 @@ struct TextFieldViewModifiers_ContentPreview: PreviewProvider {
 
             Spacer()
         }
+        .preferredColorScheme(.dark)
         .previewDisplayName("Text Field variations")
         .padding()
     }

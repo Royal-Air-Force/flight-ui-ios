@@ -1,13 +1,6 @@
-//
-//  FlightPanel.swift
-//  eTanker
-//
-//  Created by Alan Gorton on 21/11/2022.
-//
-
 import SwiftUI
 
-public struct FlightPanel<Content: View>: View {
+public struct Panel<Content: View>: View {
     @State private var expanded = false
 
     private let title: String?
@@ -18,7 +11,7 @@ public struct FlightPanel<Content: View>: View {
     private let cornerRadius = 16.0
     private let lineWidth = 6.0
 
-    private let panelColor = Color(uiColor: .tertiarySystemBackground)
+    private let panelColor = Color.neutralDarkGray
 
     public init(title: String? = nil, expandable: Bool = false, @ViewBuilder content: @escaping () -> Content) {
 
@@ -42,7 +35,7 @@ public struct FlightPanel<Content: View>: View {
         .frame(maxWidth: .infinity)
         .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
             .strokeBorder(panelColor, lineWidth: lineWidth)
-            .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous).fill(Color(uiColor: .systemBackground))))
+            .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous).fill(Color.black)))
         .onTapGesture {
             guard expandable else { return }
 
@@ -79,13 +72,13 @@ public struct FlightPanel<Content: View>: View {
             .font(.title)
             .fontDesign(.rounded)
             .fontWeight(.bold)
-            .foregroundColor(Color(uiColor: .label))
+            .foregroundColor(Color.ballisticPrimary)
     }
 
     private var expandIcon: some View {
         Image(systemName: "chevron.down")
             .font(.title)
-            .foregroundColor(Color(uiColor: .label))
+            .foregroundColor(Color.ballisticPrimary)
             .rotationEffect(.degrees(expanded ? -180.0 : 0.0))
             .padding()
     }
@@ -101,23 +94,23 @@ public struct FlightPanel<Content: View>: View {
     }
 }
 
-struct FlightPanel_Previews: PreviewProvider {
+struct Panel_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            FlightPanel {
+            Panel {
                 content
             }
             .previewDisplayName("Content Only (dark)")
             .preferredColorScheme(.dark)
 
 
-            FlightPanel(title: "Preferences") {
+            Panel(title: "Preferences") {
                 content
             }
             .previewDisplayName("Title")
             .preferredColorScheme(.dark)
 
-            FlightPanel(title: "Preferences", expandable: true) {
+            Panel(title: "Preferences", expandable: true) {
                 content
             }
             .previewDisplayName("Expandable")
