@@ -32,7 +32,6 @@ struct StaticTextStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding()
-            .foregroundColor(.ballisticPrimary)
             .when(options.contains(.background)) { view in
                 view
                     .background(Color.neutralDarkGray)
@@ -65,21 +64,25 @@ struct StaticText_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 32.0) {
             Text("Plain")
-                .font(.headline)
                 .staticTextStyle(StaticTextStyle(options: .none))
+                .font(.title)
 
             Text("Background")
-                .font(.subheadline)
                 .staticTextStyle(StaticTextStyle(options: .background))
+                .font(.title)
 
             Text("Bordered")
-                .font(.title)
                 .staticTextStyle(StaticTextStyle(options: .bordered))
+                .font(.title)
+                .fontWeight(.heavy)
 
             Text("All Options")
-                .font(.largeTitle)
                 .staticTextStyle(StaticTextStyle(options: .all))
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(Color(uiColor: .systemRed))
         }
+        .previewDisplayName("Static Text variations")
         .preferredColorScheme(.dark)
         .padding()
     }
