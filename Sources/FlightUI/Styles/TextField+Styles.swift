@@ -1,5 +1,6 @@
 import SwiftUI
 
+// Move to Theme
 fileprivate let smallFieldWidth = 84.0
 fileprivate let mediumFieldWidth = 146.0
 fileprivate let fieldCornerRadius = 5.0
@@ -73,6 +74,7 @@ public extension TextFieldStyle where Self == TextFieldType {
 // MARK: - Preview Code -
 
 #if DEBUG
+
 struct TextFieldViewModifiers_ContentPreview: PreviewProvider {
     @State private static var emptyText = ""
     @State private static var text = "Hello World"
@@ -105,4 +107,5 @@ struct TextFieldViewModifiers_ContentPreview: PreviewProvider {
         .padding()
     }
 }
+
 #endif

@@ -107,6 +107,7 @@ public extension View {
 // MARK: - FilePrivate Preview Code -
 
 #if DEBUG
+
 fileprivate extension Typography {
     var name: String {
         switch self {
@@ -150,4 +151,5 @@ struct Typography_Previews: PreviewProvider {
             .preferredColorScheme(.dark)
     }
 }
+
 #endif

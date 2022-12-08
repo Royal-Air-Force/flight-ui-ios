@@ -1,11 +1,11 @@
 import SwiftUI
 
-// TODO: Move to theme
+// TODO: Move to Theme
 fileprivate let horizontalPadding = 50.0
 fileprivate let verticalPadding = 12.0
 fileprivate let borderWidth = 3.0
 
-// MARK: - Button Style Structs & Leading dot initialisers -
+// MARK: - Button Style View -
 
 public struct PrimaryButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -20,6 +20,8 @@ public struct PrimaryButtonStyle: ButtonStyle {
             .clipShape(Capsule())
     }
 }
+
+// MARK: - Button Style Extensions -
 
 public extension ButtonStyle where Self == PrimaryButtonStyle {
     static var primary: Self {
@@ -77,9 +79,10 @@ public extension ButtonStyle where Self == TertiaryButtonStyle {
 // MARK: - Preview Code -
 
 #if DEBUG
+
 struct Button_Previews: PreviewProvider {
     private static var buttonList: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 32.0) {
             Button("Primary", action: {})
                 .buttonStyle(.primary)
             
@@ -126,4 +129,5 @@ struct Button_Previews: PreviewProvider {
             .preferredColorScheme(.dark)
     }
 }
+
 #endif

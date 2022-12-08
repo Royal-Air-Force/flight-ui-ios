@@ -17,6 +17,7 @@ public extension Color {
 // MARK: - FilePrivate Preview Code -
 
 #if DEBUG
+
 fileprivate extension Color {
     var name: String {
         let description = self.description
@@ -46,7 +47,7 @@ struct Color_Previews: PreviewProvider {
             List(Color.customColors, id: \.self) { color in
                 HStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .strokeBorder(Color.gray, lineWidth: 2)
+                        .strokeBorder(Color.gray, lineWidth: 3.0)
                         .background(color)
                         .frame(width: 75, height: 75)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -67,4 +68,5 @@ struct Color_Previews: PreviewProvider {
             .padding()
     }
 }
+
 #endif

@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Panel Structs -
+// MARK: - Panel View -
 
 public struct Panel<Content: View>: View {
     @State private var expanded = false
@@ -100,6 +100,7 @@ public struct Panel<Content: View>: View {
 // MARK: - Preview Code -
 
 #if DEBUG
+
 struct Panel_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 32) {
@@ -139,4 +140,5 @@ struct Panel_Previews: PreviewProvider {
             .font(.title)
     }
 }
+
 #endif

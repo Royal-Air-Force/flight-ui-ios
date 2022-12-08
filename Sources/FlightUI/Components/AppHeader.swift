@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - AppHeader Structs -
+// MARK: - AppHeader View -
 
 public struct AppHeader<Content: View>: View {
     private var content: () -> Content
@@ -25,6 +25,7 @@ public struct AppHeader<Content: View>: View {
 // MARK: - Preview Code -
 
 #if DEBUG
+
 struct AppHeader_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
@@ -38,4 +39,5 @@ struct AppHeader_Previews: PreviewProvider {
         .preferredColorScheme(.dark)
     }
 }
+
 #endif
