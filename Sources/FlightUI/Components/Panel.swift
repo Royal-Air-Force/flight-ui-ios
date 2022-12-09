@@ -2,8 +2,13 @@ import SwiftUI
 
 // MARK: - Panel View -
 
+public enum PanelOptions {
+    case fixed
+    case expandable(expanded: Bool = false)
+}
+
 public struct Panel<Content: View>: View {
-    @State private var expanded = false
+    @State private var expanded: Bool
 
     private var title: String?
     private var expandable: Bool
@@ -13,14 +18,20 @@ public struct Panel<Content: View>: View {
     private let cornerRadius = 16.0
     private let lineWidth = 6.0
 
-    private let panelColor = Color.neutralDarkGray
+    private let panelColor: Color = .neutralDarkGray
 
-    public init(title: String? = nil, expandable: Bool = false, expanded isExpanded: Bool = false, @ViewBuilder content: @escaping () -> Content) {
+    public init(title: String? = nil, options: PanelOptions = .fixed, @ViewBuilder content: @escaping () -> Content) {
 
         self.title = title
-        self.expandable = expandable
-        self.expanded = isExpanded
         self.content = content
+
+        if case .expandable(let expanded) = options {
+            self.expandable = true
+            self.expanded = expanded
+        } else {
+            self.expandable = false
+            self.expanded = false
+        }
     }
 
     public var body: some View {
@@ -57,9 +68,7 @@ public struct Panel<Content: View>: View {
         .padding(.bottom, cornerRadius)
         .cornerRadius(cornerRadius)
         .padding(.bottom, -cornerRadius)
-        .padding(.top, cornerRadius)
         .cornerRadius(showContent ? 0 : cornerRadius)
-        .padding(.top, -cornerRadius)
     }
 
     private func panelTitleTextView(_ title: String) -> some View {
@@ -88,8 +97,7 @@ public struct Panel<Content: View>: View {
 
     private var panelContentView: some View {
         content()
-            .padding(.top, title == nil ? 0.0 : -1.0)
-            .padding([.leading, .trailing, .bottom])
+            .padding(.top, title == nil ? -cornerRadius / 2.0 : -14.0)
     }
 
     private var showContent: Bool {
@@ -112,21 +120,22 @@ struct Panel_Previews: PreviewProvider {
                 content
             }
 
-            Panel(title: "Preferences (not expanded)", expandable: true) {
+            Panel(title: "Preferences (not expanded)", options: .expandable()) {
                 content
             }
 
-            Panel(title: "Preferences (expanded)", expandable: true, expanded: true) {
+            Panel(title: "Preferences (expanded)", options: .expandable(expanded: true)) {
                 content
             }
 
-            HStack {
+            HStack(alignment: .top) {
                 Panel {
-                    return Text("Side by Side")
+                    Text("Side by Side")
                         .font(.title)
+                        .padding()
                 }
 
-                Panel(title: "Side by Side", expandable: true) {
+                Panel(title: "Side by Side", options: .expandable(expanded: false)) {
                     content
                 }
             }
@@ -135,9 +144,10 @@ struct Panel_Previews: PreviewProvider {
         .padding()
     }
 
-    private static var content: some View {
-        return Text("Content")
+    @ViewBuilder private static var content: some View {
+        Text("Content")
             .font(.title)
+            .padding()
     }
 }
 
