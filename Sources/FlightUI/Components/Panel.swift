@@ -152,7 +152,7 @@ struct Panel_Previews: PreviewProvider {
     @ViewBuilder private static var content: some View {
         Text("Content")
             .typography(.h2)
-//            .padding()
+            .padding()
     }
 }
 
