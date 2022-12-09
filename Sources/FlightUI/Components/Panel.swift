@@ -68,21 +68,20 @@ public struct Panel<Content: View>: View {
         .padding(.bottom, cornerRadius)
         .cornerRadius(cornerRadius)
         .padding(.bottom, -cornerRadius)
-        .cornerRadius(showContent ? 0 : cornerRadius)
+        .cornerRadius(showContent ? 0.0 : cornerRadius)
     }
 
     private func panelTitleTextView(_ title: String) -> some View {
         Text(title)
             .padding()
-            .font(.title)
-            .fontDesign(.rounded)
-            .fontWeight(.bold)
+            .typography(.h1)
             .foregroundColor(Color.ballisticPrimary)
     }
 
     private var expandIcon: some View {
         Image(systemName: "chevron.down")
-            .font(.title)
+            .typography(.h1)
+            .fontWeight(.regular)
             .foregroundColor(Color.ballisticPrimary)
             .rotationEffect(.degrees(expanded ? -180.0 : 0.0))
             .padding()
@@ -97,7 +96,9 @@ public struct Panel<Content: View>: View {
 
     private var panelContentView: some View {
         content()
-            .padding(.top, title == nil ? -cornerRadius / 2.0 : -14.0)
+            // -12.0 is a magic number, text pixel alignment is slightly off; goal is
+            // to have the content "hug" the Panel and defer padding to component consumer
+            .padding(.top, title == nil ? -cornerRadius / 2.0 : -12.0)
     }
 
     private var showContent: Bool {
@@ -111,7 +112,7 @@ public struct Panel<Content: View>: View {
 
 struct Panel_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(spacing: 32) {
+        VStack(spacing: 32.0) {
             Panel {
                 content
             }
@@ -130,9 +131,13 @@ struct Panel_Previews: PreviewProvider {
 
             HStack(alignment: .top) {
                 Panel {
-                    Text("Side by Side")
-                        .font(.title)
-                        .padding()
+                    HStack {
+                        Text("Side by Side")
+                            .typography(.h1)
+                            .padding()
+
+                        Spacer()
+                    }
                 }
 
                 Panel(title: "Side by Side", options: .expandable(expanded: false)) {
@@ -146,8 +151,8 @@ struct Panel_Previews: PreviewProvider {
 
     @ViewBuilder private static var content: some View {
         Text("Content")
-            .font(.title)
-            .padding()
+            .typography(.h2)
+//            .padding()
     }
 }
 
