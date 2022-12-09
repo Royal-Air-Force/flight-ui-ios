@@ -18,7 +18,7 @@ public struct Panel<Content: View>: View {
     private let cornerRadius = 16.0
     private let lineWidth = 6.0
 
-    private let panelColor: Color = .neutralDarkGray
+    private let panelColor: Color = .flightDarkGray
 
     public init(title: String? = nil, options: PanelOptions = .fixed, @ViewBuilder content: @escaping () -> Content) {
 
@@ -75,14 +75,14 @@ public struct Panel<Content: View>: View {
         Text(title)
             .padding()
             .typography(.h1)
-            .foregroundColor(Color.ballisticPrimary)
+            .foregroundColor(Color.flightWhite)
     }
 
     private var expandIcon: some View {
         Image(systemName: "chevron.down")
             .typography(.h1)
             .fontWeight(.regular)
-            .foregroundColor(Color.ballisticPrimary)
+            .foregroundColor(Color.flightWhite)
             .rotationEffect(.degrees(expanded ? -180.0 : 0.0))
             .padding()
             .onTapGesture {

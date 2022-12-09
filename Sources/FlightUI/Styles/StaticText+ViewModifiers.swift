@@ -27,7 +27,7 @@ struct StaticTextStyle: ViewModifier {
             .padding()
             .when(options.contains(.background)) { view in
                 view
-                    .background(Color.neutralDarkGray)
+                    .background(Color.flightDarkGray)
                     .cornerRadius(fieldCornerRadius)
             }
             .when(options.contains(.bordered)) { view in
@@ -35,7 +35,7 @@ struct StaticTextStyle: ViewModifier {
                     .background(
                         // TODO: move cornerRadius and lineWidth to Theme
                         RoundedRectangle(cornerRadius: fieldCornerRadius, style: .continuous)
-                            .stroke(Color.ballisticPrimary, lineWidth: 3.0)
+                            .stroke(Color.flightWhite, lineWidth: 3.0)
                     )
             }
     }

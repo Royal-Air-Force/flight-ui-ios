@@ -14,9 +14,9 @@ public struct PrimaryButtonStyle: ButtonStyle {
         configuration.label
             .padding([.leading, .trailing], horizontalPadding)
             .padding([.top, .bottom], verticalPadding)
-            .foregroundColor(Color.neutralBlack)
+            .foregroundColor(Color.flightBlack)
             .typography(.button)
-            .background(isEnabled ? Color.ballisticSecondary : Color.ballisticSecondaryDisabled)
+            .background(isEnabled ? Color.flightGreen : Color.flightGreen.opacity(0.38))
             .clipShape(Capsule())
     }
 }
@@ -33,7 +33,7 @@ public struct SecondaryButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
     
     var foregroundColor: Color {
-        isEnabled ? Color.ballisticSecondary : Color.ballisticSecondaryDisabled
+        isEnabled ? Color.flightGreen : Color.flightGreen.opacity(0.38)
     }
     
     public func makeBody(configuration: Configuration) -> some View {
@@ -65,7 +65,7 @@ public struct TertiaryButtonStyle: ButtonStyle {
         configuration.label
             .padding([.leading, .trailing], horizontalPadding)
             .padding([.top, .bottom], verticalPadding)
-            .foregroundColor(isEnabled ? Color.ballisticPrimary : Color.neutralLightGray)
+            .foregroundColor(isEnabled ? Color.flightWhite : Color.flightLightGray)
             .typography(.button)
     }
 }

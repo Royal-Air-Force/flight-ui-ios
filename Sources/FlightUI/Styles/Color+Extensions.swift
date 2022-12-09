@@ -3,15 +3,13 @@ import SwiftUI
 // MARK: - Color Extension -
 
 public extension Color {
-    static let ballisticPrimary = Color("ballisticPrimary", bundle: .module)
-    static let ballisticSecondary = Color("ballisticSecondary", bundle: .module)
-    static let ballisticSecondaryDisabled = Color("ballisticSecondaryDisabled", bundle: .module)
-    static let neutralBlack = Color("neutralBlack", bundle: .module)
-    static let neutralDarkGray = Color("neutralDarkGray", bundle: .module)
-    static let neutralLightGray = Color("neutralLightGray", bundle: .module)
-    static let neutralBlue = Color("neutralBlue", bundle: .module)
-    static let warning = Color("warning", bundle: .module)
-    static let error = Color("error", bundle: .module)
+    static let flightWhite = Color("flightWhite", bundle: .module)
+    static let flightGreen = Color("flightGreen", bundle: .module)
+    static let flightBlack = Color("flightBlack", bundle: .module)
+    static let flightDarkGray = Color("flightDarkGray", bundle: .module)
+    static let flightLightGray = Color("flightLightGray", bundle: .module)
+    static let flightBlue = Color("flightBlue", bundle: .module)
+    static let flightYellow = Color("flightYellow", bundle: .module)
 }
 
 // MARK: - FilePrivate Preview Code -
@@ -30,15 +28,13 @@ fileprivate extension Color {
         return String(name)
     }
     
-    static let customColors: [Color] = [.ballisticPrimary,
-                                        .ballisticSecondary,
-                                        .ballisticSecondaryDisabled,
-                                        .neutralBlack,
-                                        .neutralDarkGray,
-                                        .neutralLightGray,
-                                        .neutralBlue,
-                                        .warning,
-                                        .error]
+    static let customColors: [Color] = [.flightWhite,
+                                        .flightGreen,
+                                        .flightBlack,
+                                        .flightDarkGray,
+                                        .flightLightGray,
+                                        .flightBlue,
+                                        .flightYellow]
 }
 
 struct Color_Previews: PreviewProvider {

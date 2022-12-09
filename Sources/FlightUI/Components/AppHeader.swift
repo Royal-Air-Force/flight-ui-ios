@@ -18,7 +18,7 @@ public struct AppHeader<Content: View>: View {
             Spacer()
         }
         .padding()
-        .background(Color.neutralBlack)
+        .background(Color.flightBlack)
     }
 }
 

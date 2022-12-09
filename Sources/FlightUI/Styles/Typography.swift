@@ -6,7 +6,7 @@ public struct Header1: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .font(.title.bold())
-            .foregroundColor(.ballisticPrimary)
+            .foregroundColor(.flightWhite)
     }
 }
 
@@ -14,7 +14,7 @@ public struct Header2: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .font(.title3.bold())
-            .foregroundColor(.ballisticPrimary)
+            .foregroundColor(.flightWhite)
     }
 }
 
@@ -22,7 +22,7 @@ public struct Header3: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .font(.callout)
-            .foregroundColor(.ballisticPrimary)
+            .foregroundColor(.flightWhite)
     }
 }
 
@@ -30,7 +30,7 @@ public struct Input: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .font(.callout.bold())
-            .foregroundColor(.neutralBlue)
+            .foregroundColor(.flightBlue)
     }
 }
 
@@ -38,7 +38,7 @@ public struct ResultTypography: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .font(.callout.bold())
-            .foregroundColor(.ballisticSecondary)
+            .foregroundColor(.flightGreen)
     }
 }
 
@@ -46,7 +46,7 @@ public struct ButtonTypography: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .font(.body.bold())
-            .foregroundColor(.ballisticPrimary)
+            .foregroundColor(.flightWhite)
     }
 }
 
@@ -54,7 +54,7 @@ public struct Caption: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .font(.callout)
-            .foregroundColor(.ballisticPrimary)
+            .foregroundColor(.flightWhite)
     }
 }
 
@@ -62,7 +62,7 @@ public struct EmptyField: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .font(.callout)
-            .foregroundColor(.neutralLightGray)
+            .foregroundColor(.flightLightGray)
     }
 }
 
@@ -70,7 +70,7 @@ public struct DropDownOptions: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .font(.callout)
-            .foregroundColor(.neutralBlue)
+            .foregroundColor(.flightBlue)
     }
 }
 
