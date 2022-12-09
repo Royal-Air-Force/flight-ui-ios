@@ -53,7 +53,7 @@ struct Color_Previews: PreviewProvider {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
 
                     Text("\(color.name)")
-                        .font(.title2)
+                        .typography(.h2)
                         .padding()
                 }
             }

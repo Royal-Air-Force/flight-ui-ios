@@ -58,20 +58,20 @@ struct StaticText_Previews: PreviewProvider {
         VStack(spacing: 32.0) {
             Text("Plain")
                 .staticTextStyle(StaticTextStyle(options: .none))
-                .font(.title)
+                .typography(.h1)
 
             Text("Background")
                 .staticTextStyle(StaticTextStyle(options: .background))
-                .font(.title)
+                .typography(.h2)
 
             Text("Bordered")
                 .staticTextStyle(StaticTextStyle(options: .bordered))
-                .font(.title)
+                .typography(.h3)
                 .fontWeight(.heavy)
 
             Text("All Options")
                 .staticTextStyle(StaticTextStyle(options: .all))
-                .font(.title)
+                .typography(.caption)
                 .fontWeight(.bold)
                 .foregroundColor(Color(uiColor: .systemRed))
         }
