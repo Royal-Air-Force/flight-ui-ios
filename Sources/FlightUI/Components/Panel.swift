@@ -8,6 +8,7 @@ public enum PanelOptions {
 }
 
 public struct Panel<Content: View>: View {
+    @EnvironmentObject var theme: Theme
     @State private var expanded: Bool
 
     private var title: String?
@@ -17,8 +18,6 @@ public struct Panel<Content: View>: View {
 
     private let cornerRadius = 16.0
     private let lineWidth = 6.0
-
-    private let panelColor: Color = .flightDarkGray
 
     public init(title: String? = nil, options: PanelOptions = .fixed, @ViewBuilder content: @escaping () -> Content) {
 
@@ -48,8 +47,8 @@ public struct Panel<Content: View>: View {
         }
         .frame(maxWidth: .infinity)
         .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-            .strokeBorder(panelColor, lineWidth: lineWidth)
-            .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous).fill(Color.black)))
+            .strokeBorder(theme.panelBackground, lineWidth: lineWidth)
+            .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous).fill(theme.panelViewBackground)))
     }
 
     private var panelHeaderView: some View {
@@ -64,7 +63,7 @@ public struct Panel<Content: View>: View {
                 expandIcon
             }
         }
-        .background(panelColor)
+        .background(theme.panelBackground)
         .padding(.bottom, cornerRadius)
         .cornerRadius(cornerRadius)
         .padding(.bottom, -cornerRadius)
@@ -75,14 +74,14 @@ public struct Panel<Content: View>: View {
         Text(title)
             .padding()
             .typography(.h1)
-            .foregroundColor(Color.flightWhite)
+            .foregroundColor(theme.panelForegoround)
     }
 
     private var expandIcon: some View {
         Image(systemName: "chevron.down")
             .typography(.h1)
             .fontWeight(.regular)
-            .foregroundColor(Color.flightWhite)
+            .foregroundColor(theme.panelForegoround)
             .rotationEffect(.degrees(expanded ? -180.0 : 0.0))
             .padding()
             .onTapGesture {
@@ -145,6 +144,7 @@ struct Panel_Previews: PreviewProvider {
                 }
             }
         }
+        .environmentObject(Theme())
         .preferredColorScheme(.dark)
         .padding()
     }

@@ -3,74 +3,92 @@ import SwiftUI
 // MARK: - View Modifier Structs -
 
 public struct Header1: ViewModifier {
+    @EnvironmentObject var theme: Theme
+    
     public func body(content: Content) -> some View {
         content
             .font(.title.bold())
-            .foregroundColor(.flightWhite)
+            .foregroundColor(theme.header)
     }
 }
 
 public struct Header2: ViewModifier {
+    @EnvironmentObject var theme: Theme
+    
     public func body(content: Content) -> some View {
         content
             .font(.title3.bold())
-            .foregroundColor(.flightWhite)
+            .foregroundColor(theme.header)
     }
 }
 
 public struct Header3: ViewModifier {
+    @EnvironmentObject var theme: Theme
+    
     public func body(content: Content) -> some View {
         content
             .font(.callout)
-            .foregroundColor(.flightWhite)
+            .foregroundColor(theme.header)
     }
 }
 
 public struct Input: ViewModifier {
+    @EnvironmentObject var theme: Theme
+    
     public func body(content: Content) -> some View {
         content
             .font(.callout.bold())
-            .foregroundColor(.flightBlue)
+            .foregroundColor(theme.input)
     }
 }
 
 public struct ResultTypography: ViewModifier {
+    @EnvironmentObject var theme: Theme
+    
     public func body(content: Content) -> some View {
         content
             .font(.callout.bold())
-            .foregroundColor(.flightGreen)
+            .foregroundColor(theme.result)
     }
 }
 
 public struct ButtonTypography: ViewModifier {
+    @EnvironmentObject var theme: Theme
+    
     public func body(content: Content) -> some View {
         content
             .font(.body.bold())
-            .foregroundColor(.flightWhite)
+            .foregroundColor(theme.buttonTypography)
     }
 }
 
 public struct Caption: ViewModifier {
+    @EnvironmentObject var theme: Theme
+    
     public func body(content: Content) -> some View {
         content
             .font(.callout)
-            .foregroundColor(.flightWhite)
+            .foregroundColor(theme.caption)
     }
 }
 
 public struct EmptyField: ViewModifier {
+    @EnvironmentObject var theme: Theme
+    
     public func body(content: Content) -> some View {
         content
             .font(.callout)
-            .foregroundColor(.flightLightGray)
+            .foregroundColor(theme.emptyField)
     }
 }
 
 public struct DropDownOptions: ViewModifier {
+    @EnvironmentObject var theme: Theme
+    
     public func body(content: Content) -> some View {
         content
             .font(.callout)
-            .foregroundColor(.flightBlue)
+            .foregroundColor(theme.dropDownOption)
     }
 }
 
@@ -147,6 +165,7 @@ struct Typography_Previews: PreviewProvider {
     
     static var previews: some View {
         typographyList
+            .environmentObject(Theme())
             .previewDisplayName("All Typography")
             .preferredColorScheme(.dark)
     }

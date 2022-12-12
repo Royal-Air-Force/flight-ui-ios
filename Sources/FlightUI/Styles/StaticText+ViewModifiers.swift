@@ -16,6 +16,7 @@ struct StaticTextOptionSet: OptionSet {
 }
 
 struct StaticTextStyle: ViewModifier {
+    @EnvironmentObject var theme: Theme
     private let options: StaticTextOptionSet
 
     init(options: StaticTextOptionSet = .none) {
@@ -27,7 +28,7 @@ struct StaticTextStyle: ViewModifier {
             .padding()
             .when(options.contains(.background)) { view in
                 view
-                    .background(Color.flightDarkGray)
+                    .background(theme.staticTextBackground)
                     .cornerRadius(fieldCornerRadius)
             }
             .when(options.contains(.bordered)) { view in
@@ -35,7 +36,7 @@ struct StaticTextStyle: ViewModifier {
                     .background(
                         // TODO: move cornerRadius and lineWidth to Theme
                         RoundedRectangle(cornerRadius: fieldCornerRadius, style: .continuous)
-                            .stroke(Color.flightWhite, lineWidth: 3.0)
+                            .stroke(theme.staticTextBorder, lineWidth: 3.0)
                     )
             }
     }
@@ -75,6 +76,7 @@ struct StaticText_Previews: PreviewProvider {
                 .fontWeight(.bold)
                 .foregroundColor(Color(uiColor: .systemRed))
         }
+        .environmentObject(Theme())
         .previewDisplayName("Static Text variations")
         .preferredColorScheme(.dark)
         .padding()

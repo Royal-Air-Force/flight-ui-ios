@@ -8,15 +8,16 @@ fileprivate let borderWidth = 3.0
 // MARK: - Button Style View -
 
 public struct PrimaryButtonStyle: ButtonStyle {
+    @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], horizontalPadding)
             .padding([.top, .bottom], verticalPadding)
-            .foregroundColor(Color.flightBlack)
+            .foregroundColor(theme.primaryButtonForeground)
             .typography(.button)
-            .background(isEnabled ? Color.flightGreen : Color.flightGreen.opacity(0.38))
+            .background(isEnabled ? theme.primaryButtonBackground : theme.primaryButtonBackground.opacity(0.38))
             .clipShape(Capsule())
     }
 }
@@ -30,22 +31,19 @@ public extension ButtonStyle where Self == PrimaryButtonStyle {
 }
 
 public struct SecondaryButtonStyle: ButtonStyle {
+    @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
-    
-    var foregroundColor: Color {
-        isEnabled ? Color.flightGreen : Color.flightGreen.opacity(0.38)
-    }
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], horizontalPadding)
             .padding([.top, .bottom], verticalPadding)
-            .foregroundColor(foregroundColor)
+            .foregroundColor(isEnabled ? theme.secondaryButtonForeground : theme.secondaryButtonForeground.opacity(0.38))
             .typography(.button)
             .clipShape(Capsule())
             .overlay(
                 Capsule(style: .circular)
-                    .strokeBorder(foregroundColor,
+                    .strokeBorder(isEnabled ? theme.secondaryButtonBackground : theme.secondaryButtonBackground.opacity(0.38),
                                   style: StrokeStyle(lineWidth: borderWidth))
             )
     }
@@ -59,13 +57,14 @@ public extension ButtonStyle where Self == SecondaryButtonStyle {
 
 
 public struct TertiaryButtonStyle: ButtonStyle {
+    @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], horizontalPadding)
             .padding([.top, .bottom], verticalPadding)
-            .foregroundColor(isEnabled ? Color.flightWhite : Color.flightLightGray)
+            .foregroundColor(isEnabled ? theme.tertiaryButtonColor : theme.tertiaryButtonDisabledColor)
             .typography(.button)
     }
 }
@@ -121,6 +120,7 @@ struct Button_Previews: PreviewProvider {
                 .buttonStyle(.tertiary)
                 .disabled(true)
         }
+        .environmentObject(Theme())
     }
     
     static var previews: some View {

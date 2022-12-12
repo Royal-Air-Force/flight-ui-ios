@@ -32,6 +32,8 @@ public enum TextFieldSize {
 }
 
 public struct TextFieldType: TextFieldStyle {
+    @EnvironmentObject var theme: Theme
+    
     let valueType: TextFieldValueType
     let size: TextFieldSize
     let alignment: TextAlignment
@@ -46,8 +48,8 @@ public struct TextFieldType: TextFieldStyle {
         configuration
             .fontWeight(.bold)
             .padding()
-            .background(Color.flightDarkGray)
-            .foregroundColor(Color.flightBlue)
+            .background(theme.textFieldBackground)
+            .foregroundColor(theme.textFieldForeground)
             .frame(width: size.width, height: 43)
             .cornerRadius(fieldCornerRadius)
             .multilineTextAlignment(alignment)
@@ -102,6 +104,7 @@ struct TextFieldViewModifiers_ContentPreview: PreviewProvider {
 
             Spacer()
         }
+        .environmentObject(Theme())
         .preferredColorScheme(.dark)
         .previewDisplayName("Text Field variations")
         .padding()

@@ -3,6 +3,8 @@ import SwiftUI
 // MARK: - AppHeader View -
 
 public struct AppHeader<Content: View>: View {
+    @EnvironmentObject var theme: Theme
+    
     private var content: () -> Content
 
     public init(@ViewBuilder content: @escaping () -> Content) {
@@ -18,7 +20,7 @@ public struct AppHeader<Content: View>: View {
             Spacer()
         }
         .padding()
-        .background(Color.flightBlack)
+        .background(theme.appHeaderBackground)
     }
 }
 
@@ -35,6 +37,7 @@ struct AppHeader_Previews: PreviewProvider {
 
             Spacer()
         }
+        .environmentObject(Theme())
         .previewDisplayName("Header")
         .preferredColorScheme(.dark)
     }
