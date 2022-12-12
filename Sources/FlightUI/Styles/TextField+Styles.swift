@@ -48,7 +48,7 @@ public struct TextFieldType: TextFieldStyle {
             .padding()
             .background(Color.flightDarkGray)
             .foregroundColor(Color.flightBlue)
-            .frame(width: size.width)
+            .frame(width: size.width, height: 43)
             .cornerRadius(fieldCornerRadius)
             .multilineTextAlignment(alignment)
             .keyboardType(keyboardType)
