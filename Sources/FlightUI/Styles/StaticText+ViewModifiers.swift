@@ -1,29 +1,34 @@
 import SwiftUI
 
+// Move to FlightUI Theme
 fileprivate let fieldCornerRadius = 5.0
 fileprivate let fieldBorderWidth = 5.0
 
 // MARK: - Static Text View Modifiers -
 
-struct StaticTextOptionSet: OptionSet {
-    let rawValue: UInt8
+public struct StaticTextOptionSet: OptionSet {
+    public let rawValue: UInt8
 
-    static let background = StaticTextOptionSet(rawValue: 0x1)
-    static let bordered = StaticTextOptionSet(rawValue: 0x2)
+    public static let background = StaticTextOptionSet(rawValue: 0x1)
+    public static let bordered = StaticTextOptionSet(rawValue: 0x2)
 
-    static let none = StaticTextOptionSet([])
-    static let all = StaticTextOptionSet([.background, .bordered])
+    public static let none = StaticTextOptionSet([])
+    public static let all = StaticTextOptionSet([.background, .bordered])
+
+    public init(rawValue: UInt8) {
+        self.rawValue = rawValue
+    }
 }
 
-struct StaticTextStyle: ViewModifier {
+public struct StaticTextStyle: ViewModifier {
     @EnvironmentObject var theme: Theme
     private let options: StaticTextOptionSet
 
-    init(options: StaticTextOptionSet = .none) {
+    public init(options: StaticTextOptionSet = .none) {
         self.options = options
     }
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .padding()
             .when(options.contains(.background)) { view in
@@ -45,7 +50,7 @@ struct StaticTextStyle: ViewModifier {
 // MARK: - Text View Extensions -
 
 extension Text {
-    func staticTextStyle<Style: ViewModifier>(_ style: Style) -> some View {
+    public func staticTextStyle<Style: ViewModifier>(_ style: Style) -> some View {
         ModifiedContent(content: self, modifier: style)
     }
 }
