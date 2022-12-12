@@ -71,10 +71,10 @@ struct StaticText_Previews: PreviewProvider {
                 .fontWeight(.heavy)
 
             Text("All Options")
+                .foregroundColor(Color(uiColor: .systemRed))
+                .fontWeight(.bold)
                 .staticTextStyle(StaticTextStyle(options: .all))
                 .typography(.caption)
-                .fontWeight(.bold)
-                .foregroundColor(Color(uiColor: .systemRed))
         }
         .environmentObject(Theme())
         .previewDisplayName("Static Text variations")

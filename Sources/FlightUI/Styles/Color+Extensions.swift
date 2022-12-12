@@ -10,6 +10,7 @@ public extension Color {
     static let flightLightGray = Color("flightLightGray", bundle: .module)
     static let flightBlue = Color("flightBlue", bundle: .module)
     static let flightYellow = Color("flightYellow", bundle: .module)
+    static let flightOrange = Color("flightOrange", bundle: .module)
 }
 
 // MARK: - FilePrivate Preview Code -
@@ -34,7 +35,8 @@ fileprivate extension Color {
                                         .flightDarkGray,
                                         .flightLightGray,
                                         .flightBlue,
-                                        .flightYellow]
+                                        .flightYellow,
+                                        .flightOrange]
 }
 
 struct Color_Previews: PreviewProvider {
