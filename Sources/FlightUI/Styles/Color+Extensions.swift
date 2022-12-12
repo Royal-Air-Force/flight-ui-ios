@@ -64,6 +64,7 @@ struct Color_Previews: PreviewProvider {
             .preferredColorScheme(.dark)
             .previewDisplayName("All Colors")
             .padding()
+            .environmentObject(Theme())
     }
 }
 
