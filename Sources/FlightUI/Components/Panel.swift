@@ -16,9 +16,6 @@ public struct Panel<Content: View>: View {
 
     private let content: () -> Content
 
-    private let cornerRadius = 16.0
-    private let lineWidth = 6.0
-
     public init(title: String? = nil, options: PanelOptions = .fixed, @ViewBuilder content: @escaping () -> Content) {
 
         self.title = title
@@ -46,9 +43,9 @@ public struct Panel<Content: View>: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-            .strokeBorder(theme.panelBackground, lineWidth: lineWidth)
-            .background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous).fill(theme.panelViewBackground)))
+        .background(RoundedRectangle(cornerRadius: theme.panelCornerRadius, style: .continuous)
+            .strokeBorder(theme.panelBackground, lineWidth: theme.panelLineWidth)
+            .background(RoundedRectangle(cornerRadius: theme.panelCornerRadius, style: .continuous).fill(theme.panelViewBackground)))
     }
 
     private var panelHeaderView: some View {
@@ -64,10 +61,10 @@ public struct Panel<Content: View>: View {
             }
         }
         .background(theme.panelBackground)
-        .padding(.bottom, cornerRadius)
-        .cornerRadius(cornerRadius)
-        .padding(.bottom, -cornerRadius)
-        .cornerRadius(showContent ? 0.0 : cornerRadius)
+        .padding(.bottom, theme.panelPadding)
+        .cornerRadius(theme.panelCornerRadius)
+        .padding(.bottom, -theme.panelPadding)
+        .cornerRadius(showContent ? 0.0 : theme.panelCornerRadius)
     }
 
     private func panelTitleTextView(_ title: String) -> some View {
@@ -97,7 +94,7 @@ public struct Panel<Content: View>: View {
         content()
             // -12.0 is a magic number, text pixel alignment is slightly off; goal is
             // to have the content "hug" the Panel and defer padding to component consumer
-            .padding(.top, title == nil ? -cornerRadius / 2.0 : -12.0)
+            .padding(.top, title == nil ? -theme.panelPadding / 2.0 : -12.0)
     }
 
     private var showContent: Bool {

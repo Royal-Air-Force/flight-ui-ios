@@ -1,10 +1,5 @@
 import SwiftUI
 
-// TODO: Move to Theme
-fileprivate let horizontalPadding = 50.0
-fileprivate let verticalPadding = 12.0
-fileprivate let borderWidth = 3.0
-
 // MARK: - Button Style View -
 
 public struct PrimaryButtonStyle: ButtonStyle {
@@ -13,8 +8,8 @@ public struct PrimaryButtonStyle: ButtonStyle {
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding([.leading, .trailing], horizontalPadding)
-            .padding([.top, .bottom], verticalPadding)
+            .padding([.leading, .trailing], theme.buttonHorizontalPadding)
+            .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(theme.primaryButtonForeground)
             .typography(.button)
             .background(isEnabled ? theme.primaryButtonBackground : theme.primaryButtonBackground.opacity(0.38))
@@ -36,15 +31,15 @@ public struct SecondaryButtonStyle: ButtonStyle {
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding([.leading, .trailing], horizontalPadding)
-            .padding([.top, .bottom], verticalPadding)
+            .padding([.leading, .trailing], theme.buttonHorizontalPadding)
+            .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(isEnabled ? theme.secondaryButtonForeground : theme.secondaryButtonForeground.opacity(0.38))
             .typography(.button)
             .clipShape(Capsule())
             .overlay(
                 Capsule(style: .circular)
                     .strokeBorder(isEnabled ? theme.secondaryButtonBackground : theme.secondaryButtonBackground.opacity(0.38),
-                                  style: StrokeStyle(lineWidth: borderWidth))
+                                  style: StrokeStyle(lineWidth: theme.buttonBorderWidth))
             )
     }
 }
@@ -62,8 +57,8 @@ public struct TertiaryButtonStyle: ButtonStyle {
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding([.leading, .trailing], horizontalPadding)
-            .padding([.top, .bottom], verticalPadding)
+            .padding([.leading, .trailing], theme.buttonHorizontalPadding)
+            .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(isEnabled ? theme.tertiaryButtonColor : theme.tertiaryButtonDisabledColor)
             .typography(.button)
     }

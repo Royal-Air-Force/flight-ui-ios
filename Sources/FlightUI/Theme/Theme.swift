@@ -32,6 +32,22 @@ public class Theme: ObservableObject {
     @Published public var panelViewBackground: Color
     @Published public var appHeaderBackground: Color
     
+    // Constants
+    @Published public var panelCornerRadius: Double
+    @Published public var panelLineWidth: Double
+    @Published public var panelPadding: Double
+    
+    @Published public var buttonHorizontalPadding: Double
+    @Published public var buttonVerticalPadding: Double
+    @Published public var buttonBorderWidth: Double
+    
+    @Published public var staticTextFieldCornerRadius: Double
+    @Published public var staticTextFieldBorderWidth: Double
+    
+    @Published public var smallTextFieldWidth: Double
+    @Published public var mediumTextFieldWidth: Double
+    @Published public var textFieldHeight: Double
+    @Published public var textFieldCornerRadius: Double
     
     public init(primaryButtonBackground: Color = .flightGreen,
                 primaryButtonForeground: Color = .flightBlack,
@@ -53,7 +69,20 @@ public class Theme: ObservableObject {
                 panelBackground: Color = .flightDarkGray,
                 panelForeground: Color = .flightWhite,
                 panelViewBackground: Color = .black,
-                appHeaderBackground: Color = .flightBlack) {
+                appHeaderBackground: Color = .flightBlack,
+                panelCornerRadius: Double = 16,
+                panelLineWidth: Double = 6,
+                panelPadding: Double = 6,
+                buttonHorizontalPadding: Double = 50,
+                buttonVerticalPadding: Double = 12,
+                buttonBorderWidth: Double = 3,
+                staticTextFieldCornerRadius: Double = 5,
+                staticTextFieldBorderWidth: Double = 3,
+                smallTextFieldWidth: Double = 84,
+                mediumTextFieldWidth: Double = 146,
+                textFieldHeight: Double = 43,
+                textFieldCornerRadius: Double = 5
+    ) {
         self.primaryButtonBackground = primaryButtonBackground
         self.primaryButtonForeground = primaryButtonForeground
         self.secondaryButtonBackground = secondaryButtonBackground
@@ -75,5 +104,17 @@ public class Theme: ObservableObject {
         self.panelForegoround = panelForeground
         self.panelViewBackground = panelViewBackground
         self.appHeaderBackground = appHeaderBackground
+        self.panelCornerRadius = panelCornerRadius
+        self.panelLineWidth = panelLineWidth
+        self.panelPadding = panelPadding
+        self.buttonHorizontalPadding = buttonHorizontalPadding
+        self.buttonVerticalPadding = buttonVerticalPadding
+        self.buttonBorderWidth = buttonBorderWidth
+        self.staticTextFieldCornerRadius = staticTextFieldCornerRadius
+        self.staticTextFieldBorderWidth = staticTextFieldBorderWidth
+        self.smallTextFieldWidth = smallTextFieldWidth
+        self.mediumTextFieldWidth = mediumTextFieldWidth
+        self.textFieldHeight = textFieldHeight
+        self.textFieldCornerRadius = textFieldCornerRadius
     }
 }

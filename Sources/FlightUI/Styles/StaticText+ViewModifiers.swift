@@ -1,9 +1,5 @@
 import SwiftUI
 
-// Move to FlightUI Theme
-fileprivate let fieldCornerRadius = 5.0
-fileprivate let fieldBorderWidth = 5.0
-
 // MARK: - Static Text View Modifiers -
 
 public struct StaticTextOptionSet: OptionSet {
@@ -34,14 +30,14 @@ public struct StaticTextStyle: ViewModifier {
             .when(options.contains(.background)) { view in
                 view
                     .background(theme.staticTextBackground)
-                    .cornerRadius(fieldCornerRadius)
+                    .cornerRadius(theme.staticTextFieldCornerRadius)
             }
             .when(options.contains(.bordered)) { view in
                 view
                     .background(
                         // TODO: move cornerRadius and lineWidth to Theme
-                        RoundedRectangle(cornerRadius: fieldCornerRadius, style: .continuous)
-                            .stroke(theme.staticTextBorder, lineWidth: 3.0)
+                        RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
+                            .stroke(theme.staticTextBorder, lineWidth: theme.staticTextFieldBorderWidth)
                     )
             }
     }

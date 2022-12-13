@@ -1,10 +1,5 @@
 import SwiftUI
 
-// Move to Theme
-fileprivate let smallFieldWidth = 84.0
-fileprivate let mediumFieldWidth = 146.0
-fileprivate let fieldCornerRadius = 5.0
-
 // MARK: - TextField Style Structs & Leading dot initialisers -
 
 public enum TextFieldValueType {
@@ -16,15 +11,13 @@ public enum TextFieldSize {
     case small
     case medium
     case infinity
-
-    var width: Double {
+    
+    func width(theme: Theme) -> Double {
         switch self {
         case.small:
-            return smallFieldWidth
-
+            return theme.smallTextFieldWidth
         case.medium:
-            return mediumFieldWidth
-
+            return theme.mediumTextFieldWidth
         case .infinity:
             return Double.infinity
         }
@@ -50,8 +43,8 @@ public struct TextFieldType: TextFieldStyle {
             .padding()
             .background(theme.textFieldBackground)
             .foregroundColor(theme.textFieldForeground)
-            .frame(width: size.width, height: 43)
-            .cornerRadius(fieldCornerRadius)
+            .frame(width: size.width(theme: theme), height: theme.textFieldHeight)
+            .cornerRadius(theme.textFieldCornerRadius)
             .multilineTextAlignment(alignment)
             .keyboardType(keyboardType)
     }
