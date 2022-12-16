@@ -30,24 +30,20 @@ public struct TextFieldType: TextFieldStyle {
     let valueType: TextFieldValueType
     let size: TextFieldSize
     let alignment: TextAlignment
-    let fontWeight: Font.Weight?
 
     public init(of valueType: TextFieldValueType = .text,
                 size: TextFieldSize = .infinity,
-                alignment: TextAlignment = .leading,
-                fontWeight: Font.Weight? = .bold) {
+                alignment: TextAlignment = .leading) {
         self.valueType = valueType
         self.size = size
         self.alignment = alignment
-        self.fontWeight = fontWeight
     }
 
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .fontWeight(fontWeight)
+            .typography(.input)
             .padding()
             .background(theme.textFieldBackground)
-            .foregroundColor(theme.textFieldForeground)
             .frame(width: size.width(theme: theme), height: theme.textFieldHeight)
             .cornerRadius(theme.textFieldCornerRadius)
             .multilineTextAlignment(alignment)
@@ -68,9 +64,8 @@ public struct TextFieldType: TextFieldStyle {
 public extension TextFieldStyle where Self == TextFieldType {
     static func type(of valueType: TextFieldValueType = .text,
                      size: TextFieldSize = .infinity,
-                     alignment: TextAlignment = .leading,
-                     fontWeight: Font.Weight? = .bold) -> Self {
-        .init(of: valueType, size: size, alignment: alignment, fontWeight: fontWeight)
+                     alignment: TextAlignment = .leading) -> Self {
+        .init(of: valueType, size: size, alignment: alignment)
     }
 }
 
