@@ -1,11 +1,11 @@
 import SwiftUI
 
-enum ValidationStatus {
+public enum ValidationStatus {
     case valid
     case warning(message: String)
     case error(message: String)
     
-    var color: Color {
+    public var color: Color {
         switch self {
         case .valid:
             return .flightWhite
@@ -17,18 +17,18 @@ enum ValidationStatus {
     }
 }
 
-enum ValidationMode {
+public enum ValidationMode {
     case editing
     case committed
 }
 
-struct Validation: ViewModifier {
-    func body(content: Content) -> some View {
+public struct Validation: ViewModifier {
+    public func body(content: Content) -> some View {
         content
     }
 }
 
-extension View {
+public extension View {
     func validated(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>) -> some View {
         modifier(Validation())
             .validationContext(ValidationContext(validator: validator, status: status))

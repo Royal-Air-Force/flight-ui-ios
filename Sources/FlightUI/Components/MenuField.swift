@@ -1,12 +1,12 @@
 import SwiftUI
 
-struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View {
+public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View {
     @EnvironmentObject var theme: Theme
     @Binding var selection: SelectionType?
     var options: [SelectionType]
     let placeholder: String
     
-    init(selection: Binding<SelectionType?>,
+    public init(selection: Binding<SelectionType?>,
          options: [SelectionType],
          placeholder: String = "Select") {
         self._selection = selection
@@ -14,7 +14,7 @@ struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View {
         self.placeholder = placeholder
     }
     
-    var body: some View {
+    public var body: some View {
         Menu {
             Picker("", selection: $selection) {
                 ForEach(options, id: \.self) { item in

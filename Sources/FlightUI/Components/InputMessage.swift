@@ -1,23 +1,23 @@
 import SwiftUI
 
-struct InputMessage: View {
+public struct InputMessage: View {
     @Environment (\.validationContext) private var context
 
     @Binding private var status: ValidationStatus
 
     private let useBinding: Bool
 
-    init() {
+    public init() {
         self.useBinding = false
         self._status = Binding.constant(ValidationStatus.valid)
     }
 
-    init(status: Binding<ValidationStatus>) {
+    public init(status: Binding<ValidationStatus>) {
         self.useBinding = true
         self._status = status
     }
 
-    var body: some View {
+    public var body: some View {
         if let message {
             Text(message)
                 .foregroundColor(messageColor)

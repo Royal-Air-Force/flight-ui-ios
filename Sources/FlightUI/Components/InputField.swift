@@ -1,18 +1,18 @@
 import SwiftUI
 
-struct InputField: View {
+public struct InputField: View {
     let placeholder: String
 
     @Binding var text: String
 
     @Environment (\.validationContext) var context
     
-    init(_ placeholder: String, text: Binding<String>) {
+    public init(_ placeholder: String, text: Binding<String>) {
         self.placeholder = placeholder
         self._text = text
     }
 
-    var body: some View {
+    public var body: some View {
         ZStack(alignment: .leading) {
             TextField("", text: $text, onEditingChanged: onEditingChanged)
                 .onChange(of: text, perform: onChangeText)

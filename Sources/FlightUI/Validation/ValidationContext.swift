@@ -1,24 +1,24 @@
 import SwiftUI
 
-class ValidationContext: ObservableObject {
-    typealias Validator = (String, ValidationMode) -> ValidationStatus
+public class ValidationContext: ObservableObject {
+    public typealias Validator = (String, ValidationMode) -> ValidationStatus
 
     let validator: Validator?
 
     @Binding var status: ValidationStatus
 
-    init() {
+    public init() {
         self.validator = nil
         self._status = Binding.constant(ValidationStatus.valid)
     }
 
-    init(validator: @escaping Validator, status: Binding<ValidationStatus>) {
+    public init(validator: @escaping Validator, status: Binding<ValidationStatus>) {
         self.validator = validator
         self._status = status
     }
 }
 
-struct ValidationContextEnvironmentKey: EnvironmentKey {
+public struct ValidationContextEnvironmentKey: EnvironmentKey {
     public static var defaultValue: ValidationContext = .init()
 }
 
