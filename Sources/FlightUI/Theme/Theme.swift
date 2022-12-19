@@ -15,7 +15,10 @@ public class Theme: ObservableObject {
     
     // Text Fields
     @Published public var textFieldBackground: Color
-    @Published public var textFieldForeground: Color
+    
+    // Menu Field
+    @Published public var menuFieldBackground: Color
+    @Published public var menuFieldAccent: Color
     
     // Typography
     @Published public var header: Color
@@ -48,6 +51,8 @@ public class Theme: ObservableObject {
     @Published public var mediumTextFieldWidth: Double
     @Published public var textFieldHeight: Double
     @Published public var textFieldCornerRadius: Double
+    @Published public var menuFieldHeight: Double
+    @Published public var menuFieldCornerRadius: Double
     
     public init(primaryButtonBackground: Color = .flightGreen,
                 primaryButtonForeground: Color = .flightBlack,
@@ -58,7 +63,8 @@ public class Theme: ObservableObject {
                 staticTextBackground: Color = .flightDarkGray,
                 staticTextBorder: Color = .flightWhite,
                 textFieldBackground: Color = .flightDarkGray,
-                textFieldForeground: Color = .flightBlue,
+                menuFieldBackground: Color = .flightDarkGray,
+                menuFieldAccent: Color = .flightLightGray,
                 header: Color = .flightWhite,
                 input: Color = .flightBlue,
                 result: Color = .flightGreen,
@@ -81,7 +87,10 @@ public class Theme: ObservableObject {
                 smallTextFieldWidth: Double = 84,
                 mediumTextFieldWidth: Double = 146,
                 textFieldHeight: Double = 43,
-                textFieldCornerRadius: Double = 5
+                textFieldCornerRadius: Double = 5,
+                menuFieldHeight: Double = 43,
+                menuFieldCornerRadius: Double = 5
+                
     ) {
         self.primaryButtonBackground = primaryButtonBackground
         self.primaryButtonForeground = primaryButtonForeground
@@ -92,7 +101,8 @@ public class Theme: ObservableObject {
         self.staticTextBackground = staticTextBackground
         self.staticTextBorder = staticTextBorder
         self.textFieldBackground = textFieldBackground
-        self.textFieldForeground = textFieldForeground
+        self.menuFieldBackground = menuFieldBackground
+        self.menuFieldAccent = menuFieldAccent
         self.header = header
         self.input = input
         self.result = result
@@ -116,5 +126,7 @@ public class Theme: ObservableObject {
         self.mediumTextFieldWidth = mediumTextFieldWidth
         self.textFieldHeight = textFieldHeight
         self.textFieldCornerRadius = textFieldCornerRadius
+        self.menuFieldHeight = menuFieldHeight
+        self.menuFieldCornerRadius = menuFieldCornerRadius
     }
 }
