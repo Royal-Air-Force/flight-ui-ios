@@ -50,6 +50,7 @@ class MenuFieldTests: XCTestCase {
         let actualAttributes = try sut.inspect().view(MenuField<Swift.String>.self).menu().labelView().hStack().text(0).attributes()
         let expectedAttributes = try Text("").typography(.input).environmentObject(Theme()).inspect().text(0).attributes()
         XCTAssertEqual(try actualAttributes.font(), try expectedAttributes.font())
+        XCTAssertEqual(try actualAttributes.foregroundColor(), try expectedAttributes.foregroundColor())
     }
     
     // MARK: - Optional Menu Field -
@@ -111,6 +112,7 @@ class MenuFieldTests: XCTestCase {
         let actualAttributes = try sut.inspect().view(OptionalMenuField<Swift.String>.self).menu().labelView().hStack().text(0).attributes()
         let expectedAttributes = try Text("").typography(.input).environmentObject(Theme()).inspect().text(0).attributes()
         XCTAssertEqual(try actualAttributes.font(), try expectedAttributes.font())
+        XCTAssertEqual(try actualAttributes.foregroundColor(), try expectedAttributes.foregroundColor())
     }
     
     func test_optionalMenuField_givenOptionalMenuFieldWithNilSelection_thenLabelIsOfEmptyFieldTypography() throws {
@@ -123,6 +125,7 @@ class MenuFieldTests: XCTestCase {
         let actualAttributes = try sut.inspect().view(OptionalMenuField<Swift.String>.self).menu().labelView().hStack().text(0).attributes()
         let expectedAttributes = try Text("").typography(.emptyField).environmentObject(Theme()).inspect().text(0).attributes()
         XCTAssertEqual(try actualAttributes.font(), try expectedAttributes.font())
+        XCTAssertEqual(try actualAttributes.foregroundColor(), try expectedAttributes.foregroundColor())
     }
     
     func test_optionalMenuField_givenSelectionNil_whenSelectionChanged_thenCorrectlyUpdatesTypograhy() throws {
@@ -134,6 +137,7 @@ class MenuFieldTests: XCTestCase {
         var actualAttributes = try sut.inspect().view(OptionalMenuField<Swift.String>.self).menu().labelView().hStack().text(0).attributes()
         var expectedAttributes = try Text("").typography(.emptyField).environmentObject(Theme()).inspect().text(0).attributes()
         XCTAssertEqual(try actualAttributes.font(), try expectedAttributes.font())
+        XCTAssertEqual(try actualAttributes.foregroundColor(), try expectedAttributes.foregroundColor())
 
         // when
         try sut.inspect().view(OptionalMenuField<Swift.String>.self).menu().picker(0).select(value: Optional("Captain America"))
@@ -142,5 +146,6 @@ class MenuFieldTests: XCTestCase {
         actualAttributes = try sut.inspect().view(OptionalMenuField<Swift.String>.self).menu().labelView().hStack().text(0).attributes()
         expectedAttributes = try Text("").typography(.input).environmentObject(Theme()).inspect().text(0).attributes()
         XCTAssertEqual(try actualAttributes.font(), try expectedAttributes.font())
+        XCTAssertEqual(try actualAttributes.foregroundColor(), try expectedAttributes.foregroundColor())
     }
 }
