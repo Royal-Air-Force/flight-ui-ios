@@ -1,6 +1,6 @@
 import SwiftUI
 
-public enum ValidationStatus {
+public enum ValidationStatus: Equatable {
     case valid
     case warning(message: String)
     case error(message: String)
