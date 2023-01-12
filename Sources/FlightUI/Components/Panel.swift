@@ -7,18 +7,26 @@ public enum PanelOptions {
     case expandable(expanded: Bool = false)
 }
 
-public struct Panel<Content: View>: View {
+public struct Panel<Content: View, Subtitle: View>: View {
     @EnvironmentObject var theme: Theme
     @State private var expanded: Bool
 
     private var title: String?
+    private var typography: Typography
     private var expandable: Bool
 
+    private var subtitle: () -> Subtitle
     private let content: () -> Content
 
-    public init(title: String? = nil, options: PanelOptions = .fixed, @ViewBuilder content: @escaping () -> Content) {
+    public init(title: String? = nil,
+                typography: Typography = .h1,
+                options: PanelOptions = .fixed,
+                subtitle: @escaping () -> Subtitle,
+                @ViewBuilder content: @escaping () -> Content) {
 
         self.title = title
+        self.typography = typography
+        self.subtitle = subtitle
         self.content = content
 
         if case .expandable(let expanded) = options {
@@ -28,6 +36,17 @@ public struct Panel<Content: View>: View {
             self.expandable = false
             self.expanded = false
         }
+    }
+    
+    public init(title: String? = nil,
+                typography: Typography = .h1,
+                options: PanelOptions = .fixed,
+                @ViewBuilder content: @escaping () -> Content) where Subtitle == EmptyView {
+        self.init(title: title,
+                  typography: typography,
+                  options: options,
+                  subtitle: { EmptyView() },
+                  content: content)
     }
 
     public var body: some View {
@@ -55,6 +74,8 @@ public struct Panel<Content: View>: View {
             }
 
             Spacer()
+            
+            subtitle()
 
             if expandable {
                 expandIcon
@@ -65,12 +86,19 @@ public struct Panel<Content: View>: View {
         .cornerRadius(theme.panelCornerRadius)
         .padding(.bottom, -theme.panelPadding)
         .cornerRadius(showContent ? 0.0 : theme.panelCornerRadius)
+        .onTapGesture {
+            guard expandable else { return }
+
+            withAnimation {
+                expanded.toggle()
+            }
+        }
     }
 
     private func panelTitleTextView(_ title: String) -> some View {
         Text(title)
             .padding()
-            .typography(.h1)
+            .typography(typography)
             .foregroundColor(theme.panelForegoround)
     }
 
@@ -81,13 +109,6 @@ public struct Panel<Content: View>: View {
             .foregroundColor(theme.panelForegoround)
             .rotationEffect(.degrees(expanded ? -180.0 : 0.0))
             .padding()
-            .onTapGesture {
-                guard expandable else { return }
-
-                withAnimation {
-                    expanded.toggle()
-                }
-            }
     }
 
     private var panelContentView: some View {
@@ -113,15 +134,31 @@ struct Panel_Previews: PreviewProvider {
                 content
             }
 
-            Panel(title: "Preferences") {
+            Panel(title: "Default Panel") {
+                content
+            }
+            
+            Panel(title: "Panel with h2", typography: .h2) {
+                content
+            }
+            
+            Panel(title: "Panel with h2", typography: .h2) {
+                content
+            }
+            
+            Panel(title: "Expandable Panel with subtitle", typography: .button, options: .expandable()) {
+                Text("This is a subtitle")
+                    .typography(.caption)
+            } content: {
                 content
             }
 
-            Panel(title: "Preferences (not expanded)", options: .expandable()) {
+
+            Panel(title: "Panel (not expanded)", options: .expandable()) {
                 content
             }
 
-            Panel(title: "Preferences (expanded)", options: .expandable(expanded: true)) {
+            Panel(title: "Panel (expanded)", options: .expandable(expanded: true)) {
                 content
             }
 
