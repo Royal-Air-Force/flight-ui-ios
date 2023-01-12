@@ -12,14 +12,14 @@ public enum TextFieldSize {
     case medium
     case infinity
     
-    func width(theme: Theme) -> Double {
+    func width(theme: Theme) -> CGFloat? {
         switch self {
         case.small:
             return theme.smallTextFieldWidth
         case.medium:
             return theme.mediumTextFieldWidth
         case .infinity:
-            return Double.infinity
+            return nil
         }
     }
 }
@@ -31,7 +31,9 @@ public struct TextFieldType: TextFieldStyle {
     let size: TextFieldSize
     let alignment: TextAlignment
 
-    public init(of valueType: TextFieldValueType = .text, size: TextFieldSize = .infinity, alignment: TextAlignment = .leading) {
+    public init(of valueType: TextFieldValueType = .text,
+                size: TextFieldSize = .infinity,
+                alignment: TextAlignment = .leading) {
         self.valueType = valueType
         self.size = size
         self.alignment = alignment
@@ -39,10 +41,9 @@ public struct TextFieldType: TextFieldStyle {
 
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .fontWeight(.bold)
+            .typography(.input)
             .padding()
             .background(theme.textFieldBackground)
-            .foregroundColor(theme.textFieldForeground)
             .frame(width: size.width(theme: theme), height: theme.textFieldHeight)
             .cornerRadius(theme.textFieldCornerRadius)
             .multilineTextAlignment(alignment)
@@ -61,7 +62,9 @@ public struct TextFieldType: TextFieldStyle {
 }
 
 public extension TextFieldStyle where Self == TextFieldType {
-    static func type(of valueType: TextFieldValueType = .text, size: TextFieldSize = .infinity, alignment: TextAlignment = .leading) -> Self {
+    static func type(of valueType: TextFieldValueType = .text,
+                     size: TextFieldSize = .infinity,
+                     alignment: TextAlignment = .leading) -> Self {
         .init(of: valueType, size: size, alignment: alignment)
     }
 }
