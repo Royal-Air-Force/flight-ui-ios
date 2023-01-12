@@ -2,28 +2,6 @@ import SwiftUI
 
 // MARK: - TextField Style Structs & Leading dot initialisers -
 
-public enum TextFieldValueType {
-    case text
-    case decimal
-}
-
-public enum TextFieldSize {
-    case small
-    case medium
-    case infinity
-    
-    func width(theme: Theme) -> CGFloat? {
-        switch self {
-        case.small:
-            return theme.smallTextFieldWidth
-        case.medium:
-            return theme.mediumTextFieldWidth
-        case .infinity:
-            return nil
-        }
-    }
-}
-
 public struct TextFieldType: TextFieldStyle {
     @EnvironmentObject var theme: Theme
     
@@ -62,6 +40,7 @@ public struct TextFieldType: TextFieldStyle {
 }
 
 public extension TextFieldStyle where Self == TextFieldType {
+    @available(*, deprecated, message: "Use InputField to replace TextFields")
     static func type(of valueType: TextFieldValueType = .text,
                      size: TextFieldSize = .infinity,
                      alignment: TextAlignment = .leading) -> Self {

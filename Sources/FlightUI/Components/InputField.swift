@@ -1,5 +1,7 @@
 import SwiftUI
 
+// MARK: - Input Field Component -
+
 public struct InputField: View {
     @Environment (\.validationContext) var context
     @EnvironmentObject var theme: Theme
@@ -85,16 +87,92 @@ public struct InputField: View {
     }
 }
 
-struct InputField_Previews: PreviewProvider {
-    @State private static var text = ""
+// MARK: - Supporting TextField enums -
 
-    static var previews: some View {
-        VStack {
-            InputField("Placeholder", text: $text)
-            InputField("Placeholder No Styling", text: $text, useThemeStyling: false)
+public enum TextFieldValueType {
+    case text
+    case decimal
+}
+
+public enum TextFieldSize {
+    case small
+    case medium
+    case infinity
+    
+    func width(theme: Theme) -> CGFloat? {
+        switch self {
+        case.small:
+            return theme.smallTextFieldWidth
+        case.medium:
+            return theme.mediumTextFieldWidth
+        case .infinity:
+            return nil
         }
-        .padding()
-        .preferredColorScheme(.dark)
-        .environmentObject(Theme())
     }
 }
+
+// MARK: - Preview Code -
+
+#if DEBUG
+
+struct InputField_Previews: PreviewProvider {
+    @State private static var text = "Hello World"
+    @State private static var emptyText = ""
+
+    static var previews: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Group {
+                InputField("Placeholder",
+                           text: $emptyText,
+                           size: .small)
+                
+                InputField("Placeholder",
+                           text: $text,
+                           size: .small)
+
+                InputField("Placeholder",
+                           text: $emptyText,
+                           size: .medium)
+                
+                InputField("Placeholder",
+                           text: $text,
+                           size: .medium)
+                
+                InputField("Placeholder",
+                           text: $emptyText,
+                           size: .infinity)
+                
+                InputField("Placeholder",
+                           text: $text,
+                           size: .infinity)
+            }
+            Divider()
+            Group {
+                InputField("",
+                           text: $emptyText,
+                           size: .small)
+                InputField("",
+                           text: $emptyText,
+                           size: .medium)
+                InputField("",
+                           text: $emptyText,
+                           size: .infinity)
+            }
+            Divider()
+            Group {
+                InputField("Placeholder",
+                           text: $emptyText,
+                           size: .medium,
+                           useThemeStyling: false)
+            }
+            Divider()
+            Spacer()
+        }
+        .environmentObject(Theme())
+        .preferredColorScheme(.dark)
+        .previewDisplayName("Input Field variations")
+        .padding()
+    }
+}
+
+#endif
