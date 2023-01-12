@@ -42,7 +42,6 @@ public struct InputField: View {
                 TextField("", text: $text, onEditingChanged: onEditingChanged)
                     .typography(.input)
                     .padding()
-                    // Note: Should we use theme frame sizing either way?
                     .frame(width: size.width(theme: theme), height: theme.textFieldHeight)
                     .multilineTextAlignment(alignment)
                     .keyboardType(keyboardType)
