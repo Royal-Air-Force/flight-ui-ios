@@ -75,7 +75,7 @@ public struct InputField: View {
             print("no validator")
         }
     }
-    
+
     private var keyboardType: UIKeyboardType {
         switch valueType {
         case .decimal:
