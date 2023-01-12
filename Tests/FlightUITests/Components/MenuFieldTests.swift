@@ -5,11 +5,6 @@ import ViewInspector
 
 @testable import FlightUI
 
-extension MenuField: Inspectable {}
-extension OptionalMenuField: Inspectable {}
-extension Input: Inspectable {}
-extension EmptyField: Inspectable {}
-
 class MenuFieldTests: XCTestCase {
     
     // MARK: - Menu Field -
