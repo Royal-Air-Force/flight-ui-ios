@@ -6,17 +6,47 @@ public struct AppHeader<Content: View>: View {
     @EnvironmentObject var theme: Theme
     
     private var content: () -> Content
+    private var title: String?
+    private var imageName: String?
+    private var bundle: Bundle?
+    private var typography: Typography?
+    private let useContent: Bool
 
     public init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
+        self.useContent = true
+    }
+
+    public init (title: String? = nil,
+                 typograhy: Typography = .h3,
+                 imageName: String? = nil,
+                 bundle: Bundle? = nil) where Content == EmptyView {
+        self.title = title
+        self.typography = typograhy
+        self.imageName = imageName
+        self.bundle = bundle
+        self.content = { EmptyView() }
+        self.useContent = false
     }
 
     public var body: some View {
         HStack {
             Spacer()
 
-            content()
-
+            if useContent {
+                content()
+            } else {
+                if let imageName {
+                    Image(imageName, bundle: bundle)
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .padding(5)
+                }
+                if let title, let typography {
+                    Text(title)
+                        .typography(typography)
+                }
+            }
             Spacer()
         }
         .padding()
@@ -32,11 +62,22 @@ struct AppHeader_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             AppHeader {
-                Text("Dark Header")
+                Text("Custom View App Header")
             }
+
+            AppHeader(title: "App Header")
+
+            AppHeader(title: "FlightUI",
+                      typograhy: .h3,
+                      imageName: "plane",
+                      bundle: .module)
+
+            AppHeader(imageName: "plane",
+                      bundle: .module)
 
             Spacer()
         }
+        .background(Color.flightBlack)
         .environmentObject(Theme())
         .previewDisplayName("Header")
         .preferredColorScheme(.dark)
