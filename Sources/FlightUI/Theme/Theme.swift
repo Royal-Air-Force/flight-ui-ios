@@ -75,7 +75,7 @@ public class Theme: ObservableObject {
                 panelBackground: Color = .flightDarkGray,
                 panelForeground: Color = .flightWhite,
                 panelViewBackground: Color = .black,
-                appHeaderBackground: Color = .flightBlack,
+                appHeaderBackground: Color = .black,
                 panelCornerRadius: Double = 16,
                 panelLineWidth: Double = 6,
                 panelPadding: Double = 6,
