@@ -62,18 +62,13 @@ public struct InputField: View {
         guard !isEditing else { return }
 
         if let validator = context.validator {
-            print("running commited validation")
             context.status = validator(text, .committed)
         }
     }
 
     func onChangeText(value: String) {
         if let validator = context.validator {
-            print("running editing validation")
-
             context.status = validator(value, .editing)
-        } else {
-            print("no validator")
         }
     }
 
