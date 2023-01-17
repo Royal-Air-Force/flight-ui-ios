@@ -19,7 +19,7 @@ public struct Panel<Content: View, Subtitle: View>: View {
     private let content: () -> Content
 
     public init(title: String? = nil,
-                typography: Typography = .h1,
+                typography: Typography = .h2,
                 options: PanelOptions = .fixed,
                 subtitle: @escaping () -> Subtitle,
                 @ViewBuilder content: @escaping () -> Content) {
@@ -39,7 +39,7 @@ public struct Panel<Content: View, Subtitle: View>: View {
     }
     
     public init(title: String? = nil,
-                typography: Typography = .h1,
+                typography: Typography = .h2,
                 options: PanelOptions = .fixed,
                 @ViewBuilder content: @escaping () -> Content) where Subtitle == EmptyView {
         self.init(title: title,
@@ -138,13 +138,6 @@ struct Panel_Previews: PreviewProvider {
                 content
             }
             
-            Panel(title: "Panel with h2", typography: .h2) {
-                content
-            }
-            
-            Panel(title: "Panel with h2", typography: .h2) {
-                content
-            }
             
             Panel(title: "Expandable Panel with subtitle", typography: .button, options: .expandable()) {
                 Text("This is a subtitle")
