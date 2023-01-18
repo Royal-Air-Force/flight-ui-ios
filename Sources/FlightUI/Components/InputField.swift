@@ -68,6 +68,7 @@ public struct InputField: View {
            let doubleValue = Double(text),
            let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
             text = formattedString
+            print("TEXT IS", text)
         }
 
         if let validator = context.validator {
@@ -153,7 +154,7 @@ struct InputField_Previews: PreviewProvider {
 
                 InputField("Placeholder",
                            text: $exampleNumber,
-                           formatter: .decimal(maximumIntegerDigits: 1),
+                           formatter: .decimal(maximumIntegerDigits: 42),
                            size: .infinity)
             }
             Divider()
