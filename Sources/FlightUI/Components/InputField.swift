@@ -21,7 +21,7 @@ public struct InputField: View {
                 print("TEXT IS", text)
                 return formattedString
             } else {
-                return ""
+                return text
             }
         },
         set: { self.text = $0 })}
