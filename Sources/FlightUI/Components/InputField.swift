@@ -13,6 +13,18 @@ public struct InputField: View {
     let alignment: TextAlignment
     let useThemeStyling: Bool
     var formatter: NumberFormatter?
+    private var textBinding: Binding<String> { Binding(
+        get: {
+            if let formatter,
+               let doubleValue = Double(text),
+               let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
+                print("TEXT IS", text)
+                return formattedString
+            } else {
+                return ""
+            }
+        },
+        set: { self.text = $0 })}
     
     public init(_ placeholder: String,
                 text: Binding<String>,
@@ -34,7 +46,7 @@ public struct InputField: View {
         ZStack(alignment: .leading) {
             switch useThemeStyling {
             case true:
-                TextField("", text: $text, onEditingChanged: onEditingChanged)
+                TextField("", text: textBinding, onEditingChanged: onEditingChanged)
                     .typography(.input)
                     .padding()
                     .background(theme.textFieldBackground)
@@ -44,7 +56,7 @@ public struct InputField: View {
                     .keyboardType(keyboardType)
                     .onChange(of: text, perform: onChangeText)
             case false:
-                TextField("", text: $text, onEditingChanged: onEditingChanged)
+                TextField("", text: textBinding, onEditingChanged: onEditingChanged)
                     .typography(.input)
                     .padding()
                     .frame(width: size.width(theme: theme), height: theme.textFieldHeight)
@@ -63,13 +75,6 @@ public struct InputField: View {
 
     func onEditingChanged(isEditing: Bool) {
         guard !isEditing else { return }
-
-        if let formatter,
-           let doubleValue = Double(text),
-           let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
-            text = formattedString
-            print("TEXT IS", text)
-        }
 
         if let validator = context.validator {
             context.status = validator(text, .committed)
