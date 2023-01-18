@@ -13,12 +13,15 @@ public struct InputField: View {
     let alignment: TextAlignment
     let useThemeStyling: Bool
     var formatter: NumberFormatter?
+    @State var shouldRunFormatter = false
     private var textBinding: Binding<String> { Binding(
         get: {
-            if let formatter,
+            if shouldRunFormatter,
+               let formatter,
                let doubleValue = Double(text),
                let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
                 print("TEXT IS", text)
+                shouldRunFormatter = false
                 return formattedString
             } else {
                 return text
@@ -75,6 +78,8 @@ public struct InputField: View {
 
     func onEditingChanged(isEditing: Bool) {
         guard !isEditing else { return }
+
+        shouldRunFormatter = true
 
         if let validator = context.validator {
             context.status = validator(text, .committed)
