@@ -12,15 +12,18 @@ public struct InputField: View {
     let size: TextFieldSize
     let alignment: TextAlignment
     let useThemeStyling: Bool
+    var formatter: NumberFormatter?
     
     public init(_ placeholder: String,
                 text: Binding<String>,
+                formatter: NumberFormatter? = nil,
                 of valueType: TextFieldValueType = .text,
                 size: TextFieldSize = .infinity,
                 alignment: TextAlignment = .leading,
                 useThemeStyling: Bool = true) {
         self.placeholder = placeholder
         self._text = text
+        self.formatter = formatter
         self.valueType = valueType
         self.size = size
         self.alignment = alignment
@@ -60,6 +63,12 @@ public struct InputField: View {
 
     func onEditingChanged(isEditing: Bool) {
         guard !isEditing else { return }
+
+        if let formatter,
+           let doubleValue = Double(text),
+           let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
+            text = formattedString
+        }
 
         if let validator = context.validator {
             context.status = validator(text, .committed)
@@ -113,6 +122,7 @@ public enum TextFieldSize {
 struct InputField_Previews: PreviewProvider {
     @State private static var text = "Hello World"
     @State private static var emptyText = ""
+    @State private static var exampleNumber = "100.1234"
 
     static var previews: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -139,6 +149,11 @@ struct InputField_Previews: PreviewProvider {
                 
                 InputField("Placeholder",
                            text: $text,
+                           size: .infinity)
+
+                InputField("Placeholder",
+                           text: $exampleNumber,
+                           formatter: .decimal(maximumIntegerDigits: 1),
                            size: .infinity)
             }
             Divider()
