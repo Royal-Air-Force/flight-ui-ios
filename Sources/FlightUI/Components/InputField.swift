@@ -161,7 +161,12 @@ struct InputField_Previews: PreviewProvider {
 
                 InputField("Placeholder",
                            text: $exampleNumber,
-                           formatter: .decimal(maximumIntegerDigits: 42),
+                           formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 4),
+                           size: .infinity)
+
+                InputField("Placeholder",
+                           text: $exampleNumber,
+                           formatter: .decimal(maximumIntegerDigits: 42,maximumFractionDigits: 1),
                            size: .infinity)
             }
             Divider()
