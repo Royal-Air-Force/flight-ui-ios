@@ -13,35 +13,37 @@ public struct InputField: View {
     let alignment: TextAlignment
     let useThemeStyling: Bool
     var formatter: NumberFormatter?
-    @State var isNotEditing = false
-    private var textBinding: Binding<String> { Binding(
-        get: {
-            if isNotEditing,
-               let formatter,
-               let doubleValue = Double(text),
-               let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
-                print("TEXT IS", formattedString)
-                print("UNDERLYING TEXT IS", text)
-//                shouldRunFormatter = false
-                return formattedString
-            } else {
-                print("editing and text is \(_text.wrappedValue)")
-                return text
-            }
-        },
-        set: {
-            print("SETTING TEXT, TEXT IS", $0)
-//            self.text = $0
-            if isNotEditing,
-               let formatter,
-               let doubleValue = Double(text),
-               let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
-                self.text = formattedString
-            } else {
-                print("editing and text is \(_text.wrappedValue)")
-                self.text = $0
-            }
-        })}
+    @State var isNotEditing = true
+    private var textBinding: Binding<String> { Binding(get: textGetter, set: textSetter) }
+
+    func textGetter() -> String {
+        print("getter called")
+        if isNotEditing,
+           let formatter,
+           let doubleValue = Double(text),
+           let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
+            print("TEXT IS", formattedString)
+            print("UNDERLYING TEXT IS", text)
+            return formattedString
+        } else {
+            print("getter: editing and text is \(_text.wrappedValue)")
+            return text
+        }
+    }
+
+    func textSetter(value: String) {
+        print("setter called")
+        print("SETTING TEXT, TEXT IS", value)
+        if isNotEditing,
+           let formatter,
+           let doubleValue = Double(text),
+           let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
+            self.text = formattedString
+        } else {
+            print("setter: editing and text is \(_text.wrappedValue)")
+            self.text = value
+        }
+    }
 
     public init(_ placeholder: String,
                 text: Binding<String>,
