@@ -8,7 +8,7 @@ public struct InputField: View {
 
     let placeholder: String
     @Binding var text: String
-    var formatter: NumberFormatter?
+    let formatter: NumberFormatter?
     let valueType: TextFieldValueType
     let size: TextFieldSize
     let alignment: TextAlignment
@@ -84,9 +84,8 @@ public struct InputField: View {
            let doubleValue = Double(string),
            let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
             return formattedString
-        } else {
-           return string
         }
+        return string
     }
 
     private var keyboardType: UIKeyboardType {
