@@ -31,7 +31,17 @@ public struct InputField: View {
         },
         set: {
             print("SETTING TEXT, TEXT IS", $0)
-            self.text = $0 })}
+//            self.text = $0
+            if isNotEditing,
+               let formatter,
+               let doubleValue = Double(text),
+               let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
+                self.text = formattedString
+            } else {
+                print("editing and text is \(_text.wrappedValue)")
+                self.text = $0
+            }
+        })}
 
     public init(_ placeholder: String,
                 text: Binding<String>,
