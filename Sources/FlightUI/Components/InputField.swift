@@ -5,6 +5,10 @@ import SwiftUI
 public struct InputField: View {
     @Environment (\.validationContext) var context
     @EnvironmentObject var theme: Theme
+
+    enum FormattingError: Error {
+        case formattingFailed
+    }
     
     let placeholder: String
     @Binding var text: String
@@ -17,31 +21,29 @@ public struct InputField: View {
     private var textBinding: Binding<String> { Binding(get: textGetter, set: textSetter) }
 
     func textGetter() -> String {
-        print("getter called")
-        if isNotEditing,
-           let formatter,
-           let doubleValue = Double(text),
-           let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
-            print("TEXT IS", formattedString)
-            print("UNDERLYING TEXT IS", text)
-            return formattedString
-        } else {
-            print("getter: editing and text is \(_text.wrappedValue)")
+        do {
+            return try format(text)
+        } catch {
             return text
         }
     }
 
     func textSetter(value: String) {
-        print("setter called")
-        print("SETTING TEXT, TEXT IS", value)
+        do {
+            text = try format(value)
+        } catch {
+            text = value
+        }
+    }
+
+    func format(_ string: String) throws -> String {
         if isNotEditing,
            let formatter,
-           let doubleValue = Double(text),
+           let doubleValue = Double(string),
            let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
-            self.text = formattedString
+            return formattedString
         } else {
-            print("setter: editing and text is \(_text.wrappedValue)")
-            self.text = value
+            throw FormattingError.formattingFailed
         }
     }
 
