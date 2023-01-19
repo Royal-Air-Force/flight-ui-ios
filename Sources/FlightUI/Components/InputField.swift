@@ -6,46 +6,15 @@ public struct InputField: View {
     @Environment (\.validationContext) var context
     @EnvironmentObject var theme: Theme
 
-    enum FormattingError: Error {
-        case formattingFailed
-    }
-    
     let placeholder: String
     @Binding var text: String
+    var formatter: NumberFormatter?
     let valueType: TextFieldValueType
     let size: TextFieldSize
     let alignment: TextAlignment
     let useThemeStyling: Bool
-    var formatter: NumberFormatter?
     @State var isNotEditing = true
-    private var textBinding: Binding<String> { Binding(get: textGetter, set: textSetter) }
-
-    func textGetter() -> String {
-        do {
-            return try format(text)
-        } catch {
-            return text
-        }
-    }
-
-    func textSetter(value: String) {
-        do {
-            text = try format(value)
-        } catch {
-            text = value
-        }
-    }
-
-    func format(_ string: String) throws -> String {
-        if isNotEditing,
-           let formatter,
-           let doubleValue = Double(string),
-           let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
-            return formattedString
-        } else {
-            throw FormattingError.formattingFailed
-        }
-    }
+    private var textBinding: Binding<String> { Binding(get: { format(text) }, set: { text = format($0) }) }
 
     public init(_ placeholder: String,
                 text: Binding<String>,
@@ -94,7 +63,7 @@ public struct InputField: View {
         }
     }
 
-    func onEditingChanged(isEditing: Bool) {
+    private func onEditingChanged(isEditing: Bool) {
         isNotEditing = !isEditing
         guard !isEditing else { return }
 
@@ -103,9 +72,20 @@ public struct InputField: View {
         }
     }
 
-    func onChangeText(value: String) {
+    private func onChangeText(value: String) {
         if let validator = context.validator {
             context.status = validator(value, .editing)
+        }
+    }
+
+    private func format(_ string: String) -> String {
+        if isNotEditing,
+           let formatter,
+           let doubleValue = Double(string),
+           let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
+            return formattedString
+        } else {
+           return string
         }
     }
 
