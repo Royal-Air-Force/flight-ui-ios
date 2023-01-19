@@ -13,22 +13,26 @@ public struct InputField: View {
     let alignment: TextAlignment
     let useThemeStyling: Bool
     var formatter: NumberFormatter?
-    @State var shouldRunFormatter = false
+    @State var isNotEditing = false
     private var textBinding: Binding<String> { Binding(
         get: {
-            if shouldRunFormatter,
+            if isNotEditing,
                let formatter,
                let doubleValue = Double(text),
                let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
-                print("TEXT IS", text)
-                shouldRunFormatter = false
+                print("TEXT IS", formattedString)
+                print("UNDERLYING TEXT IS", text)
+//                shouldRunFormatter = false
                 return formattedString
             } else {
+                print("editing and text is \(_text.wrappedValue)")
                 return text
             }
         },
-        set: { self.text = $0 })}
-    
+        set: {
+            print("SETTING TEXT, TEXT IS", $0)
+            self.text = $0 })}
+
     public init(_ placeholder: String,
                 text: Binding<String>,
                 formatter: NumberFormatter? = nil,
@@ -77,9 +81,8 @@ public struct InputField: View {
     }
 
     func onEditingChanged(isEditing: Bool) {
+        isNotEditing = !isEditing
         guard !isEditing else { return }
-
-        shouldRunFormatter = true
 
         if let validator = context.validator {
             context.status = validator(text, .committed)
