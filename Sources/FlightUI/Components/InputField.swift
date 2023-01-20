@@ -79,13 +79,11 @@ public struct InputField: View {
     }
 
     private func format(_ string: String) -> String {
-        if isNotEditing,
-           let formatter,
-           let doubleValue = Double(string),
-           let formattedString = formatter.string(from: NSNumber(value: doubleValue)) {
-            return formattedString
-        }
-        return string
+        guard isNotEditing,
+              let doubleValue = Double(string),
+              let formattedString = formatter?.string(from: NSNumber(value: doubleValue))
+        else { return string }
+        return formattedString
     }
 
     private var keyboardType: UIKeyboardType {
