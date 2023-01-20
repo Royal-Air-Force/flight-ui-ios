@@ -9,7 +9,7 @@ class InputFieldTests: XCTestCase {
 
     // MARK: - Input Field -
 
-    func test_inputField_bindingWorksCorrectly() throws {
+    func test_inputField_givenEmptyBinding_whenInputChanged_thenBindingUpdates() throws {
         // given
         let text = Binding<String>(wrappedValue: "")
         let inputField = InputField("",
@@ -23,7 +23,7 @@ class InputFieldTests: XCTestCase {
         XCTAssertEqual(text.wrappedValue, "Test Binding")
     }
 
-    func test_inputField_noThemeStylingBindingWorksCorrectly() throws {
+    func test_inputField_noStyling_givenEmptyBinding_whenInputChanged_thenBindingUpdates() throws {
         // given
         let text = Binding<String>(wrappedValue: "")
         let inputField = InputField("",
