@@ -12,6 +12,7 @@ public enum NumberFormatting {
             formatter.numberStyle = .decimal
             formatter.alwaysShowsDecimalSeparator = true
             formatter.allowsFloats = true
+            formatter.groupingSeparator = ""
 
             formatter.maximumIntegerDigits = maximumIntegerDigits
             formatter.minimumFractionDigits = minimumFractionDigits
