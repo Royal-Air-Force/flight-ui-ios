@@ -93,6 +93,7 @@ public class Theme: ObservableObject {
                 staticTextFieldBorderWidth: Double = 3,
                 smallTextFieldWidth: Double = 84,
                 mediumTextFieldWidth: Double = 43,
+                textFieldHeight: Double = 43,
                 textFieldCornerRadius: Double = 5,
                 menuFieldHeight: Double = 43,
                 menuFieldCornerRadius: Double = 5,
