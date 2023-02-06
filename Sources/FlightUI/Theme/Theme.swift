@@ -53,6 +53,13 @@ public class Theme: ObservableObject {
     @Published public var textFieldCornerRadius: Double
     @Published public var menuFieldHeight: Double
     @Published public var menuFieldCornerRadius: Double
+
+    // UI Element Spacing
+    @Published public var small: Double
+    @Published public var medium: Double
+    @Published public var large: Double
+    @Published public var xlarge: Double
+    @Published public var xxlarge: Double
     
     public init(primaryButtonBackground: Color = .flightGreen,
                 primaryButtonForeground: Color = .flightBlack,
@@ -89,7 +96,12 @@ public class Theme: ObservableObject {
                 textFieldHeight: Double = 43,
                 textFieldCornerRadius: Double = 5,
                 menuFieldHeight: Double = 43,
-                menuFieldCornerRadius: Double = 5
+                menuFieldCornerRadius: Double = 5,
+                small: Double = 8,
+                medium: Double = 16,
+                large: Double = 24,
+                xlarge: Double = 32,
+                xxlarge: Double = 48
                 
     ) {
         self.primaryButtonBackground = primaryButtonBackground
@@ -128,5 +140,10 @@ public class Theme: ObservableObject {
         self.textFieldCornerRadius = textFieldCornerRadius
         self.menuFieldHeight = menuFieldHeight
         self.menuFieldCornerRadius = menuFieldCornerRadius
+        self.small = small
+        self.medium = medium
+        self.large = large
+        self.xlarge = xlarge
+        self.xxlarge = xxlarge
     }
 }
