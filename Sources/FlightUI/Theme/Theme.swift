@@ -55,11 +55,11 @@ public class Theme: ObservableObject {
     @Published public var menuFieldCornerRadius: Double
 
     // UI Element Spacing
-    @Published public var spacing1x: Double
-    @Published public var spacing2x: Double
-    @Published public var spacing3x: Double
-    @Published public var spacing4x: Double
-    @Published public var spacing6x: Double
+    @Published public var small: Double
+    @Published public var medium: Double
+    @Published public var large: Double
+    @Published public var xlarge: Double
+    @Published public var xxlarge: Double
     
     public init(primaryButtonBackground: Color = .flightGreen,
                 primaryButtonForeground: Color = .flightBlack,
@@ -92,16 +92,15 @@ public class Theme: ObservableObject {
                 staticTextFieldCornerRadius: Double = 5,
                 staticTextFieldBorderWidth: Double = 3,
                 smallTextFieldWidth: Double = 84,
-                mediumTextFieldWidth: Double = 146,
-                textFieldHeight: Double = 43,
+                mediumTextFieldWidth: Double =: Double = 43,
                 textFieldCornerRadius: Double = 5,
                 menuFieldHeight: Double = 43,
                 menuFieldCornerRadius: Double = 5,
-                spacing1x: Double = 8,
-                spacing2x: Double = 16,
-                spacing3x: Double = 24,
-                spacing4x: Double = 32,
-                spacing6x: Double = 48
+                small: Double = 8,
+                medium: Double = 16,
+                large: Double = 24,
+                xlarge: Double = 32,
+                xxlarge: Double = 48
                 
     ) {
         self.primaryButtonBackground = primaryButtonBackground
@@ -140,10 +139,10 @@ public class Theme: ObservableObject {
         self.textFieldCornerRadius = textFieldCornerRadius
         self.menuFieldHeight = menuFieldHeight
         self.menuFieldCornerRadius = menuFieldCornerRadius
-        self.spacing1x = spacing1x
-        self.spacing2x = spacing2x
-        self.spacing3x = spacing3x
-        self.spacing4x = spacing4x
-        self.spacing6x = spacing6x
+        self.small = small
+        self.medium = medium
+        self.large = large
+        self.xlarge = xlarge
+        self.xxlarge = xxlarge
     }
 }
