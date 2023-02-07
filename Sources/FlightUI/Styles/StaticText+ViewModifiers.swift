@@ -19,14 +19,18 @@ public struct StaticTextOptionSet: OptionSet {
 public struct StaticTextStyle: ViewModifier {
     @EnvironmentObject var theme: Theme
     private let options: StaticTextOptionSet
+    private let size: TextFieldSize
 
-    public init(options: StaticTextOptionSet = .none) {
+    public init(options: StaticTextOptionSet = .none,
+                size: TextFieldSize = .infinity) {
         self.options = options
+        self.size = size
     }
 
     public func body(content: Content) -> some View {
         content
             .padding()
+            .frame(width: size.width(theme: theme), height: theme.textFieldHeight)
             .when(options.contains(.background)) { view in
                 view
                     .background(theme.staticTextBackground)
