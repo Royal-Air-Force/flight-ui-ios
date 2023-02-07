@@ -49,6 +49,7 @@ public class Theme: ObservableObject {
     
     @Published public var smallTextFieldWidth: Double
     @Published public var mediumTextFieldWidth: Double
+    @Published public var largeTextFieldWidth: Double
     @Published public var textFieldHeight: Double
     @Published public var textFieldCornerRadius: Double
     @Published public var menuFieldHeight: Double
@@ -93,6 +94,7 @@ public class Theme: ObservableObject {
                 staticTextFieldBorderWidth: Double = 3,
                 smallTextFieldWidth: Double = 84,
                 mediumTextFieldWidth: Double = 146,
+                largeTextFieldWidth: Double = 226,
                 textFieldHeight: Double = 43,
                 textFieldCornerRadius: Double = 5,
                 menuFieldHeight: Double = 43,
@@ -136,6 +138,7 @@ public class Theme: ObservableObject {
         self.staticTextFieldBorderWidth = staticTextFieldBorderWidth
         self.smallTextFieldWidth = smallTextFieldWidth
         self.mediumTextFieldWidth = mediumTextFieldWidth
+        self.largeTextFieldWidth = largeTextFieldWidth
         self.textFieldHeight = textFieldHeight
         self.textFieldCornerRadius = textFieldCornerRadius
         self.menuFieldHeight = menuFieldHeight

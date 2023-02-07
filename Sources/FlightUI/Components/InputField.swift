@@ -106,14 +106,17 @@ public enum TextFieldValueType {
 public enum TextFieldSize {
     case small
     case medium
+    case large
     case infinity
     
     func width(theme: Theme) -> CGFloat? {
         switch self {
-        case.small:
+        case .small:
             return theme.smallTextFieldWidth
-        case.medium:
+        case .medium:
             return theme.mediumTextFieldWidth
+        case .large:
+            return theme.largeTextFieldWidth
         case .infinity:
             return nil
         }
