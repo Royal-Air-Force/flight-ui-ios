@@ -31,7 +31,7 @@ public struct InputMessage: View {
             return nil
         case .warning(let message):
             return message
-        case .error(let message):
+        case .caution(let message):
             return message
         }
     }
@@ -41,8 +41,8 @@ public struct InputMessage: View {
         case .valid:
             return Color.white
         case .warning:
-            return Color.orange
-        case .error:
+            return Color.yellow
+        case .caution:
             return Color.red
         }
     }
@@ -58,7 +58,7 @@ public struct InputMessage: View {
 }
 
 struct InputMessage_Previews: PreviewProvider {
-    @State static var status: ValidationStatus = .error(message: "example error message")
+    @State static var status: ValidationStatus = .warning(message: "example error message")
     
     static var previews: some View {
         InputMessage()
