@@ -12,7 +12,7 @@ public enum ValidationStatus: Equatable {
         case .warning:
             return .flightYellow
         case .error:
-            return .flightOrange
+            return .flightRed
         }
     }
 }
