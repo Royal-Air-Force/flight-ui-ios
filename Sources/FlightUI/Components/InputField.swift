@@ -106,14 +106,17 @@ public enum TextFieldValueType {
 public enum TextFieldSize {
     case small
     case medium
+    case large
     case infinity
     
     func width(theme: Theme) -> CGFloat? {
         switch self {
-        case.small:
+        case .small:
             return theme.smallTextFieldWidth
-        case.medium:
+        case .medium:
             return theme.mediumTextFieldWidth
+        case .large:
+            return theme.largeTextFieldWidth
         case .infinity:
             return nil
         }
@@ -147,7 +150,15 @@ struct InputField_Previews: PreviewProvider {
                 InputField("Placeholder",
                            text: $text,
                            size: .medium)
-                
+
+                InputField("Placeholder",
+                           text: $emptyText,
+                           size: .large)
+
+                InputField("Placeholder",
+                           text: $text,
+                           size: .large)
+
                 InputField("Placeholder",
                            text: $emptyText,
                            size: .infinity)
@@ -174,6 +185,9 @@ struct InputField_Previews: PreviewProvider {
                 InputField("",
                            text: $emptyText,
                            size: .medium)
+                InputField("",
+                           text: $emptyText,
+                           size: .large)
                 InputField("",
                            text: $emptyText,
                            size: .infinity)
