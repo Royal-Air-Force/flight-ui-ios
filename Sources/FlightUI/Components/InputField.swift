@@ -14,7 +14,7 @@ public struct InputField: View {
 
     public init(_ placeholder: String,
                 text: Binding<String>,
-                configuration: InputFieldConfiguration = .plain) {
+                configuration: InputFieldConfiguration = .default) {
         self.placeholder = placeholder
         self._text = text
         self.config = configuration
@@ -22,7 +22,7 @@ public struct InputField: View {
 
     public var body: some View {
         ZStack(alignment: .leading) {
-            switch config.useThemeStyling {
+            switch config.options.contains(.useThemeStyling) {
             case true:
                 TextField("", text: textBinding, onEditingChanged: onEditingChanged)
                     .typography(.input)
@@ -33,8 +33,8 @@ public struct InputField: View {
                     .multilineTextAlignment(config.alignment)
                     .keyboardType(keyboardType)
                     .onChange(of: text, perform: onChangeText)
-                    .disabled(config.staticText)
-                    .when(config.bordered) { view in
+                    .disabled(config.options.contains(.staticText))
+                    .when(config.options.contains(.bordered)) { view in
                         view
                             .background(
                                 RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
@@ -49,8 +49,8 @@ public struct InputField: View {
                     .multilineTextAlignment(config.alignment)
                     .keyboardType(keyboardType)
                     .onChange(of: text, perform: onChangeText)
-                    .disabled(config.staticText)
-                    .when(config.bordered) { view in
+                    .disabled(config.options.contains(.staticText))
+                    .when(config.options.contains(.bordered)) { view in
                         view
                             .background(
                                 RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
@@ -63,7 +63,7 @@ public struct InputField: View {
                     .typography(.emptyField)
                     .padding(.leading)
                     .allowsHitTesting(false)
-                    .disabled(config.staticText)
+                    .disabled(config.options.contains(.staticText))
             }
         }
     }
@@ -134,23 +134,23 @@ public enum TextFieldSize {
 
 struct InputField_Previews: PreviewProvider {
     @State private static var text = "Hello World"
+    @State private static var staticText = "Hello Static"
     @State private static var emptyText = ""
     @State private static var exampleNumber = "100.1234"
 
-    private static let smallConfig = InputFieldConfiguration(size: .small)
-    private static let mediumConfig = InputFieldConfiguration(size: .medium)
-    private static let largeConfig = InputFieldConfiguration(size: .large)
-    private static let decimalConfig = InputFieldConfiguration(formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 4))
-    private static let borderedConfig = InputFieldConfiguration(size: .medium,
-                                                                useThemeStyling: true,
-                                                                bordered: true)
-    private static let borderedStaticConfig = InputFieldConfiguration(bordered: true, staticText: true)
+    private static let smallConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .small)
+    private static let mediumConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .medium)
+    private static let largeConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .large)
+    private static let decimalConfig: InputFieldConfiguration = .inputFieldConfiguration(formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 4))
+    private static let borderedConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .medium,
+                                                                options: [.useThemeStyling, .bordered])
+    private static let borderedStaticConfig: InputFieldConfiguration = .inputFieldConfiguration(options: .all)
 
     static var previews: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 Group {
-                    InputField("Placeholder",
+                    InputField("Bordered",
                                text: $emptyText,
                                configuration: borderedConfig)
                     InputField("Placeholder",
@@ -158,11 +158,11 @@ struct InputField_Previews: PreviewProvider {
                                configuration: borderedConfig)
 
                     InputField("Placeholder",
-                               text: $text,
+                               text: $staticText,
                                configuration: borderedStaticConfig)
 
                     InputField("Placeholder",
-                               text: $text,
+                               text: $staticText,
                                configuration: borderedStaticConfig)
 
 
@@ -226,7 +226,7 @@ struct InputField_Previews: PreviewProvider {
                 Group {
                     InputField("Placeholder",
                                text: $emptyText,
-                               configuration: InputFieldConfiguration(size: .medium, useThemeStyling: false))
+                               configuration: .inputFieldConfiguration(size: .medium, options: .none))
                 }
                 Divider()
                 Spacer()

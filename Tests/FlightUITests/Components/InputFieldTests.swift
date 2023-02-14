@@ -14,7 +14,7 @@ class InputFieldTests: XCTestCase {
         let text = Binding<String>(wrappedValue: "")
         let inputField = InputField("",
                                     text: text,
-                                    configuration: InputFieldConfiguration(valueType: .decimal)).environmentObject(Theme())
+                                    configuration: .inputFieldConfiguration(valueType: .decimal)).environmentObject(Theme())
 
         // when
         try inputField.inspect().view(InputField.self).zStack().textField(0).setInput("Test Binding")
@@ -28,7 +28,7 @@ class InputFieldTests: XCTestCase {
         let text = Binding<String>(wrappedValue: "")
         let inputField = InputField("",
                                     text: text,
-                                    configuration: InputFieldConfiguration(valueType: .decimal, useThemeStyling: false))
+                                    configuration: .inputFieldConfiguration(valueType: .decimal, options: .none))
             .environmentObject(Theme())
 
         // when
@@ -43,7 +43,7 @@ class InputFieldTests: XCTestCase {
         let text = Binding<String>(wrappedValue: "")
         let inputField = InputField("",
                                     text: text,
-                                    configuration: InputFieldConfiguration(formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 1),
+                                    configuration: .inputFieldConfiguration(formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 1),
                                                                            valueType: .decimal))
             .environmentObject(Theme())
 
@@ -59,7 +59,7 @@ class InputFieldTests: XCTestCase {
         let text = Binding<String>(wrappedValue: "543.21")
         let inputField = InputField("",
                                     text: text,
-                                    configuration: InputFieldConfiguration(formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 1),
+                                    configuration: .inputFieldConfiguration(formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 1),
                                                                            valueType: .decimal))
             .environmentObject(Theme())
 
