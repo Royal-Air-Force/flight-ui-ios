@@ -2,7 +2,7 @@ import SwiftUI
 
 public enum ValidationStatus: Equatable {
     case indeterminate
-    case valid(value: String)
+    case valid(value: String? = nil)
     case warning(message: String)
     case error(message: String)
     
