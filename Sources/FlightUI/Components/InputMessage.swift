@@ -9,7 +9,7 @@ public struct InputMessage: View {
 
     public init() {
         self.useBinding = false
-        self._status = Binding.constant(ValidationStatus.valid)
+        self._status = Binding.constant(.indeterminate)
     }
 
     public init(status: Binding<ValidationStatus>) {
@@ -27,7 +27,8 @@ public struct InputMessage: View {
     }
     private var message: String? {
         switch nearestStatus {
-        case .valid:
+
+        case .indeterminate, .valid:
             return nil
         case .warning(let message):
             return message
@@ -38,7 +39,7 @@ public struct InputMessage: View {
 
     private var messageColor: Color {
         switch nearestStatus {
-        case .valid:
+        case .indeterminate, .valid:
             return Color.white
         case .warning:
             return Color.orange
@@ -58,12 +59,24 @@ public struct InputMessage: View {
 }
 
 struct InputMessage_Previews: PreviewProvider {
-    @State static var status: ValidationStatus = .error(message: "example error message")
+    @State static var errorStatus: ValidationStatus = .error(message: "example error message")
+    @State static var warningStatus: ValidationStatus = .warning(message: "example error message")
+    @State static var validStatus: ValidationStatus = .valid(value: "Value")
     
     static var previews: some View {
-        InputMessage()
-            .environment(\.validationContext, ValidationContext(validator: { _ , _ in
-                return ValidationStatus.valid
-            }, status: $status))
+        VStack {
+            InputMessage()
+                .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    return .indeterminate
+                }, status: $errorStatus))
+            InputMessage()
+                .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    return .indeterminate
+                }, status: $warningStatus))
+            InputMessage()
+                .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    return ValidationStatus.valid(value: "")
+                }, status: $validStatus))
+        }
     }
 }

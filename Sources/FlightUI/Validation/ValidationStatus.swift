@@ -1,12 +1,15 @@
 import SwiftUI
 
 public enum ValidationStatus: Equatable {
-    case valid
+    case indeterminate
+    case valid(value: String)
     case warning(message: String)
     case error(message: String)
     
     public var color: Color {
         switch self {
+        case .indeterminate:
+            return .flightWhite
         case .valid:
             return .flightWhite
         case .warning:

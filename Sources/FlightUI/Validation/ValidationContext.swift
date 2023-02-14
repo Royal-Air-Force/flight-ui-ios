@@ -9,7 +9,7 @@ public class ValidationContext: ObservableObject {
 
     public init() {
         self.validator = nil
-        self._status = Binding.constant(ValidationStatus.valid)
+        self._status = Binding.constant(.indeterminate)
     }
 
     public init(validator: @escaping Validator, status: Binding<ValidationStatus>) {
