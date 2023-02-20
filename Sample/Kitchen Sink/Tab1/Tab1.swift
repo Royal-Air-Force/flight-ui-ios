@@ -53,7 +53,7 @@ struct Tab1: View {
             VStack(alignment: .leading) {
                 Text("Numerical Input with Validation")
                     .typography(.caption)
-                InputField("0 - 100", text: $viewModel.numericalInput, of: .decimal)
+                InputField("0 - 100", text: $viewModel.numericalInput, configuration: .inputFieldConfiguration(valueType: .decimal))
                 InputMessage()
             }
             .validated(by: viewModel.validateNumericalInput, status: $viewModel.numericalInputResult)
