@@ -14,7 +14,7 @@ class InputFieldTests: XCTestCase {
         let text = Binding<String>(wrappedValue: "")
         let inputField = InputField("",
                                     text: text,
-                                    of: .decimal).environmentObject(Theme())
+                                    configuration: .inputFieldConfiguration(valueType: .decimal)).environmentObject(Theme())
 
         // when
         try inputField.inspect().view(InputField.self).zStack().textField(0).setInput("Test Binding")
@@ -28,8 +28,8 @@ class InputFieldTests: XCTestCase {
         let text = Binding<String>(wrappedValue: "")
         let inputField = InputField("",
                                     text: text,
-                                    of: .decimal,
-                                    useThemeStyling: false).environmentObject(Theme())
+                                    configuration: .inputFieldConfiguration(valueType: .decimal, options: .none))
+            .environmentObject(Theme())
 
         // when
         try inputField.inspect().view(InputField.self).zStack().textField(0).setInput("Test Binding")
@@ -43,8 +43,9 @@ class InputFieldTests: XCTestCase {
         let text = Binding<String>(wrappedValue: "")
         let inputField = InputField("",
                                     text: text,
-                                    formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 1),
-                                    of: .decimal).environmentObject(Theme())
+                                    configuration: .inputFieldConfiguration(formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 1),
+                                                                           valueType: .decimal))
+            .environmentObject(Theme())
 
         // when
         try inputField.inspect().view(InputField.self).zStack().textField(0).setInput("123.123")
@@ -58,8 +59,9 @@ class InputFieldTests: XCTestCase {
         let text = Binding<String>(wrappedValue: "543.21")
         let inputField = InputField("",
                                     text: text,
-                                    formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 1),
-                                    of: .decimal).environmentObject(Theme())
+                                    configuration: .inputFieldConfiguration(formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 1),
+                                                                           valueType: .decimal))
+            .environmentObject(Theme())
 
         // then
         XCTAssertEqual(try inputField.inspect().view(InputField.self).zStack().textField(0).input(), "543.2")
