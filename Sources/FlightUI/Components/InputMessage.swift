@@ -29,9 +29,11 @@ public struct InputMessage: View {
         switch nearestStatus {
         case .valid:
             return nil
-        case .warning(let message):
+        case .advisory(let message):
             return message
         case .caution(let message):
+            return message
+        case .warning(let message):
             return message
         }
     }
@@ -40,9 +42,11 @@ public struct InputMessage: View {
         switch nearestStatus {
         case .valid:
             return Color.white
-        case .warning:
-            return Color.yellow
+        case .advisory:
+            return Color.white
         case .caution:
+            return Color.yellow
+        case .warning:
             return Color.red
         }
     }
