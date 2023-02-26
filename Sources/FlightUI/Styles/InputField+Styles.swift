@@ -20,6 +20,7 @@ public struct InputFieldConfiguration {
     let valueType: TextFieldValueType
     let size: TextFieldSize
     let alignment: TextAlignment
+    let typography: Typography
     let options: InputFieldOptionSet
 
     private init(
@@ -27,12 +28,14 @@ public struct InputFieldConfiguration {
         valueType: TextFieldValueType = .text,
         size: TextFieldSize = .infinity,
         alignment: TextAlignment = .leading,
+        typography: Typography = .input,
         options: InputFieldOptionSet = .useThemeStyling
     ) {
         self.formatter = formatter
         self.valueType = valueType
         self.size = size
         self.alignment = alignment
+        self.typography = typography
         self.options = options
     }
 }
@@ -51,12 +54,14 @@ extension InputFieldConfiguration {
         valueType: TextFieldValueType = .text,
         size: TextFieldSize = .infinity,
         alignment: TextAlignment = .leading,
+        typography: Typography = .input,
         options: InputFieldOptionSet = .useThemeStyling
     ) -> InputFieldConfiguration {
         InputFieldConfiguration(formatter: formatter,
                                 valueType: valueType,
                                 size: size,
                                 alignment: alignment,
+                                typography: typography,
                                 options: options)
     }
 }
