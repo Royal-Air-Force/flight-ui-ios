@@ -3,9 +3,9 @@ import SwiftUI
 public struct InputFieldOptionSet: OptionSet {
     public let rawValue: UInt8
 
-    public static let useThemeStyling = InputFieldOptionSet(rawValue: 0x1)
-    public static let bordered = InputFieldOptionSet(rawValue: 0x2)
-    public static let staticText = InputFieldOptionSet(rawValue: 0x2)
+    public static let useThemeStyling = InputFieldOptionSet(rawValue: 1 << 0)
+    public static let bordered = InputFieldOptionSet(rawValue: 1 << 1)
+    public static let staticText = InputFieldOptionSet(rawValue: 1 << 2)
 
     public static let none = InputFieldOptionSet([])
     public static let all = InputFieldOptionSet([.useThemeStyling, .bordered, .staticText])
