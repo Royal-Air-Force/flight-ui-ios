@@ -32,5 +32,12 @@ public extension View {
     func validated(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>) -> some View {
         modifier(Validation())
             .validationContext(ValidationContext(validator: validator, status: status))
+            .clipShape(RoundedRectangle(cornerRadius: 5))
+            .overlay {
+                if status.wrappedValue != .valid {
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color.flightOrange, lineWidth: 2)
+                }
+            }
     }
 }
