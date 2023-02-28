@@ -55,6 +55,8 @@ public class Theme: ObservableObject {
     @Published public var menuFieldHeight: Double
     @Published public var menuFieldCornerRadius: Double
 
+    @Published public var cornerRadius: CornerRadius
+
     // UI Element Spacing
     @Published public var small: Double
     @Published public var medium: Double
@@ -84,7 +86,7 @@ public class Theme: ObservableObject {
                 panelForeground: Color = .flightWhite,
                 panelViewBackground: Color = .black,
                 appHeaderBackground: Color = .black,
-                panelCornerRadius: Double = 16,
+                panelCornerRadius: Double = 5,
                 panelLineWidth: Double = 6,
                 panelPadding: Double = 6,
                 buttonHorizontalPadding: Double = 50,
@@ -99,6 +101,7 @@ public class Theme: ObservableObject {
                 textFieldCornerRadius: Double = 5,
                 menuFieldHeight: Double = 43,
                 menuFieldCornerRadius: Double = 5,
+                cornerRadius: CornerRadius = CornerRadius(),
                 small: Double = 8,
                 medium: Double = 16,
                 large: Double = 24,
@@ -143,6 +146,7 @@ public class Theme: ObservableObject {
         self.textFieldCornerRadius = textFieldCornerRadius
         self.menuFieldHeight = menuFieldHeight
         self.menuFieldCornerRadius = menuFieldCornerRadius
+        self.cornerRadius = cornerRadius
         self.small = small
         self.medium = medium
         self.large = large
