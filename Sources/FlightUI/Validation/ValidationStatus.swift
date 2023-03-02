@@ -36,11 +36,11 @@ public struct Validation: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .validationContext(ValidationContext(validator: validator, status: status))
-            .clipShape(RoundedRectangle(cornerRadius: theme.panelCornerRadius))
+            .clipShape(RoundedRectangle(cornerRadius: theme.textFieldCornerRadius))
             .overlay {
                 if status.wrappedValue != .valid {
-                    RoundedRectangle(cornerRadius: self.theme.medium)
-                        .stroke(Color.flightOrange, lineWidth: theme.medium)
+                    RoundedRectangle(cornerRadius: theme.textFieldCornerRadius)
+                        .stroke(Color.flightOrange, lineWidth: theme.staticTextFieldBorderWidth)
                 }
             }
     }
