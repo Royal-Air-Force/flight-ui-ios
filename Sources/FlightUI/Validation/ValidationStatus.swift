@@ -23,21 +23,31 @@ public enum ValidationMode {
 }
 
 public struct Validation: ViewModifier {
+    @EnvironmentObject private var theme: Theme
+
+    private let validator: ValidationContext.Validator
+    private let status: Binding<ValidationStatus>
+
+    fileprivate init(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>) {
+        self.validator = validator
+        self.status = status
+    }
+
     public func body(content: Content) -> some View {
         content
+            .validationContext(ValidationContext(validator: validator, status: status))
+            .clipShape(RoundedRectangle(cornerRadius: theme.panelCornerRadius))
+            .overlay {
+                if status.wrappedValue != .valid {
+                    RoundedRectangle(cornerRadius: self.theme.medium)
+                        .stroke(Color.flightOrange, lineWidth: theme.medium)
+                }
+            }
     }
 }
 
 public extension View {
     func validated(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>) -> some View {
-        modifier(Validation())
-            .validationContext(ValidationContext(validator: validator, status: status))
-            .clipShape(RoundedRectangle(cornerRadius: 5))
-            .overlay {
-                if status.wrappedValue != .valid {
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.flightOrange, lineWidth: 2)
-                }
-            }
+        modifier(Validation(by: validator, status: status))
     }
 }
