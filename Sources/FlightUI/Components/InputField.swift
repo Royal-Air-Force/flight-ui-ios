@@ -25,7 +25,7 @@ public struct InputField: View {
             switch config.options.contains(.useThemeStyling) {
             case true:
                 TextField("", text: textBinding, onEditingChanged: onEditingChanged)
-                    .typography(.input)
+                    .typography(config.typography)
                     .padding()
                     .background(theme.textFieldBackground)
                     .frame(width: config.size.width(theme: theme), height: theme.textFieldHeight)
@@ -43,7 +43,7 @@ public struct InputField: View {
                     }
             case false:
                 TextField("", text: textBinding, onEditingChanged: onEditingChanged)
-                    .typography(.input)
+                    .typography(config.typography)
                     .padding()
                     .frame(width: config.size.width(theme: theme), height: theme.textFieldHeight)
                     .multilineTextAlignment(config.alignment)
@@ -139,7 +139,7 @@ struct InputField_Previews: PreviewProvider {
     @State private static var exampleNumber = "100.1234"
 
     private static let smallConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .small)
-    private static let mediumConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .medium)
+    private static let mediumConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .medium, typography: .h2)
     private static let largeConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .large)
     private static let decimalConfig: InputFieldConfiguration = .inputFieldConfiguration(formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 4))
     private static let borderedConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .medium,
