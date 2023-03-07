@@ -12,7 +12,7 @@ public struct PrimaryButtonStyle: ButtonStyle {
             .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(theme.primaryButtonForeground)
             .typography(.button)
-            .background(isEnabled ? theme.primaryButtonBackground : theme.primaryButtonBackground.opacity(0.38))
+            .background(isEnabled ? theme.primaryButtonBackground : theme.primaryButtonBackground.opacity(theme.disabledButtonOpacity))
             .clipShape(Capsule())
     }
 }
@@ -33,12 +33,12 @@ public struct SecondaryButtonStyle: ButtonStyle {
         configuration.label
             .padding([.leading, .trailing], theme.buttonHorizontalPadding)
             .padding([.top, .bottom], theme.buttonVerticalPadding)
-            .foregroundColor(isEnabled ? theme.secondaryButtonForeground : theme.secondaryButtonForeground.opacity(0.38))
+            .foregroundColor(isEnabled ? theme.secondaryButtonForeground : theme.secondaryButtonForeground.opacity(theme.disabledButtonOpacity))
             .typography(.button)
             .clipShape(Capsule())
             .overlay(
                 Capsule(style: .circular)
-                    .strokeBorder(isEnabled ? theme.secondaryButtonBackground : theme.secondaryButtonBackground.opacity(0.38),
+                    .strokeBorder(isEnabled ? theme.secondaryButtonBackground : theme.secondaryButtonBackground.opacity(theme.disabledButtonOpacity),
                                   style: StrokeStyle(lineWidth: theme.buttonBorderWidth))
             )
     }
