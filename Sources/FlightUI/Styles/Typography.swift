@@ -34,11 +34,16 @@ public struct Header3: ViewModifier {
 
 public struct Input: ViewModifier {
     @EnvironmentObject var theme: Theme
+    var staticText: Bool
+
+    init(staticText: Bool) {
+        self.staticText = staticText
+    }
     
     public func body(content: Content) -> some View {
         content
             .font(.callout.bold())
-            .foregroundColor(theme.input)
+            .foregroundColor(staticText ? Color.flightWhite : theme.input)
     }
 }
 
@@ -98,7 +103,7 @@ public enum Typography: CaseIterable { case h1, h2, h3, input, result, button, c
 
 public extension View {
     @ViewBuilder
-    func typography(_ typography: Typography) -> some View {
+    func typography(_ typography: Typography, staticText: Bool = false) -> some View {
         switch typography {
         case .h1:
             modifier(Header1())
@@ -107,7 +112,7 @@ public extension View {
         case .h3:
             modifier(Header3())
         case .input:
-            modifier(Input())
+            modifier(Input(staticText: staticText))
         case .result:
             modifier(ResultTypography())
         case .button:
