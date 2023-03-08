@@ -57,6 +57,10 @@ public class Theme: ObservableObject {
 
     @Published public var cornerRadius: CornerRadius
 
+    // Opacities
+    @Published public var overlayOpacity: Double
+    @Published public var disabledButtonOpacity: Double
+
     // UI Element Spacing
     @Published public var small: Double
     @Published public var medium: Double
@@ -102,6 +106,11 @@ public class Theme: ObservableObject {
                 menuFieldHeight: Double = 43,
                 menuFieldCornerRadius: Double = 5,
                 cornerRadius: CornerRadius = CornerRadius(),
+
+                // Opacities
+                overlayOpacity: Double = 0.6,
+                disabledButtonOpacity: Double = 0.38,
+
                 small: Double = 8,
                 medium: Double = 16,
                 large: Double = 24,
@@ -147,6 +156,11 @@ public class Theme: ObservableObject {
         self.menuFieldHeight = menuFieldHeight
         self.menuFieldCornerRadius = menuFieldCornerRadius
         self.cornerRadius = cornerRadius
+
+        // Opacities
+        self.overlayOpacity = overlayOpacity
+        self.disabledButtonOpacity = disabledButtonOpacity
+
         self.small = small
         self.medium = medium
         self.large = large
