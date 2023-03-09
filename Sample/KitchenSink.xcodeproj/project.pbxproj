@@ -29,7 +29,7 @@
 		838E7E2A2987D873000F691D /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		838E7E2D2987FBF3000F691D /* Tab3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab3.swift; sourceTree = "<group>"; };
 		838E7E2F2987FC25000F691D /* Tab3+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tab3+ViewModel.swift"; sourceTree = "<group>"; };
-		83C93DC02986C53A00A911A9 /* Kitchen Sink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kitchen Sink.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		83C93DC02986C53A00A911A9 /* KitchenSink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KitchenSink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C93DC32986C53A00A911A9 /* Kitchen_SinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kitchen_SinkApp.swift; sourceTree = "<group>"; };
 		83C93DC72986C53C00A911A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83C93DCA2986C53C00A911A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		83C93DB72986C53A00A911A9 = {
 			isa = PBXGroup;
 			children = (
-				83C93DC22986C53A00A911A9 /* Kitchen Sink */,
+				83C93DC22986C53A00A911A9 /* KitchenSink */,
 				83C93DC12986C53A00A911A9 /* Products */,
 				837FC6D72986D2620076C720 /* Frameworks */,
 			);
@@ -109,12 +109,12 @@
 		83C93DC12986C53A00A911A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				83C93DC02986C53A00A911A9 /* Kitchen Sink.app */,
+				83C93DC02986C53A00A911A9 /* KitchenSink.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		83C93DC22986C53A00A911A9 /* Kitchen Sink */ = {
+		83C93DC22986C53A00A911A9 /* KitchenSink */ = {
 			isa = PBXGroup;
 			children = (
 				8389186029965415001A2364 /* Kitchen-Sink-Info.plist */,
@@ -126,7 +126,7 @@
 				83C93DC72986C53C00A911A9 /* Assets.xcassets */,
 				83C93DC92986C53C00A911A9 /* Preview Content */,
 			);
-			path = "Kitchen Sink";
+			path = KitchenSink;
 			sourceTree = "<group>";
 		};
 		83C93DC92986C53C00A911A9 /* Preview Content */ = {
@@ -140,9 +140,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		83C93DBF2986C53A00A911A9 /* Kitchen Sink */ = {
+		83C93DBF2986C53A00A911A9 /* KitchenSink */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 83C93DE42986C53D00A911A9 /* Build configuration list for PBXNativeTarget "Kitchen Sink" */;
+			buildConfigurationList = 83C93DE42986C53D00A911A9 /* Build configuration list for PBXNativeTarget "KitchenSink" */;
 			buildPhases = (
 				83C93DBC2986C53A00A911A9 /* Sources */,
 				83C93DBD2986C53A00A911A9 /* Frameworks */,
@@ -152,12 +152,12 @@
 			);
 			dependencies = (
 			);
-			name = "Kitchen Sink";
+			name = KitchenSink;
 			packageProductDependencies = (
 				837FC6D82986D2620076C720 /* FlightUI */,
 			);
 			productName = "Kitchen Sink";
-			productReference = 83C93DC02986C53A00A911A9 /* Kitchen Sink.app */;
+			productReference = 83C93DC02986C53A00A911A9 /* KitchenSink.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -175,7 +175,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83C93DBB2986C53A00A911A9 /* Build configuration list for PBXProject "Kitchen Sink" */;
+			buildConfigurationList = 83C93DBB2986C53A00A911A9 /* Build configuration list for PBXProject "KitchenSink" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -191,7 +191,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				83C93DBF2986C53A00A911A9 /* Kitchen Sink */,
+				83C93DBF2986C53A00A911A9 /* KitchenSink */,
 			);
 		};
 /* End PBXProject section */
@@ -353,7 +353,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Kitchen Sink/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"KitchenSink/Preview Content\"";
 				DEVELOPMENT_TEAM = 5PRV5PD957;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5PRV5PD957;
 				ENABLE_PREVIEWS = YES;
@@ -393,7 +393,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Kitchen Sink/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"KitchenSink/Preview Content\"";
 				DEVELOPMENT_TEAM = 5PRV5PD957;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5PRV5PD957;
 				ENABLE_PREVIEWS = YES;
@@ -428,7 +428,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		83C93DBB2986C53A00A911A9 /* Build configuration list for PBXProject "Kitchen Sink" */ = {
+		83C93DBB2986C53A00A911A9 /* Build configuration list for PBXProject "KitchenSink" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83C93DE22986C53D00A911A9 /* Debug */,
@@ -437,7 +437,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83C93DE42986C53D00A911A9 /* Build configuration list for PBXNativeTarget "Kitchen Sink" */ = {
+		83C93DE42986C53D00A911A9 /* Build configuration list for PBXNativeTarget "KitchenSink" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83C93DE52986C53D00A911A9 /* Debug */,
