@@ -6,7 +6,7 @@ struct Kitchen_SinkApp: App {
     var body: some Scene {
         WindowGroup {
             VStack {
-                AppHeader(title: "FlightUI - The Kitchen Sink", typograhy: .h2, imageName: "NavBarIcon")
+                AppHeader(title: "FlightUI - Kitchen Sink", typograhy: .h2, imageName: "NavBarIcon")
                 
                 TabView {
                     Tab1()
