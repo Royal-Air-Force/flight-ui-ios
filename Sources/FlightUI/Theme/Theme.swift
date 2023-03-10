@@ -97,7 +97,7 @@ public class Theme: ObservableObject {
                 buttonVerticalPadding: Double = 12,
                 buttonBorderWidth: Double = 3,
                 staticTextFieldCornerRadius: Double = 5,
-                staticTextFieldBorderWidth: Double = 3,
+                staticTextFieldBorderWidth: Double = 2,
                 smallTextFieldWidth: Double = 84,
                 mediumTextFieldWidth: Double = 146,
                 largeTextFieldWidth: Double = 226,
