@@ -28,7 +28,7 @@ public struct InputField: View {
             switch config.options.contains(.useThemeStyling) {
             case true:
                 TextField("", text: textBinding, onEditingChanged: onEditingChanged)
-                    .typography(config.typography, staticText: config.options.contains(.staticText), status: status)
+                    .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()
                     .background(theme.textFieldBackground)
                     .frame(width: config.size.width(theme: theme), height: theme.textFieldHeight)
@@ -46,7 +46,7 @@ public struct InputField: View {
                     }
             case false:
                 TextField("", text: textBinding, onEditingChanged: onEditingChanged)
-                    .typography(config.typography, staticText: config.options.contains(.staticText), status: status)
+                    .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()
                     .frame(width: config.size.width(theme: theme), height: theme.textFieldHeight)
                     .multilineTextAlignment(config.alignment)

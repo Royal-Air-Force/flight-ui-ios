@@ -99,7 +99,7 @@ public struct DropDownOptions: ViewModifier {
 
 public struct LargeTitle: ViewModifier {
     @EnvironmentObject var theme: Theme
-    @State var status: ValidationStatus
+    @Binding var status: ValidationStatus
 
     public func body(content: Content) -> some View {
         content
@@ -115,7 +115,7 @@ public struct LargeTitle: ViewModifier {
 public enum Typography: CaseIterable { case largeTitle, h1, h2, h3, input, result, button, caption, emptyField, dropDownOptions }
 public extension View {
     @ViewBuilder
-    func typography(_ typography: Typography, staticText: Bool = false, status: ValidationStatus = .valid) -> some View {
+    func typography(_ typography: Typography, staticText: Bool = false, status: Binding<ValidationStatus> = .constant(.valid)) -> some View {
         switch typography {
         case .h1:
             modifier(Header1())
