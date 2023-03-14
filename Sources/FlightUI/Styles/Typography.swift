@@ -104,6 +104,7 @@ public struct LargeTitle: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .font(.largeTitle)
+            .bold()
             .foregroundColor(status == .valid ? theme.header : .flightOrange)
     }
 }
