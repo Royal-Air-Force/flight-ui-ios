@@ -49,7 +49,7 @@ public struct Validation: ViewModifier {
 }
 
 public extension View {
-    func validated(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>) -> some View {
-        modifier(Validation(by: validator, status: status))
+    func validated(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>, cornerRadius: CGFloat = 5.0) -> some View {
+        modifier(Validation(by: validator, status: status, cornerRadius: cornerRadius))
     }
 }
