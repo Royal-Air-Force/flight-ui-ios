@@ -97,13 +97,25 @@ public struct DropDownOptions: ViewModifier {
     }
 }
 
+public struct LargeTitle: ViewModifier {
+    @EnvironmentObject var theme: Theme
+    @Binding var status: ValidationStatus
+
+    public func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .bold()
+            .foregroundColor(status == .valid ? theme.header : .flightOrange)
+    }
+}
+
 // MARK: - View Extention Function -
 
-public enum Typography: CaseIterable { case h1, h2, h3, input, result, button, caption, emptyField, dropDownOptions }
 
+public enum Typography: CaseIterable { case largeTitle, h1, h2, h3, input, result, button, caption, emptyField, dropDownOptions }
 public extension View {
     @ViewBuilder
-    func typography(_ typography: Typography, staticText: Bool = false) -> some View {
+    func typography(_ typography: Typography, staticText: Bool = false, status: Binding<ValidationStatus> = .constant(.valid)) -> some View {
         switch typography {
         case .h1:
             modifier(Header1())
@@ -123,6 +135,8 @@ public extension View {
             modifier(EmptyField())
         case .dropDownOptions:
             modifier(DropDownOptions())
+        case .largeTitle:
+			modifier(LargeTitle(status: status))
         }
     }
 }
@@ -134,6 +148,8 @@ public extension View {
 fileprivate extension Typography {
     var name: String {
         switch self {
+        case .largeTitle:
+            return "Large Title"
         case .h1:
             return "Header 1"
         case .h2:

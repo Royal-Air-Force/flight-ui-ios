@@ -27,19 +27,21 @@ public struct Validation: ViewModifier {
 
     private let validator: ValidationContext.Validator
     private let status: Binding<ValidationStatus>
+    private let cornerRadius: Double
 
-    fileprivate init(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>) {
+    fileprivate init(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>, cornerRadius: Double? = nil) {
         self.validator = validator
         self.status = status
+        self.cornerRadius = cornerRadius ?? CornerRadius().default
     }
 
     public func body(content: Content) -> some View {
         content
             .validationContext(ValidationContext(validator: validator, status: status))
-            .clipShape(RoundedRectangle(cornerRadius: theme.textFieldCornerRadius))
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .overlay {
                 if status.wrappedValue != .valid {
-                    RoundedRectangle(cornerRadius: theme.textFieldCornerRadius)
+                    RoundedRectangle(cornerRadius: cornerRadius)
                         .stroke(Color.flightOrange, lineWidth: theme.staticTextFieldBorderWidth)
                 }
             }
@@ -47,7 +49,7 @@ public struct Validation: ViewModifier {
 }
 
 public extension View {
-    func validated(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>) -> some View {
-        modifier(Validation(by: validator, status: status))
+    func validated(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>, cornerRadius: Double? = nil) -> some View {
+        modifier(Validation(by: validator, status: status, cornerRadius: cornerRadius))
     }
 }

@@ -8,15 +8,18 @@ public struct InputField: View {
 
     let placeholder: String
     @Binding var text: String
+    @Binding var status: ValidationStatus
     let config: InputFieldConfiguration
     @State private var isNotEditing = true
     var textBinding: Binding<String> { Binding(get: { format(text) }, set: { text = format($0) }) }
 
     public init(_ placeholder: String,
                 text: Binding<String>,
+                status: Binding<ValidationStatus> = .constant(.valid),
                 configuration: InputFieldConfiguration = .default) {
         self.placeholder = placeholder
         self._text = text
+        self._status = status
         self.config = configuration
     }
 
@@ -25,7 +28,7 @@ public struct InputField: View {
             switch config.options.contains(.useThemeStyling) {
             case true:
                 TextField("", text: textBinding, onEditingChanged: onEditingChanged)
-                    .typography(config.typography, staticText: config.options.contains(.staticText))
+                    .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()
                     .background(theme.textFieldBackground)
                     .frame(width: config.size.width(theme: theme), height: theme.textFieldHeight)
@@ -43,7 +46,7 @@ public struct InputField: View {
                     }
             case false:
                 TextField("", text: textBinding, onEditingChanged: onEditingChanged)
-                    .typography(config.typography, staticText: config.options.contains(.staticText))
+                    .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()
                     .frame(width: config.size.width(theme: theme), height: theme.textFieldHeight)
                     .multilineTextAlignment(config.alignment)
