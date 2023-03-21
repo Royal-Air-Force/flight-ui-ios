@@ -4,15 +4,15 @@ import FlightUI
 struct Tab3: View {
     @EnvironmentObject var theme: Theme
     @StateObject private var viewModel = ViewModel()
-    
+
     // Fields (move to FlightUI Theme)
     fileprivate let fieldCornerRadius = 5.0
     fileprivate let mediumFontSize = 40.0
     fileprivate let largeFontSize = 80.0
-    
+
     fileprivate let boxMinHeight: CGFloat = 126
     fileprivate let boxIdealWidth: CGFloat = 194
-    
+
     var body: some View {
         VStack {
             tabHeader
@@ -20,22 +20,21 @@ struct Tab3: View {
             ScrollView {
                 colors
                     .padding([.bottom], theme.xxlarge)
-                
-                
+
                 expandingPanel
                     .padding([.bottom], theme.xxlarge)
-                
+
                 nonExpandingPanel
                     .padding([.bottom], theme.xxlarge)
-                
+
                 bigParameters
-  
+
             }
         }
         .padding([.leading, .trailing], theme.xxlarge)
         .background(Color.flightBlack)
     }
-    
+
     @ViewBuilder
     var tabHeader: some View {
         HStack {
@@ -44,40 +43,39 @@ struct Tab3: View {
             Spacer()
         }
     }
-    
+
     var colors: some View {
         VStack {
             coreColours
                 .padding([.bottom], theme.xxlarge)
-            
+
             supportingColours
                 .padding([.bottom], theme.xxlarge)
-            
+
             warningErrorColours
                 .padding([.bottom], theme.xxlarge)
 
         }
     }
-    
+
     var coreColours: some View {
-        VStack{
+        VStack {
             HStack {
                 Text("Core colours")
                     .typography(.h1)
                 Spacer()
             }
             HStack {
-                VStack{
+                VStack {
                     Rectangle()
                         .fill(Color.flightGreen)
-                    HStack{
+                    HStack {
                         Text("flightGreen")
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    
-                    
-                    HStack{
+
+                    HStack {
                         Text("#56BD37")
                             .typography(.caption)
                         Spacer()
@@ -85,18 +83,18 @@ struct Tab3: View {
                 }
                 .frame(minHeight: boxMinHeight)
                 .padding([.trailing], theme.xxlarge)
-                
+
                 Spacer()
-                
-                VStack{
+
+                VStack {
                     Rectangle()
                         .fill(Color.flightWhite)
-                    HStack{
+                    HStack {
                         Text("flightWhite")
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    HStack{
+                    HStack {
                         Text("#FFFFFF")
                             .typography(.caption)
                         Spacer()
@@ -108,24 +106,24 @@ struct Tab3: View {
         }
 
     }
-    
+
     var supportingColours: some View {
-        VStack{
+        VStack {
             HStack {
                 Text("Supporting colours")
                     .typography(.h1)
                 Spacer()
             }
             HStack {
-                VStack{
+                VStack {
                     Rectangle()
                         .fill(Color.flightBlack)
-                    HStack{
+                    HStack {
                         Text("flightBlack")
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    HStack{
+                    HStack {
                         Text("#121212")
                             .typography(.caption)
                         Spacer()
@@ -133,18 +131,18 @@ struct Tab3: View {
                 }
                 .frame(minHeight: boxMinHeight)
                 .padding([.trailing], theme.xxlarge)
-                
+
                 Spacer()
-                
-                VStack{
+
+                VStack {
                     Rectangle()
                         .fill(Color.flightLightGray)
-                    HStack{
+                    HStack {
                         Text("flightDarkGray")
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    HStack{
+                    HStack {
                         Text("#2C2C2C")
                             .typography(.caption)
                         Spacer()
@@ -152,22 +150,21 @@ struct Tab3: View {
                 }
                 .frame(minHeight: boxMinHeight)
                 .padding([.trailing], theme.xxlarge)
-               
+
             }
             .padding([.bottom], theme.medium)
-            
-            HStack{
-                VStack{
+
+            HStack {
+                VStack {
                     Rectangle()
                         .fill(Color.flightDarkGray)
-                    HStack{
+                    HStack {
                         Text("flightLightGray")
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    
-                    
-                    HStack{
+
+                    HStack {
                         Text("#ACACAC")
                             .typography(.caption)
                         Spacer()
@@ -175,18 +172,18 @@ struct Tab3: View {
                 }
                 .frame(minHeight: boxMinHeight)
                 .padding([.trailing], theme.xxlarge)
-                
-                VStack{
+
+                VStack {
                     Rectangle()
                         .fill(Color.flightBlue)
 
-                    HStack{
+                    HStack {
                         Text("flightBlue")
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    
-                    HStack{
+
+                    HStack {
                         Text("#5EB3F1")
                             .typography(.caption)
                         Spacer()
@@ -195,30 +192,28 @@ struct Tab3: View {
                 .frame(minHeight: boxMinHeight)
                 .padding([.trailing], theme.xxlarge)
             }
-            
-            
+
         }
     }
-    
+
     var warningErrorColours: some View {
-        VStack{
+        VStack {
             HStack {
                 Text("Warning and error colours")
                     .typography(.h1)
                 Spacer()
             }
-            HStack{
-                VStack{
+            HStack {
+                VStack {
                     Rectangle()
                         .fill(Color.flightYellow)  // Q - should we expxand ShapeStyle?
-                    HStack{
+                    HStack {
                         Text("warning")
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    
-                    
-                    HStack{
+
+                    HStack {
                         Text("#FCF150")
                             .typography(.caption)
                         Spacer()
@@ -226,18 +221,18 @@ struct Tab3: View {
                 }
                 .frame(minHeight: boxMinHeight)
                 .padding([.trailing], theme.xxlarge)
-                
+
                 Spacer()
-                
-                VStack{
+
+                VStack {
                     Rectangle()
                         .fill(Color.flightOrange)   // This is wrong
-                    HStack{
+                    HStack {
                         Text("error")
                             .fontWeight(.bold)
                         Spacer()
                     }
-                    HStack{
+                    HStack {
                         Text("#EA3323")
                             .typography(.caption)
                         Spacer()
@@ -246,10 +241,9 @@ struct Tab3: View {
                 .frame(minHeight: boxMinHeight)
                 .padding([.trailing], theme.xxlarge)
             }
-            
+
         }
     }
-    
 
     var expandingPanel: some View {
         Panel(title: "Expandable Panel", options: .expandable(expanded: true)) {
@@ -262,7 +256,7 @@ struct Tab3: View {
             .padding(theme.xxlarge)
         }
     }
-    
+
     var nonExpandingPanel: some View {
         Panel(title: "Expandable Panel", typography: (.h1)) {
             VStack {
@@ -274,7 +268,7 @@ struct Tab3: View {
             .padding(theme.xxlarge)
         }
     }
-    
+
     var bigParameters: some View {
         HStack(spacing: theme.large) {
             VStack(spacing: 0) {
@@ -283,14 +277,14 @@ struct Tab3: View {
                         .font(.system(size: mediumFontSize))
                         .background(Color.flightLightGray)
                         .cornerRadius(fieldCornerRadius)
-                    
+
                     Spacer()
                 }
-                
+
                 Text("180")
                     .font(.system(size: largeFontSize))
                     .bold()
-                
+
             }
             .background(Color.flightDarkGray)
             .overlay(
@@ -303,14 +297,14 @@ struct Tab3: View {
                         .font(.system(size: mediumFontSize))
                         .background(Color.flightLightGray)
                         .cornerRadius(fieldCornerRadius)
-                    
+
                     Spacer()
                 }
-                
+
                 Text(String(format: "%.2f", 0.02))
                     .font(.system(size: largeFontSize))
                     .bold()
-                
+
             }
             .background(Color.flightDarkGray)
             .overlay(
@@ -323,14 +317,14 @@ struct Tab3: View {
                         .font(.system(size: mediumFontSize))
                         .background(Color.flightLightGray)
                         .cornerRadius(fieldCornerRadius)
-                    
+
                     Spacer()
                 }
-                
+
                 Text(String(format: "%.1f", 50.0))
                     .font(.system(size: largeFontSize))
                     .bold()
-                
+
             }
             .background(Color.flightDarkGray)
             .overlay(
@@ -338,12 +332,10 @@ struct Tab3: View {
                     .stroke(Color.white, lineWidth: 2)
             )
             Spacer()
-            
+
         }
     }
 }
-
-
 
 struct Tab3_Previews: PreviewProvider {
     static var previews: some View {

@@ -2,12 +2,12 @@ import SwiftUI
 import FlightUI
 
 @main
-struct Kitchen_SinkApp: App {
+struct KitchenSinkApp: App {
     var body: some Scene {
         WindowGroup {
             VStack {
                 AppHeader(title: "FlightUI - Kitchen Sink", typograhy: .h2, imageName: "NavBarIcon")
-                
+
                 TabView {
                     Tab1()
                         .tabItem {
@@ -18,7 +18,7 @@ struct Kitchen_SinkApp: App {
                         .tabItem {
                             Label("Typography", systemImage: "textformat.size")
                         }
-                    
+
                     Tab3()
                         .tabItem {
                             Label("Outputs", systemImage: "chart.dots.scatter")
