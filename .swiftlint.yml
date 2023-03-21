@@ -1,0 +1,52 @@
+type_body_length:
+  warning: 300
+
+function_body_length:
+  warning: 75
+
+type_name:
+  max_length: 50
+
+line_length:
+  warning: 200
+  ignores_function_declarations: false
+  ignores_comments: false
+  ignores_interpolated_strings: false
+  ignores_urls: false
+
+identifier_name:
+  min_length:
+    warning: 3
+  max_length:
+    warning: 70
+    error: 100
+  severity: error
+  excluded:
+    - x
+    - y
+    - z
+    - i
+    - j
+    - k
+    - id
+    - URL
+    - b
+    - a
+    - c
+    - t
+    - v
+    - y
+    - u
+    - to
+    - by
+
+custom_rules:
+  already_true:
+    regex: "== true"
+    message: "Don't compare to true, just use the bool value."
+  already_bool:
+    regex: "== false"
+    message: "Don't compare to false, just use !value."
+
+excluded:
+  - Pods
