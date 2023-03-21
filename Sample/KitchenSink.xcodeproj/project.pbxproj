@@ -144,10 +144,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83C93DE42986C53D00A911A9 /* Build configuration list for PBXNativeTarget "KitchenSink" */;
 			buildPhases = (
-				83A2288029CA04FA0097C75A /* Swiftlint */,
 				83C93DBC2986C53A00A911A9 /* Sources */,
 				83C93DBD2986C53A00A911A9 /* Frameworks */,
 				83C93DBE2986C53A00A911A9 /* Resources */,
+				83A2288029CA04FA0097C75A /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -219,13 +219,14 @@
 			);
 			inputPaths = (
 			);
+			name = Swiftlint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
