@@ -2,6 +2,7 @@ import SwiftUI
 
 public struct InputMessage: View {
     @Environment (\.validationContext) private var context
+    @EnvironmentObject var theme: Theme
 
     @Binding private var status: ValidationStatus
 
@@ -39,11 +40,11 @@ public struct InputMessage: View {
     private var messageColor: Color {
         switch nearestStatus {
         case .valid:
-            return Color.white
+            return theme.validationStatusValid
         case .warning:
-            return Color.orange
+            return theme.validationStatusWarning
         case .error:
-            return Color.red
+            return theme.validationStatusError
         }
     }
 
