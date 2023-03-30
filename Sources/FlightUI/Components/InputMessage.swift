@@ -59,12 +59,36 @@ public struct InputMessage: View {
 }
 
 struct InputMessage_Previews: PreviewProvider {
-    @State static var status: ValidationStatus = .error(message: "example error message")
+    @State static var warningStatus: ValidationStatus = .warning(message: "example Warning message")
+    @State static var errorStatus: ValidationStatus = .error(message: "example Error message")
     
     static var previews: some View {
-        InputMessage()
-            .environment(\.validationContext, ValidationContext(validator: { _ , _ in
-                return ValidationStatus.valid
-            }, status: $status))
+        VStack {
+            VStack {
+                InputMessage()
+                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                        return ValidationStatus.valid
+                    }, status: $warningStatus))
+                InputMessage()
+                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                        return ValidationStatus.valid
+                    }, status: $errorStatus))
+            }
+            .environmentObject(Theme(validationStatusWarning: .flightOrange,
+                                     validationStatusError: .flightRed))
+
+            VStack {
+                InputMessage()
+                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                        return ValidationStatus.valid
+                    }, status: $warningStatus))
+                InputMessage()
+                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                        return ValidationStatus.valid
+                    }, status: $errorStatus))
+            }
+            .environmentObject(Theme(validationStatusWarning: .flightGreen,
+                                     validationStatusError: .flightBlue))
+        }
     }
 }
