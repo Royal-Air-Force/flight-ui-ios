@@ -2,6 +2,7 @@ import SwiftUI
 
 public struct InputMessage: View {
     @Environment (\.validationContext) private var context
+    @EnvironmentObject var theme: Theme
 
     @Binding private var status: ValidationStatus
 
@@ -39,11 +40,11 @@ public struct InputMessage: View {
     private var messageColor: Color {
         switch nearestStatus {
         case .valid:
-            return Color.white
+            return theme.validationStatusValid
         case .warning:
-            return Color.orange
+            return theme.validationStatusWarning
         case .error:
-            return Color.red
+            return theme.validationStatusError
         }
     }
 
@@ -58,12 +59,36 @@ public struct InputMessage: View {
 }
 
 struct InputMessage_Previews: PreviewProvider {
-    @State static var status: ValidationStatus = .error(message: "example error message")
+    @State static var warningStatus: ValidationStatus = .warning(message: "example Warning message")
+    @State static var errorStatus: ValidationStatus = .error(message: "example Error message")
     
     static var previews: some View {
-        InputMessage()
-            .environment(\.validationContext, ValidationContext(validator: { _ , _ in
-                return ValidationStatus.valid
-            }, status: $status))
+        VStack {
+            VStack {
+                InputMessage()
+                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                        return ValidationStatus.valid
+                    }, status: $warningStatus))
+                InputMessage()
+                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                        return ValidationStatus.valid
+                    }, status: $errorStatus))
+            }
+            .environmentObject(Theme(validationStatusWarning: .flightOrange,
+                                     validationStatusError: .flightRed))
+
+            VStack {
+                InputMessage()
+                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                        return ValidationStatus.valid
+                    }, status: $warningStatus))
+                InputMessage()
+                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                        return ValidationStatus.valid
+                    }, status: $errorStatus))
+            }
+            .environmentObject(Theme(validationStatusWarning: .flightGreen,
+                                     validationStatusError: .flightBlue))
+        }
     }
 }
