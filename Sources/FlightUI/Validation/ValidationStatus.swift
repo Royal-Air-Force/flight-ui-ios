@@ -4,17 +4,6 @@ public enum ValidationStatus: Equatable {
     case valid
     case warning(message: String)
     case error(message: String)
-    
-    public var color: Color {
-        switch self {
-        case .valid:
-            return .flightWhite
-        case .warning:
-            return .flightYellow
-        case .error:
-            return .flightRed
-        }
-    }
 }
 
 public enum ValidationMode {
