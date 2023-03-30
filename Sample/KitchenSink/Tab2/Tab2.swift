@@ -4,35 +4,35 @@ import FlightUI
 struct Tab2: View {
     @EnvironmentObject var theme: Theme
     @StateObject private var viewModel = ViewModel()
-    
+
     let exampleText = " How vexingly quick daft zebras jump!"
-    
+
     var body: some View {
         VStack {
             tabHeader
                 .padding([.top, .bottom], theme.large)
-            
+
             headingsText
                 .padding([.bottom], theme.large)
-            
+
             inputsAndResults
                 .padding([.bottom], theme.large)
-            
+
             titleText
                 .padding([.bottom], theme.large)
-            
+
             contentText
                 .padding([.bottom], theme.medium)
-            
+
             captionsText
                 .padding([.bottom], theme.medium)
-        
+
             Spacer()
         }
         .padding([.leading, .trailing], theme.xxlarge)
         .background(Color.flightBlack)
     }
-    
+
     @ViewBuilder
     var tabHeader: some View {
         HStack {
@@ -41,7 +41,7 @@ struct Tab2: View {
             Spacer()
         }
     }
-    
+
     @ViewBuilder
     var titleText: some View {
         HStack {
@@ -65,8 +65,7 @@ struct Tab2: View {
             Spacer()
         }
     }
-    
-    
+
     @ViewBuilder
     var headingsText: some View {
         HStack {
@@ -88,7 +87,7 @@ struct Tab2: View {
             Spacer()
         }
     }
-    
+
     @ViewBuilder
     var inputsAndResults: some View {
         HStack {
@@ -102,7 +101,7 @@ struct Tab2: View {
             Spacer()
         }
     }
-    
+
     @ViewBuilder
     var contentText: some View {
         HStack {
@@ -126,7 +125,7 @@ struct Tab2: View {
             Spacer()
         }
     }
-    
+
     @ViewBuilder
     var captionsText: some View {
         HStack {
@@ -146,9 +145,6 @@ struct Tab2: View {
         }
     }
 }
-
-
-
 
 struct Tab2_Previews: PreviewProvider {
     static var previews: some View {

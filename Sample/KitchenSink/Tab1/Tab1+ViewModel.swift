@@ -6,10 +6,10 @@ extension Tab1 {
         @Published var textualInput = ""
         @Published var numericalInput = ""
         @Published var numericalInputResult: ValidationStatus = .error(message: "Error Message")
-        
+
         @Published var selectionInput: SelectionInputTypes = .selectionOne
         @Published var optionalSelectionInput: SelectionInputTypes?
-        
+
         @Published var isShowingResetAlert = false
     }
 }
@@ -33,7 +33,7 @@ extension Tab1.ViewModel {
                 return .warning(message: "Warning Message")
             }
         }
-        
+
         return validateRequiredField(value, mode: mode)
     }
 }
@@ -51,16 +51,15 @@ extension Tab1.ViewModel {
     }
 }
 
-
 extension Tab1.ViewModel {
     enum SelectionInputTypes: String, CaseIterable, CustomStringConvertible {
         case selectionOne = "Option One"
         case selectionTwo = "Option Two"
         case selectionThree = "Option Three"
-        
+
         var description: String {
             return rawValue
         }
     }
-    
+
 }
