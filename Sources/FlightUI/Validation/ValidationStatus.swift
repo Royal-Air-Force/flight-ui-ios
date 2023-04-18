@@ -2,8 +2,8 @@ import SwiftUI
 
 public enum ValidationStatus: Equatable {
     case valid
-    case warning(message: String)
-    case error(message: String)
+    case warning(message: LocalizedStringKey)
+    case error(message: LocalizedStringKey)
 }
 
 public enum ValidationMode {
