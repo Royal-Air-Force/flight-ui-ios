@@ -26,7 +26,7 @@ public struct InputMessage: View {
             EmptyView()
         }
     }
-    private var message: String? {
+    private var message: LocalizedStringKey? {
         switch nearestStatus {
         case .valid:
             return nil
