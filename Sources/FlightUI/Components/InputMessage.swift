@@ -31,9 +31,9 @@ public struct InputMessage: View {
         case .valid:
             return nil
         case .warning(let message):
-            return message
+            return LocalizedStringKey(message)
         case .error(let message):
-            return message
+            return LocalizedStringKey(message)
         }
     }
 
