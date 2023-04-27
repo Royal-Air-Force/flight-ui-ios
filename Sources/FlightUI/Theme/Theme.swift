@@ -38,7 +38,8 @@ public class Theme: ObservableObject {
     // Validation Status
     @Published public var validationStatusValid: Color
     @Published public var validationStatusWarning: Color
-    @Published public var validationStatusError: Color
+    @Published public var validationStatusCaution: Color
+    @Published public var validationStatusAdvisory: Color
 
     // Constants
     @Published public var panelCornerRadius: Double
@@ -96,8 +97,9 @@ public class Theme: ObservableObject {
                 panelViewBackground: Color = .black,
                 appHeaderBackground: Color = .black,
                 validationStatusValid: Color = .flightWhite,
-                validationStatusWarning: Color = .flightYellow,
-                validationStatusError: Color = .flightRed,
+                validationStatusWarning: Color = .flightRed,
+                validationStatusCaution: Color = .flightOrange,
+                validationStatusAdvisory: Color = .flightWhite,
                 panelCornerRadius: Double = 5,
                 panelLineWidth: Double = 6,
                 panelPadding: Double = 6,
@@ -150,7 +152,8 @@ public class Theme: ObservableObject {
         self.appHeaderBackground = appHeaderBackground
         self.validationStatusValid = validationStatusValid
         self.validationStatusWarning = validationStatusWarning
-        self.validationStatusError = validationStatusError
+        self.validationStatusCaution = validationStatusCaution
+        self.validationStatusAdvisory = validationStatusAdvisory
         self.panelCornerRadius = panelCornerRadius
         self.panelLineWidth = panelLineWidth
         self.panelPadding = panelPadding

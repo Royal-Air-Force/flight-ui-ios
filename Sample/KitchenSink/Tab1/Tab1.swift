@@ -54,9 +54,11 @@ struct Tab1: View {
                 Text("Numerical Input with Validation")
                     .typography(.caption)
                 InputField("0 - 100", text: $viewModel.numericalInput, configuration: .inputFieldConfiguration(valueType: .decimal))
-                InputMessage()
+                .validated(by: viewModel.validateNumericalInput, status: $viewModel.numericalInputResult)
+                InputMessage(status: $viewModel.numericalInputResult)
+
             }
-            .validated(by: viewModel.validateNumericalInput, status: $viewModel.numericalInputResult)
+
         }
     }
 

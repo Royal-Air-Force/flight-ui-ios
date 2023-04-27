@@ -52,7 +52,7 @@ struct Tab3: View {
             supportingColours
                 .padding([.bottom], theme.xxlarge)
 
-            warningErrorColours
+            warningCautionColours
                 .padding([.bottom], theme.xxlarge)
 
         }
@@ -196,19 +196,19 @@ struct Tab3: View {
         }
     }
 
-    var warningErrorColours: some View {
+    var warningCautionColours: some View {
         VStack {
             HStack {
-                Text("Warning and error colours")
+                Text("Warning and Caution colours")
                     .typography(.h1)
                 Spacer()
             }
             HStack {
                 VStack {
                     Rectangle()
-                        .fill(Color.flightYellow)  // Q - should we expxand ShapeStyle?
+                        .fill(Color.flightRed)
                     HStack {
-                        Text("warning")
+                        Text("Warning")
                             .fontWeight(.bold)
                         Spacer()
                     }
@@ -226,9 +226,9 @@ struct Tab3: View {
 
                 VStack {
                     Rectangle()
-                        .fill(Color.flightOrange)   // This is wrong
+                        .fill(Color.flightOrange)
                     HStack {
-                        Text("error")
+                        Text("Caution")
                             .fontWeight(.bold)
                         Spacer()
                     }

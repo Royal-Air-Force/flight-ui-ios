@@ -9,7 +9,6 @@ public extension Color {
     static let flightDarkGray = Color("flightDarkGray", bundle: .module)
     static let flightLightGray = Color("flightLightGray", bundle: .module)
     static let flightBlue = Color("flightBlue", bundle: .module)
-    static let flightYellow = Color("flightYellow", bundle: .module)
     static let flightOrange = Color("flightOrange", bundle: .module)
     static let flightRed = Color("flightRed", bundle: .module)
 }
@@ -36,7 +35,6 @@ fileprivate extension Color {
                                         .flightDarkGray,
                                         .flightLightGray,
                                         .flightBlue,
-                                        .flightYellow,
                                         .flightOrange,
                                         .flightRed]
 }
