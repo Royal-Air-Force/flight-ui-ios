@@ -38,6 +38,17 @@ public struct Validation: ViewModifier {
         }
     }
 
+    private var overlayColor: Color {
+        switch status.wrappedValue {
+        case .valid:
+            return theme.validationStatusValid
+        case .warning:
+            return theme.validationStatusWarning
+        case .error:
+            return theme.validationStatusError
+        }
+    }
+
     public func body(content: Content) -> some View {
         content
             .validationContext(ValidationContext(validator: validator, status: status))
