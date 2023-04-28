@@ -24,6 +24,17 @@ public struct Validation: ViewModifier {
         self.cornerRadius = cornerRadius ?? CornerRadius().default
     }
 
+    private var overlayColor: Color {
+        switch status.wrappedValue {
+        case .valid:
+            return theme.validationStatusValid
+        case .warning:
+            return theme.validationStatusWarning
+        case .error:
+            return theme.validationStatusError
+        }
+    }
+
     public func body(content: Content) -> some View {
         content
             .validationContext(ValidationContext(validator: validator, status: status))
@@ -31,7 +42,7 @@ public struct Validation: ViewModifier {
             .overlay {
                 if status.wrappedValue != .valid {
                     RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(Color.flightOrange, lineWidth: theme.staticTextFieldBorderWidth)
+                        .stroke(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
                 }
             }
     }
