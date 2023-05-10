@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - Button Style View -
+// MARK: - Primary Button Style View -
 
 public struct PrimaryButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
@@ -17,13 +17,15 @@ public struct PrimaryButtonStyle: ButtonStyle {
     }
 }
 
-// MARK: - Button Style Extensions -
+// MARK: - Primary Button Style Extensions -
 
 public extension ButtonStyle where Self == PrimaryButtonStyle {
     static var primary: Self {
         return .init()
     }
 }
+
+// MARK: - Secondary Button Style View -
 
 public struct SecondaryButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
@@ -44,12 +46,36 @@ public struct SecondaryButtonStyle: ButtonStyle {
     }
 }
 
+public struct UpdatedSecondaryButtonStyle: ButtonStyle {
+    @EnvironmentObject var theme: Theme
+    @Environment(\.isEnabled) private var isEnabled: Bool
+
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding([.leading, .trailing])
+            .padding([.top, .bottom], theme.buttonVerticalPadding)
+            .foregroundColor(isEnabled ? theme.secondaryButtonForeground : theme.secondaryButtonForeground.opacity(theme.disabledButtonOpacity))
+            .background(theme.secondaryButtonForeground.opacity(theme.disabledButtonOpacity))
+            .typography(.button)
+            .clipShape(Capsule())
+    }
+}
+
+// MARK: - Secondary Button Style Extensions -
+
 public extension ButtonStyle where Self == SecondaryButtonStyle {
     static var secondary: Self {
         return .init()
     }
 }
 
+public extension ButtonStyle where Self == UpdatedSecondaryButtonStyle {
+    static var updatedSecondary: Self {
+        return .init()
+    }
+}
+
+// MARK: - Tertiary Button Style View -
 
 public struct TertiaryButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
@@ -63,6 +89,8 @@ public struct TertiaryButtonStyle: ButtonStyle {
             .typography(.button)
     }
 }
+
+// MARK: - Tertiary Button Style Extensions -
 
 public extension ButtonStyle where Self == TertiaryButtonStyle {
     static var tertiary: Self {
@@ -107,7 +135,33 @@ struct Button_Previews: PreviewProvider {
             Button("Secondary Disabled", action: {})
                 .buttonStyle(.secondary)
                 .disabled(true)
-            
+
+            VStack(alignment: .leading, spacing: 24) {
+                Button("Updated Secondary", action: {})
+                    .buttonStyle(.updatedSecondary)
+
+                Button("Updated Secondary Disabled", action: {})
+                    .buttonStyle(.updatedSecondary)
+                    .disabled(true)
+
+                Button(action: {}, label: {
+                    HStack {
+                        Image(systemName: "plus")
+                        Text("Updated Secondary with Icon Disabled")
+                    }
+                })
+                .buttonStyle(.updatedSecondary)
+
+                Button(action: {}, label: {
+                    HStack {
+                        Image(systemName: "plus")
+                        Text("Updated Secondary with Icon Disabled")
+                    }
+                })
+                .buttonStyle(.updatedSecondary)
+                .disabled(true)
+            }
+
             Button("Tertiary", action: {})
                 .buttonStyle(.tertiary)
             
@@ -120,8 +174,10 @@ struct Button_Previews: PreviewProvider {
     
     static var previews: some View {
         buttonList
+            .environmentObject(Theme())
             .previewDisplayName("All Buttons")
             .preferredColorScheme(.dark)
+
     }
 }
 
