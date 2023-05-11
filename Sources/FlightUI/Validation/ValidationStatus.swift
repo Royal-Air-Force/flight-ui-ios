@@ -16,12 +16,10 @@ public struct Validation: ViewModifier {
 
     private let validator: ValidationContext.Validator
     private let status: Binding<ValidationStatus>
-    private let cornerRadius: Double
 
-    fileprivate init(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>, cornerRadius: Double? = nil) {
+    fileprivate init(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>) {
         self.validator = validator
         self.status = status
-        self.cornerRadius = cornerRadius ?? CornerRadius().default
     }
 
     public func body(content: Content) -> some View {
@@ -31,7 +29,7 @@ public struct Validation: ViewModifier {
 }
 
 public extension View {
-    func validated(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>, cornerRadius: Double? = nil) -> some View {
-        modifier(Validation(by: validator, status: status, cornerRadius: cornerRadius))
+    func validated(by validator: @escaping ValidationContext.Validator, status: Binding<ValidationStatus>) -> some View {
+        modifier(Validation(by: validator, status: status))
     }
 }
