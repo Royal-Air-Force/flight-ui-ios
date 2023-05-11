@@ -39,12 +39,12 @@ public struct Validation: ViewModifier {
         content
             .validationContext(ValidationContext(validator: validator, status: status))
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-            .overlay {
-                if status.wrappedValue != .valid {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
-                }
-            }
+//            .overlay {
+//                if status.wrappedValue != .valid {
+//                    RoundedRectangle(cornerRadius: cornerRadius)
+//                        .stroke(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
+//                }
+//            }
     }
 }
 

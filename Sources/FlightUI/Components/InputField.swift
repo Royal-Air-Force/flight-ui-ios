@@ -69,6 +69,23 @@ public struct InputField: View {
                     .disabled(config.options.contains(.staticText))
             }
         }
+        .overlay {
+            if context.status != .valid {
+                RoundedRectangle(cornerRadius: CornerRadius().default)
+                    .stroke(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
+            }
+        }
+    }
+
+    private var overlayColor: Color {
+        switch context.status {
+        case .valid:
+            return theme.validationStatusValid
+        case .warning:
+            return theme.validationStatusWarning
+        case .error:
+            return theme.validationStatusError
+        }
     }
 
     private func onEditingChanged(isEditing: Bool) {
@@ -149,6 +166,9 @@ struct InputField_Previews: PreviewProvider {
                                                                 options: [.useThemeStyling, .bordered])
     private static let borderedStaticConfig: InputFieldConfiguration = .inputFieldConfiguration(options: .all)
 
+    static func fakeValidator(value: String, mode: ValidationMode) -> ValidationStatus { return .error(message: "") }
+    @State private static var errorStatus: ValidationStatus = .warning(message: "")
+
     static var previews: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
@@ -168,11 +188,9 @@ struct InputField_Previews: PreviewProvider {
                                text: $staticText,
                                configuration: borderedStaticConfig)
 
-
                 }
                 .padding(.horizontal)
                 Group {
-
                     InputField("Placeholder",
                                text: $emptyText,
                                configuration: smallConfig)
@@ -211,6 +229,21 @@ struct InputField_Previews: PreviewProvider {
                                text: $exampleNumber,
                                configuration: decimalConfig)
                 }
+                Divider()
+                Group {
+                    InputField("Bordered Error",
+                               text: $emptyText,
+                               configuration: borderedConfig)
+                    InputField("Placeholder",
+                               text: $text,
+                               configuration: mediumConfig)
+                    InputField("Placeholder",
+                               text: $text,
+                               configuration: largeConfig)
+
+                }
+                .validated(by: fakeValidator, status: $errorStatus)
+                .padding(.horizontal)
                 Divider()
                 Group {
                     InputField("",
