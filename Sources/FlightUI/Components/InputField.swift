@@ -39,9 +39,9 @@ public struct InputField: View {
                     .disabled(config.options.contains(.staticText))
                     .when(config.options.contains(.bordered)) { view in
                         view
-                            .background(
+                            .overlay(
                                 RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
-                                    .stroke(theme.staticTextBorder, lineWidth: theme.staticTextFieldBorderWidth)
+                                    .strokeBorder(theme.staticTextBorder, lineWidth: theme.staticTextFieldBorderWidth)
                             )
                     }
             case false:
@@ -55,9 +55,9 @@ public struct InputField: View {
                     .disabled(config.options.contains(.staticText))
                     .when(config.options.contains(.bordered)) { view in
                         view
-                            .background(
+                            .overlay(
                                 RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
-                                    .stroke(theme.staticTextBorder, lineWidth: theme.staticTextFieldBorderWidth)
+                                    .strokeBorder(theme.staticTextBorder, lineWidth: theme.staticTextFieldBorderWidth)
                             )
                     }
             }
@@ -72,7 +72,7 @@ public struct InputField: View {
         .overlay {
             if context.status != .valid {
                 RoundedRectangle(cornerRadius: CornerRadius().default)
-                    .stroke(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
+                    .strokeBorder(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
             }
         }
     }
