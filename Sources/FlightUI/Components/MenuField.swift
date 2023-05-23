@@ -40,6 +40,8 @@ public struct OptionalMenuField<SelectionType: CustomStringConvertible & Hashabl
 }
 
 public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View {
+    
+    @Environment (\.validationContext) var context
     @EnvironmentObject var theme: Theme
     @Binding var selection: SelectionType
     var options: [SelectionType]
@@ -72,13 +74,32 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
         .background(theme.menuFieldBackground)
         .frame(height: theme.menuFieldHeight)
         .cornerRadius(theme.menuFieldCornerRadius)
+        .overlay {
+            if context.status != .valid {
+                RoundedRectangle(cornerRadius: CornerRadius().default)
+                    .strokeBorder(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
+            }
+        }
+    }
+    
+    private var overlayColor: Color {
+        switch context.status {
+        case .valid:
+            return theme.validationStatusValid
+        case .warning:
+            return theme.validationStatusWarning
+        case .error:
+            return theme.validationStatusError
+        }
     }
 }
+
 
 struct MenuField_Previews: PreviewProvider {
     @State static var optionalSelection: String?
     @State static var selection: String = "Iron Man"
-    
+    static func fakeValidator(value: String, mode: ValidationMode) -> ValidationStatus { return .error(message: "") }
+    @State private static var errorStatus: ValidationStatus = .warning(message: "")
     static let options = ["Thor", "Iron Man", "Captain America"]
     
     static var previews: some View {
@@ -90,9 +111,9 @@ struct MenuField_Previews: PreviewProvider {
             OptionalMenuField(selection: $optionalSelection,
                       options: options,
                       placeholder: "Custom Placeholder Text")
-            
             MenuField(selection: $selection, options: options)
-            
+            MenuField(selection: $selection, options: options)
+                .validated(by: fakeValidator, status: $errorStatus)
         }
         .padding()
         .environmentObject(Theme())
