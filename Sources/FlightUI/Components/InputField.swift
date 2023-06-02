@@ -1,4 +1,41 @@
 import SwiftUI
+import Combine
+
+class TextFieldDebouncer: ObservableObject {
+    @Published var debouncedText = ""
+    @Published var rawText = ""
+
+    init(initialText: String, debounceTime: Double) {
+        self.rawText = initialText
+        $rawText
+            .debounce(for: .seconds(debounceTime), scheduler: DispatchQueue.main)
+            .assign(to: &$debouncedText)
+    }
+
+}
+
+struct DebouncedTextField: View {
+
+    @Binding var text: String
+    @StateObject var debouncer: TextFieldDebouncer
+    let onEditingChanged: (Bool) -> Void
+
+    public init(text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void) {
+        self._text = text
+        self.onEditingChanged = onEditingChanged
+        self._debouncer = StateObject(wrappedValue: TextFieldDebouncer(initialText: text.wrappedValue, debounceTime: 0.25))
+    }
+
+    var body: some View {
+        TextField("", text: $debouncer.rawText, onEditingChanged: onEditingChanged)
+            .onChange(of: debouncer.debouncedText) { newText in
+                text = newText
+            }
+            .onChange(of: text) { newValue in
+                debouncer.rawText = newValue
+            }
+    }
+}
 
 // MARK: - Input Field Component -
 
@@ -27,7 +64,7 @@ public struct InputField: View {
         ZStack(alignment: .leading) {
             switch config.options.contains(.useThemeStyling) {
             case true:
-                TextField("", text: textBinding, onEditingChanged: onEditingChanged)
+                DebouncedTextField(text: textBinding, onEditingChanged: onEditingChanged)
                     .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()
                     .background(theme.textFieldBackground)
@@ -45,7 +82,7 @@ public struct InputField: View {
                             )
                     }
             case false:
-                TextField("", text: textBinding, onEditingChanged: onEditingChanged)
+                DebouncedTextField(text: textBinding, onEditingChanged: onEditingChanged)
                     .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()
                     .frame(width: config.size.width(theme: theme), height: theme.textFieldHeight)
