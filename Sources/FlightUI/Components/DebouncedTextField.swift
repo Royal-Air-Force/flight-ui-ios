@@ -2,12 +2,12 @@ import SwiftUI
 import Combine
 
 struct DebouncedTextField: View {
-    @EnvironmentObject var theme: Theme
+    @EnvironmentObject private var theme: Theme
     
-    let placeholder: String
-    @Binding var text: String
-    @StateObject var debouncer: TextFieldDebouncer
-    let onEditingChanged: (Bool) -> Void
+    private let placeholder: String
+    @Binding private var text: String
+    private let onEditingChanged: (Bool) -> Void
+    @StateObject private var debouncer: TextFieldDebouncer
 
     public init(_ placeholder: String, text: Binding<String>, onEditingChanged: @escaping (Bool) -> Void, debounceTime: Double = 0.25) {
         self.placeholder = placeholder
