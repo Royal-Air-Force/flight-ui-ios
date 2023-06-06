@@ -24,10 +24,10 @@ public struct InputField: View {
     }
 
     public var body: some View {
-        ZStack(alignment: .leading) {
+        Group {
             switch config.options.contains(.useThemeStyling) {
             case true:
-                TextField("", text: textBinding, onEditingChanged: onEditingChanged)
+                DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceTime)
                     .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()
                     .background(theme.textFieldBackground)
@@ -45,7 +45,7 @@ public struct InputField: View {
                             )
                     }
             case false:
-                TextField("", text: textBinding, onEditingChanged: onEditingChanged)
+                DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceTime)
                     .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()
                     .frame(width: config.size.width(theme: theme), height: theme.textFieldHeight)
@@ -61,13 +61,6 @@ public struct InputField: View {
                             )
                     }
             }
-            if text.isEmpty {
-                Text(placeholder)
-                    .typography(.emptyField)
-                    .padding(.leading)
-                    .allowsHitTesting(false)
-                    .disabled(config.options.contains(.staticText))
-            }
         }
         .overlay {
             if context.status != .valid {
@@ -75,6 +68,7 @@ public struct InputField: View {
                     .strokeBorder(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
             }
         }
+        .disabled(config.options.contains(.staticText))
     }
 
     private var overlayColor: Color {
