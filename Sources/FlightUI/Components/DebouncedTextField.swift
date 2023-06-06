@@ -19,7 +19,7 @@ struct DebouncedTextField: View {
     var body: some View {
         TextField("", text: $debouncer.rawText, onEditingChanged: onEditingChanged)
             .overlay {
-                if text.isEmpty {
+                if debouncer.rawText.isEmpty {
                     HStack {
                         Text(placeholder)
                             .typography(.emptyField)
