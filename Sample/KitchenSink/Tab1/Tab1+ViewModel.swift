@@ -5,7 +5,7 @@ extension Tab1 {
     class ViewModel: ObservableObject {
         @Published var textualInput = ""
         @Published var numericalInput = ""
-        @Published var numericalInputResult: ValidationStatus = .error(message: "Error Message")
+        @Published var numericalInputResult: ValidationStatus = .warning(message: "Warning Message")
 
         @Published var selectionInput: SelectionInputTypes = .selectionOne
         @Published var optionalSelectionInput: SelectionInputTypes?
@@ -44,9 +44,9 @@ extension Tab1.ViewModel {
         case .editing where text.isEmptyTrimmed:
             return .valid
         case .committed where text.isEmptyTrimmed:
-            return .error(message: "Required")
+            return .caution(message: "Required")
         default:
-            return .error(message: "Invalid input format")
+            return .caution(message: "Invalid input format")
         }
     }
 }

@@ -88,8 +88,10 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
             return theme.validationStatusValid
         case .warning:
             return theme.validationStatusWarning
-        case .error:
-            return theme.validationStatusError
+        case .caution:
+            return theme.validationStatusCaution
+        case .advisory:
+            return theme.validationStatusAdvisory
         }
     }
 }
@@ -98,8 +100,8 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
 struct MenuField_Previews: PreviewProvider {
     @State static var optionalSelection: String?
     @State static var selection: String = "Iron Man"
-    static func fakeValidator(value: String, mode: ValidationMode) -> ValidationStatus { return .error(message: "") }
-    @State private static var errorStatus: ValidationStatus = .warning(message: "")
+    static func fakeValidator(value: String, mode: ValidationMode) -> ValidationStatus { return .caution(message: "") }
+    @State private static var warningStatus: ValidationStatus = .warning(message: "")
     static let options = ["Thor", "Iron Man", "Captain America"]
     
     static var previews: some View {
@@ -113,7 +115,7 @@ struct MenuField_Previews: PreviewProvider {
                       placeholder: "Custom Placeholder Text")
             MenuField(selection: $selection, options: options)
             MenuField(selection: $selection, options: options)
-                .validated(by: fakeValidator, status: $errorStatus)
+                .validated(by: fakeValidator, status: $warningStatus)
         }
         .padding()
         .environmentObject(Theme())
