@@ -74,8 +74,7 @@ struct InputMessage_Previews: PreviewProvider {
                         return ValidationStatus.valid
                     }, status: $errorStatus))
             }
-            .environmentObject(Theme(validationStatusWarning: .flightOrange,
-                                     validationStatusError: .flightRed))
+            .environmentObject(Theme())
 
             VStack {
                 InputMessage()
@@ -87,8 +86,7 @@ struct InputMessage_Previews: PreviewProvider {
                         return ValidationStatus.valid
                     }, status: $errorStatus))
             }
-            .environmentObject(Theme(validationStatusWarning: .flightGreen,
-                                     validationStatusError: .flightBlue))
+            .environmentObject(Theme())
         }
     }
 }
