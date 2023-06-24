@@ -2,10 +2,10 @@ import SwiftUI
 
 // MARK: - Color Extension -
 
-public struct ColorState {
-    var color: Color
-    var focusedColor: Color
-    var disabledColor: Color
+public class ColorState {
+    @Published var color: Color
+    @Published var focusedColor: Color
+    @Published var disabledColor: Color
     
     public init(color: Color) {
         self.color = color
