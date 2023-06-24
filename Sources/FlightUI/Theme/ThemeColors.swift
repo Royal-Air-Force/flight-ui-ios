@@ -2,35 +2,35 @@ import SwiftUI
 
 public class ThemeColors{
     // General Colors
-    @Published var primary: Color
-    @Published var onPrimary: ColorState
-    @Published var secondary: Color
-    @Published var onSecondary: ColorState
-    @Published var background: Color
-    @Published var onBackground: ColorState
-    @Published var surface: Color
-    @Published var onSurface: ColorState
+    @Published public var primary: Color
+    @Published public var onPrimary: ColorState
+    @Published public var secondary: Color
+    @Published public var onSecondary: ColorState
+    @Published public var background: Color
+    @Published public var onBackground: ColorState
+    @Published public var surface: Color
+    @Published public var onSurface: ColorState
     
     // Core Colors
-    @Published var inputOutput: ColorState
-    @Published var onInputOutput: ColorState
-    @Published var nominal: ColorState
-    @Published var onNominal: ColorState
-    @Published var caution: ColorState
-    @Published var onCaution: ColorState
-    @Published var warning: ColorState
-    @Published var onWarning: ColorState
+    @Published public var inputOutput: ColorState
+    @Published public var onInputOutput: ColorState
+    @Published public var nominal: ColorState
+    @Published public var onNominal: ColorState
+    @Published public var caution: ColorState
+    @Published public var onCaution: ColorState
+    @Published public var warning: ColorState
+    @Published public var onWarning: ColorState
     
     // Graphics Colors
-    @Published var graphicsRed: Color
-    @Published var graphicsYellow: Color
-    @Published var graphicsGreen: Color
-    @Published var graphicsMint: Color
-    @Published var graphicsCyan: Color
-    @Published var graphicsBlue: Color
-    @Published var graphicsIndigo: Color
-    @Published var graphicsPurple: Color
-    @Published var graphicsPink: Color
+    @Published public var graphicsRed: Color
+    @Published public var graphicsYellow: Color
+    @Published public var graphicsGreen: Color
+    @Published public var graphicsMint: Color
+    @Published public var graphicsCyan: Color
+    @Published public var graphicsBlue: Color
+    @Published public var graphicsIndigo: Color
+    @Published public var graphicsPurple: Color
+    @Published public var graphicsPink: Color
     
     public init(primary: Color = .themePrimary,
                 onPrimary: ColorState = ColorState(color: .themeOnPrimary),

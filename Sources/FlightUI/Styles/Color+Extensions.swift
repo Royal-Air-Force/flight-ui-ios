@@ -3,9 +3,9 @@ import SwiftUI
 // MARK: - Color Extension -
 
 public class ColorState {
-    @Published var color: Color
-    @Published var focusedColor: Color
-    @Published var disabledColor: Color
+    @Published public var color: Color
+    @Published public var focusedColor: Color
+    @Published public var disabledColor: Color
     
     public init(color: Color) {
         self.color = color
