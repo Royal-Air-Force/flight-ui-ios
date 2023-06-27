@@ -16,12 +16,18 @@ public struct InputFieldOptionSet: OptionSet {
 }
 
 public struct InputFieldConfiguration {
+
+    public enum DebounceDuration: Double {
+        case `default` = 0.0
+        case small = 0.3
+    }
+
     let formatter: NumberFormatter?
     let valueType: TextFieldValueType
     let size: TextFieldSize
     let alignment: TextAlignment
     let typography: Typography
-    let debounceTime: Double
+    let debounceTime: DebounceDuration
     let options: InputFieldOptionSet
 
     private init(
@@ -30,7 +36,7 @@ public struct InputFieldConfiguration {
         size: TextFieldSize = .infinity,
         alignment: TextAlignment = .leading,
         typography: Typography = .input,
-        debounceTime: Double = 0.25,
+        debounceTime: DebounceDuration = .default,
         options: InputFieldOptionSet = .useThemeStyling
     ) {
         self.formatter = formatter
@@ -49,7 +55,7 @@ extension InputFieldConfiguration {
                                         valueType: .text,
                                         size: .infinity,
                                         alignment: .leading,
-                                        debounceTime: 0,
+                                        debounceTime: .default,
                                         options: .useThemeStyling)
     }
 
@@ -59,7 +65,7 @@ extension InputFieldConfiguration {
         size: TextFieldSize = .infinity,
         alignment: TextAlignment = .leading,
         typography: Typography = .input,
-        debounceTime: Double = 0,
+        debounceTime: DebounceDuration = .default,
         options: InputFieldOptionSet = .useThemeStyling
     ) -> InputFieldConfiguration {
         InputFieldConfiguration(formatter: formatter,
