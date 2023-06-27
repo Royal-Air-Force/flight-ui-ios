@@ -76,7 +76,7 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
         .cornerRadius(theme.menuFieldCornerRadius)
         .overlay {
             if context.status != .valid {
-                RoundedRectangle(cornerRadius: CornerRadius().default)
+                RoundedRectangle(cornerRadius: theme.radius.medium)
                     .strokeBorder(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
             }
         }

@@ -2,6 +2,13 @@ import SwiftUI
 
 public class Theme: ObservableObject {
     @Published public var color: ThemeColors
+    @Published public var padding: ThemePadding
+    @Published public var size: ThemeSize
+    @Published public var radius: ThemeRadius
+    
+    
+    
+    // All of the below is to be removed and consolidated into the above objects
     
     // Buttons
     @Published public var primaryButtonBackground: Color
@@ -43,40 +50,35 @@ public class Theme: ObservableObject {
     @Published public var validationStatusError: Color
 
     // Constants
-    @Published public var panelCornerRadius: Double
-    @Published public var panelLineWidth: Double
-    @Published public var panelPadding: Double
+    @Published public var panelCornerRadius: CGFloat
+    @Published public var panelLineWidth: CGFloat
+    @Published public var panelPadding: CGFloat
     
-    @Published public var buttonHorizontalPadding: Double
-    @Published public var buttonVerticalPadding: Double
-    @Published public var buttonBorderWidth: Double
+    @Published public var buttonHorizontalPadding: CGFloat
+    @Published public var buttonVerticalPadding: CGFloat
+    @Published public var buttonBorderWidth: CGFloat
     
-    @Published public var staticTextFieldCornerRadius: Double
-    @Published public var staticTextFieldBorderWidth: Double
+    @Published public var staticTextFieldCornerRadius: CGFloat
+    @Published public var staticTextFieldBorderWidth: CGFloat
     
-    @Published public var smallTextFieldWidth: Double
-    @Published public var mediumTextFieldWidth: Double
-    @Published public var largeTextFieldWidth: Double
-    @Published public var textFieldHeight: Double
-    @Published public var textFieldCornerRadius: Double
-    @Published public var menuFieldHeight: Double
-    @Published public var menuFieldCornerRadius: Double
+    @Published public var smallTextFieldWidth: CGFloat
+    @Published public var mediumTextFieldWidth: CGFloat
+    @Published public var largeTextFieldWidth: CGFloat
+    @Published public var textFieldHeight: CGFloat
+    @Published public var textFieldCornerRadius: CGFloat
+    @Published public var menuFieldHeight: CGFloat
+    @Published public var menuFieldCornerRadius: CGFloat
 
-    @Published public var cornerRadius: CornerRadius
 
     // Opacities
     @Published public var overlayOpacity: Double
     @Published public var disabledButtonOpacity: Double
-
-    // UI Element Spacing
-    @Published public var small: Double
-    @Published public var medium: Double
-    @Published public var large: Double
-    @Published public var xlarge: Double
-    @Published public var xxlarge: Double
     
     public init(
         color: ThemeColors = ThemeColors(),
+        padding: ThemePadding = ThemePadding(),
+        size: ThemeSize = ThemeSize(),
+        radius: ThemeRadius = ThemeRadius(),
         
         primaryButtonBackground: Color = .flightNominal,
         primaryButtonForeground: Color = .flightBlack,
@@ -103,35 +105,31 @@ public class Theme: ObservableObject {
         validationStatusValid: Color = .flightWhite,
         validationStatusWarning: Color = .flightCaution,
         validationStatusError: Color = .flightWarning,
-        panelCornerRadius: Double = 5,
-        panelLineWidth: Double = 6,
-        panelPadding: Double = 6,
-        buttonHorizontalPadding: Double = 50,
-        buttonVerticalPadding: Double = 12,
-        buttonBorderWidth: Double = 3,
-        staticTextFieldCornerRadius: Double = 5,
-        staticTextFieldBorderWidth: Double = 2,
-        smallTextFieldWidth: Double = 84,
-        mediumTextFieldWidth: Double = 146,
-        largeTextFieldWidth: Double = 226,
-        textFieldHeight: Double = 43,
-        textFieldCornerRadius: Double = 5,
-        menuFieldHeight: Double = 43,
-        menuFieldCornerRadius: Double = 5,
-        cornerRadius: CornerRadius = CornerRadius(),
+//        panelCornerRadius: Double = 5,
+//        panelLineWidth: Double = 6,
+//        panelPadding: Double = 6,
+//        buttonHorizontalPadding: Double = 50,
+//        buttonVerticalPadding: Double = 12,
+//        buttonBorderWidth: Double = 3,
+//        staticTextFieldCornerRadius: Double = 5,
+//        staticTextFieldBorderWidth: Double = 2,
+//        smallTextFieldWidth: Double = 84,
+//        mediumTextFieldWidth: Double = 146,
+//        largeTextFieldWidth: Double = 226,
+//        textFieldHeight: Double = 43,
+//        textFieldCornerRadius: Double = 5,
+//        menuFieldHeight: Double = 43,
+//        menuFieldCornerRadius: Double = 5,
 
         // Opacities
         overlayOpacity: Double = 0.6,
-        disabledButtonOpacity: Double = 0.38,
-
-        small: Double = 8,
-        medium: Double = 16,
-        large: Double = 24,
-        xlarge: Double = 32,
-        xxlarge: Double = 48
+        disabledButtonOpacity: Double = 0.38
                 
     ) {
         self.color = color
+        self.padding = padding
+        self.size = size
+        self.radius = radius
         
         self.primaryButtonBackground = primaryButtonBackground
         self.primaryButtonForeground = primaryButtonForeground
@@ -158,31 +156,24 @@ public class Theme: ObservableObject {
         self.validationStatusValid = validationStatusValid
         self.validationStatusWarning = validationStatusWarning
         self.validationStatusError = validationStatusError
-        self.panelCornerRadius = panelCornerRadius
-        self.panelLineWidth = panelLineWidth
-        self.panelPadding = panelPadding
-        self.buttonHorizontalPadding = buttonHorizontalPadding
-        self.buttonVerticalPadding = buttonVerticalPadding
-        self.buttonBorderWidth = buttonBorderWidth
-        self.staticTextFieldCornerRadius = staticTextFieldCornerRadius
-        self.staticTextFieldBorderWidth = staticTextFieldBorderWidth
-        self.smallTextFieldWidth = smallTextFieldWidth
-        self.mediumTextFieldWidth = mediumTextFieldWidth
-        self.largeTextFieldWidth = largeTextFieldWidth
-        self.textFieldHeight = textFieldHeight
-        self.textFieldCornerRadius = textFieldCornerRadius
-        self.menuFieldHeight = menuFieldHeight
-        self.menuFieldCornerRadius = menuFieldCornerRadius
-        self.cornerRadius = cornerRadius
-
+        self.panelCornerRadius = radius.medium
+        self.panelLineWidth = size.border
+        self.panelPadding = padding.grid1x
+        self.buttonHorizontalPadding = padding.grid6x
+        self.buttonVerticalPadding = padding.grid1_5x
+        self.buttonBorderWidth = size.border
+        self.staticTextFieldCornerRadius = radius.medium
+        self.staticTextFieldBorderWidth = size.border
+        self.smallTextFieldWidth = 84
+        self.mediumTextFieldWidth = 146
+        self.largeTextFieldWidth = 226
+        self.textFieldHeight = size.medium
+        self.textFieldCornerRadius = radius.medium
+        self.menuFieldHeight = size.medium
+        self.menuFieldCornerRadius = radius.medium
+        
         // Opacities
         self.overlayOpacity = overlayOpacity
         self.disabledButtonOpacity = disabledButtonOpacity
-
-        self.small = small
-        self.medium = medium
-        self.large = large
-        self.xlarge = xlarge
-        self.xxlarge = xxlarge
     }
 }

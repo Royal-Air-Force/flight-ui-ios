@@ -64,7 +64,7 @@ public struct InputField: View {
         }
         .overlay {
             if context.status != .valid {
-                RoundedRectangle(cornerRadius: CornerRadius().default)
+                RoundedRectangle(cornerRadius: theme.radius.medium)
                     .strokeBorder(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
             }
         }
