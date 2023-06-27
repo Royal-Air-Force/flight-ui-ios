@@ -37,13 +37,11 @@ public struct InputField: View {
                     .keyboardType(keyboardType)
                     .onChange(of: text, perform: onChangeText)
                     .disabled(config.options.contains(.staticText))
-                    .when(config.options.contains(.bordered)) { view in
-                        view
-                            .overlay(
-                                RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
-                                    .strokeBorder(theme.staticTextBorder, lineWidth: theme.staticTextFieldBorderWidth)
-                            )
-                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
+                        .strokeBorder(config.options.contains(.bordered) ? theme.staticTextBorder : .clear,
+                                      lineWidth: theme.staticTextFieldBorderWidth)
+                    )
             case false:
                 DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceTime)
                     .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
@@ -53,13 +51,11 @@ public struct InputField: View {
                     .keyboardType(keyboardType)
                     .onChange(of: text, perform: onChangeText)
                     .disabled(config.options.contains(.staticText))
-                    .when(config.options.contains(.bordered)) { view in
-                        view
-                            .overlay(
-                                RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
-                                    .strokeBorder(theme.staticTextBorder, lineWidth: theme.staticTextFieldBorderWidth)
-                            )
-                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
+                            .strokeBorder(config.options.contains(.bordered) ? theme.staticTextBorder : .clear,
+                                          lineWidth: theme.staticTextFieldBorderWidth)
+                    )
             }
         }
         .overlay {
