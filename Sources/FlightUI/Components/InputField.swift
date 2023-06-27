@@ -38,9 +38,8 @@ public struct InputField: View {
                     .onChange(of: text, perform: onChangeText)
                     .disabled(config.options.contains(.staticText))
                     .overlay(
-                        RoundedRectangle(cornerRadius: config.options.contains(.bordered) ? theme.staticTextFieldCornerRadius : 0, style: .continuous)
-                        .strokeBorder(config.options.contains(.bordered) ? theme.staticTextBorder : .clear,
-                                      lineWidth: config.options.contains(.bordered) ? theme.staticTextFieldBorderWidth : 0)
+                        RoundedRectangle(cornerRadius: borderCornerRadius, style: .continuous)
+                        .strokeBorder(borderColor, lineWidth: borderWidth)
                     )
             case false:
                 DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceTime)
@@ -52,9 +51,8 @@ public struct InputField: View {
                     .onChange(of: text, perform: onChangeText)
                     .disabled(config.options.contains(.staticText))
                     .overlay(
-                        RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
-                            .strokeBorder(config.options.contains(.bordered) ? theme.staticTextBorder : .clear,
-                                          lineWidth: config.options.contains(.bordered) ? theme.staticTextFieldBorderWidth : 0)
+                        RoundedRectangle(cornerRadius: borderCornerRadius, style: .continuous)
+                            .strokeBorder(borderColor, lineWidth: borderWidth)
                     )
             }
         }
@@ -65,6 +63,18 @@ public struct InputField: View {
             }
         }
         .disabled(config.options.contains(.staticText))
+    }
+
+    private var borderCornerRadius: Double {
+        config.options.contains(.bordered) ? theme.staticTextFieldCornerRadius : 0
+    }
+
+    private var borderColor: Color {
+        config.options.contains(.bordered) ? theme.staticTextBorder : .clear
+    }
+
+    private var borderWidth: Double {
+        config.options.contains(.bordered) ? theme.staticTextFieldBorderWidth : 0
     }
 
     private var overlayColor: Color {
