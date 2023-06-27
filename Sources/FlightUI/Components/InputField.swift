@@ -38,7 +38,7 @@ public struct InputField: View {
                     .onChange(of: text, perform: onChangeText)
                     .disabled(config.options.contains(.staticText))
                     .overlay(
-                        RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
+                        RoundedRectangle(cornerRadius: config.options.contains(.bordered) ? theme.staticTextFieldCornerRadius : 0, style: .continuous)
                         .strokeBorder(config.options.contains(.bordered) ? theme.staticTextBorder : .clear,
                                       lineWidth: config.options.contains(.bordered) ? theme.staticTextFieldBorderWidth : 0)
                     )
