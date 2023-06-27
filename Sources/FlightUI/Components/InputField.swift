@@ -40,7 +40,7 @@ public struct InputField: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
                         .strokeBorder(config.options.contains(.bordered) ? theme.staticTextBorder : .clear,
-                                      lineWidth: theme.staticTextFieldBorderWidth)
+                                      lineWidth: config.options.contains(.bordered) ? theme.staticTextFieldBorderWidth : 0)
                     )
             case false:
                 DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceTime)
@@ -54,7 +54,7 @@ public struct InputField: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
                             .strokeBorder(config.options.contains(.bordered) ? theme.staticTextBorder : .clear,
-                                          lineWidth: theme.staticTextFieldBorderWidth)
+                                          lineWidth: config.options.contains(.bordered) ? theme.staticTextFieldBorderWidth : 0)
                     )
             }
         }
