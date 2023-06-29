@@ -22,7 +22,7 @@ struct DebouncedTextField: View {
                 if debouncer.rawText.isEmpty {
                     HStack {
                         Text(placeholder)
-                            .typography(.emptyField)
+                            .font(Theme().typography.body)
                             .allowsHitTesting(false)
                         Spacer()
                     }

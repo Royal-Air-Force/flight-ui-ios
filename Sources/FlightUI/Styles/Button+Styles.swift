@@ -11,7 +11,7 @@ public struct PrimaryButtonStyle: ButtonStyle {
             .padding([.leading, .trailing], theme.buttonHorizontalPadding)
             .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(theme.primaryButtonForeground)
-            .typography(.button)
+            .font(theme.typography.body)
             .background(isEnabled ? theme.primaryButtonBackground : theme.primaryButtonBackground.opacity(theme.disabledButtonOpacity))
             .clipShape(Capsule())
     }
@@ -36,7 +36,7 @@ public struct SecondaryButtonStyle: ButtonStyle {
             .padding([.leading, .trailing], theme.buttonHorizontalPadding)
             .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(isEnabled ? theme.secondaryButtonForeground : theme.secondaryButtonForeground.opacity(theme.disabledButtonOpacity))
-            .typography(.button)
+            .font(theme.typography.body)
             .clipShape(Capsule())
             .overlay(
                 Capsule(style: .circular)
@@ -56,7 +56,7 @@ public struct UpdatedSecondaryButtonStyle: ButtonStyle {
             .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(isEnabled ? theme.secondaryButtonForeground : theme.secondaryButtonForeground.opacity(theme.disabledButtonOpacity))
             .background(theme.secondaryButtonForeground.opacity(theme.disabledButtonOpacity))
-            .typography(.button)
+            .font(theme.typography.body)
             .clipShape(Capsule())
     }
 }
@@ -83,10 +83,10 @@ public struct TertiaryButtonStyle: ButtonStyle {
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .font(theme.typography.body)
             .padding([.leading, .trailing], theme.buttonHorizontalPadding)
             .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(isEnabled ? theme.tertiaryButtonColor : theme.tertiaryButtonDisabledColor)
-            .typography(.button)
     }
 }
 

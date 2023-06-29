@@ -5,6 +5,7 @@ public class Theme: ObservableObject {
     @Published public var padding: ThemePadding
     @Published public var size: ThemeSize
     @Published public var radius: ThemeRadius
+    @Published public var typography: ThemeTypography
     
     
     
@@ -79,6 +80,7 @@ public class Theme: ObservableObject {
         padding: ThemePadding = ThemePadding(),
         size: ThemeSize = ThemeSize(),
         radius: ThemeRadius = ThemeRadius(),
+        typography: ThemeTypography = ThemeTypography(),
         
         primaryButtonBackground: Color = .flightNominal,
         primaryButtonForeground: Color = .flightBlack,
@@ -130,6 +132,7 @@ public class Theme: ObservableObject {
         self.padding = padding
         self.size = size
         self.radius = radius
+        self.typography = typography
         
         self.primaryButtonBackground = primaryButtonBackground
         self.primaryButtonForeground = primaryButtonForeground
