@@ -93,7 +93,7 @@ struct FontModifier : ViewModifier{
                 color: Color? = nil
     ) {
         self.typography = typography
-        self.color = color ?? theme.color.onSurface.color
+        self.color = color ?? theme.color.onSurface.default
     }
     
     public func body(content: Content) -> some View {

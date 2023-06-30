@@ -3,18 +3,18 @@ import SwiftUI
 // MARK: - Color Extension -
 
 public class ColorState {
-    @Published public var color: Color
+    @Published public var `default`: Color
     @Published public var focusedColor: Color
     @Published public var disabledColor: Color
     
     public init(color: Color) {
-        self.color = color
+        self.default = color
         self.focusedColor = color.opacity(0.87)
         self.disabledColor = color.opacity(0.38)
     }
     
     public init(color: Color, focusedColor: Color, disabledColor: Color) {
-        self.color = color
+        self.default = color
         self.focusedColor = focusedColor
         self.disabledColor = disabledColor
     }
@@ -22,19 +22,10 @@ public class ColorState {
 
 public extension Color {
     // General
-    static let themePrimary = Color("themePrimary", bundle: .module)
-    static let themeOnPrimary = Color("themeOnPrimary", bundle: .module)
-    
-    static let themeSecondary = Color("themeSecondary", bundle: .module)
-    static let themeOnSecondary = Color("themeOnSecondary", bundle: .module)
-    
-    static let themeBackground = Color("themeBackground", bundle: .module)
-    static let themeOnBackground = Color("themeOnBackground", bundle: .module)
-    
-    static let themeSurface = Color("themeSurface", bundle: .module)
-    static let themeOnSurface = Color("themeOnSurface", bundle: .module)
-    
     static let flightBlack = Color("flightBlack", bundle: .module)
+    static let flightDarkGrey = Color("flightDarkGrey", bundle: .module)
+    static let flightGrey = Color("flightGrey", bundle: .module)
+    static let flightLightGrey = Color("flightLightGrey", bundle: .module)
     static let flightWhite = Color("flightWhite", bundle: .module)
     
     // Core
@@ -71,13 +62,10 @@ fileprivate extension Color {
         return String(name)
     }
     
-    static let generalColors: [Color] = [.themePrimary,
-                                         .themeOnPrimary,
-                                         .themeSecondary,
-                                         .themeOnSecondary,
-                                         .themeBackground,
-                                         .themeOnBackground,
-                                         .flightBlack,
+    static let generalColors: [Color] = [.flightBlack,
+                                         .flightDarkGrey,
+                                         .flightGrey,
+                                         .flightLightGrey,
                                          .flightWhite]
     
     static let coreColors: [Color] = [.flightInputOutput,
