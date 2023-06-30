@@ -37,13 +37,10 @@ public struct InputField: View {
                     .keyboardType(keyboardType)
                     .onChange(of: text, perform: onChangeText)
                     .disabled(config.options.contains(.staticText))
-                    .when(config.options.contains(.bordered)) { view in
-                        view
-                            .overlay(
-                                RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
-                                    .strokeBorder(theme.staticTextBorder, lineWidth: theme.staticTextFieldBorderWidth)
-                            )
-                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: borderCornerRadius, style: .continuous)
+                        .strokeBorder(borderColor, lineWidth: borderWidth)
+                    )
             case false:
                 DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceTime)
                     .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
@@ -53,13 +50,10 @@ public struct InputField: View {
                     .keyboardType(keyboardType)
                     .onChange(of: text, perform: onChangeText)
                     .disabled(config.options.contains(.staticText))
-                    .when(config.options.contains(.bordered)) { view in
-                        view
-                            .overlay(
-                                RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
-                                    .strokeBorder(theme.staticTextBorder, lineWidth: theme.staticTextFieldBorderWidth)
-                            )
-                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: borderCornerRadius, style: .continuous)
+                            .strokeBorder(borderColor, lineWidth: borderWidth)
+                    )
             }
         }
         .overlay {
@@ -69,6 +63,18 @@ public struct InputField: View {
             }
         }
         .disabled(config.options.contains(.staticText))
+    }
+
+    private var borderCornerRadius: Double {
+        config.options.contains(.bordered) ? theme.staticTextFieldCornerRadius : 0
+    }
+
+    private var borderColor: Color {
+        config.options.contains(.bordered) ? theme.staticTextBorder : .clear
+    }
+
+    private var borderWidth: Double {
+        config.options.contains(.bordered) ? theme.staticTextFieldBorderWidth : 0
     }
 
     private var overlayColor: Color {
