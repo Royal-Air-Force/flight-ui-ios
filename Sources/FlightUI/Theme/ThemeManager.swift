@@ -1,5 +1,5 @@
 import SwiftUI
 
-class ThemeManager: ObservableObject {
+public class ThemeManager: ObservableObject {
     @Published var current: Theme = .dark
 }
