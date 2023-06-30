@@ -1,6 +1,6 @@
 extension Theme {
     
-    static let dark = Theme(
+    public static let dark = Theme(
         color: ThemeColors(primary: .flightWhite,
                     onPrimary: ColorState(color: .flightBlack),
                     secondary: .flightLightGrey,
@@ -11,7 +11,7 @@ extension Theme {
                     onSurface: ColorState(color: .flightWhite))
     )
 
-    static let light = Theme(
+    public static let light = Theme(
         color: ThemeColors(primary: .flightWhite,
                            onPrimary: ColorState(color: .flightBlack),
                            secondary: .flightLightGrey,
