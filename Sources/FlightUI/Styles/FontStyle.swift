@@ -1,5 +1,10 @@
 import SwiftUI
 
+/// Provides theme based customisation to Font views with the use of a view modifier
+/// Extensions allow this to be implemented with Text("").fontStyle(style)
+///
+/// Note: Line spacing is caluclated from design tools as line height - font size
+/// Note: Character spacing set to 0 uses the default value from the Font
 public class FontStyle {
     
     private var id: UUID

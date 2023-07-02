@@ -13,17 +13,17 @@ public class ThemeFont {
     @Published public var caption1: FontStyle
     @Published public var caption2: FontStyle
     
-    public init(largeTitle: FontStyle = FontStyle(font: .largeTitle, lineSpacing: 34),
-                title1: FontStyle = FontStyle(font: .title, lineSpacing: 28),
-                title2: FontStyle = FontStyle(font: .title2, lineSpacing: 22),
-                title3: FontStyle = FontStyle(font: .title3, lineSpacing: 20),
-                headline: FontStyle = FontStyle(font: .headline, weight: .semibold, lineSpacing: 17),
+    public init(largeTitle: FontStyle = FontStyle(font: .largeTitle, lineSpacing: 7),
+                title1: FontStyle = FontStyle(font: .title, lineSpacing: 6),
+                title2: FontStyle = FontStyle(font: .title2, lineSpacing: 6),
+                title3: FontStyle = FontStyle(font: .title3, lineSpacing: 5),
+                headline: FontStyle = FontStyle(font: .headline, weight: .semibold, lineSpacing: 5),
                 body: FontStyle = FontStyle(font: .body, lineSpacing: 5),
-                callout: FontStyle = FontStyle(font: .callout, lineSpacing: 16),
-                subhead: FontStyle = FontStyle(font: .subheadline, lineSpacing: 15),
-                footnote: FontStyle = FontStyle(font: .footnote, lineSpacing: 14),
-                caption1: FontStyle = FontStyle(font: .caption, lineSpacing: 12),
-                caption2: FontStyle = FontStyle(font: .caption2, lineSpacing: 11)
+                callout: FontStyle = FontStyle(font: .callout, lineSpacing: 5),
+                subhead: FontStyle = FontStyle(font: .subheadline, lineSpacing: 5),
+                footnote: FontStyle = FontStyle(font: .footnote, lineSpacing: 5),
+                caption1: FontStyle = FontStyle(font: .caption, lineSpacing: 4),
+                caption2: FontStyle = FontStyle(font: .caption2, lineSpacing: 2)
     ) {
         self.largeTitle = largeTitle
         self.title1 = title1
@@ -37,5 +37,5 @@ public class ThemeFont {
         self.caption1 = caption1
         self.caption2 = caption2
     }
-    
+
 }
