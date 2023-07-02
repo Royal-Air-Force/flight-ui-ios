@@ -11,7 +11,14 @@ public class FontStyle {
     public var charSpacing: CGFloat
     public var foregroundColor: Color?
     
-    public init(font: Font, weight: Font.Weight, design: Font.Design, italic: Bool, lineSpacing: CGFloat, charSpacing: CGFloat, foregroundColor: Color?) {
+    public init(font: Font,
+                weight: Font.Weight = .regular,
+                design: Font.Design = .default,
+                italic: Bool = false,
+                lineSpacing: CGFloat,
+                charSpacing: CGFloat = 0,
+                foregroundColor: Color? = nil
+    ) {
         self.id = UUID()
         self.font = font
         self.weight = weight
