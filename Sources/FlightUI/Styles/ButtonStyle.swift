@@ -17,8 +17,7 @@ public struct FilledButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 1.1 : 1.0)
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
-            .clipShape(Capsule())
-            .animation(.spring(), value: configuration.isPressed)
+            .clipShape(Capsule().scaleEffect(configuration.isPressed ? 1.1 : 1.0))
     }
 }
 
