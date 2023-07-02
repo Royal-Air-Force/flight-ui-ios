@@ -18,6 +18,7 @@ public struct FilledButtonStyle: ButtonStyle {
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
             .clipShape(Capsule())
+            .edgesIgnoringSafeArea(.all)
     }
 }
 
