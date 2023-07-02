@@ -41,6 +41,8 @@ public struct OutlineButtonStyle: ButtonStyle {
             .overlay(
                 Capsule(style: .circular)
                     .strokeBorder(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused), style: StrokeStyle(lineWidth: theme.size.border))
+                    .opacity(configuration.isPressed ? 0.6 : 1.0)
+                    .scaleEffect(configuration.isPressed ? 1.1 : 1.0)
             )
     }
 }
