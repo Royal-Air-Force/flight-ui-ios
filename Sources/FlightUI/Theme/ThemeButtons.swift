@@ -1,9 +1,9 @@
 import SwiftUI
 
 public class ThemeButtons {
-    @Published public var filled: any ButtonStyle
+    @Published public var filled: FilledButtonStyle
     
-    public init(filled: any ButtonStyle = FilledButtonStyle()) {
+    public init(filled: FilledButtonStyle = FilledButtonStyle()) {
         self.filled = filled
     }
 }
