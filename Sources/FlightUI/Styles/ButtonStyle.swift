@@ -14,7 +14,7 @@ public struct FilledButtonStyle: ButtonStyle {
             .foregroundColor(theme.color.onNominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .background(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .opacity(configuration.isPressed ? 0.6 : 1.0)
-            .scaleEffect(configuration.isPressed ? 1.1 : 1.0)
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
             .clipShape(Capsule())
@@ -34,7 +34,7 @@ public struct OutlineButtonStyle: ButtonStyle {
             .frame(minHeight: theme.size.medium)
             .foregroundColor(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .opacity(configuration.isPressed ? 0.6 : 1.0)
-            .scaleEffect(configuration.isPressed ? 1.1 : 1.0)
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
             .clipShape(Capsule())
@@ -42,7 +42,7 @@ public struct OutlineButtonStyle: ButtonStyle {
                 Capsule(style: .circular)
                     .strokeBorder(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused), style: StrokeStyle(lineWidth: theme.size.border))
                     .opacity(configuration.isPressed ? 0.6 : 1.0)
-                    .scaleEffect(configuration.isPressed ? 1.1 : 1.0)
+                    .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
             )
     }
 }
