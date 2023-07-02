@@ -8,11 +8,13 @@ public struct FilledButtonStyle: ButtonStyle {
     public init() {}
     
     public func makeBody(configuration: Configuration) -> some View {
+        let bgColor = theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused)
+        
         configuration.label
             .padding([.leading, .trailing], theme.padding.grid2x)
             .frame(minHeight: theme.size.medium)
             .foregroundColor(theme.color.onNominal.getColorForState(disabled: !isEnabled, focused: isFocused))
-            .background(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
+            .background(configuration.isPressed ? bgColor.opacity(0.8) : bgColor)
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
             .clipShape(Capsule())
