@@ -6,6 +6,7 @@ public class Theme: ObservableObject {
     @Published public var size: ThemeSize
     @Published public var radius: ThemeRadius
     @Published public var font: ThemeFont
+    @Published public var button: ThemeButtons
     
     
     
@@ -81,6 +82,7 @@ public class Theme: ObservableObject {
         size: ThemeSize = ThemeSize(),
         radius: ThemeRadius = ThemeRadius(),
         font: ThemeFont = ThemeFont(),
+        button: ThemeButtons = ThemeButtons(),
 
         // Opacities
         overlayOpacity: Double = 0.6,
@@ -92,6 +94,7 @@ public class Theme: ObservableObject {
         self.size = size
         self.radius = radius
         self.font = font
+        self.button = button
         
         self.primaryButtonBackground = color.nominal.default
         self.primaryButtonForeground = color.onNominal.default
