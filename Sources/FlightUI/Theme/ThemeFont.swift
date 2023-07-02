@@ -18,7 +18,7 @@ public class ThemeFont {
                 title2: FontStyle = FontStyle(font: .title2, lineSpacing: 22),
                 title3: FontStyle = FontStyle(font: .title3, lineSpacing: 20),
                 headline: FontStyle = FontStyle(font: .headline, weight: .semibold, lineSpacing: 17),
-                body: FontStyle = FontStyle(font: .body, lineSpacing: 17),
+                body: FontStyle = FontStyle(font: .body, lineSpacing: 5),
                 callout: FontStyle = FontStyle(font: .callout, lineSpacing: 16),
                 subhead: FontStyle = FontStyle(font: .subheadline, lineSpacing: 15),
                 footnote: FontStyle = FontStyle(font: .footnote, lineSpacing: 14),
