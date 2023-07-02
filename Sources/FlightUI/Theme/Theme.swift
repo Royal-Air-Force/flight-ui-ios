@@ -5,7 +5,6 @@ public class Theme: ObservableObject {
     @Published public var padding: ThemePadding
     @Published public var size: ThemeSize
     @Published public var radius: ThemeRadius
-    @Published public var typography: ThemeTypography
     @Published public var font: ThemeFont
     
     
@@ -81,7 +80,6 @@ public class Theme: ObservableObject {
         padding: ThemePadding = ThemePadding(),
         size: ThemeSize = ThemeSize(),
         radius: ThemeRadius = ThemeRadius(),
-        typography: ThemeTypography = ThemeTypography(),
         font: ThemeFont = ThemeFont(),
 
         // Opacities
@@ -93,7 +91,6 @@ public class Theme: ObservableObject {
         self.padding = padding
         self.size = size
         self.radius = radius
-        self.typography = typography
         self.font = font
         
         self.primaryButtonBackground = color.nominal.default

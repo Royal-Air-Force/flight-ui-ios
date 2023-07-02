@@ -34,6 +34,25 @@ public class FontStyle {
         self.foregroundColor = foregroundColor
     }
     
+    public func copy(
+        font: Font? = nil,
+        weight: Font.Weight? = nil,
+        design: Font.Design? = nil,
+        italic: Bool? = nil,
+        lineSpacing: CGFloat? = nil,
+        charSpacing: CGFloat? = nil,
+        foregroundColor: Color? = nil
+    ) -> FontStyle {
+        FontStyle(
+            font: font ?? self.font,
+            weight: weight ?? self.weight,
+            design: design ?? self.design,
+            italic: italic ?? self.italic,
+            lineSpacing: lineSpacing ?? self.lineSpacing,
+            charSpacing: charSpacing ?? self.charSpacing,
+            foregroundColor: foregroundColor ?? self.foregroundColor
+        )
+    }
 }
 
 struct FontStyleModifier : ViewModifier {

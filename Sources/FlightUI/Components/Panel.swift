@@ -37,7 +37,7 @@ public struct Panel<Content: View, Subtitle: View>: View {
             self.expanded = false
         }
         
-        self.typography = typography ?? theme.typography.title2
+        self.typography = typography ?? theme.font.title2.font
     }
     
     public init(title: String? = nil,
@@ -143,7 +143,7 @@ struct Panel_Previews: PreviewProvider {
             
             Panel(title: "Expandable Panel with subtitle", typography: .body, options: .expandable()) {
                 Text("This is a subtitle")
-                    .font(Theme().typography.caption1)
+                    .fontStyle(Theme().font.caption1)
             } content: {
                 content
             }
@@ -161,7 +161,7 @@ struct Panel_Previews: PreviewProvider {
                 Panel {
                     HStack {
                         Text("Side by Side")
-                            .font(Theme().typography.title1)
+                            .fontStyle(Theme().font.title1)
                             .padding()
 
                         Spacer()
@@ -180,7 +180,7 @@ struct Panel_Previews: PreviewProvider {
 
     @ViewBuilder private static var content: some View {
         Text("Content")
-            .font(Theme().typography.title2)
+            .fontStyle(Theme().font.title2)
             .padding()
     }
 }

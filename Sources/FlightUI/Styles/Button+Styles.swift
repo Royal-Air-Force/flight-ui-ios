@@ -11,7 +11,7 @@ public struct PrimaryButtonStyle: ButtonStyle {
             .padding([.leading, .trailing], theme.buttonHorizontalPadding)
             .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(theme.primaryButtonForeground)
-            .font(theme.typography.body)
+            .fontStyle(theme.font.body)
             .background(isEnabled ? theme.primaryButtonBackground : theme.primaryButtonBackground.opacity(theme.disabledButtonOpacity))
             .clipShape(Capsule())
     }
@@ -36,7 +36,7 @@ public struct SecondaryButtonStyle: ButtonStyle {
             .padding([.leading, .trailing], theme.buttonHorizontalPadding)
             .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(isEnabled ? theme.secondaryButtonForeground : theme.secondaryButtonForeground.opacity(theme.disabledButtonOpacity))
-            .font(theme.typography.body)
+            .fontStyle(theme.font.body)
             .clipShape(Capsule())
             .overlay(
                 Capsule(style: .circular)
@@ -56,7 +56,7 @@ public struct UpdatedSecondaryButtonStyle: ButtonStyle {
             .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(isEnabled ? theme.secondaryButtonForeground : theme.secondaryButtonForeground.opacity(theme.disabledButtonOpacity))
             .background(theme.secondaryButtonForeground.opacity(theme.disabledButtonOpacity))
-            .font(theme.typography.body)
+            .fontStyle(theme.font.body)
             .clipShape(Capsule())
     }
 }
@@ -83,7 +83,7 @@ public struct TertiaryButtonStyle: ButtonStyle {
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(theme.typography.body)
+            .fontStyle(theme.font.body)
             .padding([.leading, .trailing], theme.buttonHorizontalPadding)
             .padding([.top, .bottom], theme.buttonVerticalPadding)
             .foregroundColor(isEnabled ? theme.tertiaryButtonColor : theme.tertiaryButtonDisabledColor)
