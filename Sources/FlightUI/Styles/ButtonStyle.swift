@@ -26,6 +26,27 @@ public struct FilledButtonStyle: ButtonStyle {
     }
 }
 
+public struct FilledIconButtonStyle: ButtonStyle {
+    @EnvironmentObject var theme: Theme
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    @Environment(\.isFocused) private var isFocused: Bool
+    
+    public init() {}
+    
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding([.leading, .trailing], theme.padding.grid4x)
+            .frame(minHeight: theme.size.medium)
+            .foregroundColor(theme.color.onNominal.getColorForState(disabled: !isEnabled, focused: isFocused))
+            .background(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
+            .fontWeight(.semibold)
+            .fontStyle(theme.font.body)
+            .clipShape(Circle())
+            .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
+            .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
+    }
+}
+
 public struct TonalButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
