@@ -9,7 +9,7 @@ public struct FilledButtonStyle: ButtonStyle {
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding([.leading, .trailing], theme.padding.grid3x)
+            .padding([.leading, .trailing], theme.padding.grid10x)
             .frame(minHeight: theme.size.medium)
             .foregroundColor(theme.color.onNominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .background(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
@@ -17,8 +17,7 @@ public struct FilledButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
-            .clipShape(Capsule().padding([.leading, .trailing], theme.padding.grid3x))
-            .edgesIgnoringSafeArea(.all) // Doesn't prevent button clipping
+            .clipShape(Capsule())
     }
 }
 
