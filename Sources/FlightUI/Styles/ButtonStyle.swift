@@ -9,8 +9,11 @@ public struct FilledButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Environment(\.isFocused) private var isFocused: Bool
+    var iconOnly: Bool
     
-    public init() {}
+    public init(iconOnly: Bool = false) {
+        self.iconOnly = iconOnly
+    }
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -20,7 +23,7 @@ public struct FilledButtonStyle: ButtonStyle {
             .background(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
-            .clipShape(Capsule())
+            .clipShape(iconOnly ? AnyShape(Circle()) : AnyShape(Capsule()))
             .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
             .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
     }
