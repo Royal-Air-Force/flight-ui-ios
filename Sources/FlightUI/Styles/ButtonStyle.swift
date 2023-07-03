@@ -18,7 +18,38 @@ public struct FilledButtonStyle: ButtonStyle {
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
             .clipShape(Capsule())
-            .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all) // Doesn't prevent button clipping
+    }
+}
+
+public struct TonalButtonStyle: ButtonStyle {
+    @EnvironmentObject var theme: Theme
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    @Environment(\.isFocused) private var isFocused: Bool
+    
+    public init() {}
+    
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding([.leading, .trailing], theme.padding.grid2x)
+            .frame(minHeight: theme.size.medium)
+            .foregroundColor(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
+            .background(getTonalBackgroundColor())
+            .opacity(configuration.isPressed ? 0.6 : 1.0)
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+            .fontWeight(.semibold)
+            .fontStyle(theme.font.body)
+            .clipShape(Capsule())
+    }
+    
+    private func getTonalBackgroundColor() -> Color {
+        if (!isEnabled) {
+            return theme.color.onSurface.default.opacity(0.12)
+        } else if (isFocused) {
+            return theme.color.nominal.default.opacity(0.38)
+        } else {
+            return theme.color.nominal.default.opacity(0.16)
+        }
     }
 }
 
