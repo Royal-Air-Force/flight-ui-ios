@@ -39,7 +39,7 @@ public struct FilledIconButtonStyle: ButtonStyle {
             .foregroundColor(theme.color.onNominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .background(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .fontWeight(.semibold)
-            .fontStyle(theme.font.body)
+            .fontStyle(theme.font.title3)
             .clipShape(Circle())
             .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
             .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
