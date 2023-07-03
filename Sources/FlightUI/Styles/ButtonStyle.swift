@@ -17,7 +17,7 @@ public struct FilledButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
-            .clipShape(Capsule())
+            .clipShape(Capsule().padding([.leading, .trailing], theme.padding.grid3x))
             .edgesIgnoringSafeArea(.all) // Doesn't prevent button clipping
     }
 }
