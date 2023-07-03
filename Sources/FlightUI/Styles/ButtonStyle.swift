@@ -13,14 +13,12 @@ public struct FilledButtonStyle: ButtonStyle {
             .frame(minHeight: theme.size.medium)
             .foregroundColor(theme.color.onNominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .background(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
-            .opacity(configuration.isPressed ? 0.6 : 1.0)
-            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+            
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
             .clipShape(Capsule())
-            .overlay(Capsule()
-                .opacity(configuration.isPressed ? 0.6 : 1.0)
-                .scaleEffect(configuration.isPressed ? 0.9 : 1.0))
+            .opacity(configuration.isPressed ? 0.6 : 1.0)
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
     }
 }
 
