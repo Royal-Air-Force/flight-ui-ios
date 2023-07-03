@@ -1,5 +1,10 @@
 import SwiftUI
 
+private class Defaults {
+    static let pressedOpacity: CGFloat = 0.6
+    static let pressedScale: CGFloat = 0.95
+}
+
 public struct FilledButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -13,12 +18,11 @@ public struct FilledButtonStyle: ButtonStyle {
             .frame(minHeight: theme.size.medium)
             .foregroundColor(theme.color.onNominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .background(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
-            
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
             .clipShape(Capsule())
-            .opacity(configuration.isPressed ? 0.6 : 1.0)
-            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+            .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
+            .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
     }
 }
 
@@ -35,11 +39,11 @@ public struct TonalButtonStyle: ButtonStyle {
             .frame(minHeight: theme.size.medium)
             .foregroundColor(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .background(getTonalBackgroundColor())
-            .opacity(configuration.isPressed ? 0.6 : 1.0)
-            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
             .clipShape(Capsule())
+            .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
+            .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
     }
     
     private func getTonalBackgroundColor() -> Color {
@@ -65,16 +69,16 @@ public struct OutlineButtonStyle: ButtonStyle {
             .padding([.leading, .trailing], theme.padding.grid4x)
             .frame(minHeight: theme.size.medium)
             .foregroundColor(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
-            .opacity(configuration.isPressed ? 0.6 : 1.0)
-            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
             .clipShape(Capsule())
+            .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
+            .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
             .overlay(
                 Capsule(style: .circular)
                     .strokeBorder(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused), style: StrokeStyle(lineWidth: theme.size.border))
-                    .opacity(configuration.isPressed ? 0.6 : 1.0)
-                    .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+                    .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
+                    .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
             )
     }
 }
