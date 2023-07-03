@@ -10,8 +10,6 @@ public struct FilledButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Environment(\.isFocused) private var isFocused: Bool
     
-    public init() {}
-    
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], theme.padding.grid4x)
@@ -182,5 +180,17 @@ public struct TextIconButtonStyle: ButtonStyle {
             .fontStyle(theme.font.title3)
             .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
             .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
+    }
+}
+
+public extension ButtonStyle where Self == FilledButtonStyle {
+    static var filled: Self {
+        return .init()
+    }
+}
+
+public extension ButtonStyle where Self == FilledIconButtonStyle {
+    static var filledIcon: Self {
+        return .init()
     }
 }
