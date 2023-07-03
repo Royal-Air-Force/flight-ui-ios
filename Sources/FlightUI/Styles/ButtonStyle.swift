@@ -35,8 +35,7 @@ public struct FilledIconButtonStyle: ButtonStyle {
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding([.leading, .trailing], theme.padding.grid4x)
-            .frame(minHeight: theme.size.medium)
+            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
             .foregroundColor(theme.color.onNominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .background(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .fontWeight(.semibold)
