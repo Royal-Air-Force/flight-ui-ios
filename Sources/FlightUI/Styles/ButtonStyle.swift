@@ -18,6 +18,9 @@ public struct FilledButtonStyle: ButtonStyle {
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
             .clipShape(Capsule())
+            .overlay(Capsule()
+                .opacity(configuration.isPressed ? 0.6 : 1.0)
+                .scaleEffect(configuration.isPressed ? 0.9 : 1.0))
     }
 }
 
