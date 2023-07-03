@@ -58,22 +58,42 @@ public struct TonalButtonStyle: ButtonStyle {
             .padding([.leading, .trailing], theme.padding.grid4x)
             .frame(minHeight: theme.size.medium)
             .foregroundColor(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
-            .background(getTonalBackgroundColor())
+            .background(getTonalBackgroundColor(theme: theme, isEnabled: isEnabled, isFocused: isFocused))
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
             .clipShape(Capsule())
             .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
             .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
     }
+}
+
+public struct TonalIconButtonStyle: ButtonStyle {
+    @EnvironmentObject var theme: Theme
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    @Environment(\.isFocused) private var isFocused: Bool
     
-    private func getTonalBackgroundColor() -> Color {
-        if (!isEnabled) {
-            return theme.color.onSurface.default.opacity(0.12)
-        } else if (isFocused) {
-            return theme.color.nominal.default.opacity(0.38)
-        } else {
-            return theme.color.nominal.default.opacity(0.16)
-        }
+    public init() {}
+    
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
+            .foregroundColor(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
+            .background(getTonalBackgroundColor(theme: theme, isEnabled: isEnabled, isFocused: isFocused))
+            .fontWeight(.semibold)
+            .fontStyle(theme.font.title3)
+            .clipShape(Circle())
+            .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
+            .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
+    }
+}
+
+private func getTonalBackgroundColor(theme: Theme, isEnabled: Bool, isFocused: Bool) -> Color {
+    if (!isEnabled) {
+        return theme.color.onSurface.default.opacity(0.12)
+    } else if (isFocused) {
+        return theme.color.nominal.default.opacity(0.38)
+    } else {
+        return theme.color.nominal.default.opacity(0.16)
     }
 }
 
@@ -103,6 +123,31 @@ public struct OutlineButtonStyle: ButtonStyle {
     }
 }
 
+public struct OutlineIconButtonStyle: ButtonStyle {
+    @EnvironmentObject var theme: Theme
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    @Environment(\.isFocused) private var isFocused: Bool
+    
+    public init() {}
+    
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
+            .foregroundColor(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
+            .fontWeight(.semibold)
+            .fontStyle(theme.font.title3)
+            .clipShape(Circle())
+            .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
+            .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
+            .overlay(
+                Circle()
+                    .strokeBorder(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused), style: StrokeStyle(lineWidth: theme.size.border))
+                    .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
+                    .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
+            )
+    }
+}
+
 public struct TextButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -117,6 +162,24 @@ public struct TextButtonStyle: ButtonStyle {
             .foregroundColor(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
+            .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
+            .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
+    }
+}
+
+public struct TextIconButtonStyle: ButtonStyle {
+    @EnvironmentObject var theme: Theme
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    @Environment(\.isFocused) private var isFocused: Bool
+    
+    public init() {}
+    
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
+            .foregroundColor(theme.color.nominal.getColorForState(disabled: !isEnabled, focused: isFocused))
+            .fontWeight(.semibold)
+            .fontStyle(theme.font.title3)
             .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
             .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
     }
