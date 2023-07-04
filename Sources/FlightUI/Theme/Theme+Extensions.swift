@@ -5,9 +5,9 @@ extension Theme {
                     onPrimary: ColorState(color: .flightBlack),
                     secondary: .flightLightGrey,
                     onSecondary: ColorState(color: .flightBlack),
-                    background: .flightDarkGrey,
+                    background: .flightBlack,
                     onBackground: ColorState(color: .flightWhite),
-                    surface: .flightGrey,
+                    surface: .flightDarkGrey,
                     onSurface: ColorState(color: .flightWhite))
     )
 
