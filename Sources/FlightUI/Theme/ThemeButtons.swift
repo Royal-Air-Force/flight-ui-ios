@@ -10,14 +10,14 @@ public class ThemeButtons {
     @Published public var text: TextButtonStyle
     @Published public var textIcon: TextIconButtonStyle
     
-    public init(filled: FilledButtonStyle = FilledButtonStyle(),
-                filledIcon: FilledIconButtonStyle = FilledIconButtonStyle(),
-                tonal: TonalButtonStyle = TonalButtonStyle(),
-                tonalIcon: TonalIconButtonStyle = TonalIconButtonStyle(),
-                outline: OutlineButtonStyle = OutlineButtonStyle(),
-                outlineIcon: OutlineIconButtonStyle = OutlineIconButtonStyle(),
-                text: TextButtonStyle = TextButtonStyle(),
-                textIcon: TextIconButtonStyle = TextIconButtonStyle()
+    public init(filled: FilledButtonStyle = .filled,
+                filledIcon: FilledIconButtonStyle = .filledIcon,
+                tonal: TonalButtonStyle = .tonal,
+                tonalIcon: TonalIconButtonStyle = .tonalIcon,
+                outline: OutlineButtonStyle = .outline,
+                outlineIcon: OutlineIconButtonStyle = .outlineIcon,
+                text: TextButtonStyle = .text,
+                textIcon: TextIconButtonStyle = .textIcon
     ) {
         self.filled = filled
         self.filledIcon = filledIcon
