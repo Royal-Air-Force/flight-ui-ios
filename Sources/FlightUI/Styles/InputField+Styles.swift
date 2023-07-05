@@ -27,7 +27,7 @@ public struct InputFieldConfiguration {
     let size: TextFieldSize
     let alignment: TextAlignment
     let typography: Typography
-    let debounceTime: DebounceDuration
+    let debounceDuration: DebounceDuration
     let options: InputFieldOptionSet
 
     private init(
@@ -36,7 +36,7 @@ public struct InputFieldConfiguration {
         size: TextFieldSize = .infinity,
         alignment: TextAlignment = .leading,
         typography: Typography = .input,
-        debounceTime: DebounceDuration = .default,
+        debounceDuration: DebounceDuration = .default,
         options: InputFieldOptionSet = .useThemeStyling
     ) {
         self.formatter = formatter
@@ -44,7 +44,7 @@ public struct InputFieldConfiguration {
         self.size = size
         self.alignment = alignment
         self.typography = typography
-        self.debounceTime = debounceTime
+        self.debounceDuration = debounceDuration
         self.options = options
     }
 }
@@ -55,7 +55,7 @@ extension InputFieldConfiguration {
                                         valueType: .text,
                                         size: .infinity,
                                         alignment: .leading,
-                                        debounceTime: .default,
+                                        debounceDuration: .default,
                                         options: .useThemeStyling)
     }
 
@@ -65,7 +65,7 @@ extension InputFieldConfiguration {
         size: TextFieldSize = .infinity,
         alignment: TextAlignment = .leading,
         typography: Typography = .input,
-        debounceTime: DebounceDuration = .default,
+        debounceDuration: DebounceDuration = .default,
         options: InputFieldOptionSet = .useThemeStyling
     ) -> InputFieldConfiguration {
         InputFieldConfiguration(formatter: formatter,
@@ -73,7 +73,7 @@ extension InputFieldConfiguration {
                                 size: size,
                                 alignment: alignment,
                                 typography: typography,
-                                debounceTime: debounceTime,
+                                debounceDuration: debounceDuration,
                                 options: options)
     }
 }
