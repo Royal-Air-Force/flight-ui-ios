@@ -13,17 +13,17 @@ public class ThemeFont {
     @Published public var caption1: FontStyle
     @Published public var caption2: FontStyle
     
-    public init(largeTitle: FontStyle = FontStyle(font: .largeTitle, lineSpacing: 7),
-                title1: FontStyle = FontStyle(font: .title, lineSpacing: 6),
-                title2: FontStyle = FontStyle(font: .title2, lineSpacing: 6),
-                title3: FontStyle = FontStyle(font: .title3, lineSpacing: 5),
-                headline: FontStyle = FontStyle(font: .headline, weight: .semibold, lineSpacing: 5),
-                body: FontStyle = FontStyle(font: .body, lineSpacing: 5),
-                callout: FontStyle = FontStyle(font: .callout, lineSpacing: 5),
-                subhead: FontStyle = FontStyle(font: .subheadline, lineSpacing: 5),
-                footnote: FontStyle = FontStyle(font: .footnote, lineSpacing: 5),
-                caption1: FontStyle = FontStyle(font: .caption, lineSpacing: 4),
-                caption2: FontStyle = FontStyle(font: .caption2, lineSpacing: 2)
+    public init(largeTitle: FontStyle = .largeTitle,
+                title1: FontStyle = .title1,
+                title2: FontStyle = .title2,
+                title3: FontStyle = .title3,
+                headline: FontStyle = .headline,
+                body: FontStyle = .body,
+                callout: FontStyle = .callout,
+                subhead: FontStyle = .subhead,
+                footnote: FontStyle = .footnote,
+                caption1: FontStyle = .caption1,
+                caption2: FontStyle = .caption2
     ) {
         self.largeTitle = largeTitle
         self.title1 = title1

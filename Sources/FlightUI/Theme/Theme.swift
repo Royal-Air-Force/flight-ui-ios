@@ -1,11 +1,13 @@
 import SwiftUI
 
 public class Theme: ObservableObject {
+    @Published public var baseScheme: ColorScheme
     @Published public var color: ThemeColors
     @Published public var padding: ThemePadding
     @Published public var size: ThemeSize
     @Published public var radius: ThemeRadius
     @Published public var font: ThemeFont
+    @Published public var button: ThemeButtons
     
     
     
@@ -76,22 +78,26 @@ public class Theme: ObservableObject {
     @Published public var disabledButtonOpacity: Double
     
     public init(
+        baseScheme: ColorScheme = .dark,
         color: ThemeColors = ThemeColors(),
         padding: ThemePadding = ThemePadding(),
         size: ThemeSize = ThemeSize(),
         radius: ThemeRadius = ThemeRadius(),
         font: ThemeFont = ThemeFont(),
+        button: ThemeButtons = ThemeButtons(),
 
         // Opacities
         overlayOpacity: Double = 0.6,
         disabledButtonOpacity: Double = 0.38
                 
     ) {
+        self.baseScheme = baseScheme
         self.color = color
         self.padding = padding
         self.size = size
         self.radius = radius
         self.font = font
+        self.button = button
         
         self.primaryButtonBackground = color.nominal.default
         self.primaryButtonForeground = color.onNominal.default
