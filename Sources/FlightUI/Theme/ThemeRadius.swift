@@ -1,6 +1,6 @@
 import SwiftUI
 
-public class ThemeRadius{
+public class ThemeRadius {
     @Published public var small: CGFloat
     @Published public var medium: CGFloat
     @Published public var large: CGFloat

@@ -27,8 +27,9 @@ public struct InputField: View {
         Group {
             switch config.options.contains(.useThemeStyling) {
             case true:
-                DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceTime)
+                DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceDuration.rawValue)
                     .font(config.typography)
+                    //.typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()
                     .background(theme.textFieldBackground)
                     .frame(width: config.size.width(theme: theme), height: theme.textFieldHeight)
@@ -45,7 +46,7 @@ public struct InputField: View {
                             )
                     }
             case false:
-                DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceTime)
+                DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceDuration.rawValue)
                     .font(config.typography)
 //                    .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()

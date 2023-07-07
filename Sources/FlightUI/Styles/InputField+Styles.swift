@@ -16,12 +16,18 @@ public struct InputFieldOptionSet: OptionSet {
 }
 
 public struct InputFieldConfiguration {
+
+    public enum DebounceDuration: Double {
+        case `default` = 0.0
+        case small = 0.3
+    }
+
     let formatter: NumberFormatter?
     let valueType: TextFieldValueType
     let size: TextFieldSize
     let alignment: TextAlignment
     let typography: Font
-    let debounceTime: Double
+    let debounceDuration: DebounceDuration
     let options: InputFieldOptionSet
 
     private init(
@@ -30,7 +36,7 @@ public struct InputFieldConfiguration {
         size: TextFieldSize = .infinity,
         alignment: TextAlignment = .leading,
         typography: Font = .body,
-        debounceTime: Double = 0.25,
+        debounceDuration: DebounceDuration = .default,
         options: InputFieldOptionSet = .useThemeStyling
     ) {
         self.formatter = formatter
@@ -38,7 +44,7 @@ public struct InputFieldConfiguration {
         self.size = size
         self.alignment = alignment
         self.typography = typography
-        self.debounceTime = debounceTime
+        self.debounceDuration = debounceDuration
         self.options = options
     }
 }
@@ -49,7 +55,7 @@ extension InputFieldConfiguration {
                                         valueType: .text,
                                         size: .infinity,
                                         alignment: .leading,
-                                        debounceTime: 0,
+                                        debounceDuration: .default,
                                         options: .useThemeStyling)
     }
 
@@ -59,7 +65,7 @@ extension InputFieldConfiguration {
         size: TextFieldSize = .infinity,
         alignment: TextAlignment = .leading,
         typography: Font = .body,
-        debounceTime: Double = 0,
+        debounceDuration: DebounceDuration = .default,
         options: InputFieldOptionSet = .useThemeStyling
     ) -> InputFieldConfiguration {
         InputFieldConfiguration(formatter: formatter,
@@ -67,7 +73,7 @@ extension InputFieldConfiguration {
                                 size: size,
                                 alignment: alignment,
                                 typography: typography,
-                                debounceTime: debounceTime,
+                                debounceDuration: debounceDuration,
                                 options: options)
     }
 }
