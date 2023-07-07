@@ -1,6 +1,7 @@
 import SwiftUI
 
 public class Theme: ObservableObject {
+    @Published public var baseScheme: ColorScheme
     @Published public var color: ThemeColors
     @Published public var padding: ThemePadding
     @Published public var size: ThemeSize
@@ -77,6 +78,7 @@ public class Theme: ObservableObject {
     @Published public var disabledButtonOpacity: Double
     
     public init(
+        baseScheme: ColorScheme = .dark,
         color: ThemeColors = ThemeColors(),
         padding: ThemePadding = ThemePadding(),
         size: ThemeSize = ThemeSize(),
@@ -89,6 +91,7 @@ public class Theme: ObservableObject {
         disabledButtonOpacity: Double = 0.38
                 
     ) {
+        self.baseScheme = baseScheme
         self.color = color
         self.padding = padding
         self.size = size
