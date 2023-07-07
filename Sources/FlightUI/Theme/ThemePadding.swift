@@ -1,6 +1,6 @@
 import SwiftUI
 
-public class ThemePadding{
+public class ThemePadding {
     @Published public var grid0_5x: CGFloat
     @Published public var grid1x: CGFloat
     @Published public var grid1_5x: CGFloat

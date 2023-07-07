@@ -1,6 +1,6 @@
 import SwiftUI
 
-public class ThemeColors{
+public class ThemeColors {
     // General Colors
     @Published public var primary: Color
     @Published public var onPrimary: ColorState

@@ -1,6 +1,6 @@
 import SwiftUI
 
-public class ThemeSize{
+public class ThemeSize {
     @Published public var divider: CGFloat
     @Published public var border: CGFloat
     
