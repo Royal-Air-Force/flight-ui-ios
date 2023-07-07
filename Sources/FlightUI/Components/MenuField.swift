@@ -24,7 +24,7 @@ public struct OptionalMenuField<SelectionType: CustomStringConvertible & Hashabl
         } label: {
             HStack {
                 Text(selection?.description ?? placeholder)
-                    .font(theme.typography.body)
+                    .fontStyle(theme.font.body)
                 Spacer()
                 Image(systemName: "chevron.down")
                     .foregroundColor(theme.menuFieldAccent)
@@ -62,7 +62,7 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
         } label: {
             HStack {
                 Text(selection.description)
-                    .font(theme.typography.body)
+                    .fontStyle(theme.font.body)
                 Spacer()
                 Image(systemName: "chevron.down")
                     .foregroundColor(theme.menuFieldAccent)

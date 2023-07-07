@@ -19,7 +19,7 @@ public struct TextFieldType: TextFieldStyle {
 
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .font(theme.typography.body)
+            .fontStyle(theme.font.body)
             .padding()
             .background(theme.textFieldBackground)
             .frame(width: size.width(theme: theme), height: theme.textFieldHeight)

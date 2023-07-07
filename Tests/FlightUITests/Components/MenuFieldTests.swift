@@ -44,7 +44,7 @@ class MenuFieldTests: XCTestCase {
         // then
         let theme = Theme()
         let actualAttributes = try sut.inspect().view(MenuField<Swift.String>.self).menu().labelView().hStack().text(0).attributes()
-        let expectedAttributes = try Text("").font(theme.typography.body).environmentObject(theme).inspect().text(0).attributes()
+        let expectedAttributes = try Text("").fontStyle(theme.font.body).environmentObject(theme).inspect().text(0).attributes()
         XCTAssertEqual(try actualAttributes.font(), try expectedAttributes.font())
         XCTAssertEqual(try actualAttributes.foregroundColor(), try expectedAttributes.foregroundColor())
     }
@@ -107,7 +107,7 @@ class MenuFieldTests: XCTestCase {
         // then
         let theme = Theme()
         let actualAttributes = try sut.inspect().view(OptionalMenuField<Swift.String>.self).menu().labelView().hStack().text(0).attributes()
-        let expectedAttributes = try Text("").font(theme.typography.body).environmentObject(theme).inspect().text(0).attributes()
+        let expectedAttributes = try Text("").fontStyle(theme.font.body).environmentObject(theme).inspect().text(0).attributes()
         XCTAssertEqual(try actualAttributes.font(), try expectedAttributes.font())
         XCTAssertEqual(try actualAttributes.foregroundColor(), try expectedAttributes.foregroundColor())
     }
@@ -121,7 +121,7 @@ class MenuFieldTests: XCTestCase {
         // then
         let theme = Theme()
         let actualAttributes = try sut.inspect().view(OptionalMenuField<Swift.String>.self).menu().labelView().hStack().text(0).attributes()
-        let expectedAttributes = try Text("").font(theme.typography.body).environmentObject(theme).inspect().text(0).attributes()
+        let expectedAttributes = try Text("").fontStyle(theme.font.body).environmentObject(theme).inspect().text(0).attributes()
         XCTAssertEqual(try actualAttributes.font(), try expectedAttributes.font())
         XCTAssertEqual(try actualAttributes.foregroundColor(), try expectedAttributes.foregroundColor())
     }
@@ -134,7 +134,7 @@ class MenuFieldTests: XCTestCase {
         
         let theme = Theme()
         var actualAttributes = try sut.inspect().view(OptionalMenuField<Swift.String>.self).menu().labelView().hStack().text(0).attributes()
-        var expectedAttributes = try Text("").font(theme.typography.body).environmentObject(theme).inspect().text(0).attributes()
+        var expectedAttributes = try Text("").fontStyle(theme.font.body).environmentObject(theme).inspect().text(0).attributes()
         XCTAssertEqual(try actualAttributes.font(), try expectedAttributes.font())
         XCTAssertEqual(try actualAttributes.foregroundColor(), try expectedAttributes.foregroundColor())
 
@@ -143,7 +143,7 @@ class MenuFieldTests: XCTestCase {
         
         // then
         actualAttributes = try sut.inspect().view(OptionalMenuField<Swift.String>.self).menu().labelView().hStack().text(0).attributes()
-        expectedAttributes = try Text("").font(theme.typography.body).environmentObject(theme).inspect().text(0).attributes()
+        expectedAttributes = try Text("").fontStyle(theme.font.body).environmentObject(theme).inspect().text(0).attributes()
         XCTAssertEqual(try actualAttributes.font(), try expectedAttributes.font())
         XCTAssertEqual(try actualAttributes.foregroundColor(), try expectedAttributes.foregroundColor())
     }

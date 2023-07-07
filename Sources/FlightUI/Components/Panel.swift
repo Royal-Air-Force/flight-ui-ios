@@ -25,7 +25,6 @@ public struct Panel<Content: View, Subtitle: View>: View {
                 @ViewBuilder content: @escaping () -> Content) {
 
         self.title = title
-        //self.typography = typography ?? theme.typography.title2
         self.subtitle = subtitle
         self.content = content
 
@@ -37,7 +36,7 @@ public struct Panel<Content: View, Subtitle: View>: View {
             self.expanded = false
         }
         
-        self.typography = typography ?? theme.typography.title2
+        self.typography = typography
     }
     
     public init(title: String? = nil,
@@ -100,7 +99,7 @@ public struct Panel<Content: View, Subtitle: View>: View {
     private func panelTitleTextView(_ title: String) -> some View {
         Text(title)
             .padding()
-            .font(typography)
+            .font(typography ?? theme.font.title2.font)
             .foregroundColor(theme.panelForegoround)
     }
 
@@ -143,7 +142,7 @@ struct Panel_Previews: PreviewProvider {
             
             Panel(title: "Expandable Panel with subtitle", typography: .body, options: .expandable()) {
                 Text("This is a subtitle")
-                    .font(Theme().typography.caption1)
+                    .fontStyle(Theme().font.caption1)
             } content: {
                 content
             }
@@ -161,7 +160,7 @@ struct Panel_Previews: PreviewProvider {
                 Panel {
                     HStack {
                         Text("Side by Side")
-                            .font(Theme().typography.title1)
+                            .fontStyle(Theme().font.title1)
                             .padding()
 
                         Spacer()
@@ -180,7 +179,7 @@ struct Panel_Previews: PreviewProvider {
 
     @ViewBuilder private static var content: some View {
         Text("Content")
-            .font(Theme().typography.title2)
+            .fontStyle(Theme().font.title2)
             .padding()
     }
 }
