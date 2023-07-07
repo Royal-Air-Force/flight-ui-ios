@@ -24,7 +24,7 @@ public struct OptionalMenuField<SelectionType: CustomStringConvertible & Hashabl
         } label: {
             HStack {
                 Text(selection?.description ?? placeholder)
-                    .typography(selection == nil ? .emptyField : .input)
+                    .fontStyle(theme.font.body)
                 Spacer()
                 Image(systemName: "chevron.down")
                     .foregroundColor(theme.menuFieldAccent)
@@ -62,7 +62,7 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
         } label: {
             HStack {
                 Text(selection.description)
-                    .typography(.input)
+                    .fontStyle(theme.font.body)
                 Spacer()
                 Image(systemName: "chevron.down")
                     .foregroundColor(theme.menuFieldAccent)
@@ -76,7 +76,7 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
         .cornerRadius(theme.menuFieldCornerRadius)
         .overlay {
             if context.status != .valid {
-                RoundedRectangle(cornerRadius: CornerRadius().default)
+                RoundedRectangle(cornerRadius: theme.radius.medium)
                     .strokeBorder(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
             }
         }

@@ -12,20 +12,19 @@ public struct Panel<Content: View, Subtitle: View>: View {
     @State private var expanded: Bool
 
     private var title: String?
-    private var typography: Typography
+    private var typography: Font?
     private var expandable: Bool
 
     private var subtitle: () -> Subtitle
     private let content: () -> Content
 
     public init(title: String? = nil,
-                typography: Typography = .h2,
+                typography: Font? = nil,
                 options: PanelOptions = .fixed,
                 subtitle: @escaping () -> Subtitle,
                 @ViewBuilder content: @escaping () -> Content) {
 
         self.title = title
-        self.typography = typography
         self.subtitle = subtitle
         self.content = content
 
@@ -36,10 +35,12 @@ public struct Panel<Content: View, Subtitle: View>: View {
             self.expandable = false
             self.expanded = false
         }
+        
+        self.typography = typography
     }
     
     public init(title: String? = nil,
-                typography: Typography = .h2,
+                typography: Font? = nil,
                 options: PanelOptions = .fixed,
                 @ViewBuilder content: @escaping () -> Content) where Subtitle == EmptyView {
         self.init(title: title,
@@ -98,13 +99,13 @@ public struct Panel<Content: View, Subtitle: View>: View {
     private func panelTitleTextView(_ title: String) -> some View {
         Text(title)
             .padding()
-            .typography(typography)
+            .font(typography ?? theme.font.title2.font)
             .foregroundColor(theme.panelForegoround)
     }
 
     private var expandIcon: some View {
         Image(systemName: "chevron.down")
-            .typography(.h1)
+            .font(.title)
             .fontWeight(.regular)
             .foregroundColor(theme.panelForegoround)
             .rotationEffect(.degrees(expanded ? -180.0 : 0.0))
@@ -139,9 +140,9 @@ struct Panel_Previews: PreviewProvider {
             }
             
             
-            Panel(title: "Expandable Panel with subtitle", typography: .button, options: .expandable()) {
+            Panel(title: "Expandable Panel with subtitle", typography: .body, options: .expandable()) {
                 Text("This is a subtitle")
-                    .typography(.caption)
+                    .fontStyle(Theme().font.caption1)
             } content: {
                 content
             }
@@ -159,7 +160,7 @@ struct Panel_Previews: PreviewProvider {
                 Panel {
                     HStack {
                         Text("Side by Side")
-                            .typography(.h1)
+                            .fontStyle(Theme().font.title1)
                             .padding()
 
                         Spacer()
@@ -178,7 +179,7 @@ struct Panel_Previews: PreviewProvider {
 
     @ViewBuilder private static var content: some View {
         Text("Content")
-            .typography(.h2)
+            .fontStyle(Theme().font.title2)
             .padding()
     }
 }

@@ -54,28 +54,30 @@ extension Text {
 #if DEBUG
 
 struct StaticText_Previews: PreviewProvider {
+    static let theme: Theme = .dark
+    
     static var previews: some View {
         VStack(spacing: 32.0) {
             Text("Plain")
                 .staticTextStyle(StaticTextStyle(options: .none))
-                .typography(.h1)
+                .fontStyle(theme.font.body)
 
             Text("Background")
                 .staticTextStyle(StaticTextStyle(options: .background))
-                .typography(.h2)
+                .fontStyle(theme.font.body)
 
             Text("Bordered")
                 .staticTextStyle(StaticTextStyle(options: .bordered))
-                .typography(.h3)
+                .fontStyle(theme.font.body)
                 .fontWeight(.heavy)
 
             Text("All Options")
                 .foregroundColor(Color(uiColor: .systemRed))
                 .fontWeight(.bold)
                 .staticTextStyle(StaticTextStyle(options: .all))
-                .typography(.caption)
+                .fontStyle(theme.font.caption1)
         }
-        .environmentObject(Theme())
+        .environmentObject(theme)
         .previewDisplayName("Static Text variations")
         .preferredColorScheme(.dark)
         .padding()
