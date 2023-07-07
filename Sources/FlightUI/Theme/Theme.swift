@@ -1,6 +1,8 @@
 import SwiftUI
 
 public class Theme: ObservableObject {
+    @Published public var color: ThemeColors
+    
     // Buttons
     @Published public var primaryButtonBackground: Color
     @Published public var primaryButtonForeground: Color
@@ -73,76 +75,81 @@ public class Theme: ObservableObject {
     @Published public var xlarge: Double
     @Published public var xxlarge: Double
     
-    public init(primaryButtonBackground: Color = .flightGreen,
-                primaryButtonForeground: Color = .flightBlack,
-                secondaryButtonBackground: Color = .flightGreen,
-                secondaryButtonForeground: Color = .flightGreen,
-                tertiaryButtonColor: Color = .flightWhite,
-                tertiaryButtonDisabledColor: Color = .flightLightGray,
-                staticTextBackground: Color = .flightDarkGray,
-                staticTextBorder: Color = .flightWhite,
-                textFieldBackground: Color = .flightDarkGray,
-                menuFieldBackground: Color = .flightDarkGray,
-                menuFieldAccent: Color = .flightLightGray,
-                header: Color = .flightWhite,
-                input: Color = .flightBlue,
-                result: Color = .flightGreen,
-                buttonTypography: Color = .flightWhite,
-                caption: Color = .flightWhite,
-                emptyField: Color = .flightLightGray,
-                dropDownOption: Color = .flightBlue,
-                panelBackground: Color = .flightDarkGray,
-                panelForeground: Color = .flightWhite,
-                panelViewBackground: Color = .black,
-                appHeaderBackground: Color = .black,
-                validationStatusValid: Color = .flightWhite,
-                validationStatusWarning: Color = .flightYellow,
-                validationStatusError: Color = .flightRed,
-                panelCornerRadius: Double = 5,
-                panelLineWidth: Double = 6,
-                panelPadding: Double = 6,
-                buttonHorizontalPadding: Double = 50,
-                buttonVerticalPadding: Double = 12,
-                buttonBorderWidth: Double = 3,
-                staticTextFieldCornerRadius: Double = 5,
-                staticTextFieldBorderWidth: Double = 2,
-                smallTextFieldWidth: Double = 84,
-                mediumTextFieldWidth: Double = 146,
-                largeTextFieldWidth: Double = 226,
-                textFieldHeight: Double = 43,
-                textFieldCornerRadius: Double = 5,
-                menuFieldHeight: Double = 43,
-                menuFieldCornerRadius: Double = 5,
-                cornerRadius: CornerRadius = CornerRadius(),
+    public init(
+        color: ThemeColors = ThemeColors(),
+        
+        primaryButtonBackground: Color = .flightNominal,
+        primaryButtonForeground: Color = .flightBlack,
+        secondaryButtonBackground: Color = .flightNominal,
+        secondaryButtonForeground: Color = .flightNominal,
+        tertiaryButtonColor: Color = .flightWhite,
+        //tertiaryButtonDisabledColor: Color = .themeOnSurfaceDisabled,
+        //staticTextBackground: Color = .themeOnSurfaceDisabled,
+        staticTextBorder: Color = .flightWhite,
+        textFieldBackground: Color = .themeSurface,
+        menuFieldBackground: Color = .themeSurface,
+        //menuFieldAccent: Color = .themeOnSurfaceFocused,
+        header: Color = .flightWhite,
+        input: Color = .flightInputOutput,
+        result: Color = .flightNominal,
+        buttonTypography: Color = .flightWhite,
+        caption: Color = .flightWhite,
+        //emptyField: Color = .themeOnSurfaceFocused,
+        dropDownOption: Color = .flightInputOutput,
+        panelBackground: Color = .themeSurface,
+        panelForeground: Color = .flightWhite,
+        panelViewBackground: Color = .flightBlack,
+        appHeaderBackground: Color = .flightBlack,
+        validationStatusValid: Color = .flightWhite,
+        validationStatusWarning: Color = .flightCaution,
+        validationStatusError: Color = .flightWarning,
+        panelCornerRadius: Double = 5,
+        panelLineWidth: Double = 6,
+        panelPadding: Double = 6,
+        buttonHorizontalPadding: Double = 50,
+        buttonVerticalPadding: Double = 12,
+        buttonBorderWidth: Double = 3,
+        staticTextFieldCornerRadius: Double = 5,
+        staticTextFieldBorderWidth: Double = 2,
+        smallTextFieldWidth: Double = 84,
+        mediumTextFieldWidth: Double = 146,
+        largeTextFieldWidth: Double = 226,
+        textFieldHeight: Double = 43,
+        textFieldCornerRadius: Double = 5,
+        menuFieldHeight: Double = 43,
+        menuFieldCornerRadius: Double = 5,
+        cornerRadius: CornerRadius = CornerRadius(),
 
-                // Opacities
-                overlayOpacity: Double = 0.6,
-                disabledButtonOpacity: Double = 0.38,
+        // Opacities
+        overlayOpacity: Double = 0.6,
+        disabledButtonOpacity: Double = 0.38,
 
-                small: Double = 8,
-                medium: Double = 16,
-                large: Double = 24,
-                xlarge: Double = 32,
-                xxlarge: Double = 48
+        small: Double = 8,
+        medium: Double = 16,
+        large: Double = 24,
+        xlarge: Double = 32,
+        xxlarge: Double = 48
                 
     ) {
+        self.color = color
+        
         self.primaryButtonBackground = primaryButtonBackground
         self.primaryButtonForeground = primaryButtonForeground
         self.secondaryButtonBackground = secondaryButtonBackground
         self.secondaryButtonForeground = secondaryButtonForeground
         self.tertiaryButtonColor = tertiaryButtonColor
-        self.tertiaryButtonDisabledColor = tertiaryButtonDisabledColor
-        self.staticTextBackground = staticTextBackground
+        self.tertiaryButtonDisabledColor = color.onSurface.disabledColor
+        self.staticTextBackground = color.onSurface.disabledColor
         self.staticTextBorder = staticTextBorder
         self.textFieldBackground = textFieldBackground
         self.menuFieldBackground = menuFieldBackground
-        self.menuFieldAccent = menuFieldAccent
+        self.menuFieldAccent = color.onSurface.focusedColor
         self.header = header
         self.input = input
         self.result = result
         self.buttonTypography = buttonTypography
         self.caption = caption
-        self.emptyField = emptyField
+        self.emptyField = color.onSurface.focusedColor
         self.dropDownOption = dropDownOption
         self.panelBackground = panelBackground
         self.panelForegoround = panelForeground

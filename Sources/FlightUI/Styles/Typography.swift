@@ -105,7 +105,7 @@ public struct LargeTitle: ViewModifier {
         content
             .font(.largeTitle)
             .bold()
-            .foregroundColor(status == .valid ? theme.header : .flightOrange)
+            .foregroundColor(status == .valid ? theme.header : theme.color.caution.color)
     }
 }
 
