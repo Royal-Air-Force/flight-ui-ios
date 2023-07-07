@@ -18,6 +18,16 @@ public class ColorState {
         self.focusedColor = focusedColor
         self.disabledColor = disabledColor
     }
+    
+    public func getColorForState(disabled: Bool, focused: Bool) -> Color {
+        if (disabled) {
+            return self.disabledColor
+        } else if (focused) {
+            return self.focusedColor
+        } else {
+            return self.default
+        }
+    }
 }
 
 public extension Color {
@@ -98,7 +108,7 @@ struct Color_Previews: PreviewProvider {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
 
                     Text("\(color.name)")
-                        .font(Theme().typography.title2)
+                        .fontStyle(Theme().font.title2)
                         .padding()
                 }
             }
