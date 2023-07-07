@@ -26,7 +26,7 @@ public struct InputFieldConfiguration {
     let valueType: TextFieldValueType
     let size: TextFieldSize
     let alignment: TextAlignment
-    let typography: Typography
+    let typography: Font
     let debounceDuration: DebounceDuration
     let options: InputFieldOptionSet
 
@@ -35,7 +35,7 @@ public struct InputFieldConfiguration {
         valueType: TextFieldValueType = .text,
         size: TextFieldSize = .infinity,
         alignment: TextAlignment = .leading,
-        typography: Typography = .input,
+        typography: Font = .body,
         debounceDuration: DebounceDuration = .default,
         options: InputFieldOptionSet = .useThemeStyling
     ) {
@@ -64,7 +64,7 @@ extension InputFieldConfiguration {
         valueType: TextFieldValueType = .text,
         size: TextFieldSize = .infinity,
         alignment: TextAlignment = .leading,
-        typography: Typography = .input,
+        typography: Font = .body,
         debounceDuration: DebounceDuration = .default,
         options: InputFieldOptionSet = .useThemeStyling
     ) -> InputFieldConfiguration {

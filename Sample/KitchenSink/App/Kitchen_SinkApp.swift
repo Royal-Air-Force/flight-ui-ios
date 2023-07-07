@@ -3,6 +3,8 @@ import FlightUI
 
 @main
 struct KitchenSinkApp: App {
+    @StateObject var themeManager = ThemeManager()
+    
     var body: some Scene {
         WindowGroup {
             VStack {
@@ -25,7 +27,8 @@ struct KitchenSinkApp: App {
                         }
                 }
             }
-            .environmentObject(Theme())
+            .environmentObject(themeManager)
+            .environmentObject(themeManager.current)
         }
     }
 }

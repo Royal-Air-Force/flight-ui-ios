@@ -1,10 +1,13 @@
 import SwiftUI
 
 public class Theme: ObservableObject {
+    @Published public var baseScheme: ColorScheme
     @Published public var color: ThemeColors
     @Published public var padding: ThemePadding
     @Published public var size: ThemeSize
     @Published public var radius: ThemeRadius
+    @Published public var font: ThemeFont
+    @Published public var button: ThemeButtons
     
     
     
@@ -75,87 +78,52 @@ public class Theme: ObservableObject {
     @Published public var disabledButtonOpacity: Double
     
     public init(
+        baseScheme: ColorScheme = .dark,
         color: ThemeColors = ThemeColors(),
         padding: ThemePadding = ThemePadding(),
         size: ThemeSize = ThemeSize(),
         radius: ThemeRadius = ThemeRadius(),
-        
-        primaryButtonBackground: Color = .flightNominal,
-        primaryButtonForeground: Color = .flightBlack,
-        secondaryButtonBackground: Color = .flightNominal,
-        secondaryButtonForeground: Color = .flightNominal,
-        tertiaryButtonColor: Color = .flightWhite,
-        //tertiaryButtonDisabledColor: Color = .themeOnSurfaceDisabled,
-        //staticTextBackground: Color = .themeOnSurfaceDisabled,
-        staticTextBorder: Color = .flightWhite,
-        textFieldBackground: Color = .themeSurface,
-        menuFieldBackground: Color = .themeSurface,
-        //menuFieldAccent: Color = .themeOnSurfaceFocused,
-        header: Color = .flightWhite,
-        input: Color = .flightInputOutput,
-        result: Color = .flightNominal,
-        buttonTypography: Color = .flightWhite,
-        caption: Color = .flightWhite,
-        //emptyField: Color = .themeOnSurfaceFocused,
-        dropDownOption: Color = .flightInputOutput,
-        panelBackground: Color = .themeSurface,
-        panelForeground: Color = .flightWhite,
-        panelViewBackground: Color = .flightBlack,
-        appHeaderBackground: Color = .flightBlack,
-        validationStatusValid: Color = .flightWhite,
-        validationStatusWarning: Color = .flightCaution,
-        validationStatusError: Color = .flightWarning,
-//        panelCornerRadius: Double = 5,
-//        panelLineWidth: Double = 6,
-//        panelPadding: Double = 6,
-//        buttonHorizontalPadding: Double = 50,
-//        buttonVerticalPadding: Double = 12,
-//        buttonBorderWidth: Double = 3,
-//        staticTextFieldCornerRadius: Double = 5,
-//        staticTextFieldBorderWidth: Double = 2,
-//        smallTextFieldWidth: Double = 84,
-//        mediumTextFieldWidth: Double = 146,
-//        largeTextFieldWidth: Double = 226,
-//        textFieldHeight: Double = 43,
-//        textFieldCornerRadius: Double = 5,
-//        menuFieldHeight: Double = 43,
-//        menuFieldCornerRadius: Double = 5,
+        font: ThemeFont = ThemeFont(),
+        button: ThemeButtons = ThemeButtons(),
 
         // Opacities
         overlayOpacity: Double = 0.6,
         disabledButtonOpacity: Double = 0.38
                 
     ) {
+        self.baseScheme = baseScheme
         self.color = color
         self.padding = padding
         self.size = size
         self.radius = radius
+        self.font = font
+        self.button = button
         
-        self.primaryButtonBackground = primaryButtonBackground
-        self.primaryButtonForeground = primaryButtonForeground
-        self.secondaryButtonBackground = secondaryButtonBackground
-        self.secondaryButtonForeground = secondaryButtonForeground
-        self.tertiaryButtonColor = tertiaryButtonColor
+        self.primaryButtonBackground = color.nominal.default
+        self.primaryButtonForeground = color.onNominal.default
+        self.secondaryButtonBackground = color.nominal.default
+        self.secondaryButtonForeground = color.nominal.default
+        self.tertiaryButtonColor = color.onSurface.default
         self.tertiaryButtonDisabledColor = color.onSurface.disabledColor
         self.staticTextBackground = color.onSurface.disabledColor
-        self.staticTextBorder = staticTextBorder
-        self.textFieldBackground = textFieldBackground
-        self.menuFieldBackground = menuFieldBackground
+        self.staticTextBorder = color.onSurface.default
+        self.textFieldBackground = color.surface
+        self.menuFieldBackground = color.surface
         self.menuFieldAccent = color.onSurface.focusedColor
-        self.header = header
-        self.input = input
-        self.result = result
-        self.buttonTypography = buttonTypography
-        self.caption = caption
+        self.header = color.onSurface.default
+        self.input = color.inputOutput.default
+        self.result = color.nominal.default
+        self.buttonTypography = color.onSurface.default
+        self.caption = color.onSurface.default
         self.emptyField = color.onSurface.focusedColor
-        self.dropDownOption = dropDownOption
-        self.panelBackground = panelBackground
-        self.panelForegoround = panelForeground
-        self.panelViewBackground = panelViewBackground
-        self.appHeaderBackground = appHeaderBackground
-        self.validationStatusValid = validationStatusValid
-        self.validationStatusWarning = validationStatusWarning
-        self.validationStatusError = validationStatusError
+        self.dropDownOption = color.inputOutput.default
+        self.panelBackground = color.surface
+        self.panelForegoround = color.onSurface.default
+        self.panelViewBackground = color.background
+        self.appHeaderBackground = color.background
+        self.validationStatusValid = color.onSurface.default
+        self.validationStatusWarning = color.caution.default
+        self.validationStatusError = color.warning.default
         self.panelCornerRadius = radius.medium
         self.panelLineWidth = size.border
         self.panelPadding = padding.grid1x

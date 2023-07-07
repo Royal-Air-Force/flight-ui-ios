@@ -28,7 +28,8 @@ public struct InputField: View {
             switch config.options.contains(.useThemeStyling) {
             case true:
                 DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceDuration.rawValue)
-                    .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
+                    .font(config.typography)
+                    //.typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()
                     .background(theme.textFieldBackground)
                     .frame(width: config.size.width(theme: theme), height: theme.textFieldHeight)
@@ -46,7 +47,8 @@ public struct InputField: View {
                     }
             case false:
                 DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceDuration.rawValue)
-                    .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
+                    .font(config.typography)
+//                    .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
                     .padding()
                     .frame(width: config.size.width(theme: theme), height: theme.textFieldHeight)
                     .multilineTextAlignment(config.alignment)
@@ -153,7 +155,7 @@ struct InputField_Previews: PreviewProvider {
     @State private static var exampleNumber = "100.1234"
 
     private static let smallConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .small)
-    private static let mediumConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .medium, typography: .h2)
+    private static let mediumConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .medium, typography: .title2)
     private static let largeConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .large)
     private static let decimalConfig: InputFieldConfiguration = .inputFieldConfiguration(formatter: .decimal(maximumIntegerDigits: 42, maximumFractionDigits: 4))
     private static let borderedConfig: InputFieldConfiguration = .inputFieldConfiguration(size: .medium,
