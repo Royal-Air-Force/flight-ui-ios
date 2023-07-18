@@ -1,7 +1,7 @@
 import SwiftUI
 import FlightUI
 
-extension Tab3 {
+extension Typography {
     class ViewModel: ObservableObject {
     }
 }

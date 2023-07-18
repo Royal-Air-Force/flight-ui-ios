@@ -1,27 +1,27 @@
 import SwiftUI
 import FlightUI
 
-extension Tab1 {
+extension Colours {
     class ViewModel: ObservableObject {
         @Published var textualInput = ""
         @Published var numericalInput = ""
         @Published var numericalInputResult: ValidationStatus = .error(message: "Error Message")
-
+        
         @Published var selectionInput: SelectionInputTypes = .selectionOne
         @Published var optionalSelectionInput: SelectionInputTypes?
-
+        
         @Published var isShowingResetAlert = false
     }
 }
 
-extension Tab1.ViewModel {
+extension Colours.ViewModel {
     func reset() {
         textualInput = ""
         numericalInput = ""
     }
 }
 
-extension Tab1.ViewModel {
+extension Colours.ViewModel {
     func validateNumericalInput(value: String, mode: ValidationMode) -> ValidationStatus {
         if let doubleValue = Double(value) {
             switch doubleValue {
@@ -33,12 +33,12 @@ extension Tab1.ViewModel {
                 return .warning(message: "Warning Message")
             }
         }
-
+        
         return validateRequiredField(value, mode: mode)
     }
 }
 
-extension Tab1.ViewModel {
+extension Colours.ViewModel {
     private func validateRequiredField(_ text: String, mode: ValidationMode) -> ValidationStatus {
         switch mode {
         case .editing where text.isEmptyTrimmed:
@@ -51,15 +51,16 @@ extension Tab1.ViewModel {
     }
 }
 
-extension Tab1.ViewModel {
+
+extension Colours.ViewModel {
     enum SelectionInputTypes: String, CaseIterable, CustomStringConvertible {
         case selectionOne = "Option One"
         case selectionTwo = "Option Two"
         case selectionThree = "Option Three"
-
+        
         var description: String {
             return rawValue
         }
     }
-
+    
 }

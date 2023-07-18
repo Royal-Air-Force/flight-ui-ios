@@ -1,7 +1,7 @@
 import SwiftUI
 import FlightUI
 
-extension Tab2 {
+extension Buttons {
     class ViewModel: ObservableObject {
     }
 }
