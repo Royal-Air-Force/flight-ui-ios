@@ -16,6 +16,8 @@ public class ThemeColors {
     @Published public var onInputOutput: ColorState
     @Published public var nominal: ColorState
     @Published public var onNominal: ColorState
+    @Published public var advisory: ColorState
+    @Published public var onAdvisory: ColorState
     @Published public var caution: ColorState
     @Published public var onCaution: ColorState
     @Published public var warning: ColorState
@@ -48,6 +50,8 @@ public class ThemeColors {
                 onCaution: ColorState = ColorState(color: .flightBlack),
                 warning: ColorState = ColorState(color: .flightWarning),
                 onWarning: ColorState = ColorState(color: .flightBlack),
+                advisory: ColorState = ColorState(color: .flightNominal),
+                onAdvisory: ColorState = ColorState(color: .flightBlack),
                 graphicsRed: Color = .flightGraphicsRed,
                 graphicsYellow: Color = .flightGraphicsYellow,
                 graphicsGreen: Color = .flightGraphicsGreen,
@@ -71,6 +75,8 @@ public class ThemeColors {
         self.onInputOutput = onInputOutput
         self.nominal = nominal
         self.onNominal = onNominal
+        self.advisory = advisory
+        self.onAdvisory = onAdvisory
         self.caution = caution
         self.onCaution = onCaution
         self.warning = warning
