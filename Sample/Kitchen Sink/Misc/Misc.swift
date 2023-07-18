@@ -40,5 +40,4 @@ struct Misc: View {
             .padding(theme.padding.grid6x)
         }
     }
-        
 }
