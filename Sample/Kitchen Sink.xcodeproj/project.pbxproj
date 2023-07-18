@@ -7,32 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		837FC6D02986D0F60076C720 /* Tab1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6CF2986D0F60076C720 /* Tab1.swift */; };
-		837FC6D22986D1460076C720 /* Tab1+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6D12986D1460076C720 /* Tab1+ViewModel.swift */; };
-		837FC6D42986D1900076C720 /* Tab2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6D32986D1900076C720 /* Tab2.swift */; };
-		837FC6D62986D1AA0076C720 /* Tab2+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6D52986D1AA0076C720 /* Tab2+ViewModel.swift */; };
+		837FC6D02986D0F60076C720 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6CF2986D0F60076C720 /* Colours.swift */; };
+		837FC6D22986D1460076C720 /* Colours+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6D12986D1460076C720 /* Colours+ViewModel.swift */; };
+		837FC6D42986D1900076C720 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6D32986D1900076C720 /* Typography.swift */; };
+		837FC6D62986D1AA0076C720 /* Typography+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6D52986D1AA0076C720 /* Typography+ViewModel.swift */; };
 		837FC6D92986D2620076C720 /* FlightUI in Frameworks */ = {isa = PBXBuildFile; productRef = 837FC6D82986D2620076C720 /* FlightUI */; };
 		838E7E2B2987D873000F691D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2A2987D873000F691D /* String+Extensions.swift */; };
-		838E7E2E2987FBF3000F691D /* Tab3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2D2987FBF3000F691D /* Tab3.swift */; };
-		838E7E302987FC25000F691D /* Tab3+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2F2987FC25000F691D /* Tab3+ViewModel.swift */; };
+		838E7E2E2987FBF3000F691D /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2D2987FBF3000F691D /* Buttons.swift */; };
+		838E7E302987FC25000F691D /* Buttons+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2F2987FC25000F691D /* Buttons+ViewModel.swift */; };
 		83C93DC42986C53A00A911A9 /* Kitchen_SinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C93DC32986C53A00A911A9 /* Kitchen_SinkApp.swift */; };
 		83C93DC82986C53C00A911A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C93DC72986C53C00A911A9 /* Assets.xcassets */; };
 		83C93DCB2986C53C00A911A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C93DCA2986C53C00A911A9 /* Preview Assets.xcassets */; };
+		AA3C83AF2A3CB5B100A3F40B /* Inputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3C83AE2A3CB5B100A3F40B /* Inputs.swift */; };
+		AA3C83B12A3CB78800A3F40B /* Inputs+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3C83B02A3CB78800A3F40B /* Inputs+ViewModel.swift */; };
+		AA3C83B42A3CBE5800A3F40B /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3C83B32A3CBE5800A3F40B /* Misc.swift */; };
+		AA3C83B62A3CD34C00A3F40B /* Misc+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3C83B52A3CD34B00A3F40B /* Misc+ViewModel.swift */; };
+		AA4D62A52A4EE6E9009303DF /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D62A42A4EE6E9009303DF /* Spacing.swift */; };
+		AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABAD73C2A473C0E00967197 /* Color+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		837FC6CF2986D0F60076C720 /* Tab1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab1.swift; sourceTree = "<group>"; };
-		837FC6D12986D1460076C720 /* Tab1+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tab1+ViewModel.swift"; sourceTree = "<group>"; };
-		837FC6D32986D1900076C720 /* Tab2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab2.swift; sourceTree = "<group>"; };
-		837FC6D52986D1AA0076C720 /* Tab2+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tab2+ViewModel.swift"; sourceTree = "<group>"; };
-		8389186029965415001A2364 /* Kitchen-Sink-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Kitchen-Sink-Info.plist"; sourceTree = SOURCE_ROOT; };
+		837FC6CF2986D0F60076C720 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
+		837FC6D12986D1460076C720 /* Colours+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colours+ViewModel.swift"; sourceTree = "<group>"; };
+		837FC6D32986D1900076C720 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		837FC6D52986D1AA0076C720 /* Typography+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Typography+ViewModel.swift"; sourceTree = "<group>"; };
 		838E7E2A2987D873000F691D /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		838E7E2D2987FBF3000F691D /* Tab3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab3.swift; sourceTree = "<group>"; };
-		838E7E2F2987FC25000F691D /* Tab3+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tab3+ViewModel.swift"; sourceTree = "<group>"; };
-		83C93DC02986C53A00A911A9 /* KitchenSink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KitchenSink.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		838E7E2D2987FBF3000F691D /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		838E7E2F2987FC25000F691D /* Buttons+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Buttons+ViewModel.swift"; sourceTree = "<group>"; };
+		83C93DC02986C53A00A911A9 /* Kitchen Sink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kitchen Sink.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C93DC32986C53A00A911A9 /* Kitchen_SinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kitchen_SinkApp.swift; sourceTree = "<group>"; };
 		83C93DC72986C53C00A911A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83C93DCA2986C53C00A911A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AA3C83AE2A3CB5B100A3F40B /* Inputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inputs.swift; sourceTree = "<group>"; };
+		AA3C83B02A3CB78800A3F40B /* Inputs+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Inputs+ViewModel.swift"; sourceTree = "<group>"; };
+		AA3C83B32A3CBE5800A3F40B /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
+		AA3C83B52A3CD34B00A3F40B /* Misc+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Misc+ViewModel.swift"; sourceTree = "<group>"; };
+		AA4D62A42A4EE6E9009303DF /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		AABAD73C2A473C0E00967197 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,22 +58,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		837FC6CB2986D0940076C720 /* Tab1 */ = {
+		837FC6CB2986D0940076C720 /* Colours */ = {
 			isa = PBXGroup;
 			children = (
-				837FC6CF2986D0F60076C720 /* Tab1.swift */,
-				837FC6D12986D1460076C720 /* Tab1+ViewModel.swift */,
+				837FC6CF2986D0F60076C720 /* Colours.swift */,
+				837FC6D12986D1460076C720 /* Colours+ViewModel.swift */,
 			);
-			path = Tab1;
+			path = Colours;
 			sourceTree = "<group>";
 		};
-		837FC6CC2986D0990076C720 /* Tab2 */ = {
+		837FC6CC2986D0990076C720 /* Typography */ = {
 			isa = PBXGroup;
 			children = (
-				837FC6D32986D1900076C720 /* Tab2.swift */,
-				837FC6D52986D1AA0076C720 /* Tab2+ViewModel.swift */,
+				837FC6D32986D1900076C720 /* Typography.swift */,
+				837FC6D52986D1AA0076C720 /* Typography+ViewModel.swift */,
 			);
-			path = Tab2;
+			path = Typography;
 			sourceTree = "<group>";
 		};
 		837FC6CE2986D0C70076C720 /* App */ = {
@@ -84,23 +95,24 @@
 			isa = PBXGroup;
 			children = (
 				838E7E2A2987D873000F691D /* String+Extensions.swift */,
+				AABAD73C2A473C0E00967197 /* Color+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		838E7E2C2987FBE3000F691D /* Tab3 */ = {
+		838E7E2C2987FBE3000F691D /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				838E7E2D2987FBF3000F691D /* Tab3.swift */,
-				838E7E2F2987FC25000F691D /* Tab3+ViewModel.swift */,
+				838E7E2D2987FBF3000F691D /* Buttons.swift */,
+				838E7E2F2987FC25000F691D /* Buttons+ViewModel.swift */,
 			);
-			path = Tab3;
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		83C93DB72986C53A00A911A9 = {
 			isa = PBXGroup;
 			children = (
-				83C93DC22986C53A00A911A9 /* KitchenSink */,
+				83C93DC22986C53A00A911A9 /* Kitchen Sink */,
 				83C93DC12986C53A00A911A9 /* Products */,
 				837FC6D72986D2620076C720 /* Frameworks */,
 			);
@@ -109,24 +121,26 @@
 		83C93DC12986C53A00A911A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				83C93DC02986C53A00A911A9 /* KitchenSink.app */,
+				83C93DC02986C53A00A911A9 /* Kitchen Sink.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		83C93DC22986C53A00A911A9 /* KitchenSink */ = {
+		83C93DC22986C53A00A911A9 /* Kitchen Sink */ = {
 			isa = PBXGroup;
 			children = (
-				8389186029965415001A2364 /* Kitchen-Sink-Info.plist */,
+				AA4D62A32A4EE6DE009303DF /* Spacing */,
 				837FC6CE2986D0C70076C720 /* App */,
 				838E7E292987D85B000F691D /* Extensions */,
-				837FC6CB2986D0940076C720 /* Tab1 */,
-				837FC6CC2986D0990076C720 /* Tab2 */,
-				838E7E2C2987FBE3000F691D /* Tab3 */,
+				837FC6CB2986D0940076C720 /* Colours */,
+				837FC6CC2986D0990076C720 /* Typography */,
+				838E7E2C2987FBE3000F691D /* Buttons */,
+				AA3C83AD2A3CB4DE00A3F40B /* Inputs */,
+				AA3C83B22A3CBE4600A3F40B /* Misc */,
 				83C93DC72986C53C00A911A9 /* Assets.xcassets */,
 				83C93DC92986C53C00A911A9 /* Preview Content */,
 			);
-			path = KitchenSink;
+			path = "Kitchen Sink";
 			sourceTree = "<group>";
 		};
 		83C93DC92986C53C00A911A9 /* Preview Content */ = {
@@ -137,28 +151,53 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		AA3C83AD2A3CB4DE00A3F40B /* Inputs */ = {
+			isa = PBXGroup;
+			children = (
+				AA3C83AE2A3CB5B100A3F40B /* Inputs.swift */,
+				AA3C83B02A3CB78800A3F40B /* Inputs+ViewModel.swift */,
+			);
+			path = Inputs;
+			sourceTree = "<group>";
+		};
+		AA3C83B22A3CBE4600A3F40B /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				AA3C83B32A3CBE5800A3F40B /* Misc.swift */,
+				AA3C83B52A3CD34B00A3F40B /* Misc+ViewModel.swift */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		AA4D62A32A4EE6DE009303DF /* Spacing */ = {
+			isa = PBXGroup;
+			children = (
+				AA4D62A42A4EE6E9009303DF /* Spacing.swift */,
+			);
+			path = Spacing;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		83C93DBF2986C53A00A911A9 /* KitchenSink */ = {
+		83C93DBF2986C53A00A911A9 /* Kitchen Sink */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 83C93DE42986C53D00A911A9 /* Build configuration list for PBXNativeTarget "KitchenSink" */;
+			buildConfigurationList = 83C93DE42986C53D00A911A9 /* Build configuration list for PBXNativeTarget "Kitchen Sink" */;
 			buildPhases = (
 				83C93DBC2986C53A00A911A9 /* Sources */,
 				83C93DBD2986C53A00A911A9 /* Frameworks */,
 				83C93DBE2986C53A00A911A9 /* Resources */,
-				83A2288029CA04FA0097C75A /* Swiftlint */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = KitchenSink;
+			name = "Kitchen Sink";
 			packageProductDependencies = (
 				837FC6D82986D2620076C720 /* FlightUI */,
 			);
 			productName = "Kitchen Sink";
-			productReference = 83C93DC02986C53A00A911A9 /* KitchenSink.app */;
+			productReference = 83C93DC02986C53A00A911A9 /* Kitchen Sink.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -176,7 +215,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83C93DBB2986C53A00A911A9 /* Build configuration list for PBXProject "KitchenSink" */;
+			buildConfigurationList = 83C93DBB2986C53A00A911A9 /* Build configuration list for PBXProject "Kitchen Sink" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -192,7 +231,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				83C93DBF2986C53A00A911A9 /* KitchenSink */,
+				83C93DBF2986C53A00A911A9 /* Kitchen Sink */,
 			);
 		};
 /* End PBXProject section */
@@ -209,40 +248,25 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		83A2288029CA04FA0097C75A /* Swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Swiftlint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		83C93DBC2986C53A00A911A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				838E7E302987FC25000F691D /* Tab3+ViewModel.swift in Sources */,
+				838E7E302987FC25000F691D /* Buttons+ViewModel.swift in Sources */,
 				83C93DC42986C53A00A911A9 /* Kitchen_SinkApp.swift in Sources */,
-				837FC6D22986D1460076C720 /* Tab1+ViewModel.swift in Sources */,
-				837FC6D42986D1900076C720 /* Tab2.swift in Sources */,
-				838E7E2E2987FBF3000F691D /* Tab3.swift in Sources */,
-				837FC6D02986D0F60076C720 /* Tab1.swift in Sources */,
+				837FC6D22986D1460076C720 /* Colours+ViewModel.swift in Sources */,
+				837FC6D42986D1900076C720 /* Typography.swift in Sources */,
+				838E7E2E2987FBF3000F691D /* Buttons.swift in Sources */,
+				AA3C83B42A3CBE5800A3F40B /* Misc.swift in Sources */,
+				AA3C83AF2A3CB5B100A3F40B /* Inputs.swift in Sources */,
+				AA4D62A52A4EE6E9009303DF /* Spacing.swift in Sources */,
+				AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */,
+				837FC6D02986D0F60076C720 /* Colours.swift in Sources */,
 				838E7E2B2987D873000F691D /* String+Extensions.swift in Sources */,
-				837FC6D62986D1AA0076C720 /* Tab2+ViewModel.swift in Sources */,
+				837FC6D62986D1AA0076C720 /* Typography+ViewModel.swift in Sources */,
+				AA3C83B62A3CD34C00A3F40B /* Misc+ViewModel.swift in Sources */,
+				AA3C83B12A3CB78800A3F40B /* Inputs+ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,15 +396,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"KitchenSink/Preview Content\"";
-				DEVELOPMENT_TEAM = 5PRV5PD957;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5PRV5PD957;
+				DEVELOPMENT_ASSET_PATHS = "\"Kitchen Sink/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Kitchen-Sink-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Kitchen Sink";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -388,19 +408,16 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appivate.flight-ui-kitchen-sink";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appivate.flightui-kitchen-sink";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.appivate.flight-ui-kitchen-sink";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore *";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -412,15 +429,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"KitchenSink/Preview Content\"";
-				DEVELOPMENT_TEAM = 5PRV5PD957;
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5PRV5PD957;
+				DEVELOPMENT_ASSET_PATHS = "\"Kitchen Sink/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Kitchen-Sink-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Kitchen Sink";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -428,19 +441,16 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appivate.flight-ui-kitchen-sink";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.appivate.flightui-kitchen-sink";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.appivate.flight-ui-kitchen-sink";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore *";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -450,7 +460,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		83C93DBB2986C53A00A911A9 /* Build configuration list for PBXProject "KitchenSink" */ = {
+		83C93DBB2986C53A00A911A9 /* Build configuration list for PBXProject "Kitchen Sink" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83C93DE22986C53D00A911A9 /* Debug */,
@@ -459,7 +469,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83C93DE42986C53D00A911A9 /* Build configuration list for PBXNativeTarget "KitchenSink" */ = {
+		83C93DE42986C53D00A911A9 /* Build configuration list for PBXNativeTarget "Kitchen Sink" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83C93DE52986C53D00A911A9 /* Debug */,
@@ -475,7 +485,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Royal-Air-Force/flight-ui-ios";
 			requirement = {
-				branch = develop;
+				branch = "next-gen";
 				kind = branch;
 			};
 		};
