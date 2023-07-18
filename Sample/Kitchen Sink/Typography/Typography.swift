@@ -4,9 +4,6 @@ import FlightUI
 struct Typography: View {
     @EnvironmentObject var theme: Theme
     @StateObject private var viewModel = ViewModel()
-    
-    let exampleText = " How vexingly quick daft zebras jump!"
-    
     var body: some View {
         ScrollView {
             VStack {
