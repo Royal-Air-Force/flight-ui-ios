@@ -41,7 +41,6 @@ public extension Color {
     // Core
     static let flightInputOutput = Color("flightBlue", bundle: .module)
     static let flightNominal = Color("flightGreen", bundle: .module)
-    static let flightAdvisory = Color("flightAdvisory", bundle: .module)
     static let flightCaution = Color("flightYellow", bundle: .module)
     static let flightWarning = Color("flightRed", bundle: .module)
     
@@ -81,7 +80,6 @@ fileprivate extension Color {
     
     static let coreColors: [Color] = [.flightInputOutput,
                                       .flightNominal,
-                                      .flightAdvisory,
                                       .flightCaution,
                                       .flightWarning]
     
