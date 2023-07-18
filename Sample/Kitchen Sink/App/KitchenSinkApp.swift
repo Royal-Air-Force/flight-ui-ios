@@ -2,7 +2,7 @@ import SwiftUI
 import FlightUI
 
 @main
-struct Kitchen_SinkApp: App {
+struct KitchenSinkApp: App {
     @StateObject var themeManager = ThemeManager()
 
     init() {

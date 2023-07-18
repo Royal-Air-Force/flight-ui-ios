@@ -1,5 +1,7 @@
 import SwiftUI
 
+// swiftlint:disable identifier_name
+// swiftlint:disable large_tuple
 extension Color {
     var uiColor: UIColor { .init(self) }
     typealias RGBA = (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
@@ -22,3 +24,5 @@ extension Color {
             Int(blue * 255.999999))
     }
 }
+// swiftlint:enable identifier_name
+// swiftlint:enable large_tuple

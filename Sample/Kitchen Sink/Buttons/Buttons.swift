@@ -139,7 +139,7 @@ struct Buttons: View {
             Text("Text Button")
                 .fontStyle(theme.font.title1)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("The text button is the lowest priority action on screen and as they don't have a container don't distract from nearby content, often used for presenting a number of low priority actions")
+            Text("The text button is the lowest priority action and don't distract from nearby content they don't have a container, often used for presenting a number of low priority actions")
                 .fontStyle(theme.font.caption1)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
