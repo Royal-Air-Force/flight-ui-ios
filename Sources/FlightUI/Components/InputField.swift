@@ -180,9 +180,10 @@ struct InputField_Previews: PreviewProvider {
                     InputField("Bordered",
                                text: $emptyText,
                                configuration: borderedConfig)
+                    
                     InputField("Placeholder",
                                text: $text,
-                               confi    guration: borderedConfig)
+                               configuration: borderedConfig)
 
                     InputField("Placeholder",
                                text: $staticText,

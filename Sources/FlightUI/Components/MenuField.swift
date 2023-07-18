@@ -115,7 +115,7 @@ struct MenuField_Previews: PreviewProvider {
                       placeholder: "Custom Placeholder Text")
             MenuField(selection: $selection, options: options)
             MenuField(selection: $selection, options: options)
-                .validated(by: fakeValidator, status: validationStatus)
+                .validated(by: fakeValidator, status: $validationStatus)
         }
         .padding()
         .environmentObject(Theme())

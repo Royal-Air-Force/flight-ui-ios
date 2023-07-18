@@ -50,7 +50,7 @@ public class ThemeColors {
                 onCaution: ColorState = ColorState(color: .flightBlack),
                 warning: ColorState = ColorState(color: .flightWarning),
                 onWarning: ColorState = ColorState(color: .flightBlack),
-                advisory: ColorState = ColorState(color: .flightNominal),
+                advisory: ColorState = ColorState(color: .flightWhite),
                 onAdvisory: ColorState = ColorState(color: .flightBlack),
                 graphicsRed: Color = .flightGraphicsRed,
                 graphicsYellow: Color = .flightGraphicsYellow,
