@@ -31,19 +31,13 @@ public struct StaticTextStyle: ViewModifier {
         content
             .padding()
             .frame(width: size.width(theme: theme), height: theme.textFieldHeight)
-            .when(options.contains(.background)) { view in
-                view
-                    .background(theme.staticTextBackground)
-                    .cornerRadius(theme.staticTextFieldCornerRadius)
-            }
-            .when(options.contains(.bordered)) { view in
-                view
-                    .background(
-                        // TODO: move cornerRadius and lineWidth to Theme
-                        RoundedRectangle(cornerRadius: theme.staticTextFieldCornerRadius, style: .continuous)
-                            .stroke(theme.staticTextBorder, lineWidth: theme.staticTextFieldBorderWidth)
-                    )
-            }
+            .background(options.contains(.background) ? theme.staticTextBackground : .clear)
+            .cornerRadius(options.contains(.background) ? theme.staticTextFieldCornerRadius : 0)
+            .background(
+                // TODO: move cornerRadius and lineWidth to Theme
+                RoundedRectangle(cornerRadius: options.contains(.bordered) ? theme.staticTextFieldCornerRadius : 0, style: .continuous)
+                    .stroke(options.contains(.bordered) ? theme.staticTextBorder : .clear, lineWidth: theme.staticTextFieldBorderWidth)
+            )
     }
 }
 
