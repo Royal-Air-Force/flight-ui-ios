@@ -49,13 +49,15 @@ struct Colours: View {
 
     var coreColors: some View {
         VStack {
-            Text("Core colours")
-                .fontStyle(theme.font.title1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Used to bring context to an app such as indicating user input or success states")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer()
+            VStack {
+                Text("Core colours")
+                    .fontStyle(theme.font.title1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("Used to bring context to an app such as indicating user input or success states")
+                    .fontStyle(theme.font.caption1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Spacer()
+            }
 
             CoreColorView(colorName: "Input/Output", coreColor: theme.color.inputOutput, onCoreColor: theme.color.onInputOutput)
             Spacer()

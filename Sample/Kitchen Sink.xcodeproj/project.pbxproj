@@ -15,13 +15,13 @@
 		838E7E2B2987D873000F691D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2A2987D873000F691D /* String+Extensions.swift */; };
 		838E7E2E2987FBF3000F691D /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2D2987FBF3000F691D /* Buttons.swift */; };
 		838E7E302987FC25000F691D /* Buttons+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2F2987FC25000F691D /* Buttons+ViewModel.swift */; };
-		83C93DC42986C53A00A911A9 /* Kitchen_SinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C93DC32986C53A00A911A9 /* Kitchen_SinkApp.swift */; };
 		83C93DC82986C53C00A911A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C93DC72986C53C00A911A9 /* Assets.xcassets */; };
 		83C93DCB2986C53C00A911A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C93DCA2986C53C00A911A9 /* Preview Assets.xcassets */; };
 		AA3C83AF2A3CB5B100A3F40B /* Inputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3C83AE2A3CB5B100A3F40B /* Inputs.swift */; };
 		AA3C83B12A3CB78800A3F40B /* Inputs+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3C83B02A3CB78800A3F40B /* Inputs+ViewModel.swift */; };
 		AA3C83B42A3CBE5800A3F40B /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3C83B32A3CBE5800A3F40B /* Misc.swift */; };
 		AA3C83B62A3CD34C00A3F40B /* Misc+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3C83B52A3CD34B00A3F40B /* Misc+ViewModel.swift */; };
+		AA3E69102A671900007B6860 /* KitchenSinkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3E690F2A671900007B6860 /* KitchenSinkApp.swift */; };
 		AA4D62A52A4EE6E9009303DF /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D62A42A4EE6E9009303DF /* Spacing.swift */; };
 		AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABAD73C2A473C0E00967197 /* Color+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -35,13 +35,13 @@
 		838E7E2D2987FBF3000F691D /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		838E7E2F2987FC25000F691D /* Buttons+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Buttons+ViewModel.swift"; sourceTree = "<group>"; };
 		83C93DC02986C53A00A911A9 /* Kitchen Sink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kitchen Sink.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		83C93DC32986C53A00A911A9 /* Kitchen_SinkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kitchen_SinkApp.swift; sourceTree = "<group>"; };
 		83C93DC72986C53C00A911A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83C93DCA2986C53C00A911A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA3C83AE2A3CB5B100A3F40B /* Inputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inputs.swift; sourceTree = "<group>"; };
 		AA3C83B02A3CB78800A3F40B /* Inputs+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Inputs+ViewModel.swift"; sourceTree = "<group>"; };
 		AA3C83B32A3CBE5800A3F40B /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		AA3C83B52A3CD34B00A3F40B /* Misc+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Misc+ViewModel.swift"; sourceTree = "<group>"; };
+		AA3E690F2A671900007B6860 /* KitchenSinkApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KitchenSinkApp.swift; sourceTree = "<group>"; };
 		AA4D62A42A4EE6E9009303DF /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		AABAD73C2A473C0E00967197 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,7 +79,7 @@
 		837FC6CE2986D0C70076C720 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				83C93DC32986C53A00A911A9 /* Kitchen_SinkApp.swift */,
+				AA3E690F2A671900007B6860 /* KitchenSinkApp.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -254,13 +254,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				838E7E302987FC25000F691D /* Buttons+ViewModel.swift in Sources */,
-				83C93DC42986C53A00A911A9 /* Kitchen_SinkApp.swift in Sources */,
 				837FC6D22986D1460076C720 /* Colours+ViewModel.swift in Sources */,
 				837FC6D42986D1900076C720 /* Typography.swift in Sources */,
 				838E7E2E2987FBF3000F691D /* Buttons.swift in Sources */,
 				AA3C83B42A3CBE5800A3F40B /* Misc.swift in Sources */,
 				AA3C83AF2A3CB5B100A3F40B /* Inputs.swift in Sources */,
 				AA4D62A52A4EE6E9009303DF /* Spacing.swift in Sources */,
+				AA3E69102A671900007B6860 /* KitchenSinkApp.swift in Sources */,
 				AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */,
 				837FC6D02986D0F60076C720 /* Colours.swift in Sources */,
 				838E7E2B2987D873000F691D /* String+Extensions.swift in Sources */,
