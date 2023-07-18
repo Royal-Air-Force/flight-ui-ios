@@ -12,7 +12,7 @@ public class ThemeFont {
     @Published public var footnote: FontStyle
     @Published public var caption1: FontStyle
     @Published public var caption2: FontStyle
-    
+
     public init(largeTitle: FontStyle = .largeTitle,
                 title1: FontStyle = .title1,
                 title2: FontStyle = .title2,

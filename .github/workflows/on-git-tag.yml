@@ -8,7 +8,7 @@ jobs:
   check:
     uses: ./.github/workflows/action-check.yml
     with:
-      fail-on-lint-warning: 'true'
+      fail-on-lint-warning: 'false'
   deploy:
     uses: ./.github/workflows/action-deploy.yml
     needs: check

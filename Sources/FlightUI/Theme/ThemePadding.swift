@@ -1,5 +1,6 @@
 import SwiftUI
 
+// swiftlint:disable identifier_name
 public class ThemePadding {
     @Published public var grid0_5x: CGFloat
     @Published public var grid1x: CGFloat
@@ -13,7 +14,7 @@ public class ThemePadding {
     @Published public var grid8x: CGFloat
     @Published public var grid9x: CGFloat
     @Published public var grid10x: CGFloat
-    
+
     public init(grid0_5x: CGFloat = 4,
                 grid1x: CGFloat = 8,
                 grid1_5x: CGFloat = 12,
@@ -41,3 +42,4 @@ public class ThemePadding {
         self.grid10x = grid10x
     }
 }
+// swiftlint:enable identifier_name

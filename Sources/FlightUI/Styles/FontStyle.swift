@@ -6,7 +6,7 @@ import SwiftUI
 /// Note: Line spacing is caluclated from design tools as line height - font size
 /// Note: Character spacing set to 0 uses the default value from the Font
 public class FontStyle {
-    
+
     private var id: UUID
     public var font: Font
     public var weight: Font.Weight
@@ -15,7 +15,7 @@ public class FontStyle {
     public var lineSpacing: CGFloat
     public var charSpacing: CGFloat
     public var foregroundColor: Color?
-    
+
     public init(font: Font,
                 weight: Font.Weight = .regular,
                 design: Font.Design = .default,
@@ -35,15 +35,15 @@ public class FontStyle {
     }
 }
 
-struct FontStyleModifier : ViewModifier {
+struct FontStyleModifier: ViewModifier {
     @EnvironmentObject var theme: Theme
-    
+
     let style: FontStyle
-    
+
     init(style: FontStyle) {
         self.style = style
     }
-    
+
     func body(content: Content) -> some View {
         content
             .font(style.font
@@ -54,7 +54,7 @@ struct FontStyleModifier : ViewModifier {
             .tracking(style.charSpacing)
             .foregroundColor(style.foregroundColor ?? theme.color.onSurface.default)
     }
-    
+
 }
 
 extension Font {

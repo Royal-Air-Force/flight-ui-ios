@@ -1,5 +1,5 @@
 extension Theme {
-    
+
     public static let dark = Theme(
         baseScheme: .dark,
         color: ThemeColors(primary: .flightWhite,

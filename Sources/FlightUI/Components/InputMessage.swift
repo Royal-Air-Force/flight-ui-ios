@@ -61,16 +61,16 @@ public struct InputMessage: View {
 struct InputMessage_Previews: PreviewProvider {
     @State static var warningStatus: ValidationStatus = .warning(message: "example Warning message")
     @State static var errorStatus: ValidationStatus = .error(message: "example Error message")
-    
+
     static var previews: some View {
         VStack {
             VStack {
                 InputMessage()
-                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
                     }, status: $warningStatus))
                 InputMessage()
-                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
                     }, status: $errorStatus))
             }
@@ -78,11 +78,11 @@ struct InputMessage_Previews: PreviewProvider {
 
             VStack {
                 InputMessage()
-                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
                     }, status: $warningStatus))
                 InputMessage()
-                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
                     }, status: $errorStatus))
             }

@@ -55,7 +55,7 @@ extension Text {
 
 struct StaticText_Previews: PreviewProvider {
     static let theme: Theme = .dark
-    
+
     static var previews: some View {
         VStack(spacing: 32.0) {
             Text("Plain")

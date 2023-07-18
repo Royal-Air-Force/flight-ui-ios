@@ -4,7 +4,7 @@ import SwiftUI
 
 public struct TextFieldType: TextFieldStyle {
     @EnvironmentObject var theme: Theme
-    
+
     let valueType: TextFieldValueType
     let size: TextFieldSize
     let alignment: TextAlignment
