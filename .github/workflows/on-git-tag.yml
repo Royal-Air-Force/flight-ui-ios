@@ -1,0 +1,14 @@
+name: On Git Tag
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  check:
+    uses: ./.github/workflows/action-check.yml
+    with:
+      fail-on-lint-warning: 'true'
+  deploy:
+    uses: ./.github/workflows/action-deploy.yml
+    needs: check
