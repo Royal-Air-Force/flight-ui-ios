@@ -7,6 +7,8 @@
 ## 👋 Introduction
 FlightUI for iOS is a [Swift Package](https://developer.apple.com/documentation/xcode/swift-packages) that enables apps used by aircrew in-flight to be developed more quickly using an approved, reusable, and well-tested set of UI components that support situational accessibility needs.
 
+⚠️ Note: Approval is currently pending, but is required before this project reaches public beta.
+
 It is derived from the Society of Flight Test Engineers: Guidelines for Displays [standard](https://society-of-flight-test-engineers.github.io/handbook-2013/real-time-data-display-guidelines.html) and has been approved by the UK Air and Space Warfare Center for use across multiple mobile projects used In-Flight.
 
 ⚠️ FlightUI is currently in beta, there may be significant changes or breaking issues and full approval for all components has not been given. Please keep that in mind when using this project.
@@ -91,8 +93,11 @@ This library currently provides;
 - Typography
 - Paddings, Spacing, and Radius
 - Buttons
+
+Upcoming functionality includes;
 - Input Fields
 - Expanding Panel
+- Validation in accordance with Flight Crew Alerting
 
 The intention is for this list of components and assets to grow over time, but these are the core elements of all our current applications.
 

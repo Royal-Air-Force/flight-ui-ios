@@ -17,6 +17,7 @@ public struct TextFieldType: TextFieldStyle {
         self.alignment = alignment
     }
 
+    // swiftlint:disable identifier_name
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .fontStyle(theme.font.body)
@@ -27,6 +28,7 @@ public struct TextFieldType: TextFieldStyle {
             .multilineTextAlignment(alignment)
             .keyboardType(keyboardType)
     }
+    // swiftlint:enable identifier_name
 
     private var keyboardType: UIKeyboardType {
         switch valueType {
@@ -52,7 +54,7 @@ public extension TextFieldStyle where Self == TextFieldType {
 
 #if DEBUG
 
-struct TextFieldViewModifiers_ContentPreview: PreviewProvider {
+struct TextFieldViewModifiersContentPreview: PreviewProvider {
     @State private static var emptyText = ""
     @State private static var text = "Hello World"
 

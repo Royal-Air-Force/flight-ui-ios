@@ -9,7 +9,7 @@ Please note we have a code of conduct, please follow it in all your interactions
 2. Update the Kitchen Sink [sample](/Sample/) repository to demonstrate your update to the library
 3. Update the README.md with any new documentation relevant to your changes
 4. If your pull request will result in a tagged release of the library, ensure to increase the version numbers in any example files and within the [README.md](README.md)
-5. You are responsible for merging in the pull request once you have approval from two developers within Appivate, if you do not have permission to do that, you may request the second reviewer to merge it in for you
+5. You are responsible for merging in the pull request once you have approval from two developers within the Royal Air Force GitHub organisation, if you do not have permission to do that, you may request the second reviewer to merge it in for you
 
 ## Code of Conduct
 
