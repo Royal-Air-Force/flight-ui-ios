@@ -13,8 +13,14 @@ struct Inputs: View {
 
                 numberInput
                     .padding(.top, theme.padding.grid2x)
-
-                errorInput
+                
+                advisoryInput
+                    .padding(.top, theme.padding.grid2x)
+                
+                cautionInput
+                    .padding(.top, theme.padding.grid2x)
+                
+                warningInput
                     .padding(.top, theme.padding.grid2x)
 
                 optionalSelectInput
@@ -44,15 +50,35 @@ struct Inputs: View {
             InputMessage()
         }
     }
-
-    var errorInput: some View {
+    
+    var advisoryInput: some View {
         VStack(alignment: .leading) {
-            Text("Error Input")
+            Text("Advisory Input")
                 .fontStyle(theme.font.caption1)
-            InputField("Error", text: $viewModel.errorInput, configuration: .inputFieldConfiguration(valueType: .decimal))
+            InputField("Advisory", text: $viewModel.advisoryInput, configuration: .inputFieldConfiguration(valueType: .decimal))
             InputMessage()
         }
-        .validated(by: viewModel.validateError, status: $viewModel.errorInputResult)
+        .validated(by: viewModel.validateAdvisory, status: $viewModel.advisoryInputResult)
+    }
+    
+    var cautionInput: some View {
+        VStack(alignment: .leading) {
+            Text("Caution Input")
+                .fontStyle(theme.font.caption1)
+            InputField("Caution", text: $viewModel.cautionInput, configuration: .inputFieldConfiguration(valueType: .decimal))
+            InputMessage()
+        }
+        .validated(by: viewModel.validateCaution, status: $viewModel.cautionInputResult)
+    }
+    
+    var warningInput: some View {
+        VStack(alignment: .leading) {
+            Text("Warning Input")
+                .fontStyle(theme.font.caption1)
+            InputField("Warning", text: $viewModel.warningInput, configuration: .inputFieldConfiguration(valueType: .decimal))
+            InputMessage()
+        }
+        .validated(by: viewModel.validateWarning, status: $viewModel.warningInputResult)
     }
 
     var optionalSelectInput: some View {

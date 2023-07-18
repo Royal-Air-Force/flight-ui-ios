@@ -85,8 +85,10 @@ public struct InputField: View {
             return theme.validationStatusValid
         case .warning:
             return theme.validationStatusWarning
-        case .error:
-            return theme.validationStatusError
+        case .caution:
+            return theme.validationStatusCaution
+        case .advisory:
+            return theme.validationStatusAdvisory
         }
     }
 
@@ -168,8 +170,8 @@ struct InputField_Previews: PreviewProvider {
                                                                 options: [.useThemeStyling, .bordered])
     private static let borderedStaticConfig: InputFieldConfiguration = .inputFieldConfiguration(options: .all)
 
-    static func fakeValidator(value: String, mode: ValidationMode) -> ValidationStatus { return .error(message: "") }
-    @State private static var errorStatus: ValidationStatus = .warning(message: "")
+    static func fakeValidator(value: String, mode: ValidationMode) -> ValidationStatus { return .warning(message: "") }
+    @State private static var warningStatus: ValidationStatus = .warning(message: "")
 
     static var previews: some View {
         ScrollView {
@@ -178,6 +180,7 @@ struct InputField_Previews: PreviewProvider {
                     InputField("Bordered",
                                text: $emptyText,
                                configuration: borderedConfig)
+                    
                     InputField("Placeholder",
                                text: $text,
                                configuration: borderedConfig)
@@ -233,7 +236,7 @@ struct InputField_Previews: PreviewProvider {
                 }
                 Divider()
                 Group {
-                    InputField("Bordered Error",
+                    InputField("Bordered Warning",
                                text: $emptyText,
                                configuration: borderedConfig)
                     InputField("Placeholder",
@@ -244,7 +247,7 @@ struct InputField_Previews: PreviewProvider {
                                configuration: largeConfig)
 
                 }
-                .validated(by: fakeValidator, status: $errorStatus)
+                .validated(by: fakeValidator, status: $warningStatus)
                 .padding(.horizontal)
                 Divider()
                 Group {

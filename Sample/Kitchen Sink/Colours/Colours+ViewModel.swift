@@ -5,8 +5,8 @@ extension Colours {
     class ViewModel: ObservableObject {
         @Published var textualInput = ""
         @Published var numericalInput = ""
-        @Published var numericalInputResult: ValidationStatus = .error(message: "Error Message")
-
+        @Published var numericalInputResult: ValidationStatus = .caution(message: "Caution Message")
+        
         @Published var selectionInput: SelectionInputTypes = .selectionOne
         @Published var optionalSelectionInput: SelectionInputTypes?
 
@@ -44,9 +44,9 @@ extension Colours.ViewModel {
         case .editing where text.isEmptyTrimmed:
             return .valid
         case .committed where text.isEmptyTrimmed:
-            return .error(message: "Required")
+            return .caution(message: "Required")
         default:
-            return .error(message: "Invalid input format")
+            return .caution(message: "Invalid input format")
         }
     }
 }

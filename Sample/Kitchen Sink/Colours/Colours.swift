@@ -62,7 +62,10 @@ struct Colours: View {
 
             CoreColorView(colorName: "Nominal", coreColor: theme.color.nominal, onCoreColor: theme.color.onNominal)
             Spacer()
-
+            
+            CoreColorView(colorName: "Advisory", coreColor: theme.color.advisory, onCoreColor: theme.color.onAdvisory)
+            Spacer()
+            
             CoreColorView(colorName: "Caution", coreColor: theme.color.caution, onCoreColor: theme.color.onCaution)
             Spacer()
 

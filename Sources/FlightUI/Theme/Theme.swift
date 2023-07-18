@@ -48,7 +48,8 @@ public class Theme: ObservableObject {
     // Validation Status
     @Published public var validationStatusValid: Color
     @Published public var validationStatusWarning: Color
-    @Published public var validationStatusError: Color
+    @Published public var validationStatusCaution: Color
+    @Published public var validationStatusAdvisory: Color
 
     // Constants
     @Published public var panelCornerRadius: CGFloat
@@ -119,8 +120,9 @@ public class Theme: ObservableObject {
         self.panelViewBackground = color.background
         self.appHeaderBackground = color.background
         self.validationStatusValid = color.onSurface.default
-        self.validationStatusWarning = color.caution.default
-        self.validationStatusError = color.warning.default
+        self.validationStatusWarning = color.warning.default
+        self.validationStatusCaution = color.caution.default
+        self.validationStatusAdvisory = color.advisory.default
         self.panelCornerRadius = radius.medium
         self.panelLineWidth = size.border
         self.panelPadding = padding.grid1x

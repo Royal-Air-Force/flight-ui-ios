@@ -32,7 +32,9 @@ public struct InputMessage: View {
             return nil
         case .warning(let message):
             return message
-        case .error(let message):
+        case .caution(let message):
+            return message
+        case .advisory(let message):
             return message
         }
     }
@@ -43,8 +45,10 @@ public struct InputMessage: View {
             return theme.validationStatusValid
         case .warning:
             return theme.validationStatusWarning
-        case .error:
-            return theme.validationStatusError
+        case .caution:
+            return theme.validationStatusCaution
+        case .advisory:
+            return theme.validationStatusAdvisory
         }
     }
 
@@ -60,8 +64,9 @@ public struct InputMessage: View {
 
 struct InputMessage_Previews: PreviewProvider {
     @State static var warningStatus: ValidationStatus = .warning(message: "example Warning message")
-    @State static var errorStatus: ValidationStatus = .error(message: "example Error message")
-
+    @State static var cautionStatus: ValidationStatus = .caution(message: "example Caution message")
+    @State static var advisoryStatus: ValidationStatus = .advisory(message: "example Advisory message")
+    
     static var previews: some View {
         VStack {
             VStack {
@@ -72,7 +77,11 @@ struct InputMessage_Previews: PreviewProvider {
                 InputMessage()
                     .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
-                    }, status: $errorStatus))
+                    }, status: $cautionStatus))
+                InputMessage()
+                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                        return ValidationStatus.valid
+                    }, status: $advisoryStatus))
             }
             .environmentObject(Theme())
 
@@ -84,7 +93,11 @@ struct InputMessage_Previews: PreviewProvider {
                 InputMessage()
                     .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
-                    }, status: $errorStatus))
+                    }, status: $cautionStatus))
+                InputMessage()
+                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                        return ValidationStatus.valid
+                    }, status: $advisoryStatus))
             }
             .environmentObject(Theme())
         }
