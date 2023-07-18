@@ -4,7 +4,7 @@ import FlightUI
 @main
 struct Kitchen_SinkApp: App {
     @StateObject var themeManager = ThemeManager()
-    
+
     init() {
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.configureWithOpaqueBackground()
@@ -12,7 +12,7 @@ struct Kitchen_SinkApp: App {
         navBarAppearance.backgroundColor = UIColor(themeManager.current.color.background)
         UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
     }
-    
+
     var body: some Scene {
         WindowGroup {
             NavigationStack {

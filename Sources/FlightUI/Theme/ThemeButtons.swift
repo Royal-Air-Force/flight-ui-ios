@@ -1,7 +1,7 @@
 import SwiftUI
 
 public class ThemeButtons {
-    @Published public var filled: any ButtonStyle
+    @Published public var filled: FilledButtonStyle
     @Published public var filledIcon: FilledIconButtonStyle
     @Published public var tonal: TonalButtonStyle
     @Published public var tonalIcon: TonalIconButtonStyle
@@ -10,7 +10,7 @@ public class ThemeButtons {
     @Published public var text: TextButtonStyle
     @Published public var textIcon: TextIconButtonStyle
 
-    public init(filled: any ButtonStyle = .filled,
+    public init(filled: FilledButtonStyle = .filled,
                 filledIcon: FilledIconButtonStyle = .filledIcon,
                 tonal: TonalButtonStyle = .tonal,
                 tonalIcon: TonalIconButtonStyle = .tonalIcon,

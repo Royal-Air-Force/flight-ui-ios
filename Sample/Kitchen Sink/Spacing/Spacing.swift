@@ -3,7 +3,7 @@ import FlightUI
 
 struct Spacing: View {
     @EnvironmentObject var theme: Theme
-    
+
     var body: some View {
         ScrollView {
             VStack {
@@ -17,7 +17,7 @@ struct Spacing: View {
         .background(theme.color.background)
         .navigationBarTitle("Spacing")
     }
-    
+
     var padding: some View {
         VStack {
             Text("Padding")
@@ -27,7 +27,7 @@ struct Spacing: View {
                 .fontStyle(theme.font.caption1)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
-            
+
             VStack {
                 SpacingDisplayBox(name: "Grid 0.5x", space: theme.padding.grid0_5x)
                 SpacingDisplayBox(name: "Grid 1x", space: theme.padding.grid1x)
@@ -46,7 +46,7 @@ struct Spacing: View {
             }
         }
     }
-    
+
     var sizes: some View {
         VStack {
             Text("Sizes")
@@ -56,7 +56,7 @@ struct Spacing: View {
                 .fontStyle(theme.font.caption1)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
-            
+
             VStack {
                 SpacingDisplayBox(name: "Divider", space: theme.size.divider)
                 SpacingDisplayBox(name: "Icon Small", space: theme.size.iconSmall)
@@ -73,7 +73,7 @@ struct Spacing: View {
             }
         }
     }
-    
+
     var radius: some View {
         VStack {
             Text("Radius")
@@ -83,7 +83,7 @@ struct Spacing: View {
                 .fontStyle(theme.font.caption1)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
-            
+
             SpacingDisplayBox(name: "Radius Small", space: theme.radius.small)
             SpacingDisplayBox(name: "Radius Medium", space: theme.radius.medium)
             SpacingDisplayBox(name: "Radius Large", space: theme.radius.large)
@@ -93,10 +93,10 @@ struct Spacing: View {
 
 struct SpacingDisplayBox: View {
     @EnvironmentObject var theme: Theme
-    
+
     var name: String
     var space: CGFloat
-    
+
     var body: some View {
         HStack {
             Rectangle()

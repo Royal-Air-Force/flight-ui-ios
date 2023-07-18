@@ -7,7 +7,7 @@ extension Inputs {
         @Published var numericalInput = ""
         @Published var errorInput = ""
         @Published var errorInputResult: ValidationStatus = .error(message: "Error Message")
-        
+
         @Published var selectionInput: SelectionInputTypes = .selectionOne
         @Published var optionalSelectionInput: SelectionInputTypes?
     }
@@ -24,10 +24,10 @@ extension Inputs.ViewModel {
         case selectionOne = "Option One"
         case selectionTwo = "Option Two"
         case selectionThree = "Option Three"
-        
+
         var description: String {
             return rawValue
         }
     }
-    
+
 }

@@ -4,9 +4,9 @@ import FlightUI
 struct Typography: View {
     @EnvironmentObject var theme: Theme
     @StateObject private var viewModel = ViewModel()
-    
+
     let exampleText = " How vexingly quick daft zebras jump!"
-    
+
     var body: some View {
         ScrollView {
             VStack {
@@ -15,17 +15,17 @@ struct Typography: View {
                         .fontStyle(theme.font.largeTitle)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, theme.padding.grid1x)
-                    
+
                     Text("Title 1/SF Pro/Regular/28px")
                         .fontStyle(theme.font.title1)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, theme.padding.grid1x)
-                    
+
                     Text("Title 2/SF Pro/Regular/22px")
                         .fontStyle(theme.font.title2)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, theme.padding.grid1x)
-                    
+
                     Text("Title 3/SF Pro/Regular/20px")
                         .fontStyle(theme.font.title3)
                         .frame(maxWidth: .infinity, alignment: .leading)
