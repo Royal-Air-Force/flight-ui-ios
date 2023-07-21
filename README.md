@@ -9,7 +9,7 @@ FlightUI for iOS is a [Swift Package](https://developer.apple.com/documentation/
 
 ⚠️ Note: Approval is currently pending, but is required before this project reaches public beta.
 
-It is derived from the Society of Flight Test Engineers: Guidelines for Displays [standard](https://society-of-flight-test-engineers.github.io/handbook-2013/real-time-data-display-guidelines.html) and has been approved by the UK Air and Space Warfare Center for use across multiple mobile projects used In-Flight.
+Initial designs are derived from the Society of Flight Test Engineers: Guidelines for Displays [standard](https://society-of-flight-test-engineers.github.io/handbook-2013/real-time-data-display-guidelines.html). The project has been been developed in partnership with the UK Air and Space Warfare Center for use across multiple mobile projects used In-Flight across a large range of aircraft platforms.
 
 ⚠️ FlightUI is currently in beta, there may be significant changes or breaking issues and full approval for all components has not been given. Please keep that in mind when using this project.
 
@@ -40,6 +40,8 @@ Our recommended approach to utilising FlightUI is to provide the `ThemeManager` 
 
 1. Create the `ThemeManager` instance as a State Object within your App Struct. You can provide a customised `Theme` object to the theme manager within it's constructor.
 ```
+import FlightUI
+
 @main
 struct MyApp: App {
     @StateObject var themeManager = ThemeManager()
