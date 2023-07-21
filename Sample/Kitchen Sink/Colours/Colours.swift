@@ -24,7 +24,7 @@ struct Colours: View {
     
     var generalColors: some View {
         VStack{
-            ColorHeadingView(title: "General colours", subTitle: "UUsed for distinguishing content and content areas within an application")
+            ColorHeadingView(title: "General colours", subTitle: "Used for distinguishing content and content areas within an application")
             
             GeneralColorView(colorName: "Primary", generalColor: theme.color.primary, onGeneralColor: theme.color.onPrimary)
             Spacer()
