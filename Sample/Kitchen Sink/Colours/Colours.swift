@@ -24,14 +24,7 @@ struct Colours: View {
     
     var generalColors: some View {
         VStack{
-            Text("General colours")
-                .fontStyle(theme.font.title1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Used for distinguishing content and content areas within an application")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            Spacer()
+            ColorHeadingView(title: "General colours", subTitle: "UUsed for distinguishing content and content areas within an application")
             
             GeneralColorView(colorName: "Primary", generalColor: theme.color.primary, onGeneralColor: theme.color.onPrimary)
             Spacer()
@@ -49,13 +42,7 @@ struct Colours: View {
     
     var coreColors: some View {
         VStack{
-            Text("Core colours")
-                .fontStyle(theme.font.title1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Used to bring context to an app such as indicating user input or success states")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer()
+            ColorHeadingView(title: "Core colours", subTitle: "Used to bring context to an app such as indicating user input or success states")
             
             CoreColorView(colorName: "Input/Output", coreColor: theme.color.inputOutput, onCoreColor: theme.color.onInputOutput)
             Spacer()
@@ -76,13 +63,7 @@ struct Colours: View {
     
     var graphicsColors: some View {
         VStack{
-            Text("Graphics colours")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Only to be used for displaying complex data sets such as graphs and diagrams")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer()
+            ColorHeadingView(title:"Graphics colours", subTitle: "Only to be used for displaying complex data sets such as graphs and diagrams")
             
             HStack{
                 ColorDisplayBox(name: "Graphics Red", color: theme.color.graphicsRed, foregroundColor: .flightBlack)
@@ -113,6 +94,25 @@ struct Colours: View {
             }
         }
         .padding(.bottom, theme.padding.grid4x)
+    }
+}
+
+struct ColorHeadingView: View {
+    @EnvironmentObject var theme: Theme
+    
+    var title: String
+    var subTitle: String
+    
+    var body: some View {
+        VStack{
+            Text(title)
+                .fontStyle(theme.font.title1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(subTitle)
+                .fontStyle(theme.font.caption1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Spacer()
+        }
     }
 }
 
