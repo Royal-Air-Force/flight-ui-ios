@@ -6,23 +6,23 @@ public class ColorState {
     @Published public var `default`: Color
     @Published public var focusedColor: Color
     @Published public var disabledColor: Color
-    
+
     public init(color: Color) {
         self.default = color
         self.focusedColor = color.opacity(0.87)
         self.disabledColor = color.opacity(0.38)
     }
-    
+
     public init(color: Color, focusedColor: Color, disabledColor: Color) {
         self.default = color
         self.focusedColor = focusedColor
         self.disabledColor = disabledColor
     }
-    
+
     public func getColorForState(disabled: Bool, focused: Bool) -> Color {
-        if (disabled) {
+        if disabled {
             return self.disabledColor
-        } else if (focused) {
+        } else if focused {
             return self.focusedColor
         } else {
             return self.default
@@ -37,13 +37,13 @@ public extension Color {
     static let flightGrey = Color("flightGrey", bundle: .module)
     static let flightLightGrey = Color("flightLightGrey", bundle: .module)
     static let flightWhite = Color("flightWhite", bundle: .module)
-    
+
     // Core
     static let flightInputOutput = Color("flightBlue", bundle: .module)
     static let flightNominal = Color("flightGreen", bundle: .module)
     static let flightCaution = Color("flightYellow", bundle: .module)
     static let flightWarning = Color("flightRed", bundle: .module)
-    
+
     // Graphics
     static let flightGraphicsRed = Color("flightGraphicsRed", bundle: .module)
     static let flightGraphicsYellow = Color("flightGraphicsYellow", bundle: .module)
@@ -71,18 +71,18 @@ fileprivate extension Color {
         let name = suffix.prefix(upTo: lastOccurenceIndex)
         return String(name)
     }
-    
+
     static let generalColors: [Color] = [.flightBlack,
                                          .flightDarkGrey,
                                          .flightGrey,
                                          .flightLightGrey,
                                          .flightWhite]
-    
+
     static let coreColors: [Color] = [.flightInputOutput,
                                       .flightNominal,
                                       .flightCaution,
                                       .flightWarning]
-    
+
     static let graphicsColors: [Color] = [.flightGraphicsRed,
                                           .flightGraphicsYellow,
                                           .flightGraphicsGreen,
@@ -92,7 +92,7 @@ fileprivate extension Color {
                                           .flightGraphicsIndigo,
                                           .flightGraphicsPurple,
                                           .flightGraphicsPink]
-    
+
     static let customColors: [Color] = generalColors + coreColors + graphicsColors
 }
 
@@ -115,7 +115,7 @@ struct Color_Previews: PreviewProvider {
             .navigationTitle("Colors")
         }
     }
-    
+
     static var previews: some View {
         colorList
             .preferredColorScheme(.dark)

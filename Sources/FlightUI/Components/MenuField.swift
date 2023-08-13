@@ -5,15 +5,15 @@ public struct OptionalMenuField<SelectionType: CustomStringConvertible & Hashabl
     @Binding var selection: SelectionType?
     var options: [SelectionType]
     let placeholder: String
-    
+
     public init(selection: Binding<SelectionType?>,
-         options: [SelectionType],
-         placeholder: String = "Select") {
+                options: [SelectionType],
+                placeholder: String = "Select") {
         self._selection = selection
         self.options = options
         self.placeholder = placeholder
     }
-    
+
     public var body: some View {
         Menu {
             Picker("", selection: $selection) {
@@ -29,7 +29,7 @@ public struct OptionalMenuField<SelectionType: CustomStringConvertible & Hashabl
                 Image(systemName: "chevron.down")
                     .foregroundColor(theme.menuFieldAccent)
                     .fontWeight(.bold)
-                
+
             }
         }
         .padding()
@@ -40,18 +40,18 @@ public struct OptionalMenuField<SelectionType: CustomStringConvertible & Hashabl
 }
 
 public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View {
-    
+
     @Environment (\.validationContext) var context
     @EnvironmentObject var theme: Theme
     @Binding var selection: SelectionType
     var options: [SelectionType]
-    
+
     public init(selection: Binding<SelectionType>,
                 options: [SelectionType]) {
         self._selection = selection
         self.options = options
     }
-    
+
     public var body: some View {
         Menu {
             Picker("", selection: $selection) {
@@ -67,7 +67,7 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
                 Image(systemName: "chevron.down")
                     .foregroundColor(theme.menuFieldAccent)
                     .fontWeight(.bold)
-                
+
             }
         }
         .padding()
@@ -81,7 +81,7 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
             }
         }
     }
-    
+
     private var overlayColor: Color {
         switch context.status {
         case .valid:
@@ -96,20 +96,19 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
     }
 }
 
-
 struct MenuField_Previews: PreviewProvider {
     @State static var optionalSelection: String?
     @State static var selection: String = "Iron Man"
     static func fakeValidator(value: String, mode: ValidationMode) -> ValidationStatus { return .caution(message: "") }
     @State private static var validationStatus: ValidationStatus = .warning(message: "")
     static let options = ["Thor", "Iron Man", "Captain America"]
-    
+
     static var previews: some View {
-        
+
         VStack {
             OptionalMenuField(selection: $optionalSelection,
                       options: options)
-            
+
             OptionalMenuField(selection: $optionalSelection,
                       options: options,
                       placeholder: "Custom Placeholder Text")

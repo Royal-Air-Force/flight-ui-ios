@@ -9,9 +9,9 @@ public struct FilledButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Environment(\.isFocused) private var isFocused: Bool
-    
+
     public init() {}
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], theme.padding.grid4x)
@@ -30,9 +30,9 @@ public struct FilledIconButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Environment(\.isFocused) private var isFocused: Bool
-    
+
     public init() {}
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
@@ -50,9 +50,9 @@ public struct TonalButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Environment(\.isFocused) private var isFocused: Bool
-    
+
     public init() {}
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], theme.padding.grid4x)
@@ -71,9 +71,9 @@ public struct TonalIconButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Environment(\.isFocused) private var isFocused: Bool
-    
+
     public init() {}
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
@@ -88,9 +88,9 @@ public struct TonalIconButtonStyle: ButtonStyle {
 }
 
 private func getTonalBackgroundColor(theme: Theme, isEnabled: Bool, isFocused: Bool) -> Color {
-    if (!isEnabled) {
+    if !isEnabled {
         return theme.color.onSurface.default.opacity(0.12)
-    } else if (isFocused) {
+    } else if isFocused {
         return theme.color.nominal.default.opacity(0.38)
     } else {
         return theme.color.nominal.default.opacity(0.16)
@@ -101,9 +101,9 @@ public struct OutlineButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Environment(\.isFocused) private var isFocused: Bool
-    
+
     public init() {}
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], theme.padding.grid4x)
@@ -127,9 +127,9 @@ public struct OutlineIconButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Environment(\.isFocused) private var isFocused: Bool
-    
+
     public init() {}
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
@@ -152,9 +152,9 @@ public struct TextButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Environment(\.isFocused) private var isFocused: Bool
-    
+
     public init() {}
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], theme.padding.grid4x)
@@ -171,9 +171,9 @@ public struct TextIconButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Environment(\.isFocused) private var isFocused: Bool
-    
+
     public init() {}
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)

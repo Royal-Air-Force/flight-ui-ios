@@ -34,7 +34,7 @@ public struct StaticTextStyle: ViewModifier {
             .background(options.contains(.background) ? theme.staticTextBackground : .clear)
             .cornerRadius(options.contains(.background) ? theme.staticTextFieldCornerRadius : 0)
             .background(
-                // TODO: move cornerRadius and lineWidth to Theme
+                // Move cornerRadius and lineWidth to Theme
                 RoundedRectangle(cornerRadius: options.contains(.bordered) ? theme.staticTextFieldCornerRadius : 0, style: .continuous)
                     .stroke(options.contains(.bordered) ? theme.staticTextBorder : .clear, lineWidth: theme.staticTextFieldBorderWidth)
             )
@@ -55,7 +55,7 @@ extension Text {
 
 struct StaticText_Previews: PreviewProvider {
     static let theme: Theme = .dark
-    
+
     static var previews: some View {
         VStack(spacing: 32.0) {
             Text("Plain")

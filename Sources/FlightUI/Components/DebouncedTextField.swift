@@ -3,7 +3,7 @@ import Combine
 
 struct DebouncedTextField: View {
     @EnvironmentObject private var theme: Theme
-    
+
     private let placeholder: String
     @Binding private var text: String
     private let onEditingChanged: (Bool) -> Void
@@ -49,7 +49,6 @@ class TextFieldDebouncer: ObservableObject {
     }
 
 }
-
 
 #if DEBUG
 struct DebouncedTextField_Previews: PreviewProvider {

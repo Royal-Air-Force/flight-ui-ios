@@ -35,10 +35,10 @@ public struct Panel<Content: View, Subtitle: View>: View {
             self.expandable = false
             self.expanded = false
         }
-        
+
         self.typography = typography
     }
-    
+
     public init(title: String? = nil,
                 typography: Font? = nil,
                 options: PanelOptions = .fixed,
@@ -58,7 +58,7 @@ public struct Panel<Content: View, Subtitle: View>: View {
         VStack {
             panelHeaderView
 
-            if (showContent) {
+            if showContent {
                 panelContentView
             }
         }
@@ -75,7 +75,7 @@ public struct Panel<Content: View, Subtitle: View>: View {
             }
 
             Spacer()
-            
+
             subtitle()
 
             if expandable {
@@ -138,15 +138,13 @@ struct Panel_Previews: PreviewProvider {
             Panel(title: "Default Panel") {
                 content
             }
-            
-            
+
             Panel(title: "Expandable Panel with subtitle", typography: .body, options: .expandable()) {
                 Text("This is a subtitle")
                     .fontStyle(Theme().font.caption1)
             } content: {
                 content
             }
-
 
             Panel(title: "Panel (not expanded)", options: .expandable()) {
                 content

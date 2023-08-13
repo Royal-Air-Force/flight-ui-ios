@@ -71,11 +71,11 @@ struct InputMessage_Previews: PreviewProvider {
         VStack {
             VStack {
                 InputMessage()
-                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
                     }, status: $warningStatus))
                 InputMessage()
-                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
                     }, status: $cautionStatus))
                 InputMessage()
@@ -87,11 +87,11 @@ struct InputMessage_Previews: PreviewProvider {
 
             VStack {
                 InputMessage()
-                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
                     }, status: $warningStatus))
                 InputMessage()
-                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
                     }, status: $cautionStatus))
                 InputMessage()

@@ -4,7 +4,7 @@ import FlightUI
 struct Inputs: View {
     @EnvironmentObject var theme: Theme
     @StateObject private var viewModel = ViewModel()
-    
+
     var body: some View {
         ScrollView {
             VStack {
@@ -22,18 +22,18 @@ struct Inputs: View {
                 
                 warningInput
                     .padding(.top, theme.padding.grid2x)
-                
+
                 optionalSelectInput
                     .padding(.top, theme.padding.grid2x)
-                
+
                 mandatorySelectInput
                     .padding(.top, theme.padding.grid2x)
             }
-            
+
         }
         .navigationBarTitle("Inputs")
     }
-    
+
     var textInput: some View {
         VStack(alignment: .leading) {
             Text("Full Length Textual Input")
@@ -41,7 +41,7 @@ struct Inputs: View {
             InputField("Select", text: $viewModel.textualInput)
         }
     }
-    
+
     var numberInput: some View {
         VStack(alignment: .leading) {
             Text("Numerical Input with Validation")
@@ -80,7 +80,7 @@ struct Inputs: View {
         }
         .validated(by: viewModel.validateWarning, status: $viewModel.warningInputResult)
     }
-    
+
     var optionalSelectInput: some View {
         VStack(alignment: .leading) {
             Text("Select Value (Optional)")
@@ -89,7 +89,7 @@ struct Inputs: View {
                       options: ViewModel.SelectionInputTypes.allCases, placeholder: "Select value placeholder text")
         }
     }
-    
+
     var mandatorySelectInput: some View {
         VStack(alignment: .leading) {
             Text("Select Value (Mandatory)")

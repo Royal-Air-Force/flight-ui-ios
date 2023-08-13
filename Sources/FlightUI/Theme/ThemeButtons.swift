@@ -9,7 +9,7 @@ public class ThemeButtons {
     @Published public var outlineIcon: OutlineIconButtonStyle
     @Published public var text: TextButtonStyle
     @Published public var textIcon: TextIconButtonStyle
-    
+
     public init(filled: FilledButtonStyle = .filled,
                 filledIcon: FilledIconButtonStyle = .filledIcon,
                 tonal: TonalButtonStyle = .tonal,

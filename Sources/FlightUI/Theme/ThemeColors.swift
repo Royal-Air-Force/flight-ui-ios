@@ -10,7 +10,7 @@ public class ThemeColors {
     @Published public var onBackground: ColorState
     @Published public var surface: Color
     @Published public var onSurface: ColorState
-    
+
     // Core Colors
     @Published public var inputOutput: ColorState
     @Published public var onInputOutput: ColorState
@@ -22,7 +22,7 @@ public class ThemeColors {
     @Published public var onCaution: ColorState
     @Published public var warning: ColorState
     @Published public var onWarning: ColorState
-    
+
     // Graphics Colors
     @Published public var graphicsRed: Color
     @Published public var graphicsYellow: Color
@@ -33,7 +33,7 @@ public class ThemeColors {
     @Published public var graphicsIndigo: Color
     @Published public var graphicsPurple: Color
     @Published public var graphicsPink: Color
-    
+
     public init(primary: Color = .flightWhite,
                 onPrimary: ColorState = ColorState(color: .flightBlack),
                 secondary: Color = .flightLightGrey,
@@ -70,7 +70,7 @@ public class ThemeColors {
         self.onBackground = onBackground
         self.surface = surface
         self.onSurface = onSurface
-        
+
         self.inputOutput = inputOutput
         self.onInputOutput = onInputOutput
         self.nominal = nominal
@@ -81,7 +81,7 @@ public class ThemeColors {
         self.onCaution = onCaution
         self.warning = warning
         self.onWarning = onWarning
-        
+
         self.graphicsRed = graphicsRed
         self.graphicsYellow = graphicsYellow
         self.graphicsGreen = graphicsGreen

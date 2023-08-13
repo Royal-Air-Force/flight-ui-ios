@@ -34,10 +34,10 @@ extension Inputs.ViewModel {
         case selectionOne = "Option One"
         case selectionTwo = "Option Two"
         case selectionThree = "Option Three"
-        
+
         var description: String {
             return rawValue
         }
     }
-    
+
 }

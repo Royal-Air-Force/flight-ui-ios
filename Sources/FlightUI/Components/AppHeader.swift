@@ -4,7 +4,7 @@ import SwiftUI
 
 public struct AppHeader<Content: View>: View {
     @EnvironmentObject var theme: Theme
-    
+
     private var content: () -> Content
     private var title: String?
     private var imageName: String?

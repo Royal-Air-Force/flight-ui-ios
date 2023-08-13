@@ -9,14 +9,14 @@ struct Misc: View {
             VStack {
                 expandingPanel
                     .padding([.bottom], theme.padding.grid6x)
-                
+
                 nonExpandingPanel
                     .padding([.bottom], theme.padding.grid6x)
             }
         }
         .navigationBarTitle("Misc")
     }
-    
+
     var expandingPanel: some View {
         Panel(title: "Expandable Panel", options: .expandable(expanded: true)) {
             VStack {
@@ -28,7 +28,7 @@ struct Misc: View {
             .padding(theme.padding.grid6x)
         }
     }
-    
+
     var nonExpandingPanel: some View {
         Panel(title: "Expandable Panel", typography: (theme.font.title1.font)) {
             VStack {
