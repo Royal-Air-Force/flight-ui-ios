@@ -75,6 +75,15 @@ struct Spacing: View {
             SpacingDisplayBox(name: "Radius Small", space: theme.radius.small)
             SpacingDisplayBox(name: "Radius Medium", space: theme.radius.medium)
             SpacingDisplayBox(name: "Radius Large", space: theme.radius.large)
+
+            HeadingView(
+                title: "Inner Radius",
+                subTitle: "When a rounded component is inside another rounded component, the corner radius should work well with the parent. " +
+                "This is calculated based on the margin between the inner and outer component, the following examples use a value of 8pt padding")
+
+            SpacingDisplayBox(name: "Inner Radius Small", space: theme.radius.innerSmall(padding: 8.0))
+            SpacingDisplayBox(name: "Inner Radius Medium", space: theme.radius.innerMedium(padding: 8.0))
+            SpacingDisplayBox(name: "Inner Radius Large", space: theme.radius.innerLarge(padding: 8.0))
         }
     }
 }
