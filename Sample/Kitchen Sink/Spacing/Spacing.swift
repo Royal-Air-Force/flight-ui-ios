@@ -20,7 +20,9 @@ struct Spacing: View {
 
     var padding: some View {
         VStack {
-            HeadingView(title: "Padding", subTitle: "Used for spacing between components on screen, follows the standard 8pt grid")
+            HeadingView(
+                title: "Padding",
+                subTitle: "Used for spacing between components on screen, follows the standard 8pt grid")
 
             VStack {
                 SpacingDisplayBox(name: "Grid 0.5x", space: theme.padding.grid0_5x)
@@ -43,7 +45,9 @@ struct Spacing: View {
 
     var sizes: some View {
         VStack {
-            HeadingView(title: "Sizes", subTitle: "Used for managing the size of components themselves")
+            HeadingView(
+                title: "Sizes",
+                subTitle: "Used for managing the size of components themselves")
 
             VStack {
                 SpacingDisplayBox(name: "Divider", space: theme.size.divider)
@@ -64,7 +68,9 @@ struct Spacing: View {
 
     var radius: some View {
         VStack {
-            HeadingView(title: "Radius", subTitle: "Providing the standard radius used across the apps for corners on components")
+            HeadingView(
+                title: "Radius",
+                subTitle: "Providing the standard radius used across the apps for corners on components")
 
             SpacingDisplayBox(name: "Radius Small", space: theme.radius.small)
             SpacingDisplayBox(name: "Radius Medium", space: theme.radius.medium)

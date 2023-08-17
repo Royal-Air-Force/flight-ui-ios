@@ -3,7 +3,7 @@ import FlightUI
 
 struct Misc: View {
     @EnvironmentObject var theme: Theme
-    
+
     var body: some View {
         ScrollView {
             VStack {

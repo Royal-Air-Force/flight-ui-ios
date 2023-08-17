@@ -23,9 +23,11 @@ struct Colours: View {
     }
 
     var generalColors: some View {
-        VStack{
-            HeadingView(title: "General colours", subTitle: "Used for distinguishing content and content areas within an application")
-            
+        VStack {
+            HeadingView(
+                title: "General colours",
+                subTitle: "Used for distinguishing content and content areas within an application")
+
             GeneralColorView(colorName: "Primary", generalColor: theme.color.primary, onGeneralColor: theme.color.onPrimary)
             Spacer()
 
@@ -41,18 +43,20 @@ struct Colours: View {
     }
 
     var coreColors: some View {
-        VStack{
-            HeadingView(title: "Core colours", subTitle: "Used to bring context to an app such as indicating user input or success states")
-            
+        VStack {
+            HeadingView(
+                title: "Core colours",
+                subTitle: "Used to bring context to an app such as indicating user input or success states")
+
             CoreColorView(colorName: "Input/Output", coreColor: theme.color.inputOutput, onCoreColor: theme.color.onInputOutput)
             Spacer()
 
             CoreColorView(colorName: "Nominal", coreColor: theme.color.nominal, onCoreColor: theme.color.onNominal)
             Spacer()
-            
+
             CoreColorView(colorName: "Advisory", coreColor: theme.color.advisory, onCoreColor: theme.color.onAdvisory)
             Spacer()
-            
+
             CoreColorView(colorName: "Caution", coreColor: theme.color.caution, onCoreColor: theme.color.onCaution)
             Spacer()
 
@@ -62,10 +66,12 @@ struct Colours: View {
     }
 
     var graphicsColors: some View {
-        VStack{
-            HeadingView(title:"Graphics colours", subTitle: "Only to be used for displaying complex data sets such as graphs and diagrams")
-            
-            HStack{
+        VStack {
+            HeadingView(
+                title: "Graphics colours",
+                subTitle: "Only to be used for displaying complex data sets such as graphs and diagrams")
+
+            HStack {
                 ColorDisplayBox(name: "Graphics Red", color: theme.color.graphicsRed, foregroundColor: .flightBlack)
                 Spacer()
                 ColorDisplayBox(name: "Graphics Yellow", color: theme.color.graphicsYellow, foregroundColor: .flightBlack)
@@ -97,8 +103,8 @@ struct Colours: View {
     }
 }
 
-struct GeneralColorView : View {
-    
+struct GeneralColorView: View {
+
     @EnvironmentObject var theme: Theme
 
     var colorName: String

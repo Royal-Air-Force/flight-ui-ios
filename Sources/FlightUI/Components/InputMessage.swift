@@ -66,7 +66,7 @@ struct InputMessage_Previews: PreviewProvider {
     @State static var warningStatus: ValidationStatus = .warning(message: "example Warning message")
     @State static var cautionStatus: ValidationStatus = .caution(message: "example Caution message")
     @State static var advisoryStatus: ValidationStatus = .advisory(message: "example Advisory message")
-    
+
     static var previews: some View {
         VStack {
             VStack {
@@ -79,7 +79,7 @@ struct InputMessage_Previews: PreviewProvider {
                         return ValidationStatus.valid
                     }, status: $cautionStatus))
                 InputMessage()
-                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
                     }, status: $advisoryStatus))
             }
@@ -95,7 +95,7 @@ struct InputMessage_Previews: PreviewProvider {
                         return ValidationStatus.valid
                     }, status: $cautionStatus))
                 InputMessage()
-                    .environment(\.validationContext, ValidationContext(validator: { _ , _ in
+                    .environment(\.validationContext, ValidationContext(validator: { _, _ in
                         return ValidationStatus.valid
                     }, status: $advisoryStatus))
             }

@@ -57,7 +57,9 @@ struct Buttons: View {
 
     var tonalButton: some View {
         VStack {
-            HeadingView(title: "Tonal Button", subTitle: "The tonal button has less emphasis than filled but still provides visual importance, and should be used for non-final actions in a flow such as 'Next'")
+            HeadingView(
+                title: "Tonal Button",
+                subTitle: "The tonal button has less emphasis than filled but still provides visual importance, and should be used for non-final actions in a flow such as 'Next'")
 
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
@@ -89,7 +91,9 @@ struct Buttons: View {
 
     var outlinedButton: some View {
         VStack {
-            HeadingView(title: "Outline Button", subTitle: "The outline button has low emphasis within the UI and often paired with a filled/tonal button to indicate a secondary action on screen")
+            HeadingView(
+                title: "Outline Button",
+                subTitle: "The outline button has low emphasis within the UI and often paired with a filled/tonal button to indicate a secondary action on screen")
 
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
@@ -121,7 +125,10 @@ struct Buttons: View {
 
     var textButton: some View {
         VStack {
-            HeadingView(title: "Text Button", subTitle: "The text button is the lowest priority action and don't distract from nearby content they don't have a container, often used for presenting a number of low priority actions")
+            HeadingView(
+                title: "Text Button",
+                subTitle: "The text button is the lowest priority action and don't distract from nearby content they don't have a container, often used for presenting a number of low priority actions"
+            )
 
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
