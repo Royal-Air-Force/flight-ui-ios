@@ -20,13 +20,9 @@ struct Spacing: View {
 
     var padding: some View {
         VStack {
-            Text("Padding")
-                .fontStyle(theme.font.title1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Used for spacing between components on screen, follows the standard 8pt grid")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer()
+            HeadingView(
+                title: "Padding",
+                subTitle: "Used for spacing between components on screen, follows the standard 8pt grid")
 
             VStack {
                 SpacingDisplayBox(name: "Grid 0.5x", space: theme.padding.grid0_5x)
@@ -49,13 +45,9 @@ struct Spacing: View {
 
     var sizes: some View {
         VStack {
-            Text("Sizes")
-                .fontStyle(theme.font.title1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Used for managing the size of components themselves")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer()
+            HeadingView(
+                title: "Sizes",
+                subTitle: "Used for managing the size of components themselves")
 
             VStack {
                 SpacingDisplayBox(name: "Divider", space: theme.size.divider)
@@ -76,17 +68,22 @@ struct Spacing: View {
 
     var radius: some View {
         VStack {
-            Text("Radius")
-                .fontStyle(theme.font.title1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Providing the standard radius used across the apps for corners on components")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer()
+            HeadingView(
+                title: "Radius",
+                subTitle: "Providing the standard radius used across the apps for corners on components")
 
             SpacingDisplayBox(name: "Radius Small", space: theme.radius.small)
             SpacingDisplayBox(name: "Radius Medium", space: theme.radius.medium)
             SpacingDisplayBox(name: "Radius Large", space: theme.radius.large)
+
+            HeadingView(
+                title: "Inner Radius",
+                subTitle: "When a rounded component is inside another rounded component, the corner radius should work well with the parent. " +
+                "This is calculated based on the margin between the inner and outer component, the following examples use a value of 8pt padding")
+
+            SpacingDisplayBox(name: "Inner Radius Small", space: theme.radius.innerSmall(padding: 8.0))
+            SpacingDisplayBox(name: "Inner Radius Medium", space: theme.radius.innerMedium(padding: 8.0))
+            SpacingDisplayBox(name: "Inner Radius Large", space: theme.radius.innerLarge(padding: 8.0))
         }
     }
 }

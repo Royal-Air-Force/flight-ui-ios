@@ -11,7 +11,7 @@ extension Inputs {
         @Published var cautionInputResult: ValidationStatus = .caution(message: "Caution Message")
         @Published var warningInput = ""
         @Published var warningInputResult: ValidationStatus = .warning(message: "Warning Message")
-        
+
         @Published var selectionInput: SelectionInputTypes = .selectionOne
         @Published var optionalSelectionInput: SelectionInputTypes?
     }

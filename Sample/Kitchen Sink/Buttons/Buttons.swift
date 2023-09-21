@@ -25,12 +25,7 @@ struct Buttons: View {
 
     var filledButton: some View {
         VStack {
-            Text("Filled Button")
-                .fontStyle(theme.font.title1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("The filled button has the most visual impact and should be used for important, final actions within a flow")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HeadingView(title: "Filled Button", subTitle: "The filled button has the most visual impact and should be used for important, final actions within a flow")
 
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
@@ -62,12 +57,9 @@ struct Buttons: View {
 
     var tonalButton: some View {
         VStack {
-            Text("Tonal Button")
-                .fontStyle(theme.font.title1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("The tonal button has less emphasis than filled but still provides visual importance, and should be used for non-final actions in a flow such as 'Next'")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HeadingView(
+                title: "Tonal Button",
+                subTitle: "The tonal button has less emphasis than filled but still provides visual importance, and should be used for non-final actions in a flow such as 'Next'")
 
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
@@ -99,12 +91,9 @@ struct Buttons: View {
 
     var outlinedButton: some View {
         VStack {
-            Text("Outlined Button")
-                .fontStyle(theme.font.title1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("The outline button has low emphasis within the UI and often paired with a filled/tonal button to indicate a secondary action on screen")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HeadingView(
+                title: "Outline Button",
+                subTitle: "The outline button has low emphasis within the UI and often paired with a filled/tonal button to indicate a secondary action on screen")
 
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
@@ -136,12 +125,10 @@ struct Buttons: View {
 
     var textButton: some View {
         VStack {
-            Text("Text Button")
-                .fontStyle(theme.font.title1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("The text button is the lowest priority action and don't distract from nearby content they don't have a container, often used for presenting a number of low priority actions")
-                .fontStyle(theme.font.caption1)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HeadingView(
+                title: "Text Button",
+                subTitle: "The text button is the lowest priority action and don't distract from nearby content they don't have a container, often used for presenting a number of low priority actions"
+            )
 
             HStack {
                 Button("Enabled", action: { print("Button tapped") })

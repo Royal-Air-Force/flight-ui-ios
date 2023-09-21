@@ -6,7 +6,7 @@ extension Colours {
         @Published var textualInput = ""
         @Published var numericalInput = ""
         @Published var numericalInputResult: ValidationStatus = .caution(message: "Caution Message")
-        
+
         @Published var selectionInput: SelectionInputTypes = .selectionOne
         @Published var optionalSelectionInput: SelectionInputTypes?
 

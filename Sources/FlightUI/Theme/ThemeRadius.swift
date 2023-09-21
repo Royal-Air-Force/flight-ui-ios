@@ -15,14 +15,23 @@ public class ThemeRadius {
     }
 
     public func innerSmall(padding: CGFloat) -> CGFloat {
-        return small - (padding / 2)
+        return calculateRadius(outerRadius: small, outerPadding: padding)
     }
 
     public func innerMedium(padding: CGFloat) -> CGFloat {
-        return medium - (padding / 2)
+        return calculateRadius(outerRadius: medium, outerPadding: padding)
     }
 
     public func innerLarge(padding: CGFloat) -> CGFloat {
-        return large - (padding / 2)
+        return calculateRadius(outerRadius: large, outerPadding: padding)
+    }
+
+    private func calculateRadius(outerRadius: CGFloat, outerPadding: CGFloat) -> CGFloat {
+        let radius = outerRadius - (outerPadding / 2)
+        if radius < 1 {
+            return 1
+        } else {
+            return radius
+        }
     }
 }
