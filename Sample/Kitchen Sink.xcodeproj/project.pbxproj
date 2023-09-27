@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55B64F3B2AC4C01C00AC21F5 /* FlightUI in Frameworks */ = {isa = PBXBuildFile; productRef = 55B64F3A2AC4C01C00AC21F5 /* FlightUI */; };
 		837FC6D02986D0F60076C720 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6CF2986D0F60076C720 /* Colours.swift */; };
 		837FC6D22986D1460076C720 /* Colours+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6D12986D1460076C720 /* Colours+ViewModel.swift */; };
 		837FC6D42986D1900076C720 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6D32986D1900076C720 /* Typography.swift */; };
 		837FC6D62986D1AA0076C720 /* Typography+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6D52986D1AA0076C720 /* Typography+ViewModel.swift */; };
-		837FC6D92986D2620076C720 /* FlightUI in Frameworks */ = {isa = PBXBuildFile; productRef = 837FC6D82986D2620076C720 /* FlightUI */; };
 		838E7E2B2987D873000F691D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2A2987D873000F691D /* String+Extensions.swift */; };
 		838E7E2E2987FBF3000F691D /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2D2987FBF3000F691D /* Buttons.swift */; };
 		838E7E302987FC25000F691D /* Buttons+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2F2987FC25000F691D /* Buttons+ViewModel.swift */; };
@@ -28,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55B64F392AC4BEEF00AC21F5 /* flight-ui-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "flight-ui-ios"; path = ..; sourceTree = "<group>"; };
 		837FC6CF2986D0F60076C720 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		837FC6D12986D1460076C720 /* Colours+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colours+ViewModel.swift"; sourceTree = "<group>"; };
 		837FC6D32986D1900076C720 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
@@ -53,13 +54,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				837FC6D92986D2620076C720 /* FlightUI in Frameworks */,
+				55B64F3B2AC4C01C00AC21F5 /* FlightUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55B64F382AC4BEEF00AC21F5 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				55B64F392AC4BEEF00AC21F5 /* flight-ui-ios */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		837FC6CB2986D0940076C720 /* Colours */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +123,7 @@
 		83C93DB72986C53A00A911A9 = {
 			isa = PBXGroup;
 			children = (
+				55B64F382AC4BEEF00AC21F5 /* Packages */,
 				83C93DC22986C53A00A911A9 /* Kitchen Sink */,
 				83C93DC12986C53A00A911A9 /* Products */,
 				837FC6D72986D2620076C720 /* Frameworks */,
@@ -205,7 +215,7 @@
 			);
 			name = "Kitchen Sink";
 			packageProductDependencies = (
-				837FC6D82986D2620076C720 /* FlightUI */,
+				55B64F3A2AC4C01C00AC21F5 /* FlightUI */,
 			);
 			productName = "Kitchen Sink";
 			productReference = 83C93DC02986C53A00A911A9 /* Kitchen Sink.app */;
@@ -236,7 +246,6 @@
 			);
 			mainGroup = 83C93DB72986C53A00A911A9;
 			packageReferences = (
-				769B74F7294218D4003A3D98 /* XCRemoteSwiftPackageReference "flight-ui-ios" */,
 			);
 			productRefGroup = 83C93DC12986C53A00A911A9 /* Products */;
 			projectDirPath = "";
@@ -492,21 +501,9 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		769B74F7294218D4003A3D98 /* XCRemoteSwiftPackageReference "flight-ui-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Royal-Air-Force/flight-ui-ios";
-			requirement = {
-				branch = "next-gen";
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		837FC6D82986D2620076C720 /* FlightUI */ = {
+		55B64F3A2AC4C01C00AC21F5 /* FlightUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 769B74F7294218D4003A3D98 /* XCRemoteSwiftPackageReference "flight-ui-ios" */;
 			productName = FlightUI;
 		};
 /* End XCSwiftPackageProductDependency section */
