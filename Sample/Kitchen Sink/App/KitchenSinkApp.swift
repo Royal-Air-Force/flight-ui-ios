@@ -21,34 +21,34 @@ struct KitchenSinkApp: App {
                         header: HeaderTitleView(title: "Styles",
                                                 subtitle: "Base atoms used across components")
                     ) {
-                        NavigationLinkView(title: "Cards (TBC)", destination: Misc())
-                        NavigationLinkView(title: "Colours", destination: Colours())
-                        NavigationLinkView(title: "Navigation (TBC)", destination: Misc())
-                        NavigationLinkView(title: "Spacing", destination: Spacing())
-                        NavigationLinkView(title: "Typography", destination: Typography())
+                        SampleScreenView(title: "Cards (TBC)", destination: Misc())
+                        SampleScreenView(title: "Colours", destination: Colours())
+                        SampleScreenView(title: "Navigation (TBC)", destination: Misc())
+                        SampleScreenView(title: "Spacing", destination: Spacing())
+                        SampleScreenView(title: "Typography", destination: Typography())
                     }
                     .headerProminence(.increased)
                     Section(
                         header: HeaderTitleView(title: "Components",
                                                 subtitle: "Complex interactable UI components")
                     ) {
-                        NavigationLinkView(title: "Banners (TBC)", destination: Misc())
-                        NavigationLinkView(title: "Buttons", destination: Buttons())
-                        NavigationLinkView(title: "Chips (TBC)", destination: Misc())
-                        NavigationLinkView(title: "Inputs", destination: Inputs())
-                        NavigationLinkView(title: "Menus (TBC)", destination: Misc())
-                        NavigationLinkView(title: "Notifications (TBC)", destination: Misc())
-                        NavigationLinkView(title: "Progress (TBC)", destination: Misc())
-                        NavigationLinkView(title: "Selection Controls (TBC)", destination: Misc())
-                        NavigationLinkView(title: "Sliders (TBC)", destination: Misc())
-                        NavigationLinkView(title: "Misc (To Delete)", destination: Misc())
+                        SampleScreenView(title: "Banners (TBC)", destination: Misc())
+                        SampleScreenView(title: "Buttons", destination: Buttons())
+                        SampleScreenView(title: "Chips (TBC)", destination: Misc())
+                        SampleScreenView(title: "Inputs", destination: Inputs())
+                        SampleScreenView(title: "Menus (TBC)", destination: Misc())
+                        SampleScreenView(title: "Notifications (TBC)", destination: Misc())
+                        SampleScreenView(title: "Progress (TBC)", destination: Misc())
+                        SampleScreenView(title: "Selection Controls (TBC)", destination: Misc())
+                        SampleScreenView(title: "Sliders (TBC)", destination: Misc())
+                        SampleScreenView(title: "Misc (To Delete)", destination: Misc())
                     }
                     .headerProminence(.increased)
                     Section(
                         header: HeaderTitleView(title: "Aviation",
                                                 subtitle: "Components and Functionalities specific to aviation")
                     ) {
-                        NavigationLinkView(title: "Flight Crew Alerting", destination: Misc())
+                        SampleScreenView(title: "Flight Crew Alerting", destination: Misc())
                     }
                     .headerProminence(.increased)
                 }
@@ -84,7 +84,7 @@ private struct HeaderTitleView: View {
     }
 }
 
-private struct NavigationLinkView<Destination: View>: View {
+private struct SampleScreenView<Destination: View>: View {
     @EnvironmentObject var theme: Theme
     
     var title: String
