@@ -4,7 +4,7 @@ import FlightUI
 @main
 struct KitchenSinkApp: App {
     @StateObject var themeManager = ThemeManager()
-
+    
     init() {
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.configureWithOpaqueBackground()
@@ -17,30 +17,40 @@ struct KitchenSinkApp: App {
         WindowGroup {
             NavigationStack {
                 List {
-                    NavigationLink(destination: Colours(), label: {
-                        Text("Colours")
-                    })
-                    .listRowBackground(themeManager.current.color.surface)
-                    NavigationLink(destination: Typography(), label: {
-                        Text("Typography")
-                    })
-                    .listRowBackground(themeManager.current.color.surface)
-                    NavigationLink(destination: Spacing(), label: {
-                        Text("Spacing")
-                    })
-                    .listRowBackground(themeManager.current.color.surface)
-                    NavigationLink(destination: Buttons(), label: {
-                        Text("Buttons")
-                    })
-                    .listRowBackground(themeManager.current.color.surface)
-                    NavigationLink(destination: Inputs(), label: {
-                        Text("Inputs")
-                    })
-                    .listRowBackground(themeManager.current.color.surface)
-                    NavigationLink(destination: Misc(), label: {
-                        Text("Misc")
-                    })
-                    .listRowBackground(themeManager.current.color.surface)
+                    Section(
+                        header: HeaderTitleView(title: "Styles",
+                                                subtitle: "Base atoms used across components")
+                    ) {
+                        NavigationLinkView(title: "Cards (TBC)", destination: Misc())
+                        NavigationLinkView(title: "Colours", destination: Colours())
+                        NavigationLinkView(title: "Navigation (TBC)", destination: Misc())
+                        NavigationLinkView(title: "Spacing", destination: Spacing())
+                        NavigationLinkView(title: "Typography", destination: Typography())
+                    }
+                    .headerProminence(.increased)
+                    Section(
+                        header: HeaderTitleView(title: "Components",
+                                                subtitle: "Complex interactable UI components")
+                    ) {
+                        NavigationLinkView(title: "Banners (TBC)", destination: Misc())
+                        NavigationLinkView(title: "Buttons", destination: Buttons())
+                        NavigationLinkView(title: "Chips (TBC)", destination: Misc())
+                        NavigationLinkView(title: "Inputs", destination: Inputs())
+                        NavigationLinkView(title: "Menus (TBC)", destination: Misc())
+                        NavigationLinkView(title: "Notifications (TBC)", destination: Misc())
+                        NavigationLinkView(title: "Progress (TBC)", destination: Misc())
+                        NavigationLinkView(title: "Selection Controls (TBC)", destination: Misc())
+                        NavigationLinkView(title: "Sliders (TBC)", destination: Misc())
+                        NavigationLinkView(title: "Misc (To Delete)", destination: Misc())
+                    }
+                    .headerProminence(.increased)
+                    Section(
+                        header: HeaderTitleView(title: "Aviation",
+                                                subtitle: "Components and Functionalities specific to aviation")
+                    ) {
+                        NavigationLinkView(title: "Flight Crew Alerting", destination: Misc())
+                    }
+                    .headerProminence(.increased)
                 }
                 .padding([.top], themeManager.current.padding.grid1x)
                 .scrollContentBackground(.hidden)
@@ -53,5 +63,37 @@ struct KitchenSinkApp: App {
             .accentColor(themeManager.current.color.onBackground.default)
             .environment(\.colorScheme, themeManager.current.baseScheme)
         }
+    }
+}
+
+private struct HeaderTitleView: View {
+    @EnvironmentObject var theme: Theme
+    
+    var title: String
+    var subtitle: String
+    
+    var body: some View {
+        VStack {
+            Text(title)
+                .fontStyle(theme.font.title1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text(subtitle)
+                .fontStyle(theme.font.body)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+}
+
+private struct NavigationLinkView<Destination: View>: View {
+    @EnvironmentObject var theme: Theme
+    
+    var title: String
+    var destination: Destination
+    
+    var body: some View {
+        NavigationLink(destination: destination, label: {
+            Text(title)
+        })
+        .listRowBackground(theme.color.surface)
     }
 }
