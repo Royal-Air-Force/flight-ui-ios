@@ -12,6 +12,22 @@ struct Misc: View {
 
                 nonExpandingPanel
                     .padding([.bottom], theme.padding.grid6x)
+                
+                VStack {
+                    Text("Hello")
+                        .foregroundColor(.flightBlack)
+                    Text("World")
+                        .foregroundColor(.flightBlack)
+                    Text("Hello")
+                        .foregroundColor(.flightBlack)
+                    Text("World")
+                        .foregroundColor(.flightBlack)
+                    Text("Hello")
+                        .foregroundColor(.flightBlack)
+                    Text("World")
+                        .foregroundColor(.flightBlack)
+                }
+                .cardStyle(.normalCard)
             }
         }
         .navigationBarTitle("Misc")
