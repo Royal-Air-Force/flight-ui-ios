@@ -1,7 +1,15 @@
 import SwiftUI
 
 public extension CardStyle {
-    static var normalCard: CardStyle {
-        return CardStyle(shadow: true)
+    static var elevated: CardStyle {
+        return CardStyle(shadow: CardShadow(), backgroundColor: nil, showBorder: false)
+    }
+    
+    static var outline: CardStyle {
+        return CardStyle(shadow: nil, backgroundColor: .flightTransparent, showBorder: true)
+    }
+    
+    static var filled: CardStyle {
+        return CardStyle(shadow: nil, backgroundColor: nil, showBorder: false)
     }
 }

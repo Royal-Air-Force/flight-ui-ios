@@ -31,6 +31,9 @@ public class ColorState {
 }
 
 public extension Color {
+    // N/A
+    static let flightTransparent = Color("flightTransparent", bundle: .module)
+    
     // General
     static let flightBlack = Color("flightBlack", bundle: .module)
     static let flightDarkGrey = Color("flightDarkGrey", bundle: .module)

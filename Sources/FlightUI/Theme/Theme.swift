@@ -8,6 +8,7 @@ public class Theme: ObservableObject {
     @Published public var radius: ThemeRadius
     @Published public var font: ThemeFont
     @Published public var button: ThemeButtons
+    @Published public var cards: ThemeCards
 
     // All of the below is to be removed and consolidated into the above objects
 
@@ -83,6 +84,7 @@ public class Theme: ObservableObject {
         radius: ThemeRadius = ThemeRadius(),
         font: ThemeFont = ThemeFont(),
         button: ThemeButtons = ThemeButtons(),
+        cards: ThemeCards = ThemeCards(),
 
         // Opacities
         overlayOpacity: Double = 0.6,
@@ -96,6 +98,7 @@ public class Theme: ObservableObject {
         self.radius = radius
         self.font = font
         self.button = button
+        self.cards = cards
 
         self.primaryButtonBackground = color.nominal.default
         self.primaryButtonForeground = color.onNominal.default

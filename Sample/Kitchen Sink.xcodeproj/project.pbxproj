@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		556931492AC713FD00259236 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556931482AC713FD00259236 /* Cards.swift */; };
 		55B64F3B2AC4C01C00AC21F5 /* FlightUI in Frameworks */ = {isa = PBXBuildFile; productRef = 55B64F3A2AC4C01C00AC21F5 /* FlightUI */; };
 		837FC6D02986D0F60076C720 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6CF2986D0F60076C720 /* Colours.swift */; };
 		837FC6D22986D1460076C720 /* Colours+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6D12986D1460076C720 /* Colours+ViewModel.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		556931482AC713FD00259236 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		55B64F392AC4BEEF00AC21F5 /* flight-ui-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "flight-ui-ios"; path = ..; sourceTree = "<group>"; };
 		837FC6CF2986D0F60076C720 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		837FC6D12986D1460076C720 /* Colours+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colours+ViewModel.swift"; sourceTree = "<group>"; };
@@ -61,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		556931472AC713F100259236 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				556931482AC713FD00259236 /* Cards.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
 		55B64F382AC4BEEF00AC21F5 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +151,7 @@
 		83C93DC22986C53A00A911A9 /* Kitchen Sink */ = {
 			isa = PBXGroup;
 			children = (
+				556931472AC713F100259236 /* Styles */,
 				AA4D62A32A4EE6DE009303DF /* Spacing */,
 				837FC6CE2986D0C70076C720 /* App */,
 				838E7E292987D85B000F691D /* Extensions */,
@@ -284,6 +295,7 @@
 				AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */,
 				837FC6D02986D0F60076C720 /* Colours.swift in Sources */,
 				AA4832C22A8E1DCD004B5F45 /* HeadingView.swift in Sources */,
+				556931492AC713FD00259236 /* Cards.swift in Sources */,
 				838E7E2B2987D873000F691D /* String+Extensions.swift in Sources */,
 				837FC6D62986D1AA0076C720 /* Typography+ViewModel.swift in Sources */,
 				AA3C83B62A3CD34C00A3F40B /* Misc+ViewModel.swift in Sources */,

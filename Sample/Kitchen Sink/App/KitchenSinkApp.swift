@@ -21,7 +21,7 @@ struct KitchenSinkApp: App {
                         header: HeaderTitleView(title: "Styles",
                                                 subtitle: "Base atoms used across components")
                     ) {
-                        SampleScreenView(title: "Cards (TBC)", destination: Misc())
+                        SampleScreenView(title: "Cards", destination: Cards())
                         SampleScreenView(title: "Colours", destination: Colours())
                         SampleScreenView(title: "Navigation (TBC)", destination: Misc())
                         SampleScreenView(title: "Spacing", destination: Spacing())
