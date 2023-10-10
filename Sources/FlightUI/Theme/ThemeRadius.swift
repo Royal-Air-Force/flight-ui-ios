@@ -5,9 +5,9 @@ public class ThemeRadius {
     @Published public var medium: CGFloat
     @Published public var large: CGFloat
 
-    public init(small: CGFloat = 2,
-                medium: CGFloat = 5,
-                large: CGFloat = 8
+    public init(small: CGFloat = 4,
+                medium: CGFloat = 8,
+                large: CGFloat = 20
     ) {
         self.small = small
         self.medium = medium

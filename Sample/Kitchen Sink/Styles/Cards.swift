@@ -10,67 +10,120 @@ struct Cards: View {
                 elevatedCard
                 filledCard
                 outlineCard
+                customColourCard
             }
         }
         .navigationBarTitle("Cards")
     }
     
     var elevatedCard: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HeadingView(
                 title: "Elevated Card",
                 subTitle: "Displays a card surrounded by a shadow")
 
             VStack(alignment: .leading) {
-                Text("Hello")
+                Image(uiImage: UIImage(named: "AppIcon")!)
+                    .resizable()
+                    .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
+                    .frame(width: 200, height: 200)
+                
+                Text("Elevated Card")
                     .foregroundColor(theme.color.onSurface.default)
-                Text("World")
+                    .fontStyle(.title1)
+                    .padding([.leading, .trailing], theme.padding.grid2x)
+                    .padding([.top, .bottom], theme.padding.grid1x)
+                Text("Displays a card surrounded by a shadow")
                     .foregroundColor(theme.color.onSurface.default)
-                Text("Elevated")
-                    .foregroundColor(theme.color.onSurface.default)
+                    .fontStyle(.body)
+                    .padding([.leading, .trailing, .bottom], theme.padding.grid2x)
             }
-            .padding(theme.padding.grid1x)
             .cardStyle(theme.cards.elevated)
+            .frame(width: 200)
             .padding(theme.padding.grid2x)
         }
     }
     
     var filledCard: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HeadingView(
                 title: "Filled Card",
                 subTitle: "Displays a card with no border and no shadow")
 
             VStack(alignment: .leading) {
-                Text("Hello")
+                Image(uiImage: UIImage(named: "AppIcon")!)
+                    .resizable()
+                    .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
+                    .frame(width: 200, height: 200)
+                
+                Text("Filled Card")
                     .foregroundColor(theme.color.onSurface.default)
-                Text("World")
+                    .fontStyle(.title1)
+                    .padding([.leading, .trailing], theme.padding.grid2x)
+                    .padding([.top, .bottom], theme.padding.grid1x)
+                Text("Displays a card with no border and no shadow")
                     .foregroundColor(theme.color.onSurface.default)
-                Text("Filled")
-                    .foregroundColor(theme.color.onSurface.default)
+                    .fontStyle(.body)
+                    .padding([.leading, .trailing, .bottom], theme.padding.grid2x)
             }
-            .padding(theme.padding.grid1x)
             .cardStyle(theme.cards.filled)
+            .frame(width: 200)
             .padding(theme.padding.grid2x)
         }
     }
     
     var outlineCard: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HeadingView(
                 title: "Outline Card",
                 subTitle: "Displays a card with a border and no background color")
 
             VStack(alignment: .leading) {
-                Text("Hello")
-                    .foregroundColor(theme.color.onSurface.default)
-                Text("World")
-                    .foregroundColor(theme.color.onSurface.default)
-                Text("Outline")
-                    .foregroundColor(theme.color.onSurface.default)
+                Image(uiImage: UIImage(named: "AppIcon")!)
+                    .resizable()
+                    .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
+                    .frame(width: 200, height: 200)
+                
+                Text("Outline Card")
+                    .foregroundColor(theme.color.onBackground.default)
+                    .fontStyle(.title1)
+                    .padding([.leading, .trailing], theme.padding.grid2x)
+                    .padding([.top, .bottom], theme.padding.grid1x)
+                Text("Displays a card with a border and no background color")
+                    .foregroundColor(theme.color.onBackground.default)
+                    .fontStyle(.body)
+                    .padding([.leading, .trailing, .bottom], theme.padding.grid2x)
             }
-            .padding(theme.padding.grid1x)
-            .cardStyle(theme.cards.filled)
+            .cardStyle(theme.cards.outline)
+            .frame(width: 200)
+            .padding(theme.padding.grid2x)
+        }
+    }
+    
+    var customColourCard: some View {
+        VStack(alignment: .leading) {
+            HeadingView(
+                title: "Custom Card",
+                subTitle: "Displays a card with custom styling such as the background colour and corner radius")
+
+            VStack(alignment: .leading) {
+                Image(uiImage: UIImage(named: "AppIcon")!)
+                    .resizable()
+                    .clipCorners(theme.radius.large, corners: [.topLeft, .topRight])
+                    .frame(width: 200, height: 200)
+                
+                Text("Custom Card")
+                    .foregroundColor(theme.color.onInputOutput.default)
+                    .fontStyle(.title1)
+                    .padding([.leading, .trailing], theme.padding.grid2x)
+                    .padding([.top, .bottom], theme.padding.grid1x)
+                Text("Displays a card with custom styling such as the background colour and corner radius")
+                    .foregroundColor(theme.color.onInputOutput.default)
+                    .fontStyle(.body)
+                    .padding([.leading, .trailing, .bottom], theme.padding.grid2x)
+            }
+            .cardStyle(CardStyle(shadow: nil, backgroundColor: theme.color.inputOutput.default, showBorder: false, cardRadius: theme.radius.large))
+            .frame(width: 200)
             .padding(theme.padding.grid2x)
         }
     }

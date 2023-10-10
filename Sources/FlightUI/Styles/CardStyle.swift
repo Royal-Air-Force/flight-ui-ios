@@ -10,12 +10,14 @@ public class CardStyle {
     public var shadow: CardShadow?
     public var backgroundColor: Color?
     public var showBorder: Bool
+    public var cardRadius: CGFloat?
     
-    public init(shadow: CardShadow?, backgroundColor: Color?, showBorder: Bool) {
+    public init(shadow: CardShadow?, backgroundColor: Color?, showBorder: Bool, cardRadius: CGFloat?) {
         self.id = UUID()
         self.shadow = shadow
         self.backgroundColor = backgroundColor
         self.showBorder = showBorder
+        self.cardRadius = cardRadius
     }
 }
 
@@ -51,13 +53,13 @@ struct CardStyleModifier: ViewModifier {
     @ViewBuilder
     private func getBaseCard() -> some View {
         if (style.showBorder) {
-            RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous)
+            RoundedRectangle(cornerRadius: style.cardRadius ?? theme.radius.medium, style: .continuous)
                 .style(
                     withStroke: theme.color.onSurface.default.opacity(0.2),
                     lineWidth: theme.size.border,
                     fill: style.backgroundColor ?? theme.color.surface)
         } else {
-            RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous)
+            RoundedRectangle(cornerRadius: style.cardRadius ?? theme.radius.medium, style: .continuous)
                 .fill(style.backgroundColor ?? theme.color.surface)
         }
     }
