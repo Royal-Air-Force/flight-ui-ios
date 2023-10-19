@@ -11,13 +11,15 @@ public class CardStyle {
     public var backgroundColor: Color?
     public var showBorder: Bool
     public var cardRadius: CGFloat?
+    public var cardPadding: CGFloat?
     
-    public init(shadow: CardShadow?, backgroundColor: Color?, showBorder: Bool, cardRadius: CGFloat?) {
+    public init(shadow: CardShadow?, backgroundColor: Color?, showBorder: Bool, cardRadius: CGFloat?, cardPadding: CGFloat?) {
         self.id = UUID()
         self.shadow = shadow
         self.backgroundColor = backgroundColor
         self.showBorder = showBorder
         self.cardRadius = cardRadius
+        self.cardPadding = cardPadding
     }
 }
 
@@ -47,6 +49,7 @@ struct CardStyleModifier: ViewModifier {
                     view.shadow(color: shadow.color, radius: shadow.radius, x: 2, y: 4)
                 })
             content
+                .padding(style.cardPadding ?? 0)
         }
     }
     

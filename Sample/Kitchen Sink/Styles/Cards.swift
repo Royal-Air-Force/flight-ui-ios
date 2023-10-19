@@ -109,7 +109,7 @@ struct Cards: View {
             VStack(alignment: .leading) {
                 Image(uiImage: UIImage(named: "AppIcon")!)
                     .resizable()
-                    .clipCorners(theme.radius.large, corners: [.topLeft, .topRight])
+                    .clipCorners(theme.radius.innerLarge(padding: theme.padding.grid1x), corners: [.allCorners])
                     .frame(width: 200, height: 200)
                 
                 Text("Custom Card")
@@ -120,10 +120,11 @@ struct Cards: View {
                 Text("Displays a card with custom styling such as the background colour and corner radius")
                     .foregroundColor(theme.color.onInputOutput.default)
                     .fontStyle(.body)
-                    .padding([.leading, .trailing, .bottom], theme.padding.grid2x)
+                    .padding([.leading, .trailing], theme.padding.grid2x)
+                    .padding(.bottom, theme.padding.grid1x)
             }
-            .cardStyle(CardStyle(shadow: nil, backgroundColor: theme.color.inputOutput.default, showBorder: false, cardRadius: theme.radius.large))
-            .frame(width: 200)
+            .cardStyle(CardStyle(shadow: nil, backgroundColor: theme.color.inputOutput.default, showBorder: false, cardRadius: theme.radius.large, cardPadding: theme.padding.grid1x))
+            .frame(width: 216)
             .padding(theme.padding.grid2x)
         }
     }
