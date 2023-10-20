@@ -54,10 +54,15 @@ struct KitchenSinkApp: App {
                 .toolbar {
                     Toggle("Dark Theme", isOn: $isDarkTheme)
                         .onChange(of: isDarkTheme) { value in
+                            let scenes = UIApplication.shared.connectedScenes
+                            guard let scene = scenes.first as? UIWindowScene else { return }
+                            
                             if (value) {
                                 themeManager.current = .dark
+                                scene.keyWindow?.overrideUserInterfaceStyle = .dark
                             } else {
                                 themeManager.current = .light
+                                scene.keyWindow?.overrideUserInterfaceStyle = .light
                             }
                         }
                         .toggleStyle(SwitchToggleStyle(tint: .green))
