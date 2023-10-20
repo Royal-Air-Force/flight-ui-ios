@@ -12,7 +12,9 @@ struct Cards: View {
                 outlineCard
                 customColourCard
             }
+            .padding(.horizontal, theme.padding.grid3x)
         }
+        .background(theme.color.background)
         .navigationBarTitle("Cards")
     }
     
@@ -40,7 +42,7 @@ struct Cards: View {
             }
             .cardStyle(theme.cards.elevated)
             .frame(width: 200)
-            .padding(theme.padding.grid2x)
+            .padding(.vertical, theme.padding.grid2x)
         }
     }
     
@@ -68,7 +70,7 @@ struct Cards: View {
             }
             .cardStyle(theme.cards.filled)
             .frame(width: 200)
-            .padding(theme.padding.grid2x)
+            .padding(.vertical, theme.padding.grid2x)
         }
     }
     
@@ -96,7 +98,7 @@ struct Cards: View {
             }
             .cardStyle(theme.cards.outline)
             .frame(width: 200)
-            .padding(theme.padding.grid2x)
+            .padding(.vertical, theme.padding.grid2x)
         }
     }
     
@@ -117,7 +119,7 @@ struct Cards: View {
                     .fontStyle(.title1)
                     .padding([.leading, .trailing], theme.padding.grid2x)
                     .padding([.top, .bottom], theme.padding.grid1x)
-                Text("Displays a card with custom styling such as the background colour and corner radius")
+                Text("Displays a card with custom styling such as the background colour, corner radius, and inner padding")
                     .foregroundColor(theme.color.onInputOutput.default)
                     .fontStyle(.body)
                     .padding([.leading, .trailing], theme.padding.grid2x)
@@ -125,7 +127,7 @@ struct Cards: View {
             }
             .cardStyle(CardStyle(shadow: nil, backgroundColor: theme.color.inputOutput.default, showBorder: false, cardRadius: theme.radius.large, cardPadding: theme.padding.grid1x))
             .frame(width: 216)
-            .padding(theme.padding.grid2x)
+            .padding(.vertical, theme.padding.grid2x)
         }
     }
 }
