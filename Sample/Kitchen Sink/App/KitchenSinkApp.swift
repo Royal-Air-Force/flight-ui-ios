@@ -3,15 +3,8 @@ import FlightUI
 
 @main
 struct KitchenSinkApp: App {
-    @StateObject var themeManager = ThemeManager()
-    
-    init() {
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.shadowColor = .clear
-        navBarAppearance.backgroundColor = UIColor(themeManager.current.color.background)
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
-    }
+    @StateObject var themeManager = ThemeManager(current: .dark)
+    @State private var isDarkTheme = true
 
     var body: some Scene {
         WindowGroup {
@@ -57,6 +50,18 @@ struct KitchenSinkApp: App {
                 .background(themeManager.current.color.background)
                 .navigationBarTitle("FlightUI")
                 .navigationBarTitleDisplayMode(.large)
+                .toolbarBackground(themeManager.current.color.background, for: .navigationBar)
+                .toolbar {
+                    Toggle("Dark Theme", isOn: $isDarkTheme)
+                        .onChange(of: isDarkTheme) { value in
+                            if (value) {
+                                themeManager.current = .dark
+                            } else {
+                                themeManager.current = .light
+                            }
+                        }
+                        .toggleStyle(SwitchToggleStyle(tint: .green))
+                }
             }
             .environmentObject(themeManager)
             .environmentObject(themeManager.current)
