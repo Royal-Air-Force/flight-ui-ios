@@ -4,6 +4,8 @@ import FlightUI
 struct Buttons: View {
     @EnvironmentObject var theme: Theme
     @StateObject private var viewModel = ViewModel()
+    
+    @State private var showingAlert = false
 
     fileprivate let boxMinHeight: CGFloat = 126
     fileprivate let boxIdealWidth: CGFloat = 194
@@ -28,9 +30,12 @@ struct Buttons: View {
             HeadingView(title: "Filled Button", subTitle: "The filled button has the most visual impact and should be used for important, final actions within a flow")
 
             HStack {
-                Button("Enabled", action: { print("Button tapped") })
+                Button("Enabled", action: { showingAlert = true })
                     .buttonStyle(.filled)
                     .padding([.trailing], theme.padding.grid2x)
+                    .alert("Important message", isPresented: $showingAlert) {
+                        Button("OK", role: .cancel) { }
+                    }
 
                 Button {} label: {
                     HStack {
