@@ -3,7 +3,7 @@ import SwiftUI
 public extension Color {
     // N/A
     static let flightTransparent = Color("flightTransparent", bundle: .module)
-    
+
     // Greys
     static let flightGrey0 = Color("flightGrey0", bundle: .module)
     static let flightGrey100 = Color("flightGrey100", bundle: .module)

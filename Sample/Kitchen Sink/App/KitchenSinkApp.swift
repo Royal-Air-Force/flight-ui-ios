@@ -56,8 +56,8 @@ struct KitchenSinkApp: App {
                         .onChange(of: isDarkTheme) { value in
                             let scenes = UIApplication.shared.connectedScenes
                             guard let scene = scenes.first as? UIWindowScene else { return }
-                            
-                            if (value) {
+
+                            if value {
                                 themeManager.current = .dark
                                 scene.keyWindow?.overrideUserInterfaceStyle = .dark
                             } else {
@@ -78,10 +78,10 @@ struct KitchenSinkApp: App {
 
 private struct HeaderTitleView: View {
     @EnvironmentObject var theme: Theme
-    
+
     var title: String
     var subtitle: String
-    
+
     var body: some View {
         VStack {
             Text(title)
@@ -96,10 +96,10 @@ private struct HeaderTitleView: View {
 
 private struct SampleScreenView<Destination: View>: View {
     @EnvironmentObject var theme: Theme
-    
+
     var title: String
     var destination: Destination
-    
+
     var body: some View {
         NavigationLink(destination: destination, label: {
             Text(title)

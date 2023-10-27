@@ -4,7 +4,7 @@ import FlightUI
 struct Buttons: View {
     @EnvironmentObject var theme: Theme
     @StateObject private var viewModel = ViewModel()
-    
+
     @State private var showingAlert = false
 
     fileprivate let boxMinHeight: CGFloat = 126
@@ -163,11 +163,11 @@ struct Buttons: View {
         }
         .padding(.bottom, theme.padding.grid4x)
     }
-    
+
     var coreButton: some View {
         VStack {
             HeadingView(title: "Core Button", subTitle: "Core buttons are specific to the alerting context, they should be used sparingly and only when directly related to an alerting state")
-            
+
             Grid(alignment: .leading) {
                 GridRow {
                     Button("Advisory", action: { print("Advisory Tapped") })

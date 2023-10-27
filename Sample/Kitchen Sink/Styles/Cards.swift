@@ -3,7 +3,7 @@ import FlightUI
 
 struct Cards: View {
     @EnvironmentObject var theme: Theme
-    
+
     var body: some View {
         ScrollView {
             VStack {
@@ -17,7 +17,7 @@ struct Cards: View {
         .background(theme.color.background)
         .navigationBarTitle("Cards")
     }
-    
+
     var elevatedCard: some View {
         VStack(alignment: .leading) {
             HeadingView(
@@ -29,7 +29,7 @@ struct Cards: View {
                     .resizable()
                     .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
                     .frame(width: 200, height: 200)
-                
+
                 Text("Elevated Card")
                     .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
@@ -45,7 +45,7 @@ struct Cards: View {
             .padding(.vertical, theme.padding.grid2x)
         }
     }
-    
+
     var filledCard: some View {
         VStack(alignment: .leading) {
             HeadingView(
@@ -57,7 +57,7 @@ struct Cards: View {
                     .resizable()
                     .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
                     .frame(width: 200, height: 200)
-                
+
                 Text("Filled Card")
                     .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
@@ -73,7 +73,7 @@ struct Cards: View {
             .padding(.vertical, theme.padding.grid2x)
         }
     }
-    
+
     var outlineCard: some View {
         VStack(alignment: .leading) {
             HeadingView(
@@ -85,7 +85,7 @@ struct Cards: View {
                     .resizable()
                     .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
                     .frame(width: 200, height: 200)
-                
+
                 Text("Outline Card")
                     .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
@@ -101,7 +101,7 @@ struct Cards: View {
             .padding(.vertical, theme.padding.grid2x)
         }
     }
-    
+
     var customColourCard: some View {
         VStack(alignment: .leading) {
             HeadingView(
@@ -113,7 +113,7 @@ struct Cards: View {
                     .resizable()
                     .clipCorners(theme.radius.innerLarge(padding: theme.padding.grid1x), corners: [.allCorners])
                     .frame(width: 200, height: 200)
-                
+
                 Text("Custom Card")
                     .foregroundColor(theme.color.onCore)
                     .fontStyle(.title1)

@@ -231,7 +231,7 @@ public enum CoreButtonType {
 public struct CoreButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
-    
+
     private let coreType: CoreButtonType
 
     public init(coreType: CoreButtonType) {

@@ -57,7 +57,7 @@ public class ThemeColors {
         self.secondary = secondary
         self.disabled = disabled
         self.onDisabled = onDisabled
-        
+
         self.inputOutput = inputOutput
         self.nominal = nominal
         self.caution = caution
