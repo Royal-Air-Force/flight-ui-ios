@@ -16,7 +16,7 @@ public struct FilledButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], theme.padding.grid4x)
-            .frame(minHeight: theme.size.medium)
+            .frame(minHeight: theme.size.large)
             .foregroundColor(getFilledForeground(theme, isEnabled: isEnabled))
             .background(getFilledBackground(theme, isEnabled: isEnabled))
             .fontWeight(.semibold)
@@ -35,7 +35,7 @@ public struct FilledIconButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
+            .frame(minWidth: theme.size.large, minHeight: theme.size.large)
             .foregroundColor(getFilledForeground(theme, isEnabled: isEnabled))
             .background(getFilledBackground(theme, isEnabled: isEnabled))
             .fontWeight(.semibold)
@@ -73,7 +73,7 @@ public struct TonalButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], theme.padding.grid4x)
-            .frame(minHeight: theme.size.medium)
+            .frame(minHeight: theme.size.large)
             .foregroundColor(getTonalForeground(theme, isEnabled: isEnabled))
             .background(getTonalBackground(theme, isEnabled: isEnabled))
             .fontWeight(.semibold)
@@ -92,7 +92,7 @@ public struct TonalIconButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
+            .frame(minWidth: theme.size.large, minHeight: theme.size.large)
             .foregroundColor(getTonalForeground(theme, isEnabled: isEnabled))
             .background(getTonalBackground(theme, isEnabled: isEnabled))
             .fontWeight(.semibold)
@@ -130,7 +130,7 @@ public struct OutlineButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], theme.padding.grid4x)
-            .frame(minHeight: theme.size.medium)
+            .frame(minHeight: theme.size.large)
             .foregroundColor(getOutlineForeground(theme, isEnabled: isEnabled))
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
@@ -154,7 +154,7 @@ public struct OutlineIconButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
+            .frame(minWidth: theme.size.large, minHeight: theme.size.large)
             .foregroundColor(getOutlineForeground(theme, isEnabled: isEnabled))
             .fontWeight(.semibold)
             .fontStyle(theme.font.title3)
@@ -189,7 +189,7 @@ public struct TextButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding([.leading, .trailing], theme.padding.grid4x)
-            .frame(minHeight: theme.size.medium)
+            .frame(minHeight: theme.size.large)
             .foregroundColor(getTextForeground(theme, isEnabled: isEnabled))
             .fontWeight(.semibold)
             .fontStyle(theme.font.body)
@@ -206,7 +206,7 @@ public struct TextIconButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
+            .frame(minWidth: theme.size.large, minHeight: theme.size.large)
             .foregroundColor(getTextForeground(theme, isEnabled: isEnabled))
             .fontWeight(.semibold)
             .fontStyle(theme.font.title3)
@@ -218,6 +218,58 @@ public struct TextIconButtonStyle: ButtonStyle {
 private func getTextForeground(_ theme: Theme, isEnabled: Bool) -> Color {
     if isEnabled {
         return theme.color.nominal
+    } else {
+        return theme.color.onDisabled
+    }
+}
+
+// MARK: - Core Button
+public enum CoreButtonType {
+    case Advisory, Caution, Warning
+}
+
+public struct CoreButtonStyle: ButtonStyle {
+    @EnvironmentObject var theme: Theme
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    
+    private let coreType: CoreButtonType
+
+    public init(coreType: CoreButtonType) {
+        self.coreType = coreType
+    }
+
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding([.leading, .trailing], theme.padding.grid4x)
+            .frame(minHeight: theme.size.large)
+            .foregroundColor(getCoreForeground(theme, isEnabled: isEnabled))
+            .background(getCoreBackground(theme, coreType: coreType, isEnabled: isEnabled))
+            .fontWeight(.semibold)
+            .fontStyle(theme.font.body)
+            .clipShape(Capsule())
+            .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
+            .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
+    }
+}
+
+private func getCoreBackground(_ theme: Theme, coreType: CoreButtonType, isEnabled: Bool) -> Color {
+    if isEnabled {
+        switch coreType {
+        case .Advisory:
+            return theme.color.primary
+        case .Caution:
+            return theme.color.caution
+        case .Warning:
+            return theme.color.warning
+        }
+    } else {
+        return theme.color.disabled
+    }
+}
+
+private func getCoreForeground(_ theme: Theme, isEnabled: Bool) -> Color {
+    if isEnabled {
+        return theme.color.onCore
     } else {
         return theme.color.onDisabled
     }

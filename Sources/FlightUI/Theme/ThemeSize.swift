@@ -16,7 +16,7 @@ public class ThemeSize {
     @Published public var xxxLarge: CGFloat
 
     public init(divider: CGFloat = 1,
-                border: CGFloat = 2,
+                border: CGFloat = 4,
                 iconSmall: CGFloat = 16,
                 iconMedium: CGFloat = 24,
                 iconLarge: CGFloat = 32,
