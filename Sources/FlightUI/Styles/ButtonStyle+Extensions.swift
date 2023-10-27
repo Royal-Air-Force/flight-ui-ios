@@ -50,14 +50,14 @@ public extension ButtonStyle where Self == TextIconButtonStyle {
 
 public extension ButtonStyle where Self == CoreButtonStyle {
     static var advisory: Self {
-        return .init(coreType: .Advisory)
+        return .init(coreType: .advisory)
     }
     
     static var caution: Self {
-        return .init(coreType: .Caution)
+        return .init(coreType: .caution)
     }
     
     static var warning: Self {
-        return .init(coreType: .Warning)
+        return .init(coreType: .warning)
     }
 }

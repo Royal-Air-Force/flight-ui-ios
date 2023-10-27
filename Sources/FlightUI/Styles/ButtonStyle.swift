@@ -225,7 +225,7 @@ private func getTextForeground(_ theme: Theme, isEnabled: Bool) -> Color {
 
 // MARK: - Core Button
 public enum CoreButtonType {
-    case Advisory, Caution, Warning
+    case advisory, caution, warning
 }
 
 public struct CoreButtonStyle: ButtonStyle {
@@ -255,11 +255,11 @@ public struct CoreButtonStyle: ButtonStyle {
 private func getCoreBackground(_ theme: Theme, coreType: CoreButtonType, isEnabled: Bool) -> Color {
     if isEnabled {
         switch coreType {
-        case .Advisory:
+        case .advisory:
             return theme.color.primary
-        case .Caution:
+        case .caution:
             return theme.color.caution
-        case .Warning:
+        case .warning:
             return theme.color.warning
         }
     } else {
