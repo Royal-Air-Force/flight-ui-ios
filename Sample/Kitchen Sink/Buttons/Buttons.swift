@@ -166,7 +166,7 @@ struct Buttons: View {
     
     var coreButton: some View {
         VStack {
-            HeadingView(title: "Core Button", subTitle: "Core buttons are specific to the flight crew alerting context, they should be used sparingly and only when directly related to an advisory, caution, or warning state")
+            HeadingView(title: "Core Button", subTitle: "Core buttons are specific to the alerting context, they should be used sparingly and only when directly related to an alerting state")
             
             Grid(alignment: .leading) {
                 GridRow {
