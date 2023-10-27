@@ -29,6 +29,11 @@ extension Theme {
                            nominal: .flightDarkGreen,
                            caution: .flightDarkYellow,
                            warning: .flightDarkRed,
-                           onCore: .flightGrey800)
+                           onCore: .flightGrey800,
+                           graphicsYellow: .flightGraphicsDarkYellow,
+                           graphicsGreen: .flightGraphicsDarkGreen,
+                           graphicsMint: .flightGraphicsDarkMint,
+                           graphicsCyan: .flightGraphicsDarkCyan,
+                           graphicsBlue: .flightGraphicsDarkBlue)
     )
 }

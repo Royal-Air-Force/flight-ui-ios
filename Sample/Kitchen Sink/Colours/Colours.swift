@@ -107,33 +107,19 @@ struct Colours: View {
             HeadingView(
                 title: "Graphics colours",
                 subTitle: "Only to be used for displaying complex data sets such as graphs and diagrams")
-
-            HStack {
-                ColorDisplayBox(name: "Graphics Red", color: theme.color.graphicsRed, foregroundColor: .flightGrey0)
-                Spacer()
-                ColorDisplayBox(name: "Graphics Yellow", color: theme.color.graphicsYellow, foregroundColor: .flightGrey0)
-                Spacer()
-                ColorDisplayBox(name: "Graphics Green", color: theme.color.graphicsGreen, foregroundColor: .flightGrey0)
+            
+            VStack {
+                SimpleColorView(colorName: "Graphics Red", colorValue: theme.color.graphicsRed)
+                SimpleColorView(colorName: "Graphics Yellow", colorValue: theme.color.graphicsYellow)
+                SimpleColorView(colorName: "Graphics Green", colorValue: theme.color.graphicsGreen)
+                SimpleColorView(colorName: "Graphics Mint", colorValue: theme.color.graphicsMint)
+                SimpleColorView(colorName: "Graphics Cyan", colorValue: theme.color.graphicsCyan)
             }
-
-            Spacer()
-
-            HStack {
-                ColorDisplayBox(name: "Graphics Mint", color: theme.color.graphicsMint, foregroundColor: .flightGrey0)
-                Spacer()
-                ColorDisplayBox(name: "Graphics Cyan", color: theme.color.graphicsCyan, foregroundColor: .flightGrey0)
-                Spacer()
-                ColorDisplayBox(name: "Graphics Blue", color: theme.color.graphicsBlue, foregroundColor: .flightGrey0)
-            }
-
-            Spacer()
-
-            HStack {
-                ColorDisplayBox(name: "Graphics Indigo", color: theme.color.graphicsIndigo, foregroundColor: .flightGrey0)
-                Spacer()
-                ColorDisplayBox(name: "Graphics Purple", color: theme.color.graphicsPurple, foregroundColor: .flightGrey0)
-                Spacer()
-                ColorDisplayBox(name: "Graphics Pink", color: theme.color.graphicsPink, foregroundColor: .flightGrey0)
+            VStack {
+                SimpleColorView(colorName: "Graphics Blue", colorValue: theme.color.graphicsBlue)
+                SimpleColorView(colorName: "Graphics Indigo", colorValue: theme.color.graphicsIndigo)
+                SimpleColorView(colorName: "Graphics Purple", colorValue: theme.color.graphicsPurple)
+                SimpleColorView(colorName: "Graphics Pink", colorValue: theme.color.graphicsPink)
             }
         }
         .padding(.bottom, theme.padding.grid2x)
@@ -171,26 +157,29 @@ struct ColorView: View {
     }
 }
 
-struct ColorDisplayBox: View {
-
+struct SimpleColorView: View {
     @EnvironmentObject var theme: Theme
-
-    var name: String
-    var color: Color
-    var foregroundColor: Color
-
+    
+    var colorName: String
+    var colorValue: Color
+    
     var body: some View {
-        ZStack {
+        HStack {
             Rectangle()
-                .fill(color)
-            Text("\(name) - \(color.hexaRGBA?.uppercased() ?? "")")
-                .foregroundColor(foregroundColor)
-                .padding(theme.padding.grid1x)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .fontStyle(theme.font.caption1)
+                .fill(colorValue)
+                .border(theme.color.surfaceLow)
+                .frame(width: 80, height: 30)
+            
+            VStack {
+                Text("\(colorName) - \(colorValue.hexaRGBA?.uppercased() ?? "")")
+                    .foregroundColor(theme.color.primary)
+                    .fontStyle(theme.font.body)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(.leading, theme.padding.grid1x)
         }
+        .padding([.top, .bottom], theme.padding.grid0_5x)
     }
-
 }
 
 struct Colours_Previews: PreviewProvider {
