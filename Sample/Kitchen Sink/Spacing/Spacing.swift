@@ -97,7 +97,7 @@ struct SpacingDisplayBox: View {
     var body: some View {
         HStack {
             Rectangle()
-                .fill(theme.color.onBackground.default)
+                .fill(theme.color.primary)
                 .frame(width: space, height: space, alignment: .leading)
                 .padding(theme.padding.grid1x)
             Text("\(name) - \(String(format: "%.0f", space))pt")

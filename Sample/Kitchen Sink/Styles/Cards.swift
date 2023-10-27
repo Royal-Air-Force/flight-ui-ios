@@ -31,12 +31,12 @@ struct Cards: View {
                     .frame(width: 200, height: 200)
                 
                 Text("Elevated Card")
-                    .foregroundColor(theme.color.onSurface.default)
+                    .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
                     .padding([.leading, .trailing], theme.padding.grid2x)
                     .padding([.top, .bottom], theme.padding.grid1x)
                 Text("Displays a card surrounded by a shadow")
-                    .foregroundColor(theme.color.onSurface.default)
+                    .foregroundColor(theme.color.secondary)
                     .fontStyle(.body)
                     .padding([.leading, .trailing, .bottom], theme.padding.grid2x)
             }
@@ -59,12 +59,12 @@ struct Cards: View {
                     .frame(width: 200, height: 200)
                 
                 Text("Filled Card")
-                    .foregroundColor(theme.color.onSurface.default)
+                    .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
                     .padding([.leading, .trailing], theme.padding.grid2x)
                     .padding([.top, .bottom], theme.padding.grid1x)
                 Text("Displays a card with no border and no shadow")
-                    .foregroundColor(theme.color.onSurface.default)
+                    .foregroundColor(theme.color.secondary)
                     .fontStyle(.body)
                     .padding([.leading, .trailing, .bottom], theme.padding.grid2x)
             }
@@ -87,12 +87,12 @@ struct Cards: View {
                     .frame(width: 200, height: 200)
                 
                 Text("Outline Card")
-                    .foregroundColor(theme.color.onBackground.default)
+                    .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
                     .padding([.leading, .trailing], theme.padding.grid2x)
                     .padding([.top, .bottom], theme.padding.grid1x)
                 Text("Displays a card with a border and no background color")
-                    .foregroundColor(theme.color.onBackground.default)
+                    .foregroundColor(theme.color.secondary)
                     .fontStyle(.body)
                     .padding([.leading, .trailing, .bottom], theme.padding.grid2x)
             }
@@ -115,17 +115,17 @@ struct Cards: View {
                     .frame(width: 200, height: 200)
                 
                 Text("Custom Card")
-                    .foregroundColor(theme.color.onInputOutput.default)
+                    .foregroundColor(theme.color.onCore)
                     .fontStyle(.title1)
                     .padding([.leading, .trailing], theme.padding.grid2x)
                     .padding([.top, .bottom], theme.padding.grid1x)
                 Text("Displays a card with custom styling such as the background colour, corner radius, and inner padding")
-                    .foregroundColor(theme.color.onInputOutput.default)
+                    .foregroundColor(theme.color.onCore)
                     .fontStyle(.body)
                     .padding([.leading, .trailing], theme.padding.grid2x)
                     .padding(.bottom, theme.padding.grid1x)
             }
-            .cardStyle(CardStyle(shadow: nil, backgroundColor: theme.color.inputOutput.default, showBorder: false, cardRadius: theme.radius.large, cardPadding: theme.padding.grid1x))
+            .cardStyle(CardStyle(shadow: nil, backgroundColor: theme.color.inputOutput, showBorder: false, cardRadius: theme.radius.large, cardPadding: theme.padding.grid1x))
             .frame(width: 216)
             .padding(.vertical, theme.padding.grid2x)
         }

@@ -12,7 +12,8 @@ struct Colours: View {
         ScrollView {
             VStack {
                 Spacer()
-                generalColors
+                backgroundColors
+                foregroundColors
                 coreColors
                 graphicsColors
             }
@@ -22,24 +23,50 @@ struct Colours: View {
         .navigationBarTitle("Colours")
     }
 
-    var generalColors: some View {
+    var backgroundColors: some View {
         VStack {
             HeadingView(
                 title: "General colours",
                 subTitle: "Used for distinguishing content and content areas within an application")
 
-            GeneralColorView(colorName: "Primary", generalColor: theme.color.primary, onGeneralColor: theme.color.onPrimary)
+            ColorView(colorName: "Background",
+                      colorDescription: "Default colour for every screen background",
+                      colorValue: theme.color.background)
             Spacer()
-
-            GeneralColorView(colorName: "Secondary", generalColor: theme.color.secondary, onGeneralColor: theme.color.onSecondary)
+            
+            ColorView(colorName: "Surface Low",
+                      colorDescription: "Background colour for structural components such as cards and bottom sheets",
+                      colorValue: theme.color.surfaceLow)
             Spacer()
-
-            GeneralColorView(colorName: "Background", generalColor: theme.color.background, onGeneralColor: theme.color.onBackground)
-            Spacer()
-
-            GeneralColorView(colorName: "Surface", generalColor: theme.color.surface, onGeneralColor: theme.color.onSurface)
+            
+            ColorView(colorName: "Surface High",
+                      colorDescription: "Colour for component surfaces closer to the user such as text fields and alert dialogs",
+                      colorValue: theme.color.surfaceHigh)
         }
-        .padding(.bottom, theme.padding.grid4x)
+    }
+    
+    var foregroundColors: some View {
+        VStack {
+            ColorView(colorName: "Primary",
+                      colorDescription: "Default colour for all content including text, icons, and non-context based components",
+                      colorValue: theme.color.primary)
+            Spacer()
+            
+            ColorView(colorName: "Secondary",
+                      colorDescription: "Colour with lower priority for content, such as subtitles or unselected components",
+                      colorValue: theme.color.secondary)
+            Spacer()
+            
+            ColorView(colorName: "Disabled",
+                      colorDescription: "Colour for all disabled components including button backgrounds, input field backgrounds, etc",
+                      colorValue: theme.color.disabled)
+            Spacer()
+            
+            ColorView(colorName: "On Disabled",
+                      colorDescription: "Colour for disabled content on top of a disabled component for example the the button text on top of a disabled background etc",
+                      colorValue: theme.color.onDisabled)
+        }
+        .padding(.bottom, theme.padding.grid2x)
     }
 
     var coreColors: some View {
@@ -48,21 +75,31 @@ struct Colours: View {
                 title: "Core colours",
                 subTitle: "Used to bring context to an app such as indicating user input or success states")
 
-            CoreColorView(colorName: "Input/Output", coreColor: theme.color.inputOutput, onCoreColor: theme.color.onInputOutput)
+            ColorView(colorName: "Input Output",
+                      colorDescription: "Colour used to indicate required input or output for a user",
+                      colorValue: theme.color.inputOutput)
             Spacer()
-
-            CoreColorView(colorName: "Nominal", coreColor: theme.color.nominal, onCoreColor: theme.color.onNominal)
+            
+            ColorView(colorName: "Nominal",
+                      colorDescription: "Colour to indicate general success or a safe action such as proceeding in a flow",
+                      colorValue: theme.color.nominal)
             Spacer()
-
-            CoreColorView(colorName: "Advisory", coreColor: theme.color.advisory, onCoreColor: theme.color.onAdvisory)
+            
+            ColorView(colorName: "Caution",
+                      colorDescription: "Colour to indicate a non-severe warning, such as continuing with data input that is technically valid but requires expertise and confirmation",
+                      colorValue: theme.color.caution)
             Spacer()
-
-            CoreColorView(colorName: "Caution", coreColor: theme.color.caution, onCoreColor: theme.color.onCaution)
+            
+            ColorView(colorName: "Warning",
+                      colorDescription: "Colour to be used very sparingly, and indicates a severe or potential risk to life error within it's use case",
+                      colorValue: theme.color.warning)
             Spacer()
-
-            CoreColorView(colorName: "Warning", coreColor: theme.color.warning, onCoreColor: theme.color.onWarning)
+            
+            ColorView(colorName: "On Core",
+                      colorDescription: "Default colour to display components such as text on top of any of the other core colours",
+                      colorValue: theme.color.onCore)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.padding.grid2x)
     }
 
     var graphicsColors: some View {
@@ -72,99 +109,66 @@ struct Colours: View {
                 subTitle: "Only to be used for displaying complex data sets such as graphs and diagrams")
 
             HStack {
-                ColorDisplayBox(name: "Graphics Red", color: theme.color.graphicsRed, foregroundColor: .flightBlack)
+                ColorDisplayBox(name: "Graphics Red", color: theme.color.graphicsRed, foregroundColor: .flightGrey0)
                 Spacer()
-                ColorDisplayBox(name: "Graphics Yellow", color: theme.color.graphicsYellow, foregroundColor: .flightBlack)
+                ColorDisplayBox(name: "Graphics Yellow", color: theme.color.graphicsYellow, foregroundColor: .flightGrey0)
                 Spacer()
-                ColorDisplayBox(name: "Graphics Green", color: theme.color.graphicsGreen, foregroundColor: .flightBlack)
+                ColorDisplayBox(name: "Graphics Green", color: theme.color.graphicsGreen, foregroundColor: .flightGrey0)
             }
 
             Spacer()
 
             HStack {
-                ColorDisplayBox(name: "Graphics Mint", color: theme.color.graphicsMint, foregroundColor: .flightBlack)
+                ColorDisplayBox(name: "Graphics Mint", color: theme.color.graphicsMint, foregroundColor: .flightGrey0)
                 Spacer()
-                ColorDisplayBox(name: "Graphics Cyan", color: theme.color.graphicsCyan, foregroundColor: .flightBlack)
+                ColorDisplayBox(name: "Graphics Cyan", color: theme.color.graphicsCyan, foregroundColor: .flightGrey0)
                 Spacer()
-                ColorDisplayBox(name: "Graphics Blue", color: theme.color.graphicsBlue, foregroundColor: .flightBlack)
+                ColorDisplayBox(name: "Graphics Blue", color: theme.color.graphicsBlue, foregroundColor: .flightGrey0)
             }
 
             Spacer()
 
             HStack {
-                ColorDisplayBox(name: "Graphics Indigo", color: theme.color.graphicsIndigo, foregroundColor: .flightBlack)
+                ColorDisplayBox(name: "Graphics Indigo", color: theme.color.graphicsIndigo, foregroundColor: .flightGrey0)
                 Spacer()
-                ColorDisplayBox(name: "Graphics Purple", color: theme.color.graphicsPurple, foregroundColor: .flightBlack)
+                ColorDisplayBox(name: "Graphics Purple", color: theme.color.graphicsPurple, foregroundColor: .flightGrey0)
                 Spacer()
-                ColorDisplayBox(name: "Graphics Pink", color: theme.color.graphicsPink, foregroundColor: .flightBlack)
+                ColorDisplayBox(name: "Graphics Pink", color: theme.color.graphicsPink, foregroundColor: .flightGrey0)
             }
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.padding.grid2x)
     }
 }
 
-struct GeneralColorView: View {
-
+struct ColorView: View {
+    
     @EnvironmentObject var theme: Theme
-
+    
     var colorName: String
-    var generalColor: Color
-    var onGeneralColor: ColorState
-
-    var body: some View {
-        VStack {
-            Text("\(colorName) - \(generalColor.hexaRGBA?.uppercased() ?? "")")
-                .foregroundColor(onGeneralColor.default)
-                .fontStyle(theme.font.subhead)
-                .padding(.top, theme.padding.grid1x)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer()
-
-            HStack {
-                ColorDisplayBox(name: "On \(colorName)", color: onGeneralColor.default, foregroundColor: generalColor)
-                ColorDisplayBox(name: "On \(colorName) Focused", color: onGeneralColor.focusedColor, foregroundColor: generalColor)
-                ColorDisplayBox(name: "On \(colorName) Disabled", color: onGeneralColor.disabledColor, foregroundColor: generalColor)
-            }
-        }
-        .padding(theme.padding.grid1x)
-        .background(generalColor)
-    }
-
-}
-
-struct CoreColorView: View {
-
-    @EnvironmentObject var theme: Theme
-
-    var colorName: String
-    var coreColor: ColorState
-    var onCoreColor: ColorState
-
+    var colorDescription: String
+    var colorValue: Color
+    
     var body: some View {
         HStack {
-            HStack {
-                ColorDisplayBox(name: colorName, color: coreColor.default, foregroundColor: onCoreColor.default)
-                Spacer()
-                ColorDisplayBox(name: "\(colorName) Focused", color: coreColor.focusedColor, foregroundColor: onCoreColor.default)
-                Spacer()
-                ColorDisplayBox(name: "\(colorName) Disabled", color: coreColor.disabledColor, foregroundColor: onCoreColor.default)
+            Rectangle()
+                .fill(colorValue)
+                .border(theme.color.surfaceLow)
+                .frame(width: 80, height: 60)
+            
+            VStack {
+                Text("\(colorName) - \(colorValue.hexaRGBA?.uppercased() ?? "")")
+                    .foregroundColor(theme.color.primary)
+                    .fontStyle(theme.font.title3)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("\(colorDescription)")
+                    .foregroundColor(theme.color.secondary)
+                    .fontStyle(theme.font.caption1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(theme.padding.grid1x)
-
-            Spacer()
-
-            HStack {
-                ColorDisplayBox(name: "On \(colorName)", color: onCoreColor.default, foregroundColor: coreColor.default)
-                Spacer()
-                ColorDisplayBox(name: "On \(colorName) Focused", color: onCoreColor.focusedColor, foregroundColor: coreColor.default)
-                Spacer()
-                ColorDisplayBox(name: "On \(colorName) Disabled", color: onCoreColor.disabledColor, foregroundColor: coreColor.default)
-            }
-            .padding(theme.padding.grid1x)
-            .background(coreColor.default)
+            .padding(.leading, theme.padding.grid1x)
         }
+        .padding([.top, .bottom], theme.padding.grid0_5x)
     }
-
 }
 
 struct ColorDisplayBox: View {

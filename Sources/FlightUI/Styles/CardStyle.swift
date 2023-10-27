@@ -58,12 +58,12 @@ struct CardStyleModifier: ViewModifier {
         if (style.showBorder) {
             RoundedRectangle(cornerRadius: style.cardRadius ?? theme.radius.medium, style: .continuous)
                 .style(
-                    withStroke: theme.color.onSurface.default.opacity(0.2),
+                    withStroke: theme.color.primary.opacity(0.2),
                     lineWidth: theme.size.border,
-                    fill: style.backgroundColor ?? theme.color.surface)
+                    fill: style.backgroundColor ?? theme.color.surfaceLow)
         } else {
             RoundedRectangle(cornerRadius: style.cardRadius ?? theme.radius.medium, style: .continuous)
-                .fill(style.backgroundColor ?? theme.color.surface)
+                .fill(style.backgroundColor ?? theme.color.surfaceLow)
         }
     }
 }

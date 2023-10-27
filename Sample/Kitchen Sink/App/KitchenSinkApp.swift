@@ -70,7 +70,7 @@ struct KitchenSinkApp: App {
             }
             .environmentObject(themeManager)
             .environmentObject(themeManager.current)
-            .accentColor(themeManager.current.color.onBackground.default)
+            .accentColor(themeManager.current.color.primary)
             .environment(\.colorScheme, themeManager.current.baseScheme)
         }
     }
@@ -104,6 +104,6 @@ private struct SampleScreenView<Destination: View>: View {
         NavigationLink(destination: destination, label: {
             Text(title)
         })
-        .listRowBackground(theme.color.surface)
+        .listRowBackground(theme.color.surfaceLow)
     }
 }
