@@ -27,7 +27,7 @@ public struct CardShadow {
     var color: Color
     var radius: CGFloat
 
-    init(color: Color = .black.opacity(0.4), radius: CGFloat = Defaults.shadowRadius) {
+    init(color: Color = .black.opacity(0.1), radius: CGFloat = Defaults.shadowRadius) {
         self.color = color
         self.radius = radius
     }
