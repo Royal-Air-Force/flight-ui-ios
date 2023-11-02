@@ -71,4 +71,4 @@ These colours should not be used for any other forms of content and are intentio
 | Nominal | #1B7E34 | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | AAA for large text and graphics |
 | Caution | #806A00 | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | AAA for large text and graphics |
 | Warning | #DB0B00 | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | AAA for large text and graphics |
-| Graphics | - | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | Lighter colours pass AAA but darker shades may be AA |
+| Graphics | - | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | Darker colours pass AAA but lighter shades may be AA |
