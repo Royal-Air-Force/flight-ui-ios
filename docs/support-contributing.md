@@ -8,5 +8,5 @@ If you are raising a new feature or pull request, please bear in mind that there
 ## ℹ️ Support
 If you require support while using this library, you may either raise a new GitHub issue if the problem is with the library and requires an update, or for wider support, see the [FlightUI Slack Group](https://defencedigital.slack.com/archives/C05E88SK6TA) on the Defence Digital Service Slack.
 
-## ⛙ Contributing
+## 📝 Contributing
 Contributions are welcome through GitHub pull requests and issues, for more info see the [CONTRIBUTING](../CONTRIBUTING.md) file.

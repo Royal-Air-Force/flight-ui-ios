@@ -63,7 +63,7 @@ struct Colours: View {
             Spacer()
 
             ColorView(colorName: "On Disabled",
-                      colorDescription: "Colour for disabled content on top of a disabled component for example the the button text on top of a disabled background etc",
+                      colorDescription: "Colour for disabled content on top of a disabled component, for example the text shown on a disabled button",
                       colorValue: theme.color.onDisabled)
         }
         .padding(.bottom, theme.padding.grid2x)
