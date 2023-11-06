@@ -3,7 +3,7 @@ import FlightUI
 
 struct Colours: View {
     @EnvironmentObject var theme: Theme
-    @StateObject private var viewModel = ViewModel()
+//    @StateObject private var viewModel = ViewModel()
 
     fileprivate let boxMinHeight: CGFloat = 126
     fileprivate let boxIdealWidth: CGFloat = 194
