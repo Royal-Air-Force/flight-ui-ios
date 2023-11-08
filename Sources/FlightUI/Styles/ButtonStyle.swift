@@ -222,3 +222,55 @@ private func getTextForeground(_ theme: Theme, isEnabled: Bool) -> Color {
         return theme.color.onDisabled
     }
 }
+
+// MARK: - Core Button
+public enum CoreButtonType {
+    case advisory, caution, warning
+}
+
+public struct CoreButtonStyle: ButtonStyle {
+    @EnvironmentObject var theme: Theme
+    @Environment(\.isEnabled) private var isEnabled: Bool
+
+    private let coreType: CoreButtonType
+
+    public init(coreType: CoreButtonType) {
+        self.coreType = coreType
+    }
+
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding([.leading, .trailing], theme.padding.grid4x)
+            .frame(minHeight: theme.size.medium)
+            .foregroundColor(getCoreForeground(theme, isEnabled: isEnabled))
+            .background(getCoreBackground(theme, coreType: coreType, isEnabled: isEnabled))
+            .fontWeight(.semibold)
+            .fontStyle(theme.font.body)
+            .clipShape(Capsule())
+            .opacity(configuration.isPressed ? Defaults.pressedOpacity : 1.0)
+            .scaleEffect(configuration.isPressed ? Defaults.pressedScale : 1.0)
+    }
+}
+
+private func getCoreBackground(_ theme: Theme, coreType: CoreButtonType, isEnabled: Bool) -> Color {
+    if isEnabled {
+        switch coreType {
+        case .advisory:
+            return theme.color.primary
+        case .caution:
+            return theme.color.caution
+        case .warning:
+            return theme.color.warning
+        }
+    } else {
+        return theme.color.disabled
+    }
+}
+
+private func getCoreForeground(_ theme: Theme, isEnabled: Bool) -> Color {
+    if isEnabled {
+        return theme.color.onCore
+    } else {
+        return theme.color.onDisabled
+    }
+}

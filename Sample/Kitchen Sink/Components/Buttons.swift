@@ -3,8 +3,7 @@ import FlightUI
 
 struct Buttons: View {
     @EnvironmentObject var theme: Theme
-    @StateObject private var viewModel = ViewModel()
-    
+
     @State private var showingAlert = false
 
     fileprivate let boxMinHeight: CGFloat = 126
@@ -18,6 +17,7 @@ struct Buttons: View {
                 tonalButton
                 outlinedButton
                 textButton
+                coreButton
             }
             .padding(.horizontal, theme.padding.grid3x)
         }
@@ -156,6 +156,72 @@ struct Buttons: View {
                 Button {} label: {
                     Image(systemName: "plus")
                 }.buttonStyle(.textIcon)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, theme.padding.grid1x)
+        }
+        .padding(.bottom, theme.padding.grid4x)
+    }
+
+    var coreButton: some View {
+        VStack {
+            HeadingView(title: "Core Button", subTitle: "Core buttons are specific to the alerting context, they should be used sparingly and only when directly related to an alerting state")
+
+            Grid(alignment: .leading) {
+                GridRow {
+                    Button("Advisory", action: { print("Advisory Tapped") })
+                        .buttonStyle(.advisory)
+                        .padding([.trailing], theme.padding.grid2x)
+
+                    Button {} label: {
+                        HStack {
+                            Image(systemName: "plus")
+                            Text("Advisory w/ Icon")
+                        }
+                    }.buttonStyle(.advisory)
+                        .padding([.trailing], theme.padding.grid2x)
+
+                    Button("Advisory Disabled", action: {})
+                        .buttonStyle(.advisory)
+                        .padding([.trailing], theme.padding.grid2x)
+                        .disabled(true)
+                }
+                GridRow {
+                    Button("Caution", action: { print("Caution Tapped") })
+                        .buttonStyle(.caution)
+                        .padding([.trailing], theme.padding.grid2x)
+
+                    Button {} label: {
+                        HStack {
+                            Image(systemName: "plus")
+                            Text("Caution w/ Icon")
+                        }
+                    }.buttonStyle(.caution)
+                        .padding([.trailing], theme.padding.grid2x)
+
+                    Button("Caution Disabled", action: {})
+                        .buttonStyle(.caution)
+                        .padding([.trailing], theme.padding.grid2x)
+                        .disabled(true)
+                }
+                GridRow {
+                    Button("Warning", action: { print("Warning Tapped") })
+                        .buttonStyle(.warning)
+                        .padding([.trailing], theme.padding.grid2x)
+
+                    Button {} label: {
+                        HStack {
+                            Image(systemName: "plus")
+                            Text("Warning w/ Icon")
+                        }
+                    }.buttonStyle(.warning)
+                        .padding([.trailing], theme.padding.grid2x)
+
+                    Button("Warning Disabled", action: {})
+                        .buttonStyle(.warning)
+                        .padding([.trailing], theme.padding.grid2x)
+                        .disabled(true)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, theme.padding.grid1x)
