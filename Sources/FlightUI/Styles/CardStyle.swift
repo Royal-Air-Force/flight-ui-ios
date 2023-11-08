@@ -5,14 +5,14 @@ private class Defaults {
 }
 
 public class CardStyle {
-    
+
     private var id: UUID
     public var shadow: CardShadow?
     public var backgroundColor: Color?
     public var showBorder: Bool
     public var cardRadius: CGFloat?
     public var cardPadding: CGFloat?
-    
+
     public init(shadow: CardShadow?, backgroundColor: Color?, showBorder: Bool, cardRadius: CGFloat?, cardPadding: CGFloat?) {
         self.id = UUID()
         self.shadow = shadow
@@ -26,8 +26,8 @@ public class CardStyle {
 public struct CardShadow {
     var color: Color
     var radius: CGFloat
-    
-    init(color: Color = .black.opacity(0.4), radius: CGFloat = Defaults.shadowRadius) {
+
+    init(color: Color = .black.opacity(0.1), radius: CGFloat = Defaults.shadowRadius) {
         self.color = color
         self.radius = radius
     }
@@ -35,13 +35,13 @@ public struct CardShadow {
 
 struct CardStyleModifier: ViewModifier {
     @EnvironmentObject var theme: Theme
-    
+
     let style: CardStyle
-    
+
     init(style: CardStyle) {
         self.style = style
     }
-    
+
     func body(content: Content) -> some View {
         ZStack {
             getBaseCard()
@@ -52,18 +52,18 @@ struct CardStyleModifier: ViewModifier {
                 .padding(style.cardPadding ?? 0)
         }
     }
-    
+
     @ViewBuilder
     private func getBaseCard() -> some View {
-        if (style.showBorder) {
+        if style.showBorder {
             RoundedRectangle(cornerRadius: style.cardRadius ?? theme.radius.medium, style: .continuous)
                 .style(
-                    withStroke: theme.color.onSurface.default.opacity(0.2),
+                    withStroke: theme.color.surfaceLow,
                     lineWidth: theme.size.border,
-                    fill: style.backgroundColor ?? theme.color.surface)
+                    fill: style.backgroundColor ?? theme.color.surfaceLow)
         } else {
             RoundedRectangle(cornerRadius: style.cardRadius ?? theme.radius.medium, style: .continuous)
-                .fill(style.backgroundColor ?? theme.color.surface)
+                .fill(style.backgroundColor ?? theme.color.surfaceLow)
         }
     }
 }

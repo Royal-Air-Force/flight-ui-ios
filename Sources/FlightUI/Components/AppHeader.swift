@@ -77,7 +77,7 @@ struct AppHeader_Previews: PreviewProvider {
 
             Spacer()
         }
-        .background(Color.flightBlack)
+        .background(Color.flightGrey0)
         .environmentObject(Theme())
         .previewDisplayName("Header")
         .preferredColorScheme(.dark)

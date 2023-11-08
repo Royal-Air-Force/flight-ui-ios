@@ -52,7 +52,7 @@ struct FontStyleModifier: ViewModifier {
             .fontDesign(style.design)
             .lineSpacing(style.lineSpacing)
             .tracking(style.charSpacing)
-            .foregroundColor(style.foregroundColor ?? theme.color.onSurface.default)
+            .foregroundColor(style.foregroundColor ?? theme.color.primary)
     }
 
 }

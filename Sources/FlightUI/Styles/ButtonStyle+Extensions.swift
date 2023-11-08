@@ -47,3 +47,17 @@ public extension ButtonStyle where Self == TextIconButtonStyle {
         return .init()
     }
 }
+
+public extension ButtonStyle where Self == CoreButtonStyle {
+    static var advisory: Self {
+        return .init(coreType: .advisory)
+    }
+
+    static var caution: Self {
+        return .init(coreType: .caution)
+    }
+
+    static var warning: Self {
+        return .init(coreType: .warning)
+    }
+}
