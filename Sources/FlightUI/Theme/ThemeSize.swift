@@ -16,16 +16,16 @@ public class ThemeSize {
     @Published public var xxxLarge: CGFloat
 
     public init(divider: CGFloat = 1,
-                border: CGFloat = 2,
+                border: CGFloat = 4,
                 iconSmall: CGFloat = 16,
                 iconMedium: CGFloat = 24,
                 iconLarge: CGFloat = 32,
                 small: CGFloat = 40,
-                medium: CGFloat = 44,
-                large: CGFloat = 48,
-                xLarge: CGFloat = 56,
-                xxLarge: CGFloat = 64,
-                xxxLarge: CGFloat = 72
+                medium: CGFloat = 48,
+                large: CGFloat = 56,
+                xLarge: CGFloat = 64,
+                xxLarge: CGFloat = 72,
+                xxxLarge: CGFloat = 80
     ) {
         self.divider = divider
         self.border = border

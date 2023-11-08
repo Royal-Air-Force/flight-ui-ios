@@ -3,15 +3,8 @@ import FlightUI
 
 @main
 struct KitchenSinkApp: App {
-    @StateObject var themeManager = ThemeManager()
-    
-    init() {
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.shadowColor = .clear
-        navBarAppearance.backgroundColor = UIColor(themeManager.current.color.background)
-        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
-    }
+    @StateObject var themeManager = ThemeManager(current: .dark)
+    @State private var isDarkTheme = true
 
     var body: some Scene {
         WindowGroup {
@@ -21,9 +14,7 @@ struct KitchenSinkApp: App {
                         header: HeaderTitleView(title: "Styles",
                                                 subtitle: "Base atoms used across components")
                     ) {
-                        SampleScreenView(title: "Cards", destination: Cards())
                         SampleScreenView(title: "Colours", destination: Colours())
-                        SampleScreenView(title: "Navigation (TBC)", destination: Misc())
                         SampleScreenView(title: "Spacing", destination: Spacing())
                         SampleScreenView(title: "Typography", destination: Typography())
                     }
@@ -32,16 +23,9 @@ struct KitchenSinkApp: App {
                         header: HeaderTitleView(title: "Components",
                                                 subtitle: "Complex interactable UI components")
                     ) {
-                        SampleScreenView(title: "Banners (TBC)", destination: Misc())
                         SampleScreenView(title: "Buttons", destination: Buttons())
-                        SampleScreenView(title: "Chips (TBC)", destination: Misc())
+                        SampleScreenView(title: "Cards", destination: Cards())
                         SampleScreenView(title: "Inputs", destination: Inputs())
-                        SampleScreenView(title: "Menus (TBC)", destination: Misc())
-                        SampleScreenView(title: "Notifications (TBC)", destination: Misc())
-                        SampleScreenView(title: "Progress (TBC)", destination: Misc())
-                        SampleScreenView(title: "Selection Controls (TBC)", destination: Misc())
-                        SampleScreenView(title: "Sliders (TBC)", destination: Misc())
-                        SampleScreenView(title: "Misc (To Delete)", destination: Misc())
                     }
                     .headerProminence(.increased)
                     Section(
@@ -51,16 +35,42 @@ struct KitchenSinkApp: App {
                         SampleScreenView(title: "Flight Crew Alerting", destination: Misc())
                     }
                     .headerProminence(.increased)
+//                    Section(
+//                        header: HeaderTitleView(title: "Coming Soon",
+//                                                subtitle: "Functionality coming soon to FlightUI")
+//                    ) {
+//                        SampleScreenView(title: "Banners", destination: Misc())
+//                        SampleScreenView(title: "Chips", destination: Misc())
+//                        SampleScreenView(title: "Menus", destination: Misc())
+//                        SampleScreenView(title: "Navigation", destination: Misc())
+//                        SampleScreenView(title: "Notifications", destination: Misc())
+//                        SampleScreenView(title: "Progress", destination: Misc())
+//                        SampleScreenView(title: "Selection Controls", destination: Misc())
+//                        SampleScreenView(title: "Sliders", destination: Misc())
+//                    }
+//                    .headerProminence(.increased)
                 }
                 .padding([.top], themeManager.current.padding.grid1x)
                 .scrollContentBackground(.hidden)
                 .background(themeManager.current.color.background)
                 .navigationBarTitle("FlightUI")
                 .navigationBarTitleDisplayMode(.large)
+                .toolbarBackground(themeManager.current.color.background, for: .navigationBar)
+                .toolbar {
+                    Toggle("Dark Theme", isOn: $isDarkTheme)
+                        .onChange(of: isDarkTheme) { value in
+                            if value {
+                                themeManager.updateTheme(.dark)
+                            } else {
+                                themeManager.updateTheme(.light)
+                            }
+                        }
+                        .toggleStyle(SwitchToggleStyle(tint: .green))
+                }
             }
             .environmentObject(themeManager)
             .environmentObject(themeManager.current)
-            .accentColor(themeManager.current.color.onBackground.default)
+            .accentColor(themeManager.current.color.primary)
             .environment(\.colorScheme, themeManager.current.baseScheme)
         }
     }
@@ -68,10 +78,10 @@ struct KitchenSinkApp: App {
 
 private struct HeaderTitleView: View {
     @EnvironmentObject var theme: Theme
-    
+
     var title: String
     var subtitle: String
-    
+
     var body: some View {
         VStack {
             Text(title)
@@ -86,14 +96,14 @@ private struct HeaderTitleView: View {
 
 private struct SampleScreenView<Destination: View>: View {
     @EnvironmentObject var theme: Theme
-    
+
     var title: String
     var destination: Destination
-    
+
     var body: some View {
         NavigationLink(destination: destination, label: {
             Text(title)
         })
-        .listRowBackground(theme.color.surface)
+        .listRowBackground(theme.color.surfaceLow)
     }
 }
