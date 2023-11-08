@@ -3,6 +3,8 @@ import FlightUI
 
 extension Inputs {
     class ViewModel: ObservableObject {
+        @Published var testInput = ""
+        @Published var nominalInput = ""
         @Published var textualInput = ""
         @Published var numericalInput = ""
         @Published var advisoryInput = ""
@@ -14,6 +16,16 @@ extension Inputs {
 
         @Published var selectionInput: SelectionInputTypes = .selectionOne
         @Published var optionalSelectionInput: SelectionInputTypes?
+        
+        @Published var generalDisabled = ""
+        @Published var generalHint = ""
+        @Published var generalActive = "General"
+        @Published var advisoryText = "Advisory"
+        @Published var nominalState = "Nominal"
+        @Published var cautionState = "Caution"
+        @Published var warningState = "Warning"
+        @Published var topLabel = "Top Label"
+        @Published var advisoryLabel = "Advisory Label"
     }
 }
 
