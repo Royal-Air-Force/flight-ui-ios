@@ -29,6 +29,7 @@ struct Spacing: View {
                 SpacingDisplayBox(name: "Grid 1x", space: theme.padding.grid1x)
                 SpacingDisplayBox(name: "Grid 1.5x", space: theme.padding.grid1_5x)
                 SpacingDisplayBox(name: "Grid 2x", space: theme.padding.grid2x)
+                SpacingDisplayBox(name: "Grid 2.5x", space: theme.padding.grid2_5x)
                 SpacingDisplayBox(name: "Grid 3x", space: theme.padding.grid3x)
                 SpacingDisplayBox(name: "Grid 4x", space: theme.padding.grid4x)
             }

@@ -3,7 +3,6 @@ import FlightUI
 
 struct Buttons: View {
     @EnvironmentObject var theme: Theme
-    @StateObject private var viewModel = ViewModel()
 
     @State private var showingAlert = false
 
