@@ -101,7 +101,7 @@ struct Cards: View {
             .padding(.vertical, theme.padding.grid2x)
         }
     }
-
+    
     var customColourCard: some View {
         VStack(alignment: .leading) {
             HeadingView(
@@ -130,4 +130,5 @@ struct Cards: View {
             .padding(.vertical, theme.padding.grid2x)
         }
     }
+
 }

@@ -27,7 +27,7 @@ public struct CardShadow {
     var color: Color
     var radius: CGFloat
 
-    init(color: Color = .black.opacity(0.4), radius: CGFloat = Defaults.shadowRadius) {
+    init(color: Color = .black.opacity(0.1), radius: CGFloat = Defaults.shadowRadius) {
         self.color = color
         self.radius = radius
     }
@@ -58,7 +58,7 @@ struct CardStyleModifier: ViewModifier {
         if style.showBorder {
             RoundedRectangle(cornerRadius: style.cardRadius ?? theme.radius.medium, style: .continuous)
                 .style(
-                    withStroke: theme.color.primary.opacity(0.2),
+                    withStroke: theme.color.surfaceLow,
                     lineWidth: theme.size.border,
                     fill: style.backgroundColor ?? theme.color.surfaceLow)
         } else {

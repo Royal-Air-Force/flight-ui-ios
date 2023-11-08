@@ -28,3 +28,11 @@ struct RoundedCorner: Shape {
         return Path(path.cgPath)
     }
 }
+
+extension UIApplication {
+    public func setUserInterfaceStyle(_ style: UIUserInterfaceStyle) {
+        let scenes = self.connectedScenes
+        guard let scene = scenes.first as? UIWindowScene else { return }
+        scene.keyWindow?.overrideUserInterfaceStyle = style
+    }
+}
