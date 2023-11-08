@@ -6,6 +6,7 @@ public class ThemePadding {
     @Published public var grid1x: CGFloat
     @Published public var grid1_5x: CGFloat
     @Published public var grid2x: CGFloat
+    @Published public var grid2_5x: CGFloat
     @Published public var grid3x: CGFloat
     @Published public var grid4x: CGFloat
     @Published public var grid5x: CGFloat
@@ -19,6 +20,7 @@ public class ThemePadding {
                 grid1x: CGFloat = 8,
                 grid1_5x: CGFloat = 12,
                 grid2x: CGFloat = 16,
+                grid2_5x: CGFloat = 20,
                 grid3x: CGFloat = 24,
                 grid4x: CGFloat = 32,
                 grid5x: CGFloat = 40,
@@ -32,6 +34,7 @@ public class ThemePadding {
         self.grid1x = grid1x
         self.grid1_5x = grid1_5x
         self.grid2x = grid2x
+        self.grid2_5x = grid2_5x
         self.grid3x = grid3x
         self.grid4x = grid4x
         self.grid5x = grid5x
