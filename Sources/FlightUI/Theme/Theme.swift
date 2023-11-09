@@ -8,6 +8,7 @@ public class Theme: ObservableObject {
     @Published public var radius: ThemeRadius
     @Published public var font: ThemeFont
     @Published public var button: ThemeButtons
+    @Published public var cards: ThemeCards
 
     // All of the below is to be removed and consolidated into the above objects
 
@@ -83,6 +84,7 @@ public class Theme: ObservableObject {
         radius: ThemeRadius = ThemeRadius(),
         font: ThemeFont = ThemeFont(),
         button: ThemeButtons = ThemeButtons(),
+        cards: ThemeCards = ThemeCards(),
 
         // Opacities
         overlayOpacity: Double = 0.6,
@@ -96,33 +98,34 @@ public class Theme: ObservableObject {
         self.radius = radius
         self.font = font
         self.button = button
+        self.cards = cards
 
-        self.primaryButtonBackground = color.nominal.default
-        self.primaryButtonForeground = color.onNominal.default
-        self.secondaryButtonBackground = color.nominal.default
-        self.secondaryButtonForeground = color.nominal.default
-        self.tertiaryButtonColor = color.onSurface.default
-        self.tertiaryButtonDisabledColor = color.onSurface.disabledColor
-        self.staticTextBackground = color.onSurface.disabledColor
-        self.staticTextBorder = color.onSurface.default
-        self.textFieldBackground = color.surface
-        self.menuFieldBackground = color.surface
-        self.menuFieldAccent = color.onSurface.focusedColor
-        self.header = color.onSurface.default
-        self.input = color.inputOutput.default
-        self.result = color.nominal.default
-        self.buttonTypography = color.onSurface.default
-        self.caption = color.onSurface.default
-        self.emptyField = color.onSurface.focusedColor
-        self.dropDownOption = color.inputOutput.default
-        self.panelBackground = color.surface
-        self.panelForegoround = color.onSurface.default
+        self.primaryButtonBackground = color.nominal
+        self.primaryButtonForeground = color.onCore
+        self.secondaryButtonBackground = color.nominal
+        self.secondaryButtonForeground = color.nominal
+        self.tertiaryButtonColor = color.primary
+        self.tertiaryButtonDisabledColor = color.disabled
+        self.staticTextBackground = color.disabled
+        self.staticTextBorder = color.primary
+        self.textFieldBackground = color.surfaceHigh
+        self.menuFieldBackground = color.surfaceHigh
+        self.menuFieldAccent = color.primary
+        self.header = color.surfaceLow
+        self.input = color.inputOutput
+        self.result = color.nominal
+        self.buttonTypography = color.surfaceLow
+        self.caption = color.secondary
+        self.emptyField = color.surfaceHigh
+        self.dropDownOption = color.inputOutput
+        self.panelBackground = color.surfaceLow
+        self.panelForegoround = color.surfaceLow
         self.panelViewBackground = color.background
         self.appHeaderBackground = color.background
-        self.validationStatusValid = color.onSurface.default
-        self.validationStatusWarning = color.warning.default
-        self.validationStatusCaution = color.caution.default
-        self.validationStatusAdvisory = color.advisory.default
+        self.validationStatusValid = color.surfaceHigh
+        self.validationStatusWarning = color.warning
+        self.validationStatusCaution = color.caution
+        self.validationStatusAdvisory = color.primary
         self.panelCornerRadius = radius.medium
         self.panelLineWidth = size.border
         self.panelPadding = padding.grid1x
