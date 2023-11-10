@@ -99,7 +99,7 @@ public struct Panel<Content: View, Subtitle: View>: View {
     private func panelTitleTextView(_ title: String) -> some View {
         Text(title)
             .padding()
-            .font(typography ?? theme.font.title2.font)
+            .font(typography ?? Font.title2)
             .foregroundColor(theme.panelForegoround)
     }
 

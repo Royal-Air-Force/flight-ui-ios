@@ -44,7 +44,7 @@ public struct AppHeader<Content: View>: View {
                 }
                 if let title {
                     Text(title)
-                        .font(typography ?? theme.font.title3.font)
+                        .font(typography ?? Font.title3)
                 }
             }
             Spacer()
@@ -68,7 +68,7 @@ struct AppHeader_Previews: PreviewProvider {
             AppHeader(title: "App Header")
 
             AppHeader(title: "FlightUI",
-                      typography: Theme().font.title3.font,
+                      typography: Font.title3,
                       imageName: "plane",
                       bundle: .module)
 

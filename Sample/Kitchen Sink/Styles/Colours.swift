@@ -143,11 +143,11 @@ struct ColorView: View {
             VStack {
                 Text("\(colorName) - \(colorValue.hexaRGBA?.uppercased() ?? "")")
                     .foregroundColor(theme.color.primary)
-                    .fontStyle(theme.font.title3)
+                    .fontStyle(theme.font.headline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("\(colorDescription)")
                     .foregroundColor(theme.color.secondary)
-                    .fontStyle(theme.font.caption1)
+                    .fontStyle(theme.font.caption2)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.leading, theme.padding.grid1x)

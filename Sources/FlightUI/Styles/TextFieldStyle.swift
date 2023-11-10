@@ -7,18 +7,18 @@ private class Defaults {
 }
 
 public struct CustomTextFieldConfig {
-    
+
 }
 
 public struct WrappedTextField: View {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
-    
+
     @Binding var text: String
-    var topLabel: String? = nil
-    var advisoryLabel: String? = nil
-    var placeholder: String? = nil
-    
+    var topLabel: String?
+    var advisoryLabel: String?
+    var placeholder: String?
+
     public init(
         text: Binding<String>,
         topLabel: String? = nil,
@@ -30,7 +30,7 @@ public struct WrappedTextField: View {
         self.advisoryLabel = advisoryLabel
         self.placeholder = placeholder
     }
-    
+
     public var body: some View {
         VStack(alignment: .leading) {
             if topLabel != nil {
@@ -64,19 +64,19 @@ public struct CustomTextFieldStyle: TextFieldStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
-    
+
     var textFieldState: TextFieldState
-    
+
     public init(
         _ textFieldState: TextFieldState
     ) {
         self.textFieldState = textFieldState
     }
-    
+
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .foregroundColor(getFontColor())
-            .fontStyle(theme.font.headline)
+            .fontStyle(theme.font.bodyBold)
             .frame(maxWidth: .infinity, minHeight: theme.size.large)
             .padding(.horizontal, theme.padding.grid2x)
             .background(getFieldBackgroundColor())
@@ -91,12 +91,12 @@ public struct CustomTextFieldStyle: TextFieldStyle {
                 isFocused = true
             }
     }
-    
+
     private func getFieldBackgroundColor() -> Color {
         if !isEnabled {
             return theme.color.surfaceHigh.opacity(Defaults.disabledOpacity)
         }
-        
+
         switch textFieldState {
         case .default:
             return theme.color.surfaceHigh
@@ -110,7 +110,7 @@ public struct CustomTextFieldStyle: TextFieldStyle {
             return theme.color.warning.opacity(Defaults.stateBackgroundOpacity)
         }
     }
-    
+
     private func getFieldBorderSize() -> CGFloat {
         if case .default = textFieldState {
             if !isEnabled {
@@ -122,7 +122,7 @@ public struct CustomTextFieldStyle: TextFieldStyle {
         }
         return theme.size.border
     }
-    
+
     private func getFieldBorderColor() -> Color {
         switch textFieldState {
         case .default:
@@ -137,7 +137,7 @@ public struct CustomTextFieldStyle: TextFieldStyle {
             return theme.color.warning.opacity(isEnabled ? 1 : Defaults.disabledOpacity)
         }
     }
-    
+
     private func getFontColor() -> Color {
         switch textFieldState {
         case .advisory:

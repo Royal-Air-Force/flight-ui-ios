@@ -16,7 +16,7 @@ extension Inputs {
 
         @Published var selectionInput: SelectionInputTypes = .selectionOne
         @Published var optionalSelectionInput: SelectionInputTypes?
-        
+
         @Published var generalDisabled = ""
         @Published var generalHint = ""
         @Published var generalActive = "General"
@@ -54,7 +54,7 @@ extension Inputs.ViewModel {
 
 }
 
-//extension Colours {
+// extension Colours {
 //    class ViewModel: ObservableObject {
 //        @Published var textualInput = ""
 //        @Published var numericalInput = ""
@@ -65,16 +65,16 @@ extension Inputs.ViewModel {
 //
 //        @Published var isShowingResetAlert = false
 //    }
-//}
+// }
 //
-//extension Colours.ViewModel {
+// extension Colours.ViewModel {
 //    func reset() {
 //        textualInput = ""
 //        numericalInput = ""
 //    }
-//}
+// }
 //
-//extension Colours.ViewModel {
+// extension Colours.ViewModel {
 //    func validateNumericalInput(value: String, mode: ValidationMode) -> ValidationStatus {
 //        if let doubleValue = Double(value) {
 //            switch doubleValue {
@@ -89,9 +89,9 @@ extension Inputs.ViewModel {
 //
 //        return validateRequiredField(value, mode: mode)
 //    }
-//}
+// }
 //
-//extension Colours.ViewModel {
+// extension Colours.ViewModel {
 //    private func validateRequiredField(_ text: String, mode: ValidationMode) -> ValidationStatus {
 //        switch mode {
 //        case .editing where text.isEmptyTrimmed:
@@ -102,9 +102,9 @@ extension Inputs.ViewModel {
 //            return .caution(message: "Invalid input format")
 //        }
 //    }
-//}
+// }
 //
-//extension Colours.ViewModel {
+// extension Colours.ViewModel {
 //    enum SelectionInputTypes: String, CaseIterable, CustomStringConvertible {
 //        case selectionOne = "Option One"
 //        case selectionTwo = "Option Two"
@@ -115,4 +115,4 @@ extension Inputs.ViewModel {
 //        }
 //    }
 //
-//}
+// }

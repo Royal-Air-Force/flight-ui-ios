@@ -20,34 +20,34 @@ struct Inputs: View {
         .background(theme.color.background)
         .navigationBarTitle("Inputs")
     }
-    
+
     var generalInput: some View {
         VStack(alignment: .leading) {
             HeadingView(
                 title: "General Input",
                 subTitle: "The default input field provides styling for a common input field, supporting disabled and hint states")
-            
+
             HStack {
                 WrappedTextField(text: $viewModel.generalDisabled, placeholder: "Disabled")
                     .textFieldStyle(.default)
                     .disabled(true)
-                
+
                 WrappedTextField(text: $viewModel.generalHint, placeholder: "Hint")
                     .textFieldStyle(.default)
-                
+
                 WrappedTextField(text: $viewModel.generalActive, placeholder: "General")
                     .textFieldStyle(.default)
             }
         }
         .padding(.top, theme.padding.grid4x)
     }
-    
+
     var advisoryInput: some View {
         VStack(alignment: .leading) {
             HeadingView(
                 title: "Advisory Text",
                 subTitle: "A specific component used for displaying text with a high visual impact but that the user cannot interact with, typically this is used for results of calculations or tasks")
-            
+
             WrappedTextField(text: $viewModel.advisoryText, placeholder: "Advisory")
                 .textFieldStyle(.advisory)
                 .frame(width: 240)
@@ -59,69 +59,71 @@ struct Inputs: View {
         VStack(alignment: .leading) {
             HeadingView(
                 title: "State Input",
-                subTitle: "An extension on the General input field which supports setting a contextual state, changing the visual to one of a nominal, caution, and warning state. Clear the fields to show the default state.")
-            
+                subTitle: "An extension on the General input field which supports setting a contextual state, changing the visual to one of a nominal, caution, and warning state. " +
+                    "Clear the fields to show the default state.")
+
             HStack {
                 WrappedTextField(text: $viewModel.nominalState, advisoryLabel: "Extra Info", placeholder: "Nominal")
                     .textFieldStyle(CustomTextFieldStyle(viewModel.nominalState.isEmpty ? .default : .nominal))
-                
+
                 WrappedTextField(text: $viewModel.cautionState, advisoryLabel: "Extra Info", placeholder: "Caution")
                     .textFieldStyle(CustomTextFieldStyle(viewModel.cautionState.isEmpty ? .default : .caution))
-                
+
                 WrappedTextField(text: $viewModel.warningState, advisoryLabel: "Extra Info", placeholder: "Warning")
                     .textFieldStyle(CustomTextFieldStyle(viewModel.warningState.isEmpty ? .default : .warning))
             }
         }
         .padding(.top, theme.padding.grid4x)
     }
-    
+
     var labelInput: some View {
         VStack {
             HeadingView(
                 title: "Label Input",
-                subTitle: "Provides input fields that can support labels above and below the field itself, useful for providing supporting information that does not hide when the user types in the field")
-            
+                subTitle: "Provides input fields that can support labels above and below the field itself, " +
+                    "useful for providing supporting information that does not hide when the user types in the field")
+
             HStack {
                 WrappedTextField(text: $viewModel.topLabel, topLabel: "Top Label", advisoryLabel: "-", placeholder: "Top Label")
                     .textFieldStyle(.default)
-                
+
                 WrappedTextField(text: $viewModel.advisoryLabel, topLabel: "-", advisoryLabel: "ℹ Advisory information goes here", placeholder: "Advisory Label")
                     .textFieldStyle(.default)
             }
         }
         .padding(.top, theme.padding.grid4x)
     }
-    
+
     var inputWithIcons: some View {
         VStack {
             HeadingView(
                 title: "Input with Icons",
                 subTitle: "Icons are supported within text fields, either at the start, end, or on both sides of the input fields")
-            
+
             HStack {
                 WrappedTextField(text: $viewModel.topLabel, placeholder: "Leading Icon")
                     .textFieldStyle(.default)
-                
+
                 WrappedTextField(text: $viewModel.advisoryLabel, placeholder: "Trailing Icon")
                     .textFieldStyle(.default)
-                
+
                 WrappedTextField(text: $viewModel.advisoryLabel, placeholder: "Dual Icons")
                     .textFieldStyle(.default)
             }
         }
         .padding(.top, theme.padding.grid4x)
     }
-    
+
     var selectionInput: some View {
         VStack {
             HeadingView(
                 title: "Selection Input",
                 subTitle: "Providing either a bound or unbound set of options for user selection and input")
-            
+
         }
         .padding(.top, theme.padding.grid4x)
     }
-    
+
 //    var textInput: some View {
 //        VStack(alignment: .leading) {
 //            Text("Full Length Textual Input")

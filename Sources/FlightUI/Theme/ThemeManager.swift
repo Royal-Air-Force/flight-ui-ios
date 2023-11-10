@@ -6,7 +6,7 @@ public class ThemeManager: ObservableObject {
     public init(current: Theme = .dark) {
         self.current = current
     }
-    
+
     public func updateTheme(_ theme: Theme, changeBaseTheme: Bool = true) {
         self.current = theme
         if changeBaseTheme {
