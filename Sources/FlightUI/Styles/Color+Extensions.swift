@@ -28,6 +28,7 @@ public extension Color {
 
     // Graphics
     static let flightGraphicsRed = Color("flightGraphicsRed", bundle: .module)
+    static let flightGraphicsDarkRed = Color("flightGraphicsDarkRed", bundle: .module)
     static let flightGraphicsYellow = Color("flightGraphicsYellow", bundle: .module)
     static let flightGraphicsDarkYellow = Color("flightGraphicsDarkYellow", bundle: .module)
     static let flightGraphicsGreen = Color("flightGraphicsGreen", bundle: .module)
@@ -40,7 +41,9 @@ public extension Color {
     static let flightGraphicsDarkBlue = Color("flightGraphicsDarkBlue", bundle: .module)
     static let flightGraphicsIndigo = Color("flightGraphicsIndigo", bundle: .module)
     static let flightGraphicsPurple = Color("flightGraphicsPurple", bundle: .module)
+    static let flightGraphicsDarkPurple = Color("flightGraphicsDarkPurple", bundle: .module)
     static let flightGraphicsPink = Color("flightGraphicsPink", bundle: .module)
+    static let flightGraphicsDarkPink = Color("flightGraphicsDarkPink", bundle: .module)
 }
 
 // MARK: - FilePrivate Preview Code -

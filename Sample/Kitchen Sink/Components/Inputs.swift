@@ -12,29 +12,8 @@ struct Inputs: View {
                 advisoryInput
                 stateInputs
                 labelInput
-                inputWithIcons
-                
-                
-//                textInput
-//                    .padding(.top, theme.padding.grid2x)
-//
-//                numberInput
-//                    .padding(.top, theme.padding.grid2x)
-//
-//                advisoryInput
-//                    .padding(.top, theme.padding.grid2x)
-//
-//                cautionInput
-//                    .padding(.top, theme.padding.grid2x)
-//
-//                warningInput
-//                    .padding(.top, theme.padding.grid2x)
-//
-//                optionalSelectInput
-//                    .padding(.top, theme.padding.grid2x)
-//
-//                mandatorySelectInput
-//                    .padding(.top, theme.padding.grid2x)
+//                inputWithIcons
+
             }
             .padding(.horizontal, theme.padding.grid3x)
         }
@@ -129,6 +108,16 @@ struct Inputs: View {
                 WrappedTextField(text: $viewModel.advisoryLabel, placeholder: "Dual Icons")
                     .textFieldStyle(.default)
             }
+        }
+        .padding(.top, theme.padding.grid4x)
+    }
+    
+    var selectionInput: some View {
+        VStack {
+            HeadingView(
+                title: "Selection Input",
+                subTitle: "Providing either a bound or unbound set of options for user selection and input")
+            
         }
         .padding(.top, theme.padding.grid4x)
     }

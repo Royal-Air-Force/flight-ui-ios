@@ -1,5 +1,11 @@
 import SwiftUI
 
+private class Defaults {
+    static let disabledOpacity: CGFloat = 0.38
+    static let stateBackgroundOpacity: CGFloat = 0.08
+    static let hintOpacity: CGFloat = 0.54
+}
+
 public struct CustomTextFieldConfig {
     
 }
@@ -32,11 +38,9 @@ public struct WrappedTextField: View {
             }
             if placeholder != nil {
                 HStack {
-                    //Image(systemName: "envelope")
                     TextField(text: $text) {
-                        Text(placeholder!).foregroundColor(theme.color.primary.opacity(isEnabled ? 0.8 : 0.4))
+                        Text(placeholder!).foregroundColor(theme.color.primary.opacity(isEnabled ? Defaults.hintOpacity : Defaults.disabledOpacity))
                     }
-                    //Image(systemName: "envelope")
                 }
             } else {
                 TextField("", text: $text)
@@ -59,6 +63,7 @@ public enum TextFieldState {
 public struct CustomTextFieldStyle: TextFieldStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
+    @FocusState private var isFocused: Bool
     
     var textFieldState: TextFieldState
     
@@ -81,11 +86,15 @@ public struct CustomTextFieldStyle: TextFieldStyle {
                     .strokeBorder(getFieldBorderColor(), lineWidth: getFieldBorderSize())
             }
             .disabled(textFieldState == .advisory)
+            .focused($isFocused)
+            .onTapGesture {
+                isFocused = true
+            }
     }
     
     private func getFieldBackgroundColor() -> Color {
         if !isEnabled {
-            return theme.color.surfaceHigh.opacity(0.4)
+            return theme.color.surfaceHigh.opacity(Defaults.disabledOpacity)
         }
         
         switch textFieldState {
@@ -94,11 +103,11 @@ public struct CustomTextFieldStyle: TextFieldStyle {
         case .advisory:
             return theme.color.surfaceHigh
         case .nominal:
-            return theme.color.nominal.opacity(0.04)
+            return theme.color.nominal.opacity(Defaults.stateBackgroundOpacity)
         case .caution:
-            return theme.color.caution.opacity(0.04)
+            return theme.color.caution.opacity(Defaults.stateBackgroundOpacity)
         case .warning:
-            return theme.color.warning.opacity(0.04)
+            return theme.color.warning.opacity(Defaults.stateBackgroundOpacity)
         }
     }
     
@@ -119,13 +128,13 @@ public struct CustomTextFieldStyle: TextFieldStyle {
         case .default:
             return theme.color.surfaceHigh
         case .advisory:
-            return theme.color.primary.opacity(isEnabled ? 1 : 0.4)
+            return theme.color.primary.opacity(isEnabled ? 1 : Defaults.disabledOpacity)
         case .nominal:
-            return theme.color.nominal.opacity(isEnabled ? 1 : 0.4)
+            return theme.color.nominal.opacity(isEnabled ? 1 : Defaults.disabledOpacity)
         case .caution:
-            return theme.color.caution.opacity(isEnabled ? 1 : 0.4)
+            return theme.color.caution.opacity(isEnabled ? 1 : Defaults.disabledOpacity)
         case .warning:
-            return theme.color.warning.opacity(isEnabled ? 1 : 0.4)
+            return theme.color.warning.opacity(isEnabled ? 1 : Defaults.disabledOpacity)
         }
     }
     
