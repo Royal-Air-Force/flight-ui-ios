@@ -14,7 +14,7 @@ struct HeadingView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             Text(subTitle)
                 .foregroundColor(theme.color.secondary)
-                .fontStyle(theme.font.subhead)
+                .fontStyle(theme.font.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
         }

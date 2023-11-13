@@ -1,6 +1,15 @@
 import SwiftUI
 import FlightUI
 
+// TODO: Remove InputField and replace with WrappedTextField (comment out validation for now)
+// TODO: Fix spacing for top and advisory labels
+// TODO: Debounce?
+// TODO: Advisory Labels in sync with state changes (i.e. caution -> nominal)
+// TODO: Selection Input
+// TODO: Functional Inputs
+// TODO: Validation?
+// TODO: iPad Numeric Keyboard
+
 struct Inputs: View {
     @EnvironmentObject var theme: Theme
     @StateObject private var viewModel = ViewModel()
@@ -28,18 +37,19 @@ struct Inputs: View {
                 subTitle: "The default input field provides styling for a common input field, supporting disabled and hint states")
 
             HStack {
-                WrappedTextField(text: $viewModel.generalDisabled, placeholder: "Disabled")
+                InputField(text: $viewModel.generalDisabled, placeholder: "Disabled")
                     .textFieldStyle(.default)
                     .disabled(true)
 
-                WrappedTextField(text: $viewModel.generalHint, placeholder: "Hint")
+                InputField(text: $viewModel.generalHint, placeholder: "Hint")
                     .textFieldStyle(.default)
 
-                WrappedTextField(text: $viewModel.generalActive, placeholder: "General")
+                InputField(text: $viewModel.generalActive, placeholder: "General")
                     .textFieldStyle(.default)
             }
+            .padding(.top, theme.padding.grid2x)
         }
-        .padding(.top, theme.padding.grid4x)
+        .padding(.bottom, theme.padding.grid4x)
     }
 
     var advisoryInput: some View {
@@ -48,11 +58,12 @@ struct Inputs: View {
                 title: "Advisory Text",
                 subTitle: "A specific component used for displaying text with a high visual impact but that the user cannot interact with, typically this is used for results of calculations or tasks")
 
-            WrappedTextField(text: $viewModel.advisoryText, placeholder: "Advisory")
+            InputField(text: $viewModel.advisoryText, placeholder: "Advisory")
                 .textFieldStyle(.advisory)
                 .frame(width: 240)
+                .padding(.top, theme.padding.grid2x)
         }
-        .padding(.top, theme.padding.grid4x)
+        .padding(.bottom, theme.padding.grid4x)
     }
 
     var stateInputs: some View {
@@ -63,17 +74,18 @@ struct Inputs: View {
                     "Clear the fields to show the default state.")
 
             HStack {
-                WrappedTextField(text: $viewModel.nominalState, advisoryLabel: "Extra Info", placeholder: "Nominal")
-                    .textFieldStyle(CustomTextFieldStyle(viewModel.nominalState.isEmpty ? .default : .nominal))
+                InputField(text: $viewModel.nominalState, placeholder: "Nominal", advisoryLabel: AdvisoryLabel("Extra Info"))
+                    .textFieldStyle(InputFieldStyle(viewModel.nominalState.isEmpty ? .default : .nominal))
 
-                WrappedTextField(text: $viewModel.cautionState, advisoryLabel: "Extra Info", placeholder: "Caution")
-                    .textFieldStyle(CustomTextFieldStyle(viewModel.cautionState.isEmpty ? .default : .caution))
+                InputField(text: $viewModel.cautionState, placeholder: "Caution", advisoryLabel: AdvisoryLabel("Extra Info", state: .caution))
+                    .textFieldStyle(InputFieldStyle(viewModel.cautionState.isEmpty ? .default : .caution))
 
-                WrappedTextField(text: $viewModel.warningState, advisoryLabel: "Extra Info", placeholder: "Warning")
-                    .textFieldStyle(CustomTextFieldStyle(viewModel.warningState.isEmpty ? .default : .warning))
+                InputField(text: $viewModel.warningState, placeholder: "Warning", advisoryLabel: AdvisoryLabel("Extra Info", state: .warning))
+                    .textFieldStyle(InputFieldStyle(viewModel.warningState.isEmpty ? .default : .warning))
             }
+            .padding(.top, theme.padding.grid2x)
         }
-        .padding(.top, theme.padding.grid4x)
+        .padding(.bottom, theme.padding.grid4x)
     }
 
     var labelInput: some View {
@@ -83,15 +95,16 @@ struct Inputs: View {
                 subTitle: "Provides input fields that can support labels above and below the field itself, " +
                     "useful for providing supporting information that does not hide when the user types in the field")
 
-            HStack {
-                WrappedTextField(text: $viewModel.topLabel, topLabel: "Top Label", advisoryLabel: "-", placeholder: "Top Label")
+            HStack(alignment: .center) {
+                InputField(text: $viewModel.topLabel, placeholder: "Top Label", topLabel: "Top Label", advisoryLabelSpacer: true)
                     .textFieldStyle(.default)
 
-                WrappedTextField(text: $viewModel.advisoryLabel, topLabel: "-", advisoryLabel: "ℹ Advisory information goes here", placeholder: "Advisory Label")
+                InputField(text: $viewModel.advisoryLabel, placeholder: "Advisory Label", topLabelSpacer: true, advisoryLabel: AdvisoryLabel("Advisory information goes here"))
                     .textFieldStyle(.default)
             }
+            .padding(.top, theme.padding.grid2x)
         }
-        .padding(.top, theme.padding.grid4x)
+        .padding(.bottom, theme.padding.grid4x)
     }
 
     var inputWithIcons: some View {
@@ -101,17 +114,18 @@ struct Inputs: View {
                 subTitle: "Icons are supported within text fields, either at the start, end, or on both sides of the input fields")
 
             HStack {
-                WrappedTextField(text: $viewModel.topLabel, placeholder: "Leading Icon")
+                InputField(text: $viewModel.topLabel, placeholder: "Leading Icon")
                     .textFieldStyle(.default)
 
-                WrappedTextField(text: $viewModel.advisoryLabel, placeholder: "Trailing Icon")
+                InputField(text: $viewModel.advisoryLabel, placeholder: "Trailing Icon")
                     .textFieldStyle(.default)
 
-                WrappedTextField(text: $viewModel.advisoryLabel, placeholder: "Dual Icons")
+                InputField(text: $viewModel.advisoryLabel, placeholder: "Dual Icons")
                     .textFieldStyle(.default)
             }
+            .padding(.top, theme.padding.grid2x)
         }
-        .padding(.top, theme.padding.grid4x)
+        .padding(.bottom, theme.padding.grid4x)
     }
 
     var selectionInput: some View {
@@ -121,7 +135,7 @@ struct Inputs: View {
                 subTitle: "Providing either a bound or unbound set of options for user selection and input")
 
         }
-        .padding(.top, theme.padding.grid4x)
+        .padding(.bottom, theme.padding.grid4x)
     }
 
 //    var textInput: some View {

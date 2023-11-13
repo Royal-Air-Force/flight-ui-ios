@@ -46,7 +46,7 @@ struct Typography: View {
                         .padding(.top, theme.padding.grid1x)
 
                     Text("Body Bold | SF Pro | Semi Bold | 16px")
-                        .fontStyle(theme.font.body)
+                        .fontStyle(theme.font.bodyBold)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, theme.padding.grid1x)
 
