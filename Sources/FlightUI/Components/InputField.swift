@@ -58,7 +58,7 @@ public struct InputField: View {
             }
         }
     }
-    
+
     private func getLabelColor(_ state: InputFieldState) -> Color {
         switch state {
         case .caution:
@@ -74,7 +74,7 @@ public struct InputField: View {
 public struct AdvisoryLabel {
     var text: String
     var state: InputFieldState
-    
+
     public init(_ text: String,
                 show: Bool = true,
                 state: InputFieldState = .advisory) {

@@ -20,7 +20,7 @@ public struct InputFieldConfig {
     var backgroundColor: Color?
     var cornerRadius: CGFloat?
     var borderColor: Color?
-    
+
     public init(fontColor: Color? = nil, fontStyle: FontStyle? = nil, backgroundColor: Color? = nil, cornerRadius: CGFloat? = nil, borderColor: Color? = nil) {
         self.fontColor = fontColor
         self.fontStyle = fontStyle

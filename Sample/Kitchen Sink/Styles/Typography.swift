@@ -8,7 +8,7 @@ struct Typography: View {
         ScrollView {
             VStack {
                 VStack {
-                    Text("Large Title | SF Pro | Regular | 34px")
+                    Text("Large Title | SF Pro | Bold | 34px")
                         .fontStyle(theme.font.largeTitle)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, theme.padding.grid1x)

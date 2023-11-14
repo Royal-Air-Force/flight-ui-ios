@@ -1,9 +1,9 @@
 //// NOTE: Temporary file to keep code easily accessible during refactoring
 
 //
-//// MARK: - Input Field Component -
+// MARK: - Input Field Component -
 //
-//public struct InputField: View {
+// public struct InputField: View {
 //    @Environment (\.validationContext) var context
 //    @EnvironmentObject var theme: Theme
 //
@@ -124,16 +124,16 @@
 //            return .default
 //        }
 //    }
-//}
+// }
 //
-//// MARK: - Supporting TextField enums -
+// MARK: - Supporting TextField enums -
 //
-//public enum TextFieldValueType {
+// public enum TextFieldValueType {
 //    case text
 //    case decimal
-//}
+// }
 //
-//public enum TextFieldSize {
+// public enum TextFieldSize {
 //    case small
 //    case medium
 //    case large
@@ -151,13 +151,13 @@
 //            return nil
 //        }
 //    }
-//}
+// }
 //
-//// MARK: - Preview Code -
+// MARK: - Preview Code -
 //
-//#if DEBUG
+// #if DEBUG
 //
-//struct InputField_Previews: PreviewProvider {
+// struct InputField_Previews: PreviewProvider {
 //    @State private static var text = "Hello World"
 //    @State private static var staticText = "Hello Static"
 //    @State private static var emptyText = ""
@@ -280,14 +280,14 @@
 //        .previewDisplayName("Input Field variations")
 //        .padding()
 //    }
-//}
+// }
 //
-//#endif
+// #endif
 
-//// MARK: Input Message
-//import SwiftUI
+// MARK: Input Message
+// import SwiftUI
 //
-//public struct InputMessage: View {
+// public struct InputMessage: View {
 //    @Environment (\.validationContext) private var context
 //    @EnvironmentObject var theme: Theme
 //
@@ -347,9 +347,9 @@
 //
 //        return context.status
 //    }
-//}
+// }
 //
-//struct InputMessage_Previews: PreviewProvider {
+// struct InputMessage_Previews: PreviewProvider {
 //    @State static var warningStatus: ValidationStatus = .warning(message: "example Warning message")
 //    @State static var cautionStatus: ValidationStatus = .caution(message: "example Caution message")
 //    @State static var advisoryStatus: ValidationStatus = .advisory(message: "example Advisory message")
@@ -389,11 +389,11 @@
 //            .environmentObject(Theme())
 //        }
 //    }
-//}
+// }
 //
-//import SwiftUI
+// import SwiftUI
 //
-//public struct InputFieldOptionSet: OptionSet {
+// public struct InputFieldOptionSet: OptionSet {
 //    public let rawValue: UInt8
 //
 //    public static let useThemeStyling = InputFieldOptionSet(rawValue: 1 << 0)
@@ -406,9 +406,9 @@
 //    public init(rawValue: UInt8) {
 //        self.rawValue = rawValue
 //    }
-//}
+// }
 //
-//public struct InputFieldConfiguration {
+// public struct InputFieldConfiguration {
 //
 //    public enum DebounceDuration: Double {
 //        case `default` = 0.0
@@ -440,9 +440,9 @@
 //        self.debounceDuration = debounceDuration
 //        self.options = options
 //    }
-//}
+// }
 //
-//extension InputFieldConfiguration {
+// extension InputFieldConfiguration {
 //    public static var `default`: InputFieldConfiguration {
 //        return .inputFieldConfiguration(formatter: nil,
 //                                        valueType: .text,
@@ -469,12 +469,12 @@
 //                                debounceDuration: debounceDuration,
 //                                options: options)
 //    }
-//}
-//import SwiftUI
+// }
+// import SwiftUI
 //
-//// MARK: - Static Text View Modifiers -
+// MARK: - Static Text View Modifiers -
 //
-//public struct StaticTextOptionSet: OptionSet {
+// public struct StaticTextOptionSet: OptionSet {
 //    public let rawValue: UInt8
 //
 //    public static let background = StaticTextOptionSet(rawValue: 0x1)
@@ -486,9 +486,9 @@
 //    public init(rawValue: UInt8) {
 //        self.rawValue = rawValue
 //    }
-//}
+// }
 //
-//public struct StaticTextStyle: ViewModifier {
+// public struct StaticTextStyle: ViewModifier {
 //    @EnvironmentObject var theme: Theme
 //    private let options: StaticTextOptionSet
 //    private let size: TextFieldSize
@@ -510,21 +510,21 @@
 //                    .stroke(options.contains(.bordered) ? theme.staticTextBorder : .clear, lineWidth: theme.staticTextFieldBorderWidth)
 //            )
 //    }
-//}
+// }
 //
-//// MARK: - Text View Extensions -
+// MARK: - Text View Extensions -
 //
-//extension Text {
+// extension Text {
 //    public func staticTextStyle<Style: ViewModifier>(_ style: Style) -> some View {
 //        ModifiedContent(content: self, modifier: style)
 //    }
-//}
+// }
 //
-//// MARK: - Preview Code -
+// MARK: - Preview Code -
 //
-//#if DEBUG
+// #if DEBUG
 //
-//struct StaticText_Previews: PreviewProvider {
+// struct StaticText_Previews: PreviewProvider {
 //    static let theme: Theme = .dark
 //
 //    static var previews: some View {
@@ -553,14 +553,14 @@
 //        .preferredColorScheme(.dark)
 //        .padding()
 //    }
-//}
+// }
 //
-//#endif
-//import SwiftUI
+// #endif
+// import SwiftUI
 //
-//// MARK: - TextField Style Structs & Leading dot initialisers -
+// MARK: - TextField Style Structs & Leading dot initialisers -
 //
-//public struct TextFieldType: TextFieldStyle {
+// public struct TextFieldType: TextFieldStyle {
 //    @EnvironmentObject var theme: Theme
 //
 //    let valueType: TextFieldValueType
@@ -597,22 +597,22 @@
 //            return .default
 //        }
 //    }
-//}
+// }
 //
-//public extension TextFieldStyle where Self == TextFieldType {
+// public extension TextFieldStyle where Self == TextFieldType {
 //    @available(*, deprecated, message: "Use InputField to replace TextFields")
 //    static func type(of valueType: TextFieldValueType = .text,
 //                     size: TextFieldSize = .infinity,
 //                     alignment: TextAlignment = .leading) -> Self {
 //        .init(of: valueType, size: size, alignment: alignment)
 //    }
-//}
+// }
 //
-//// MARK: - Preview Code -
+// MARK: - Preview Code -
 //
-//#if DEBUG
+// #if DEBUG
 //
-//struct TextFieldViewModifiersContentPreview: PreviewProvider {
+// struct TextFieldViewModifiersContentPreview: PreviewProvider {
 //    @State private static var emptyText = ""
 //    @State private static var text = "Hello World"
 //
@@ -644,6 +644,6 @@
 //        .previewDisplayName("Text Field variations")
 //        .padding()
 //    }
-//}
+// }
 //
-//#endif
+// #endif

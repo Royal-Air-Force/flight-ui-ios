@@ -34,12 +34,12 @@ public struct InputFieldStyle: TextFieldStyle {
                 isFocused = true
             }
     }
-    
+
     private func getFontColor() -> Color {
         if let overrideColor = inputFieldConfig.fontColor {
             return overrideColor
         }
-        
+
         switch inputFieldState {
         case .advisory:
             return theme.color.primary
@@ -52,7 +52,7 @@ public struct InputFieldStyle: TextFieldStyle {
         if !isEnabled {
             return theme.color.surfaceHigh.opacity(InputFieldDefaults.disabledOpacity)
         }
-        
+
         if let overrideColor = inputFieldConfig.backgroundColor {
             return overrideColor
         }
@@ -70,19 +70,19 @@ public struct InputFieldStyle: TextFieldStyle {
             return theme.color.warning.opacity(InputFieldDefaults.stateBackgroundOpacity)
         }
     }
-    
+
     private func getCornerRadius() -> CGFloat {
         if let overrideRadius = inputFieldConfig.cornerRadius {
             return overrideRadius
         }
         return theme.radius.medium
     }
-    
+
     private func getFieldBorderColor() -> Color {
         if let overrideColor = inputFieldConfig.borderColor {
             return overrideColor
         }
-        
+
         switch inputFieldState {
         case .default:
             return theme.color.surfaceHigh
