@@ -23,9 +23,9 @@ public struct InputFieldStyle: TextFieldStyle {
             .frame(maxWidth: .infinity, minHeight: theme.size.large)
             .padding(.horizontal, theme.padding.grid2x)
             .background(getFieldBackgroundColor())
-            .cornerRadius(theme.radius.medium)
+            .cornerRadius(getCornerRadius())
             .overlay {
-                RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous)
+                RoundedRectangle(cornerRadius: getCornerRadius(), style: .continuous)
                     .strokeBorder(getFieldBorderColor(), lineWidth: getFieldBorderSize())
             }
             .disabled(inputFieldState == .advisory)
@@ -70,16 +70,14 @@ public struct InputFieldStyle: TextFieldStyle {
             return theme.color.warning.opacity(InputFieldDefaults.stateBackgroundOpacity)
         }
     }
-
-    private func getFieldBorderSize() -> CGFloat {
-        switch inputFieldState {
-        case .nominal, .caution, .warning:
-            return theme.size.border
-        default:
-            return 0
+    
+    private func getCornerRadius() -> CGFloat {
+        if let overrideRadius = inputFieldConfig.cornerRadius {
+            return overrideRadius
         }
+        return theme.radius.medium
     }
-
+    
     private func getFieldBorderColor() -> Color {
         if let overrideColor = inputFieldConfig.borderColor {
             return overrideColor
@@ -96,6 +94,15 @@ public struct InputFieldStyle: TextFieldStyle {
             return theme.color.caution.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
         case .warning:
             return theme.color.warning.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
+        }
+    }
+
+    private func getFieldBorderSize() -> CGFloat {
+        switch inputFieldState {
+        case .nominal, .caution, .warning:
+            return theme.size.border
+        default:
+            return 0
         }
     }
 }

@@ -3,7 +3,6 @@ import SwiftUI
 public struct InputField: View {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
-//    @Environment(\.sizeCategory) var sizeCategory
 
     @Binding var text: String
     var placeholder: String?
@@ -35,14 +34,9 @@ public struct InputField: View {
                     .foregroundColor(theme.color.primary)
                     .fontStyle(theme.font.subhead)
             } else if topLabelSpacer {
-                //TODO STILL NOT WORKING AS EXPECTED e.g. LARGE FONT
-                
                 Text("-")
                     .foregroundColor(theme.color.surfaceHigh.opacity(0))
                     .fontStyle(theme.font.subhead)
-                
-//                Spacer()
-//                    .frame(height: UIFontMetrics.default.scaledValue(for: theme.font.subhead.size))
             }
             if let placeholderText = placeholder {
                 TextField(text: $text) {
@@ -58,7 +52,6 @@ public struct InputField: View {
                     .fontStyle(theme.font.caption1)
                     .padding(.horizontal, theme.padding.grid2x)
             } else if advisoryLabelSpacer {
-                //TODO STILL NOT WORKING AS EXPECTED e.g. LARGE FONT
                 Text("-")
                     .foregroundColor(theme.color.surfaceHigh.opacity(0))
                     .fontStyle(theme.font.caption1)

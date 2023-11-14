@@ -6,7 +6,7 @@ public extension TextFieldStyle where Self == DefaultTextFieldStyle {
     }
 
     static var advisory: InputFieldStyle {
-        return InputFieldStyle(.advisory, inputFieldConfig: InputFieldConfig(fontStyle: .largeTitle))
+        return InputFieldStyle(.advisory)
     }
 
     static var nominal: InputFieldStyle {

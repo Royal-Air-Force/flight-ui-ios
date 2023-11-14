@@ -1,14 +1,13 @@
 import SwiftUI
 import FlightUI
 
-// TODO: Remove InputField and replace with WrappedTextField (comment out validation for now)
-// TODO: Fix spacing for top and advisory labels
 // TODO: Debounce?
 // TODO: Advisory Labels in sync with state changes (i.e. caution -> nominal)
 // TODO: Selection Input
 // TODO: Functional Inputs
 // TODO: Validation?
 // TODO: iPad Numeric Keyboard
+// TODO: Remove comments
 
 struct Inputs: View {
     @EnvironmentObject var theme: Theme
@@ -95,7 +94,7 @@ struct Inputs: View {
                 subTitle: "Provides input fields that can support labels above and below the field itself, " +
                     "useful for providing supporting information that does not hide when the user types in the field")
 
-            HStack(alignment: .center) {
+            HStack(alignment: .top) {
                 InputField(text: $viewModel.topLabel, placeholder: "Top Label", topLabel: "Top Label", advisoryLabelSpacer: true)
                     .textFieldStyle(.default)
 

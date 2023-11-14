@@ -2,7 +2,7 @@ import SwiftUI
 
 public extension FontStyle {
     static var largeTitle: FontStyle {
-        return FontStyle(size: 34, lineSpacing: 7)
+        return FontStyle(size: 34, weight: .bold, lineSpacing: 7)
     }
     static var title1: FontStyle {
         return FontStyle(size: 30, weight: .semibold, lineSpacing: 3)
