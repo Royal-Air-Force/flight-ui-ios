@@ -29,3 +29,18 @@ public struct InputFieldConfig {
         self.borderColor = borderColor
     }
 }
+
+public struct AdvisoryLabel {
+    var label: String?
+    var state: InputFieldState
+    var isVisible: Bool
+
+    public init(_ label: String? = nil,
+         state: InputFieldState = .default,
+         isVisible: Bool = true
+    ) {
+        self.label = label
+        self.state = state
+        self.isVisible = isVisible
+    }
+}

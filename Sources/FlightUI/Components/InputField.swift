@@ -10,8 +10,7 @@ public struct InputField: View {
     var placeholder: String?
     var topLabel: String?
     var topLabelSpacer: Bool
-    var advisoryLabel: AdvisoryLabel?
-    var advisoryLabelSpacer: Bool
+    var advisoryLabel: AdvisoryLabel
     var formatter: ((String) -> String)?
 
     public init(
@@ -19,8 +18,7 @@ public struct InputField: View {
         placeholder: String? = nil,
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
-        advisoryLabel: AdvisoryLabel? = nil,
-        advisoryLabelSpacer: Bool = false,
+        advisoryLabel: AdvisoryLabel = .init(isVisible: false),
         formatter: ((String) -> String)? = nil
     ) {
         self._text = text
@@ -28,7 +26,6 @@ public struct InputField: View {
         self.topLabel = topLabel
         self.topLabelSpacer = topLabelSpacer
         self.advisoryLabel = advisoryLabel
-        self.advisoryLabelSpacer = advisoryLabelSpacer
         self.formatter = formatter
     }
 
@@ -79,20 +76,22 @@ public struct InputField: View {
 
     @ViewBuilder
     private func buildAdvisoryLabel() -> some View {
-        if let advisory = advisoryLabel {
-            Text(advisory.text)
-                .foregroundColor(getLabelColor(advisory.state))
+        if let advisory = advisoryLabel.label, advisoryLabel.isVisible {
+            Text(advisory)
+                .foregroundColor(getLabelColor())
                 .fontStyle(theme.font.caption1)
                 .padding(.horizontal, theme.padding.grid2x)
-        } else if advisoryLabelSpacer {
+        } else if advisoryLabel.isVisible {
             Text("-")
                 .foregroundColor(theme.color.surfaceHigh.opacity(0))
                 .fontStyle(theme.font.caption1)
         }
     }
 
-    private func getLabelColor(_ state: InputFieldState) -> Color {
-        switch state {
+    private func getLabelColor() -> Color {
+        switch advisoryLabel.state {
+        case .nominal:
+            return theme.color.nominal
         case .caution:
             return theme.color.caution
         case .warning:
@@ -100,17 +99,5 @@ public struct InputField: View {
         default:
             return theme.color.secondary
         }
-    }
-}
-
-public struct AdvisoryLabel {
-    var text: String
-    var state: InputFieldState
-
-    public init(_ text: String,
-                show: Bool = true,
-                state: InputFieldState = .advisory) {
-        self.text = text
-        self.state = state
     }
 }

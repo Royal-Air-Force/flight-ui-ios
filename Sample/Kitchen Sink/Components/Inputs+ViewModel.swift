@@ -23,15 +23,42 @@ extension Inputs {
         @Published var generalHint = ""
         @Published var generalActive = "General"
         @Published var advisoryText = "Advisory"
-        @Published var nominalState = "Nominal"
-        @Published var cautionState = "Caution"
-        @Published var warningState = "Warning"
+        @Published var nominalStateInput = "Nominal"
+        @Published var cautionStateInput = "Caution"
+        @Published var warningStateInput = "Warning"
         @Published var topLabel = "Top Label"
         @Published var advisoryLabel = "Advisory Label"
         @Published var formatInput = ""
         @Published var debounceInput = ""
         @Published var debounceAdvisoryLabel = defaultDebounceAdvisoryLabel
         @Published var keyboardInput = ""
+
+        func nominalState() -> InputFieldState {
+            return nominalStateInput.isEmpty ? .default : .nominal
+        }
+
+        func nominalAdvisory() -> AdvisoryLabel {
+            return AdvisoryLabel(
+                nominalStateInput.isEmpty ? "Required" : "Extra info",
+                state: nominalStateInput.isEmpty ? .caution : .default
+            )
+        }
+
+        func cautionState() -> InputFieldState {
+            return cautionStateInput.isEmpty ? .default : .caution
+        }
+
+        func cautionAdvisory() -> AdvisoryLabel {
+            return AdvisoryLabel("Extra info", state: cautionState())
+        }
+
+        func warningState() -> InputFieldState {
+            return warningStateInput.isEmpty ? .default : .warning
+        }
+
+        func warningAdvisory() -> AdvisoryLabel {
+            return AdvisoryLabel("Extra info", state: warningState())
+        }
     }
 }
 

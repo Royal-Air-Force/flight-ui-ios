@@ -1,8 +1,6 @@
 import SwiftUI
 import FlightUI
 
-// TODO: Debounce?
-// TODO: Advisory Labels in sync with state changes (i.e. caution -> nominal)
 // TODO: Selection Input
 // TODO: Functional Inputs
 // TODO: Validation?
@@ -21,7 +19,7 @@ struct Inputs: View {
                 stateInputs
                 labelInput
                 managedInput
-
+                selectionInput
             }
             .padding(.horizontal, theme.padding.grid3x)
         }
@@ -75,15 +73,15 @@ struct Inputs: View {
                 subTitle: "An extension on the General input field which supports setting a contextual state, changing the visual to one of a nominal, caution, and warning state. " +
                     "Clear the fields to show the default state.")
 
-            HStack {
-                InputField(text: $viewModel.nominalState, placeholder: "Nominal", advisoryLabel: AdvisoryLabel("Extra Info"))
-                    .textFieldStyle(InputFieldStyle(viewModel.nominalState.isEmpty ? .default : .nominal))
+            HStack(alignment: .top) {
+                InputField(text: $viewModel.nominalStateInput, placeholder: "Nominal", advisoryLabel: viewModel.nominalAdvisory())
+                    .textFieldStyle(InputFieldStyle(viewModel.nominalState()))
 
-                InputField(text: $viewModel.cautionState, placeholder: "Caution", advisoryLabel: AdvisoryLabel("Extra Info", state: .caution))
-                    .textFieldStyle(InputFieldStyle(viewModel.cautionState.isEmpty ? .default : .caution))
+                InputField(text: $viewModel.cautionStateInput, placeholder: "Caution", advisoryLabel: viewModel.cautionAdvisory())
+                    .textFieldStyle(InputFieldStyle(viewModel.cautionState()))
 
-                InputField(text: $viewModel.warningState, placeholder: "Warning", advisoryLabel: AdvisoryLabel("Extra Info", state: .warning))
-                    .textFieldStyle(InputFieldStyle(viewModel.warningState.isEmpty ? .default : .warning))
+                InputField(text: $viewModel.warningStateInput, placeholder: "Warning", advisoryLabel: viewModel.warningAdvisory())
+                    .textFieldStyle(InputFieldStyle(viewModel.warningState()))
             }
             .padding(.top, theme.padding.grid2x)
         }
@@ -98,7 +96,7 @@ struct Inputs: View {
                     "useful for providing supporting information that does not hide when the user types in the field")
 
             HStack(alignment: .top) {
-                InputField(text: $viewModel.topLabel, placeholder: "Top Label", topLabel: "Top Label", advisoryLabelSpacer: true)
+                InputField(text: $viewModel.topLabel, placeholder: "Top Label", topLabel: "Top Label")
                     .textFieldStyle(.default)
 
                 InputField(text: $viewModel.advisoryLabel, placeholder: "Advisory Label", topLabelSpacer: true, advisoryLabel: AdvisoryLabel("Advisory information goes here"))
@@ -113,12 +111,12 @@ struct Inputs: View {
         VStack {
             HeadingView(
                 title: "Managed Input",
-                subTitle: "Input fields that provide some additional level of management including; real time formatting, debounce functionality, and custom keyboards")
+                subTitle: "Input fields that provide some additional level of management including; formatting on focus change, debounce functionality, and custom keyboards")
 
             HStack(alignment: .top) {
                 InputField(text: $viewModel.formatInput, placeholder: "Formatter", advisoryLabel: AdvisoryLabel("Formats numbers to 2dp"), formatter: { typedString in
-                     guard let doubleValue = Double(typedString) else { return typedString }
-                     return String(format: "%.2f", doubleValue)
+                        guard let doubleValue = Double(typedString) else { return typedString }
+                        return String(format: "%.2f", doubleValue)
                 })
                 .textFieldStyle(.default)
 
@@ -150,6 +148,10 @@ struct Inputs: View {
                 title: "Selection Input",
                 subTitle: "Providing either a bound or unbound set of options for user selection and input")
 
+                // Text("Select Value (Mandatory)")
+                //    .fontStyle(theme.font.caption1)
+                MenuField(selection: $viewModel.selectionInput,
+                          options: ViewModel.SelectionInputTypes.allCases)
         }
         .padding(.bottom, theme.padding.grid4x)
     }
