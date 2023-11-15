@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 public struct InputField: View {
     @EnvironmentObject var theme: Theme
@@ -10,6 +11,9 @@ public struct InputField: View {
     var topLabelSpacer: Bool
     var advisoryLabel: AdvisoryLabel?
     var advisoryLabelSpacer: Bool
+    var formatter: ((String) -> String)?
+
+    var textBinding: Binding<String> { Binding(get: { format(text) }, set: { text = format($0) }) }
 
     public init(
         text: Binding<String>,
@@ -17,7 +21,8 @@ public struct InputField: View {
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
         advisoryLabel: AdvisoryLabel? = nil,
-        advisoryLabelSpacer: Bool = false
+        advisoryLabelSpacer: Bool = false,
+        formatter: ((String) -> String)? = nil
     ) {
         self._text = text
         self.placeholder = placeholder
@@ -25,6 +30,7 @@ public struct InputField: View {
         self.topLabelSpacer = topLabelSpacer
         self.advisoryLabel = advisoryLabel
         self.advisoryLabelSpacer = advisoryLabelSpacer
+        self.formatter = formatter
     }
 
     public var body: some View {
@@ -39,12 +45,12 @@ public struct InputField: View {
                     .fontStyle(theme.font.subhead)
             }
             if let placeholderText = placeholder {
-                TextField(text: $text) {
+                TextField(text: textBinding) {
                     Text(placeholderText)
                         .foregroundColor(theme.color.primary.opacity(isEnabled ? InputFieldDefaults.hintOpacity : InputFieldDefaults.disabledOpacity))
                 }
             } else {
-                TextField("", text: $text)
+                TextField("", text: textBinding)
             }
             if let advisory = advisoryLabel {
                 Text(advisory.text)
@@ -57,6 +63,11 @@ public struct InputField: View {
                     .fontStyle(theme.font.caption1)
             }
         }
+    }
+
+    private func format(_ text: String) -> String {
+        guard let formatString = formatter else { return text }
+        return formatString(text)
     }
 
     private func getLabelColor(_ state: InputFieldState) -> Color {

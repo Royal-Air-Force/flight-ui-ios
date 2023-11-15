@@ -3,6 +3,8 @@ import FlightUI
 
 extension Inputs {
     class ViewModel: ObservableObject {
+        static let defaultDebounceAdvisoryLabel = "Adds a 2 second delay"
+
         @Published var testInput = ""
         @Published var nominalInput = ""
         @Published var textualInput = ""
@@ -26,6 +28,10 @@ extension Inputs {
         @Published var warningState = "Warning"
         @Published var topLabel = "Top Label"
         @Published var advisoryLabel = "Advisory Label"
+        @Published var formatInput = ""
+        @Published var debounceInput = ""
+        @Published var debounceAdvisoryLabel = defaultDebounceAdvisoryLabel
+        @Published var keyboardInput = ""
     }
 }
 

@@ -20,7 +20,7 @@ struct Inputs: View {
                 advisoryInput
                 stateInputs
                 labelInput
-//                inputWithIcons
+                managedInput
 
             }
             .padding(.horizontal, theme.padding.grid3x)
@@ -42,6 +42,9 @@ struct Inputs: View {
 
                 InputField(text: $viewModel.generalHint, placeholder: "Hint")
                     .textFieldStyle(.default)
+                    .onChange(of: viewModel.generalHint) { newText in
+                        print("General hint changed to \(newText)")
+                    }
 
                 InputField(text: $viewModel.generalActive, placeholder: "General")
                     .textFieldStyle(.default)
@@ -106,20 +109,40 @@ struct Inputs: View {
         .padding(.bottom, theme.padding.grid4x)
     }
 
-    var inputWithIcons: some View {
+    var managedInput: some View {
         VStack {
             HeadingView(
-                title: "Input with Icons",
-                subTitle: "Icons are supported within text fields, either at the start, end, or on both sides of the input fields")
+                title: "Managed Input",
+                subTitle: "Input fields that provide some additional level of management including; real time formatting, debounce functionality, and custom keyboards")
 
-            HStack {
-                InputField(text: $viewModel.topLabel, placeholder: "Leading Icon")
+            HStack(alignment: .top) {
+                // TODO: Doesn't work if you're changing the lenght of the string in the formatter
+                InputField(text: $viewModel.formatInput, placeholder: "Formatter", advisoryLabel: AdvisoryLabel("Replaces all spaces with +"), formatter: { typedString in
+                    // guard let doubleValue = Double(typedString) else { return typedString }
+                    // return String(format: "%.2f", doubleValue)
+                    return typedString.replacingOccurrences(of: " ", with: "+")
+                })
+                .textFieldStyle(.default)
+                .onSubmit {
+//                    guard let doubleValue = Double(viewModel.formatInput) else { return }
+//                    viewModel.formatInput = String(format: "%.2f", doubleValue)
+                }
+
+                InputField(text: $viewModel.debounceInput, placeholder: "Debounce", advisoryLabel: AdvisoryLabel(viewModel.debounceAdvisoryLabel))
                     .textFieldStyle(.default)
+                    .onChange(of: viewModel.debounceInput) { _ in
+                        viewModel.debounceAdvisoryLabel = Inputs.ViewModel.defaultDebounceAdvisoryLabel
+                    }
+                    .onDebounce(of: viewModel.debounceInput, duration: .seconds(2)) { debouncedValue in
+                        if debouncedValue.isEmpty {
+                            viewModel.debounceAdvisoryLabel = Inputs.ViewModel.defaultDebounceAdvisoryLabel
+                        } else {
+                            viewModel.debounceAdvisoryLabel = debouncedValue
+                        }
+                    }
 
-                InputField(text: $viewModel.advisoryLabel, placeholder: "Trailing Icon")
-                    .textFieldStyle(.default)
-
-                InputField(text: $viewModel.advisoryLabel, placeholder: "Dual Icons")
+                // TODO: Custom Keyboard
+                InputField(text: $viewModel.keyboardInput, placeholder: "Number Keyboard", advisoryLabel: AdvisoryLabel("Enables iPad numeric keyboard"))
                     .textFieldStyle(.default)
             }
             .padding(.top, theme.padding.grid2x)
