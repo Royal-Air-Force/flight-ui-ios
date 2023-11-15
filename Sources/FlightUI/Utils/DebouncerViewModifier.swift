@@ -2,18 +2,17 @@ import SwiftUI
 import Combine
 
 struct DebounceViewModifier<Value>: ViewModifier where Value: Equatable {
-
-    let trigger: Value
-    let action: (Value) -> Void
-    let sleep: @Sendable () async throws -> Void
-
     @State private var debounceTask: Task<Void, Never>?
+    
+    let observable: Value
+    let action: (Value) -> Void
+    let delay: @Sendable () async throws -> Void
 
     func body(content: Content) -> some View {
-        content.onChange(of: trigger) { value in
+        content.onChange(of: observable) { value in
             debounceTask?.cancel()
             debounceTask = Task {
-                do { try await sleep() } catch { return }
+                do { try await delay() } catch { return }
                 action(value)
             }
         }
@@ -26,7 +25,7 @@ extension View {
         duration: Duration,
         perform action: @escaping (_ newValue: Value) -> Void
     ) -> some View where Value: Equatable {
-        self.modifier(DebounceViewModifier(trigger: value, action: action) {
+        self.modifier(DebounceViewModifier(observable: value, action: action) {
             try await Task.sleep(for: duration)
         })
     }
