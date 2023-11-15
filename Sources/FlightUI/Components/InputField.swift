@@ -4,6 +4,7 @@ import Combine
 public struct InputField: View {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
+    @FocusState private var isFocused: Bool
 
     @Binding var text: String
     var placeholder: String?
@@ -12,8 +13,6 @@ public struct InputField: View {
     var advisoryLabel: AdvisoryLabel?
     var advisoryLabelSpacer: Bool
     var formatter: ((String) -> String)?
-
-    var textBinding: Binding<String> { Binding(get: { format(text) }, set: { text = format($0) }) }
 
     public init(
         text: Binding<String>,
@@ -35,39 +34,61 @@ public struct InputField: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
-            if let top = topLabel {
-                Text(top)
-                    .foregroundColor(theme.color.primary)
-                    .fontStyle(theme.font.subhead)
-            } else if topLabelSpacer {
-                Text("-")
-                    .foregroundColor(theme.color.surfaceHigh.opacity(0))
-                    .fontStyle(theme.font.subhead)
-            }
-            if let placeholderText = placeholder {
-                TextField(text: textBinding) {
-                    Text(placeholderText)
-                        .foregroundColor(theme.color.primary.opacity(isEnabled ? InputFieldDefaults.hintOpacity : InputFieldDefaults.disabledOpacity))
-                }
-            } else {
-                TextField("", text: textBinding)
-            }
-            if let advisory = advisoryLabel {
-                Text(advisory.text)
-                    .foregroundColor(getLabelColor(advisory.state))
-                    .fontStyle(theme.font.caption1)
-                    .padding(.horizontal, theme.padding.grid2x)
-            } else if advisoryLabelSpacer {
-                Text("-")
-                    .foregroundColor(theme.color.surfaceHigh.opacity(0))
-                    .fontStyle(theme.font.caption1)
-            }
+            buildTopLabel()
+            buildTextField()
+            buildAdvisoryLabel()
         }
     }
-
-    private func format(_ text: String) -> String {
-        guard let formatString = formatter else { return text }
-        return formatString(text)
+    
+    @ViewBuilder
+    private func buildTopLabel() -> some View {
+        if let top = topLabel {
+            Text(top)
+                .foregroundColor(theme.color.primary)
+                .fontStyle(theme.font.subhead)
+        } else if topLabelSpacer {
+            Text("-")
+                .foregroundColor(theme.color.surfaceHigh.opacity(0))
+                .fontStyle(theme.font.subhead)
+        }
+    }
+    
+    @ViewBuilder
+    private func buildTextField() -> some View {
+        if let placeholderText = placeholder {
+            TextField(text: $text) {
+                Text(placeholderText)
+                    .foregroundColor(theme.color.primary.opacity(isEnabled ? InputFieldDefaults.hintOpacity : InputFieldDefaults.disabledOpacity))
+            }
+            .focused($isFocused)
+            .onChange(of: isFocused) { newFocus in
+                if !newFocus, let format = formatter {
+                    text = format(text)
+                }
+            }
+        } else {
+            TextField("", text: $text)
+                .focused($isFocused)
+                .onChange(of: isFocused) { newFocus in
+                    if !newFocus, let format = formatter {
+                        text = format(text)
+                    }
+                }
+        }
+    }
+    
+    @ViewBuilder
+    private func buildAdvisoryLabel() -> some View {
+        if let advisory = advisoryLabel {
+            Text(advisory.text)
+                .foregroundColor(getLabelColor(advisory.state))
+                .fontStyle(theme.font.caption1)
+                .padding(.horizontal, theme.padding.grid2x)
+        } else if advisoryLabelSpacer {
+            Text("-")
+                .foregroundColor(theme.color.surfaceHigh.opacity(0))
+                .fontStyle(theme.font.caption1)
+        }
     }
 
     private func getLabelColor(_ state: InputFieldState) -> Color {

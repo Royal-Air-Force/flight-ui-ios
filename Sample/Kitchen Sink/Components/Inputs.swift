@@ -116,17 +116,11 @@ struct Inputs: View {
                 subTitle: "Input fields that provide some additional level of management including; real time formatting, debounce functionality, and custom keyboards")
 
             HStack(alignment: .top) {
-                // TODO: Doesn't work if you're changing the lenght of the string in the formatter
-                InputField(text: $viewModel.formatInput, placeholder: "Formatter", advisoryLabel: AdvisoryLabel("Replaces all spaces with +"), formatter: { typedString in
-                    // guard let doubleValue = Double(typedString) else { return typedString }
-                    // return String(format: "%.2f", doubleValue)
-                    return typedString.replacingOccurrences(of: " ", with: "+")
+                InputField(text: $viewModel.formatInput, placeholder: "Formatter", advisoryLabel: AdvisoryLabel("Formats numbers to 2dp"), formatter: { typedString in
+                     guard let doubleValue = Double(typedString) else { return typedString }
+                     return String(format: "%.2f", doubleValue)
                 })
                 .textFieldStyle(.default)
-                .onSubmit {
-//                    guard let doubleValue = Double(viewModel.formatInput) else { return }
-//                    viewModel.formatInput = String(format: "%.2f", doubleValue)
-                }
 
                 InputField(text: $viewModel.debounceInput, placeholder: "Debounce", advisoryLabel: AdvisoryLabel(viewModel.debounceAdvisoryLabel))
                     .textFieldStyle(.default)
