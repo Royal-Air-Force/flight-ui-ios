@@ -39,7 +39,7 @@ public struct InputField: View {
             buildAdvisoryLabel()
         }
     }
-    
+
     @ViewBuilder
     private func buildTopLabel() -> some View {
         if let top = topLabel {
@@ -52,7 +52,7 @@ public struct InputField: View {
                 .fontStyle(theme.font.subhead)
         }
     }
-    
+
     @ViewBuilder
     private func buildTextField() -> some View {
         if let placeholderText = placeholder {
@@ -76,7 +76,7 @@ public struct InputField: View {
                 }
         }
     }
-    
+
     @ViewBuilder
     private func buildAdvisoryLabel() -> some View {
         if let advisory = advisoryLabel {

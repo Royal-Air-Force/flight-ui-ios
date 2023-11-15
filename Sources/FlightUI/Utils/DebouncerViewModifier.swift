@@ -3,7 +3,7 @@ import Combine
 
 struct DebounceViewModifier<Value>: ViewModifier where Value: Equatable {
     @State private var debounceTask: Task<Void, Never>?
-    
+
     let observable: Value
     let action: (Value) -> Void
     let delay: @Sendable () async throws -> Void
