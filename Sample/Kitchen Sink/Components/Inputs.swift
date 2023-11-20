@@ -3,7 +3,6 @@ import FlightUI
 
 // TODO: Selection Input
 // TODO: Functional Inputs
-// TODO: Validation?
 // TODO: iPad Numeric Keyboard
 // TODO: Remove comments
 
@@ -147,11 +146,18 @@ struct Inputs: View {
             HeadingView(
                 title: "Selection Input",
                 subTitle: "Providing either a bound or unbound set of options for user selection and input")
-
-                // Text("Select Value (Mandatory)")
-                //    .fontStyle(theme.font.caption1)
-                MenuField(selection: $viewModel.selectionInput,
+            
+            HStack {
+                NewMenuField(selection: $viewModel.boundSelectionInput,
+                             options: ViewModel.BoundSelectionTypes.allCases,
+                             placeholder: "Bound Selection Input")
+                .menuFieldStyle(MenuFieldStyle(state: viewModel.boundSelectionState(), config: InputFieldConfig()))
+                
+                UnboundMenuField(selection: $viewModel.selectionInput,
                           options: ViewModel.SelectionInputTypes.allCases)
+                //.menuFieldStyle(MenuFieldStyle(state: .default, config: InputFieldConfig()))
+            }
+
         }
         .padding(.bottom, theme.padding.grid4x)
     }

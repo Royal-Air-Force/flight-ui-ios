@@ -16,8 +16,10 @@ extension Inputs {
         @Published var warningInput = ""
         @Published var warningInputResult: ValidationStatus = .warning(message: "Warning Message")
 
-        @Published var selectionInput: SelectionInputTypes = .selectionOne
+        @Published var selectionInput: SelectionInputTypes? = .selectionOne
         @Published var optionalSelectionInput: SelectionInputTypes?
+        
+        @Published var boundSelectionInput: BoundSelectionTypes? = nil
 
         @Published var generalDisabled = ""
         @Published var generalHint = ""
@@ -59,6 +61,19 @@ extension Inputs {
         func warningAdvisory() -> AdvisoryLabel {
             return AdvisoryLabel("Extra info", state: warningState())
         }
+        
+        func boundSelectionState() -> InputFieldState {
+            switch boundSelectionInput {
+            case .nominalSelection:
+                return .nominal
+            case .cautionSelection:
+                return .caution
+            case .warningSelection:
+                return .warning
+            default:
+                return .default
+            }
+        }
     }
 }
 
@@ -75,6 +90,17 @@ extension Inputs.ViewModel {
 }
 
 extension Inputs.ViewModel {
+    enum BoundSelectionTypes: String, CaseIterable, CustomStringConvertible {
+        case defaultSelection = "Default Selection"
+        case nominalSelection = "Nominal Selection"
+        case cautionSelection = "Caution Selection"
+        case warningSelection = "Warning Selection"
+        
+        var description: String {
+            return rawValue
+        }
+    }
+    
     enum SelectionInputTypes: String, CaseIterable, CustomStringConvertible {
         case selectionOne = "Option One"
         case selectionTwo = "Option Two"

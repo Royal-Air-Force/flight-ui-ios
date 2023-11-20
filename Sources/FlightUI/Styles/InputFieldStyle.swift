@@ -9,10 +9,10 @@ public struct InputFieldStyle: TextFieldStyle {
     var inputFieldConfig: InputFieldConfig
 
     public init(
-        _ textFieldState: InputFieldState,
+        _ inputFieldState: InputFieldState,
         inputFieldConfig: InputFieldConfig = InputFieldConfig()
     ) {
-        self.inputFieldState = textFieldState
+        self.inputFieldState = inputFieldState
         self.inputFieldConfig = inputFieldConfig
     }
 
