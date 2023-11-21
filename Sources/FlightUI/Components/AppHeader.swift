@@ -50,7 +50,7 @@ public struct AppHeader<Content: View>: View {
             Spacer()
         }
         .padding()
-        .background(theme.appHeaderBackground)
+        .background(theme.color.background)
     }
 }
 

@@ -84,18 +84,6 @@ extension Inputs {
 }
 
 extension Inputs.ViewModel {
-    func validateAdvisory(value: String, mode: ValidationMode) -> ValidationStatus {
-        return .advisory(message: "Advisory Message")
-    }
-    func validateCaution(value: String, mode: ValidationMode) -> ValidationStatus {
-        return .caution(message: "Caution Message")
-    }
-    func validateWarning(value: String, mode: ValidationMode) -> ValidationStatus {
-        return .warning(message: "Warning Message")
-    }
-}
-
-extension Inputs.ViewModel {
     enum BoundSelectionTypes: String, CaseIterable, CustomStringConvertible {
         case defaultSelection = "Default Selection"
         case nominalSelection = "Nominal Selection"
