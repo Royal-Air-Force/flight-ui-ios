@@ -43,6 +43,9 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
         VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
             buildTopLabel()
             buildMenuField()
+                .onTapGesture {
+                    isSheetShown = true
+                }
             SupportLabel(supportLabelConfig)
         }
     }
@@ -123,9 +126,6 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
         .overlay {
             RoundedRectangle(cornerRadius: style.getCornerRadius(theme), style: .continuous)
                 .strokeBorder(style.getFieldBorderColor(theme, isEnabled: isEnabled), lineWidth: style.getFieldBorderSize(theme))
-        }
-        .onTapGesture {
-            isSheetShown = true
         }
     }
 
