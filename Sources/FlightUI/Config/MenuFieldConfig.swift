@@ -6,13 +6,6 @@ internal class MenuFieldDefaults {
     static let hintOpacity: CGFloat = 0.54
 }
 
-public enum MenuFieldState {
-    case `default`
-    case nominal
-    case caution
-    case warning
-}
-
 public struct MenuFieldConfig {
     var fontColor: Color?
     var fontStyle: FontStyle?

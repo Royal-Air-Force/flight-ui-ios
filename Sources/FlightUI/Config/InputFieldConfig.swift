@@ -6,14 +6,6 @@ internal class InputFieldDefaults {
     static let hintOpacity: CGFloat = 0.54
 }
 
-public enum InputFieldState {
-    case `default`
-    case advisory
-    case nominal
-    case caution
-    case warning
-}
-
 public struct InputFieldConfig {
     var fontColor: Color?
     var fontStyle: FontStyle?
@@ -27,20 +19,5 @@ public struct InputFieldConfig {
         self.backgroundColor = backgroundColor
         self.cornerRadius = cornerRadius
         self.borderColor = borderColor
-    }
-}
-
-public struct AdvisoryLabel {
-    var label: String?
-    var state: InputFieldState
-    var isVisible: Bool
-
-    public init(_ label: String? = nil,
-         state: InputFieldState = .default,
-         isVisible: Bool = true
-    ) {
-        self.label = label
-        self.state = state
-        self.isVisible = isVisible
     }
 }

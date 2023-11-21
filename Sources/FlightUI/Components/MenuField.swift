@@ -8,19 +8,50 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
 
     @Binding var selection: SelectionType?
     var options: [SelectionType]
-    let placeholder: String?
+    var placeholder: String?
+    var topLabel: String?
+    var topLabelSpacer: Bool
+    var supportLabelConfig: SupportLabelConfig
 
     public init(
         selection: Binding<SelectionType?>,
         options: [SelectionType],
-        placeholder: String? = nil
+        placeholder: String? = nil,
+        topLabel: String? = nil,
+        topLabelSpacer: Bool = false,
+        supportLabelConfig: SupportLabelConfig = .init(isVisible: false)
     ) {
         self._selection = selection
         self.options = options
         self.placeholder = placeholder
+        self.topLabel = topLabel
+        self.topLabelSpacer = topLabelSpacer
+        self.supportLabelConfig = supportLabelConfig
     }
 
     public var body: some View {
+        VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
+            buildTopLabel()
+            buildMenuField()
+            SupportLabel(supportLabelConfig)
+        }
+    }
+
+    @ViewBuilder
+    private func buildTopLabel() -> some View {
+        if let top = topLabel {
+            Text(top)
+                .foregroundColor(theme.color.primary)
+                .fontStyle(theme.font.subhead)
+        } else if topLabelSpacer {
+            Text("-")
+                .foregroundColor(theme.color.surfaceHigh.opacity(0))
+                .fontStyle(theme.font.subhead)
+        }
+    }
+
+    @ViewBuilder
+    private func buildMenuField() -> some View {
         Menu {
             Picker("", selection: $selection) {
                 ForEach(options, id: \.self) { item in

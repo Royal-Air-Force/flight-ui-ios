@@ -1,10 +1,10 @@
 import SwiftUI
 
 public struct MenuFieldStyle {
-    var state: MenuFieldState
+    var state: InputAlertingState
     var config: MenuFieldConfig
 
-    public init(state: MenuFieldState, config: MenuFieldConfig = MenuFieldConfig()) {
+    public init(state: InputAlertingState, config: MenuFieldConfig = MenuFieldConfig()) {
         self.state = state
         self.config = config
     }
@@ -53,14 +53,14 @@ public struct MenuFieldStyle {
         }
 
         switch state {
-        case .default:
-            return theme.color.surfaceHigh
         case .nominal:
             return theme.color.nominal.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
         case .caution:
             return theme.color.caution.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
         case .warning:
             return theme.color.warning.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+        default:
+            return theme.color.surfaceHigh
         }
     }
 

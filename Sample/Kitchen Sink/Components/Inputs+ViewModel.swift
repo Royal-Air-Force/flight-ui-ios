@@ -22,34 +22,34 @@ extension Inputs {
         @Published var boundSelectionInput: BoundSelectionTypes?
         @Published var unboundSelectionInput: UnboundDefaultSelectionTypes?
 
-        func nominalState() -> InputFieldState {
+        func nominalState() -> InputAlertingState {
             return nominalStateInput.isEmpty ? .default : .nominal
         }
 
-        func nominalAdvisory() -> AdvisoryLabel {
-            return AdvisoryLabel(
+        func nominalAdvisory() -> SupportLabelConfig {
+            return SupportLabelConfig(
                 nominalStateInput.isEmpty ? "Required" : "Extra info",
                 state: nominalStateInput.isEmpty ? .caution : .default
             )
         }
 
-        func cautionState() -> InputFieldState {
+        func cautionState() -> InputAlertingState {
             return cautionStateInput.isEmpty ? .default : .caution
         }
 
-        func cautionAdvisory() -> AdvisoryLabel {
-            return AdvisoryLabel("Extra info", state: cautionState())
+        func cautionAdvisory() -> SupportLabelConfig {
+            return SupportLabelConfig("Extra info", state: cautionState())
         }
 
-        func warningState() -> InputFieldState {
+        func warningState() -> InputAlertingState {
             return warningStateInput.isEmpty ? .default : .warning
         }
 
-        func warningAdvisory() -> AdvisoryLabel {
-            return AdvisoryLabel("Extra info", state: warningState())
+        func warningAdvisory() -> SupportLabelConfig {
+            return SupportLabelConfig("Extra info", state: warningState())
         }
 
-        func boundSelectionState() -> MenuFieldState {
+        func boundSelectionState() -> InputAlertingState {
             switch boundSelectionInput {
             case .nominalSelection:
                 return .nominal
@@ -62,7 +62,7 @@ extension Inputs {
             }
         }
 
-        func unboundSelectionState() -> MenuFieldState {
+        func unboundSelectionState() -> InputAlertingState {
             switch unboundSelectionInput {
             case .nominalSelection:
                 return .nominal

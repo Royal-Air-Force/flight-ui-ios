@@ -10,7 +10,7 @@ public struct InputField: View {
     var placeholder: String?
     var topLabel: String?
     var topLabelSpacer: Bool
-    var advisoryLabel: AdvisoryLabel
+    var supportLabelConfig: SupportLabelConfig
     var formatter: ((String) -> String)?
 
     public init(
@@ -18,14 +18,14 @@ public struct InputField: View {
         placeholder: String? = nil,
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
-        advisoryLabel: AdvisoryLabel = .init(isVisible: false),
+        supportLabelConfig: SupportLabelConfig = .init(isVisible: false),
         formatter: ((String) -> String)? = nil
     ) {
         self._text = text
         self.placeholder = placeholder
         self.topLabel = topLabel
         self.topLabelSpacer = topLabelSpacer
-        self.advisoryLabel = advisoryLabel
+        self.supportLabelConfig = supportLabelConfig
         self.formatter = formatter
     }
 
@@ -33,7 +33,7 @@ public struct InputField: View {
         VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
             buildTopLabel()
             buildTextField()
-            buildAdvisoryLabel()
+            SupportLabel(supportLabelConfig)
         }
     }
 
@@ -71,33 +71,6 @@ public struct InputField: View {
                         text = format(text)
                     }
                 }
-        }
-    }
-
-    @ViewBuilder
-    private func buildAdvisoryLabel() -> some View {
-        if let advisory = advisoryLabel.label, advisoryLabel.isVisible {
-            Text(advisory)
-                .foregroundColor(getLabelColor())
-                .fontStyle(theme.font.caption1)
-                .padding(.horizontal, theme.padding.grid2x)
-        } else if advisoryLabel.isVisible {
-            Text("-")
-                .foregroundColor(theme.color.surfaceHigh.opacity(0))
-                .fontStyle(theme.font.caption1)
-        }
-    }
-
-    private func getLabelColor() -> Color {
-        switch advisoryLabel.state {
-        case .nominal:
-            return theme.color.nominal
-        case .caution:
-            return theme.color.caution
-        case .warning:
-            return theme.color.warning
-        default:
-            return theme.color.secondary
         }
     }
 }

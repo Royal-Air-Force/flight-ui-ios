@@ -5,11 +5,11 @@ public struct InputFieldStyle: TextFieldStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
 
-    var inputFieldState: InputFieldState
+    var inputFieldState: InputAlertingState
     var inputFieldConfig: InputFieldConfig
 
     public init(
-        _ inputFieldState: InputFieldState,
+        _ inputFieldState: InputAlertingState,
         inputFieldConfig: InputFieldConfig = InputFieldConfig()
     ) {
         self.inputFieldState = inputFieldState

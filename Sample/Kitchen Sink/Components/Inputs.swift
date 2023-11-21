@@ -72,13 +72,13 @@ struct Inputs: View {
                     "Clear the fields to show the default state.")
 
             HStack(alignment: .top) {
-                InputField(text: $viewModel.nominalStateInput, placeholder: "Nominal", advisoryLabel: viewModel.nominalAdvisory())
+                InputField(text: $viewModel.nominalStateInput, placeholder: "Nominal", supportLabelConfig: viewModel.nominalAdvisory())
                     .textFieldStyle(InputFieldStyle(viewModel.nominalState()))
 
-                InputField(text: $viewModel.cautionStateInput, placeholder: "Caution", advisoryLabel: viewModel.cautionAdvisory())
+                InputField(text: $viewModel.cautionStateInput, placeholder: "Caution", supportLabelConfig: viewModel.cautionAdvisory())
                     .textFieldStyle(InputFieldStyle(viewModel.cautionState()))
 
-                InputField(text: $viewModel.warningStateInput, placeholder: "Warning", advisoryLabel: viewModel.warningAdvisory())
+                InputField(text: $viewModel.warningStateInput, placeholder: "Warning", supportLabelConfig: viewModel.warningAdvisory())
                     .textFieldStyle(InputFieldStyle(viewModel.warningState()))
             }
             .padding(.top, theme.padding.grid2x)
@@ -97,7 +97,7 @@ struct Inputs: View {
                 InputField(text: $viewModel.topLabel, placeholder: "Top Label", topLabel: "Top Label")
                     .textFieldStyle(.default)
 
-                InputField(text: $viewModel.advisoryLabel, placeholder: "Advisory Label", topLabelSpacer: true, advisoryLabel: AdvisoryLabel("Advisory information goes here"))
+                InputField(text: $viewModel.advisoryLabel, placeholder: "Advisory Label", topLabelSpacer: true, supportLabelConfig: SupportLabelConfig("Advisory information goes here"))
                     .textFieldStyle(.default)
             }
             .padding(.top, theme.padding.grid2x)
@@ -112,13 +112,13 @@ struct Inputs: View {
                 subTitle: "Input fields that provide some additional level of management including; formatting on focus change, debounce functionality, and custom keyboards")
 
             HStack(alignment: .top) {
-                InputField(text: $viewModel.formatInput, placeholder: "Formatter", advisoryLabel: AdvisoryLabel("Formats numbers to 2dp"), formatter: { typedString in
+                InputField(text: $viewModel.formatInput, placeholder: "Formatter", supportLabelConfig: SupportLabelConfig("Formats numbers to 2dp"), formatter: { typedString in
                         guard let doubleValue = Double(typedString) else { return typedString }
                         return String(format: "%.2f", doubleValue)
                 })
                 .textFieldStyle(.default)
 
-                InputField(text: $viewModel.debounceInput, placeholder: "Debounce", advisoryLabel: AdvisoryLabel(viewModel.debounceAdvisoryLabel))
+                InputField(text: $viewModel.debounceInput, placeholder: "Debounce", supportLabelConfig: SupportLabelConfig(viewModel.debounceAdvisoryLabel))
                     .textFieldStyle(.default)
                     .onChange(of: viewModel.debounceInput) { _ in
                         viewModel.debounceAdvisoryLabel = Inputs.ViewModel.defaultDebounceAdvisoryLabel
@@ -132,7 +132,7 @@ struct Inputs: View {
                     }
 
                 // TODO: Custom Keyboard
-                InputField(text: $viewModel.keyboardInput, placeholder: "Number Keyboard", advisoryLabel: AdvisoryLabel("Enables iPad numeric keyboard"))
+                InputField(text: $viewModel.keyboardInput, placeholder: "Number Keyboard", supportLabelConfig: SupportLabelConfig("Enables iPad numeric keyboard"))
                     .textFieldStyle(.default)
             }
             .padding(.top, theme.padding.grid2x)
@@ -149,12 +149,15 @@ struct Inputs: View {
             HStack {
                 MenuField(selection: $viewModel.boundSelectionInput,
                              options: ViewModel.BoundSelectionTypes.allCases,
-                             placeholder: "Bound Selection Input")
+                             placeholder: "Bound Selection Input",
+                topLabel: "Hello",
+                          supportLabelConfig: .init("Bound selection init", state: .warning))
                 .menuFieldStyle(MenuFieldStyle(state: viewModel.boundSelectionState(), config: MenuFieldConfig()))
 
                 UnboundMenuField(selection: $viewModel.unboundSelectionInput,
                                  options: ViewModel.UnboundDefaultSelectionTypes.allCases,
-                                 placeholder: "Unbound Selection Input")
+                                 placeholder: "Unbound Selection Input", topLabel: "Hello",
+                                 supportLabelConfig: .init("Unbound selection init", state: .caution))
                 .menuFieldStyle(MenuFieldStyle(state: viewModel.unboundSelectionState()))
             }
         }
