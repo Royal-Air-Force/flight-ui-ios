@@ -149,17 +149,15 @@ struct Inputs: View {
             HStack {
                 MenuField(selection: $viewModel.boundSelectionInput,
                              options: ViewModel.BoundSelectionTypes.allCases,
-                             placeholder: "Bound Selection Input",
-                topLabel: "Hello",
-                          supportLabelConfig: .init("Bound selection init", state: .warning))
-                .menuFieldStyle(MenuFieldStyle(state: viewModel.boundSelectionState(), config: MenuFieldConfig()))
+                             placeholder: "Bound Selection Input")
+                .menuFieldStyle(MenuFieldStyle(state: viewModel.boundSelectionState()))
 
                 UnboundMenuField(selection: $viewModel.unboundSelectionInput,
                                  options: ViewModel.UnboundDefaultSelectionTypes.allCases,
-                                 placeholder: "Unbound Selection Input", topLabel: "Hello",
-                                 supportLabelConfig: .init("Unbound selection init", state: .caution))
+                                 placeholder: "Unbound Selection Input")
                 .menuFieldStyle(MenuFieldStyle(state: viewModel.unboundSelectionState()))
             }
+            .padding(.top, theme.padding.grid2x)
         }
         .padding(.bottom, theme.padding.grid4x)
     }
