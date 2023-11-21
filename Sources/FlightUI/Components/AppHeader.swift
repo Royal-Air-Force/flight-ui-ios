@@ -1,3 +1,10 @@
+//
+//  AppHeader.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 
 // MARK: - AppHeader View -

@@ -1,10 +1,18 @@
+//
+//  MenuFieldStyle.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 
 public struct MenuFieldStyle {
     var state: InputAlertingState
     var config: MenuFieldConfig
 
-    public init(state: InputAlertingState, config: MenuFieldConfig = MenuFieldConfig()) {
+    public init(_ state: InputAlertingState,
+                config: MenuFieldConfig = MenuFieldConfig()) {
         self.state = state
         self.config = config
     }
@@ -75,9 +83,7 @@ public struct MenuFieldStyle {
 }
 
 public struct MenuFieldStyleEnvironmentKey: EnvironmentKey {
-    public static var defaultValue: MenuFieldStyle = .init(
-        state: .default, config: .init()
-    )
+    public static var defaultValue: MenuFieldStyle = .default
 }
 
 extension EnvironmentValues {

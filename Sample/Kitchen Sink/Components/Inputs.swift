@@ -1,3 +1,10 @@
+//
+//  Inputs.swift
+//  Flight UI - Kitchen Sink Sample
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 import FlightUI
 
@@ -150,12 +157,12 @@ struct Inputs: View {
                 MenuField(selection: $viewModel.boundSelectionInput,
                              options: ViewModel.BoundSelectionTypes.allCases,
                              placeholder: "Bound Selection Input")
-                .menuFieldStyle(MenuFieldStyle(state: viewModel.boundSelectionState()))
+                .menuFieldStyle(MenuFieldStyle(viewModel.boundSelectionState()))
 
                 UnboundMenuField(selection: $viewModel.unboundSelectionInput,
                                  options: ViewModel.UnboundDefaultSelectionTypes.allCases,
                                  placeholder: "Unbound Selection Input")
-                .menuFieldStyle(MenuFieldStyle(state: viewModel.unboundSelectionState()))
+                .menuFieldStyle(MenuFieldStyle(viewModel.unboundSelectionState()))
             }
             .padding(.top, theme.padding.grid2x)
         }

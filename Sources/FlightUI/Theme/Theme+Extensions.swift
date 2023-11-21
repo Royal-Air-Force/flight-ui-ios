@@ -1,3 +1,10 @@
+//
+//  Theme+Extensions.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 extension Theme {
 
     public static let dark = Theme(

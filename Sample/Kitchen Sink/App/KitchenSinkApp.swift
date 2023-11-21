@@ -1,3 +1,10 @@
+//
+//  KitchenSinkApp.swift
+//  Flight UI - Kitchen Sink Sample
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 import FlightUI
 

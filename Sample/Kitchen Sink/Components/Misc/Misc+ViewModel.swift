@@ -1,8 +1,8 @@
 //
 //  Misc+ViewModel.swift
-//  Kitchen Sink
+//  Flight UI - Kitchen Sink Sample
 //
-//  Created by David Jones on 16/06/2023.
+//  Created by Appivate 2023
 //
 
 import Foundation
