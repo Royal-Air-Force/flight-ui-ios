@@ -1,7 +1,6 @@
 import SwiftUI
 import FlightUI
 
-// TODO: Selection Input
 // TODO: Functional Inputs
 // TODO: iPad Numeric Keyboard
 // TODO: Remove comments
@@ -148,10 +147,10 @@ struct Inputs: View {
                 subTitle: "Providing either a bound or unbound set of options for user selection and input")
 
             HStack {
-                NewMenuField(selection: $viewModel.boundSelectionInput,
+                MenuField(selection: $viewModel.boundSelectionInput,
                              options: ViewModel.BoundSelectionTypes.allCases,
                              placeholder: "Bound Selection Input")
-                .menuFieldStyle(MenuFieldStyle(state: viewModel.boundSelectionState(), config: InputFieldConfig()))
+                .menuFieldStyle(MenuFieldStyle(state: viewModel.boundSelectionState(), config: MenuFieldConfig()))
 
                 UnboundMenuField(selection: $viewModel.unboundSelectionInput,
                                  options: ViewModel.UnboundDefaultSelectionTypes.allCases,
@@ -161,69 +160,4 @@ struct Inputs: View {
         }
         .padding(.bottom, theme.padding.grid4x)
     }
-
-//    var textInput: some View {
-//        VStack(alignment: .leading) {
-//            Text("Full Length Textual Input")
-//                .fontStyle(theme.font.caption1)
-//            InputField("Select", text: $viewModel.textualInput)
-//        }
-//    }
-//
-//    var numberInput: some View {
-//        VStack(alignment: .leading) {
-//            Text("Numerical Input with Validation")
-//                .fontStyle(theme.font.caption1)
-//            InputField("0 - 100", text: $viewModel.numericalInput, configuration: .inputFieldConfiguration(valueType: .decimal))
-//            InputMessage()
-//        }
-//    }
-//
-//    var advisoryInput: some View {
-//        VStack(alignment: .leading) {
-//            Text("Advisory Input")
-//                .fontStyle(theme.font.caption1)
-//            InputField("Advisory", text: $viewModel.advisoryInput, configuration: .inputFieldConfiguration(valueType: .decimal))
-//            InputMessage()
-//        }
-//        .validated(by: viewModel.validateAdvisory, status: $viewModel.advisoryInputResult)
-//    }
-//
-//    var cautionInput: some View {
-//        VStack(alignment: .leading) {
-//            Text("Caution Input")
-//                .fontStyle(theme.font.caption1)
-//            InputField("Caution", text: $viewModel.cautionInput, configuration: .inputFieldConfiguration(valueType: .decimal))
-//            InputMessage()
-//        }
-//        .validated(by: viewModel.validateCaution, status: $viewModel.cautionInputResult)
-//    }
-//
-//    var warningInput: some View {
-//        VStack(alignment: .leading) {
-//            Text("Warning Input")
-//                .fontStyle(theme.font.caption1)
-//            InputField("Warning", text: $viewModel.warningInput, configuration: .inputFieldConfiguration(valueType: .decimal))
-//            InputMessage()
-//        }
-//        .validated(by: viewModel.validateWarning, status: $viewModel.warningInputResult)
-//    }
-//
-//    var optionalSelectInput: some View {
-//        VStack(alignment: .leading) {
-//            Text("Select Value (Optional)")
-//                .fontStyle(theme.font.caption1)
-//            OptionalMenuField(selection: $viewModel.optionalSelectionInput,
-//                      options: ViewModel.SelectionInputTypes.allCases, placeholder: "Select value placeholder text")
-//        }
-//    }
-//
-//    var mandatorySelectInput: some View {
-//        VStack(alignment: .leading) {
-//            Text("Select Value (Mandatory)")
-//                .fontStyle(theme.font.caption1)
-//            MenuField(selection: $viewModel.selectionInput,
-//                      options: ViewModel.SelectionInputTypes.allCases)
-//        }
-//    }
 }
