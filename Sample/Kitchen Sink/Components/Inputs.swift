@@ -146,18 +146,18 @@ struct Inputs: View {
             HeadingView(
                 title: "Selection Input",
                 subTitle: "Providing either a bound or unbound set of options for user selection and input")
-            
+
             HStack {
                 NewMenuField(selection: $viewModel.boundSelectionInput,
                              options: ViewModel.BoundSelectionTypes.allCases,
                              placeholder: "Bound Selection Input")
                 .menuFieldStyle(MenuFieldStyle(state: viewModel.boundSelectionState(), config: InputFieldConfig()))
-                
-                UnboundMenuField(selection: $viewModel.selectionInput,
-                          options: ViewModel.SelectionInputTypes.allCases)
-                //.menuFieldStyle(MenuFieldStyle(state: .default, config: InputFieldConfig()))
-            }
 
+                UnboundMenuField(selection: $viewModel.unboundSelectionInput,
+                                 options: ViewModel.UnboundDefaultSelectionTypes.allCases,
+                                 placeholder: "Unbound Selection Input")
+                .menuFieldStyle(MenuFieldStyle(state: viewModel.unboundSelectionState()))
+            }
         }
         .padding(.bottom, theme.padding.grid4x)
     }

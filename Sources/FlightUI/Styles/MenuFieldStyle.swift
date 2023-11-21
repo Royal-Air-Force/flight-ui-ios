@@ -9,8 +9,8 @@ internal class MenuFieldDefaults {
 public struct MenuFieldStyle {
     var state: InputFieldState
     var config: InputFieldConfig
-    
-    public init(state: InputFieldState, config: InputFieldConfig) {
+
+    public init(state: InputFieldState, config: InputFieldConfig = InputFieldConfig()) {
         self.state = state
         self.config = config
     }

@@ -2,7 +2,7 @@ import SwiftUI
 
 public struct MenuLabelStyle: LabelStyle {
     var textColor: Color
-  
+
     init(textColor: Color) {
         self.textColor = textColor
     }
@@ -13,15 +13,26 @@ public struct MenuLabelStyle: LabelStyle {
     }
 }
 
-public struct UnboundMenuField<SelectionType: CustomStringConvertible & Hashable>: View {
+public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
-    @FocusState private var isFocused: Bool
-    
+    @Environment(\.menuFieldStyle) var style: MenuFieldStyle
+
     @Binding var selection: SelectionType?
     var options: [SelectionType]
     let placeholder: String?
-    
+
+    @State private var isSheetShown = false
+    @State private var queryString = ""
+
+    var searchResults: [SelectionType] {
+        if queryString.isEmpty {
+            return options
+        } else {
+            return options.filter { $0.description.contains(queryString) }
+        }
+    }
+
     public init(
         selection: Binding<SelectionType?>,
         options: [SelectionType],
@@ -31,7 +42,7 @@ public struct UnboundMenuField<SelectionType: CustomStringConvertible & Hashable
         self.options = options
         self.placeholder = placeholder
     }
-    
+
     public var body: some View {
         HStack {
             if let selectedItem = selection?.description {
@@ -48,28 +59,145 @@ public struct UnboundMenuField<SelectionType: CustomStringConvertible & Hashable
                 .foregroundColor(getFontColor(isPlaceholder: false))
                 .fontWeight(.bold)
         }
+        .sheet(isPresented: $isSheetShown) {
+            VStack {
+                NavigationStack {
+                    List {
+                        ForEach(searchResults, id: \.description) { item in
+                            HStack {
+                                Text(item.description)
+                                Spacer()
+                            }
+                            .contentShape(Rectangle())
+                            .listRowBackground(theme.color.surfaceHigh)
+                            .onTapGesture {
+                                onSelected(item: item)
+                            }
+                        }
+                        if !queryString.isEmpty && (options.filter { $0.description == queryString }.isEmpty) {
+                            HStack {
+                                Text(queryString)
+                                Spacer()
+                                Image(systemName: "plus")
+                            }
+                            .contentShape(Rectangle())
+                            .listRowBackground(theme.color.surfaceHigh)
+                            .onTapGesture {
+                                onSelected(item: SelectionType.custom(string: queryString))
+                            }
+                        }
+                    }
+                    .environment(\.defaultMinListRowHeight, theme.size.large)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button {
+                                isSheetShown = false
+                            } label: {
+                                HStack {
+                                    Image(systemName: "xmark")
+                                    Text("Close")
+                                }
+                                .foregroundColor(theme.color.primary)
+                            }
+                        }
+                    }
+                    .toolbarBackground(theme.color.surfaceLow, for: .navigationBar)
+                    .scrollContentBackground(.hidden)
+                    .background(theme.color.surfaceLow)
+                }
+                .searchable(text: $queryString, placement: .navigationBarDrawer(displayMode: .always), prompt: placeholder ?? "Search")
+                .onSubmit(of: .search) {
+                    onSelected(item: SelectionType.custom(string: queryString))
+                }
+                .accentColor(theme.color.primary)
+            }
+            .interactiveDismissDisabled()
+        }
         .padding(.horizontal, theme.padding.grid2x)
         .frame(height: theme.size.large)
-        .background(theme.color.surfaceHigh)
-        .cornerRadius(theme.radius.medium)
+        .background(getFieldBackgroundColor())
+        .cornerRadius(getCornerRadius())
         .overlay {
-            RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous)
-                .strokeBorder(theme.color.surfaceHigh, lineWidth: theme.size.border)
+            RoundedRectangle(cornerRadius: getCornerRadius(), style: .continuous)
+                .strokeBorder(getFieldBorderColor(), lineWidth: getFieldBorderSize())
         }
-        .focused($isFocused)
         .onTapGesture {
-            isFocused = true
+            isSheetShown = true
         }
     }
-    
+
+    private func onSelected(item: SelectionType) {
+        selection = item
+        isSheetShown = false
+        queryString = ""
+    }
+
     private func getFontColor(isPlaceholder: Bool) -> Color {
         if isPlaceholder {
             return theme.color.primary.opacity(MenuFieldDefaults.hintOpacity)
+        } else if let overrideColor = style.config.fontColor {
+            return overrideColor.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
         } else {
             return theme.color.inputOutput.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
         }
     }
-    
+
+    private func getFieldBackgroundColor() -> Color {
+        if !isEnabled {
+            return theme.color.surfaceHigh.opacity(MenuFieldDefaults.disabledOpacity)
+        }
+
+        if let overrideColor = style.config.backgroundColor {
+            return overrideColor
+        }
+
+        switch style.state {
+        case .nominal:
+            return theme.color.nominal.opacity(MenuFieldDefaults.stateBackgroundOpacity)
+        case .caution:
+            return theme.color.caution.opacity(MenuFieldDefaults.stateBackgroundOpacity)
+        case .warning:
+            return theme.color.warning.opacity(MenuFieldDefaults.stateBackgroundOpacity)
+        default:
+            return theme.color.surfaceHigh
+        }
+    }
+
+    private func getCornerRadius() -> CGFloat {
+        if let overrideRadius = style.config.cornerRadius {
+            return overrideRadius
+        }
+        return theme.radius.medium
+    }
+
+    private func getFieldBorderColor() -> Color {
+        if let overrideColor = style.config.borderColor {
+            return overrideColor
+        }
+
+        switch style.state {
+        case .default:
+            return theme.color.surfaceHigh
+        case .advisory:
+            return theme.color.primary.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+        case .nominal:
+            return theme.color.nominal.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+        case .caution:
+            return theme.color.caution.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+        case .warning:
+            return theme.color.warning.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+        }
+    }
+
+    private func getFieldBorderSize() -> CGFloat {
+        switch style.state {
+        case .nominal, .caution, .warning:
+            return theme.size.border
+        default:
+            return 0
+        }
+    }
+
 }
 
 public struct NewMenuField<SelectionType: CustomStringConvertible & Hashable>: View {
@@ -77,13 +205,13 @@ public struct NewMenuField<SelectionType: CustomStringConvertible & Hashable>: V
     @Environment(\.menuFieldStyle) var style: MenuFieldStyle
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
-    
+
     @State var customItem: String = ""
-    
+
     @Binding var selection: SelectionType?
     var options: [SelectionType]
     let placeholder: String?
-    
+
     public init(
         selection: Binding<SelectionType?>,
         options: [SelectionType],
@@ -93,7 +221,7 @@ public struct NewMenuField<SelectionType: CustomStringConvertible & Hashable>: V
         self.options = options
         self.placeholder = placeholder
     }
-    
+
     public var body: some View {
         Menu {
             Picker("", selection: $selection) {
@@ -132,7 +260,7 @@ public struct NewMenuField<SelectionType: CustomStringConvertible & Hashable>: V
                 .strokeBorder(getFieldBorderColor(), lineWidth: getFieldBorderSize())
         }
     }
-    
+
     private func getFontColor(isPlaceholder: Bool) -> Color {
         if isPlaceholder {
             return theme.color.primary.opacity(MenuFieldDefaults.hintOpacity)

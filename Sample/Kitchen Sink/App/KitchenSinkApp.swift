@@ -104,6 +104,6 @@ private struct SampleScreenView<Destination: View>: View {
         NavigationLink(destination: destination, label: {
             Text(title)
         })
-        .listRowBackground(theme.color.surfaceLow)
+        .listRowBackground(theme.color.surfaceHigh)
     }
 }

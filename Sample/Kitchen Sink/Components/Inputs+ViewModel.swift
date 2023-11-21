@@ -18,8 +18,10 @@ extension Inputs {
 
         @Published var selectionInput: SelectionInputTypes? = .selectionOne
         @Published var optionalSelectionInput: SelectionInputTypes?
-        
-        @Published var boundSelectionInput: BoundSelectionTypes? = nil
+
+        @Published var boundSelectionInput: BoundSelectionTypes?
+
+        @Published var unboundSelectionInput: UnboundDefaultSelectionTypes?
 
         @Published var generalDisabled = ""
         @Published var generalHint = ""
@@ -61,7 +63,7 @@ extension Inputs {
         func warningAdvisory() -> AdvisoryLabel {
             return AdvisoryLabel("Extra info", state: warningState())
         }
-        
+
         func boundSelectionState() -> InputFieldState {
             switch boundSelectionInput {
             case .nominalSelection:
@@ -70,6 +72,25 @@ extension Inputs {
                 return .caution
             case .warningSelection:
                 return .warning
+            default:
+                return .default
+            }
+        }
+
+        func unboundSelectionState() -> InputFieldState {
+            switch unboundSelectionInput {
+            case .nominalSelection:
+                return .nominal
+            case .cautionSelection:
+                return .caution
+            case .warningSelection:
+                return .warning
+            case .customSelection(let customString):
+                if customString == "Error" {
+                    return .warning
+                } else {
+                    return .default
+                }
             default:
                 return .default
             }
@@ -95,12 +116,52 @@ extension Inputs.ViewModel {
         case nominalSelection = "Nominal Selection"
         case cautionSelection = "Caution Selection"
         case warningSelection = "Warning Selection"
-        
+
         var description: String {
             return rawValue
         }
     }
-    
+
+    enum UnboundDefaultSelectionTypes: UnboundSelectionEnum {
+        static var allCases: [Inputs.ViewModel.UnboundDefaultSelectionTypes] {
+            return [.defaultSelection, .nominalSelection, .cautionSelection, .warningSelection]
+        }
+
+        case customSelection(String)
+        case defaultSelection
+        case nominalSelection
+        case cautionSelection
+        case warningSelection
+
+        var description: String {
+            switch self {
+            case .defaultSelection:
+                return "Default Selection"
+            case .nominalSelection:
+                return "Nominal Selection"
+            case .cautionSelection:
+                return "Caution Selection"
+            case .warningSelection:
+                return "Warning Selection"
+            case .customSelection(let customString):
+                return customString
+            }
+        }
+
+        static func custom(string: String) -> Inputs.ViewModel.UnboundDefaultSelectionTypes {
+            return .customSelection(string)
+        }
+
+//        case defaultSelection = "Default Selection"
+//        case nominalSelection = "Nominal Selection"
+//        case cautionSelection = "Caution Selection"
+//        case warningSelection = "Warning Selection"
+//
+//        var description: String {
+//            return rawValue
+//        }
+    }
+
     enum SelectionInputTypes: String, CaseIterable, CustomStringConvertible {
         case selectionOne = "Option One"
         case selectionTwo = "Option Two"
