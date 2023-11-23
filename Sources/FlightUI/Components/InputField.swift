@@ -64,6 +64,13 @@ public struct InputField: View {
                 Text(placeholderText)
                     .foregroundColor(theme.color.primary.opacity(isEnabled ? InputFieldDefaults.hintOpacity : InputFieldDefaults.disabledOpacity))
             }
+//            .inputView {
+//                ZStack {
+//                    Color.red
+//                }
+//                .frame(maxWidth: .infinity)
+//                .frame(height: 300)
+//            }
             .focused($isFocused)
             .onChange(of: isFocused) { newFocus in
                 if !newFocus, let format = formatter {

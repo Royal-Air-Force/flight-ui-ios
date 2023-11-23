@@ -141,6 +141,13 @@ struct Inputs: View {
                 // TODO: Custom Keyboard
                 InputField(text: $viewModel.keyboardInput, placeholder: "Number Keyboard", supportLabelConfig: SupportLabelConfig("Enables iPad numeric keyboard"))
                     .textFieldStyle(.default)
+                    .inputView {
+                        ZStack {
+                            Color.red
+                        }
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 300)
+                    }
             }
             .padding(.top, theme.padding.grid2x)
         }
