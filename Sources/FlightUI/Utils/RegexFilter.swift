@@ -8,7 +8,7 @@
 public enum RegexFilter {
     case integerOnly, doubleOnly, letterOnly, noDigits
     case custom(String)
-    
+
     public var regex: String {
         switch self {
         case .integerOnly:

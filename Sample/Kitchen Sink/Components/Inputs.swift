@@ -123,7 +123,7 @@ struct Inputs: View {
 
                 InputField(text: $viewModel.keyboardInput, placeholder: "Filter", supportLabelConfig: SupportLabelConfig("Filters out non-digit characters"), filter: .integerOnly)
                     .textFieldStyle(.default)
-                
+
                 InputField(text: $viewModel.debounceInput, placeholder: "Debounce", supportLabelConfig: SupportLabelConfig(viewModel.debounceAdvisoryLabel))
                     .textFieldStyle(.default)
                     .onChange(of: viewModel.debounceInput) { _ in
