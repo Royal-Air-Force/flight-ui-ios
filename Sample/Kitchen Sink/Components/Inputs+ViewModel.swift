@@ -20,7 +20,7 @@ extension Inputs {
         @Published var cautionStateInput = "Caution"
         @Published var warningStateInput = "Warning"
         @Published var topLabel = "Top Label"
-        @Published var advisoryLabel = "Advisory Label"
+        @Published var supportLabel = "Support Label"
         @Published var formatInput = ""
         @Published var debounceInput = ""
         @Published var debounceAdvisoryLabel = defaultDebounceAdvisoryLabel

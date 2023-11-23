@@ -100,7 +100,7 @@ struct Inputs: View {
                 InputField(text: $viewModel.topLabel, placeholder: "Top Label", topLabel: "Top Label")
                     .textFieldStyle(.default)
 
-                InputField(text: $viewModel.advisoryLabel, placeholder: "Advisory Label", topLabelSpacer: true, supportLabelConfig: SupportLabelConfig("Advisory information goes here"))
+                InputField(text: $viewModel.supportLabel, placeholder: "Support Label", topLabelSpacer: true, supportLabelConfig: SupportLabelConfig("Support information goes here"))
                     .textFieldStyle(.default)
             }
             .padding(.top, theme.padding.grid2x)
