@@ -5,6 +5,7 @@ import SwiftUI
 public struct InputField: View {
     @Environment (\.validationContext) var context
     @EnvironmentObject var theme: Theme
+    @FocusState private var isFocused: Bool
 
     let placeholder: String
     @Binding var text: String
@@ -41,6 +42,10 @@ public struct InputField: View {
                         RoundedRectangle(cornerRadius: borderCornerRadius, style: .continuous)
                         .strokeBorder(borderColor, lineWidth: borderWidth)
                     )
+                    .focused($isFocused)
+                    .onTapGesture {
+                        isFocused = true
+                    }
             case false:
                 DebouncedTextField(placeholder, text: textBinding, onEditingChanged: onEditingChanged, debounceTime: config.debounceTime)
                     .typography(config.typography, staticText: config.options.contains(.staticText), status: $status)
@@ -54,6 +59,10 @@ public struct InputField: View {
                         RoundedRectangle(cornerRadius: borderCornerRadius, style: .continuous)
                             .strokeBorder(borderColor, lineWidth: borderWidth)
                     )
+                    .focused($isFocused)
+                    .onTapGesture {
+                        isFocused = true
+                    }
             }
         }
         .overlay {
