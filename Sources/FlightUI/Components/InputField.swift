@@ -19,6 +19,7 @@ public struct InputField: View {
     var topLabelSpacer: Bool
     var supportLabelConfig: SupportLabelConfig
     var formatter: ((String) -> String)?
+    var filter: RegexFilter?
 
     public init(
         text: Binding<String>,
@@ -26,7 +27,8 @@ public struct InputField: View {
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
         supportLabelConfig: SupportLabelConfig = .init(isVisible: false),
-        formatter: ((String) -> String)? = nil
+        formatter: ((String) -> String)? = nil,
+        filter: RegexFilter? = nil
     ) {
         self._text = text
         self.placeholder = placeholder
@@ -34,6 +36,7 @@ public struct InputField: View {
         self.topLabelSpacer = topLabelSpacer
         self.supportLabelConfig = supportLabelConfig
         self.formatter = formatter
+        self.filter = filter
     }
 
     public var body: some View {
@@ -64,6 +67,14 @@ public struct InputField: View {
                 Text(placeholderText)
                     .foregroundColor(theme.color.primary.opacity(isEnabled ? InputFieldDefaults.hintOpacity : InputFieldDefaults.disabledOpacity))
             }
+            .onReceive(Just(text)) { newValue in
+                if let regex = filter?.regex {
+                    let replaced = newValue.replacingOccurrences(of: regex, with: "", options: .regularExpression)
+                    if replaced != newValue {
+                        self.text = replaced
+                    }
+                }
+            }
             .focused($isFocused)
             .onChange(of: isFocused) { newFocus in
                 if !newFocus, let format = formatter {
@@ -72,6 +83,14 @@ public struct InputField: View {
             }
         } else {
             TextField("", text: $text)
+                .onReceive(Just(text)) { newValue in
+                    if let regex = filter?.regex {
+                        let replaced = newValue.replacingOccurrences(of: regex, with: "", options: .regularExpression)
+                        if replaced != newValue {
+                            self.text = replaced
+                        }
+                    }
+                }
                 .focused($isFocused)
                 .onChange(of: isFocused) { newFocus in
                     if !newFocus, let format = formatter {

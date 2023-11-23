@@ -8,10 +8,6 @@
 import SwiftUI
 import FlightUI
 
-// TODO: Functional Inputs
-// TODO: iPad Numeric Keyboard
-// TODO: Remove comments
-
 struct Inputs: View {
     @EnvironmentObject var theme: Theme
     @StateObject private var viewModel = ViewModel()
@@ -116,7 +112,7 @@ struct Inputs: View {
         VStack {
             HeadingView(
                 title: "Managed Input",
-                subTitle: "Input fields that provide some additional level of management including; formatting on focus change, debounce functionality, and custom keyboards")
+                subTitle: "Input fields that provide some additional level of management including; formatting on focus change, filtering allowed input, and debounce functionality")
 
             HStack(alignment: .top) {
                 InputField(text: $viewModel.formatInput, placeholder: "Formatter", supportLabelConfig: SupportLabelConfig("Formats numbers to 2dp"), formatter: { typedString in
@@ -125,6 +121,9 @@ struct Inputs: View {
                 })
                 .textFieldStyle(.default)
 
+                InputField(text: $viewModel.keyboardInput, placeholder: "Filter", supportLabelConfig: SupportLabelConfig("Filters out non-digit characters"), filter: .integerOnly)
+                    .textFieldStyle(.default)
+                
                 InputField(text: $viewModel.debounceInput, placeholder: "Debounce", supportLabelConfig: SupportLabelConfig(viewModel.debounceAdvisoryLabel))
                     .textFieldStyle(.default)
                     .onChange(of: viewModel.debounceInput) { _ in
@@ -137,10 +136,6 @@ struct Inputs: View {
                             viewModel.debounceAdvisoryLabel = debouncedValue
                         }
                     }
-
-                // TODO: Custom Keyboard
-                InputField(text: $viewModel.keyboardInput, placeholder: "Number Keyboard", supportLabelConfig: SupportLabelConfig("Enables iPad numeric keyboard"))
-                    .textFieldStyle(.default)
             }
             .padding(.top, theme.padding.grid2x)
         }
