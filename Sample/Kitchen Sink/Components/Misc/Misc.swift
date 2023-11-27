@@ -1,24 +1,31 @@
+//
+//  Misc.swift
+//  Flight UI - Kitchen Sink Sample
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 import FlightUI
 
 struct Misc: View {
     @EnvironmentObject var theme: Theme
-    
+
     var body: some View {
         ScrollView {
             VStack {
                 expandingPanel
                     .padding([.bottom], theme.padding.grid6x)
-                
+
                 nonExpandingPanel
                     .padding([.bottom], theme.padding.grid6x)
-                
+
                 expandingCard
             }
         }
         .navigationBarTitle("Misc")
     }
-    
+
     var expandingPanel: some View {
         Panel(title: "Expandable Panel", options: .expandable(expanded: true)) {
             VStack {
@@ -30,9 +37,9 @@ struct Misc: View {
             .padding(theme.padding.grid6x)
         }
     }
-    
+
     var nonExpandingPanel: some View {
-        Panel(title: "Expandable Panel", typography: (theme.font.title1.font)) {
+        Panel(title: "Expandable Panel", typography: (Font.title)) {
             VStack {
                 HStack(alignment: .top) {
                     Text("Lots of lovely panel content")
@@ -42,7 +49,7 @@ struct Misc: View {
             .padding(theme.padding.grid6x)
         }
     }
-    
+
     // Expanding panels will become cards at some point, similar to below, some style tweaking still needed
     @State private var isExpandedCardExpanded = false
     var expandingCard: some View {
@@ -50,7 +57,7 @@ struct Misc: View {
             HeadingView(
                 title: "Expanding Card",
                 subTitle: "Displays a card capable of expanding and contracting for additional content")
-            
+
             DisclosureGroup(isExpanded: $isExpandedCardExpanded) {
                 VStack(alignment: .leading) {
                     Text("Hidden Content")

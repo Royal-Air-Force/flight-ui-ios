@@ -1,3 +1,10 @@
+//
+//  Theme+Extensions.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 extension Theme {
 
     public static let dark = Theme(
@@ -30,10 +37,13 @@ extension Theme {
                            caution: .flightDarkYellow,
                            warning: .flightDarkRed,
                            onCore: .flightGrey800,
+                           graphicsRed: .flightGraphicsDarkRed,
                            graphicsYellow: .flightGraphicsDarkYellow,
                            graphicsGreen: .flightGraphicsDarkGreen,
                            graphicsMint: .flightGraphicsDarkMint,
                            graphicsCyan: .flightGraphicsDarkCyan,
-                           graphicsBlue: .flightGraphicsDarkBlue)
+                           graphicsBlue: .flightGraphicsDarkBlue,
+                           graphicsPurple: .flightGraphicsDarkPurple,
+                           graphicsPink: .flightGraphicsDarkPink)
     )
 }

@@ -1,3 +1,10 @@
+//
+//  Inputs.swift
+//  Flight UI - Kitchen Sink Sample
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 import FlightUI
 
@@ -8,94 +15,152 @@ struct Inputs: View {
     var body: some View {
         ScrollView {
             VStack {
-                textInput
-                    .padding(.top, theme.padding.grid2x)
-
-                numberInput
-                    .padding(.top, theme.padding.grid2x)
-
+                generalInput
                 advisoryInput
-                    .padding(.top, theme.padding.grid2x)
-
-                cautionInput
-                    .padding(.top, theme.padding.grid2x)
-
-                warningInput
-                    .padding(.top, theme.padding.grid2x)
-
-                optionalSelectInput
-                    .padding(.top, theme.padding.grid2x)
-
-                mandatorySelectInput
-                    .padding(.top, theme.padding.grid2x)
+                stateInputs
+                labelInput
+                managedInput
+                selectionInput
             }
-
+            .padding(.horizontal, theme.padding.grid3x)
         }
+        .background(theme.color.background)
         .navigationBarTitle("Inputs")
     }
 
-    var textInput: some View {
+    var generalInput: some View {
         VStack(alignment: .leading) {
-            Text("Full Length Textual Input")
-                .fontStyle(theme.font.caption1)
-            InputField("Select", text: $viewModel.textualInput)
-        }
-    }
+            HeadingView(
+                title: "General Input",
+                subTitle: "The default input field provides styling for a common input field, supporting disabled and hint states")
 
-    var numberInput: some View {
-        VStack(alignment: .leading) {
-            Text("Numerical Input with Validation")
-                .fontStyle(theme.font.caption1)
-            InputField("0 - 100", text: $viewModel.numericalInput, configuration: .inputFieldConfiguration(valueType: .decimal))
-            InputMessage()
+            HStack {
+                InputField(text: $viewModel.generalDisabled, placeholder: "Disabled")
+                    .textFieldStyle(.default)
+                    .disabled(true)
+
+                InputField(text: $viewModel.generalHint, placeholder: "Hint")
+                    .textFieldStyle(.default)
+                    .onChange(of: viewModel.generalHint) { newText in
+                        print("General hint changed to \(newText)")
+                    }
+
+                InputField(text: $viewModel.generalActive, placeholder: "General")
+                    .textFieldStyle(.default)
+            }
+            .padding(.top, theme.padding.grid2x)
         }
+        .padding(.bottom, theme.padding.grid4x)
     }
 
     var advisoryInput: some View {
         VStack(alignment: .leading) {
-            Text("Advisory Input")
-                .fontStyle(theme.font.caption1)
-            InputField("Advisory", text: $viewModel.advisoryInput, configuration: .inputFieldConfiguration(valueType: .decimal))
-            InputMessage()
+            HeadingView(
+                title: "Advisory Text",
+                subTitle: "A specific component used for displaying text with a high visual impact but that the user cannot interact with, typically this is used for results of calculations or tasks")
+
+            InputField(text: $viewModel.advisoryText, placeholder: "Advisory")
+                .textFieldStyle(.advisory)
+                .frame(width: 240)
+                .padding(.top, theme.padding.grid2x)
         }
-        .validated(by: viewModel.validateAdvisory, status: $viewModel.advisoryInputResult)
+        .padding(.bottom, theme.padding.grid4x)
     }
 
-    var cautionInput: some View {
+    var stateInputs: some View {
         VStack(alignment: .leading) {
-            Text("Caution Input")
-                .fontStyle(theme.font.caption1)
-            InputField("Caution", text: $viewModel.cautionInput, configuration: .inputFieldConfiguration(valueType: .decimal))
-            InputMessage()
+            HeadingView(
+                title: "State Input",
+                subTitle: "An extension on the General input field which supports setting a contextual state, changing the visual to one of a nominal, caution, and warning state. " +
+                    "Clear the fields to show the default state.")
+
+            HStack(alignment: .top) {
+                InputField(text: $viewModel.nominalStateInput, placeholder: "Nominal", supportLabelConfig: viewModel.nominalAdvisory())
+                    .textFieldStyle(InputFieldStyle(viewModel.nominalState()))
+
+                InputField(text: $viewModel.cautionStateInput, placeholder: "Caution", supportLabelConfig: viewModel.cautionAdvisory())
+                    .textFieldStyle(InputFieldStyle(viewModel.cautionState()))
+
+                InputField(text: $viewModel.warningStateInput, placeholder: "Warning", supportLabelConfig: viewModel.warningAdvisory())
+                    .textFieldStyle(InputFieldStyle(viewModel.warningState()))
+            }
+            .padding(.top, theme.padding.grid2x)
         }
-        .validated(by: viewModel.validateCaution, status: $viewModel.cautionInputResult)
+        .padding(.bottom, theme.padding.grid4x)
     }
 
-    var warningInput: some View {
-        VStack(alignment: .leading) {
-            Text("Warning Input")
-                .fontStyle(theme.font.caption1)
-            InputField("Warning", text: $viewModel.warningInput, configuration: .inputFieldConfiguration(valueType: .decimal))
-            InputMessage()
+    var labelInput: some View {
+        VStack {
+            HeadingView(
+                title: "Label Input",
+                subTitle: "Provides input fields that can support labels above and below the field itself, " +
+                    "useful for providing supporting information that does not hide when the user types in the field")
+
+            HStack(alignment: .top) {
+                InputField(text: $viewModel.topLabel, placeholder: "Top Label", topLabel: "Top Label")
+                    .textFieldStyle(.default)
+
+                InputField(text: $viewModel.supportLabel, placeholder: "Support Label", topLabelSpacer: true, supportLabelConfig: SupportLabelConfig("Support information goes here"))
+                    .textFieldStyle(.default)
+            }
+            .padding(.top, theme.padding.grid2x)
         }
-        .validated(by: viewModel.validateWarning, status: $viewModel.warningInputResult)
+        .padding(.bottom, theme.padding.grid4x)
     }
 
-    var optionalSelectInput: some View {
-        VStack(alignment: .leading) {
-            Text("Select Value (Optional)")
-                .fontStyle(theme.font.caption1)
-            OptionalMenuField(selection: $viewModel.optionalSelectionInput,
-                      options: ViewModel.SelectionInputTypes.allCases, placeholder: "Select value placeholder text")
+    var managedInput: some View {
+        VStack {
+            HeadingView(
+                title: "Managed Input",
+                subTitle: "Input fields that provide some additional level of management including; formatting on focus change, filtering allowed input, and debounce functionality")
+
+            HStack(alignment: .top) {
+                InputField(text: $viewModel.formatInput, placeholder: "Formatter", supportLabelConfig: SupportLabelConfig("Formats numbers to 2dp"), formatter: { typedString in
+                        guard let doubleValue = Double(typedString) else { return typedString }
+                        return String(format: "%.2f", doubleValue)
+                })
+                .textFieldStyle(.default)
+
+                InputField(text: $viewModel.keyboardInput, placeholder: "Filter", supportLabelConfig: SupportLabelConfig("Filters out non-digit characters"), filter: .integerOnly)
+                    .textFieldStyle(.default)
+
+                InputField(text: $viewModel.debounceInput, placeholder: "Debounce", supportLabelConfig: SupportLabelConfig(viewModel.debounceAdvisoryLabel))
+                    .textFieldStyle(.default)
+                    .onChange(of: viewModel.debounceInput) { _ in
+                        viewModel.debounceAdvisoryLabel = Inputs.ViewModel.defaultDebounceAdvisoryLabel
+                    }
+                    .onDebounce(of: viewModel.debounceInput, duration: .seconds(2)) { debouncedValue in
+                        if debouncedValue.isEmpty {
+                            viewModel.debounceAdvisoryLabel = Inputs.ViewModel.defaultDebounceAdvisoryLabel
+                        } else {
+                            viewModel.debounceAdvisoryLabel = debouncedValue
+                        }
+                    }
+            }
+            .padding(.top, theme.padding.grid2x)
         }
+        .padding(.bottom, theme.padding.grid4x)
     }
 
-    var mandatorySelectInput: some View {
-        VStack(alignment: .leading) {
-            Text("Select Value (Mandatory)")
-                .fontStyle(theme.font.caption1)
-            MenuField(selection: $viewModel.selectionInput,
-                      options: ViewModel.SelectionInputTypes.allCases)
+    var selectionInput: some View {
+        VStack {
+            HeadingView(
+                title: "Selection Input",
+                subTitle: "Providing either a bound or unbound set of options for user selection and input")
+
+            HStack {
+                MenuField(selection: $viewModel.boundSelectionInput,
+                             options: ViewModel.BoundSelectionTypes.allCases,
+                             placeholder: "Bound Selection Input")
+                .menuFieldStyle(MenuFieldStyle(viewModel.boundSelectionState()))
+
+                UnboundMenuField(selection: $viewModel.unboundSelectionInput,
+                                 options: ViewModel.UnboundDefaultSelectionTypes.allCases,
+                                 placeholder: "Unbound Selection Input")
+                .menuFieldStyle(MenuFieldStyle(viewModel.unboundSelectionState()))
+            }
+            .padding(.top, theme.padding.grid2x)
         }
+        .padding(.bottom, theme.padding.grid4x)
     }
 }

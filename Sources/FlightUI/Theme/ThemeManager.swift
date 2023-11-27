@@ -1,3 +1,10 @@
+//
+//  ThemeManager.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 
 public class ThemeManager: ObservableObject {
@@ -6,7 +13,7 @@ public class ThemeManager: ObservableObject {
     public init(current: Theme = .dark) {
         self.current = current
     }
-    
+
     public func updateTheme(_ theme: Theme, changeBaseTheme: Bool = true) {
         self.current = theme
         if changeBaseTheme {

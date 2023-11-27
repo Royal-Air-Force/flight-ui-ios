@@ -1,3 +1,10 @@
+//
+//  KitchenSinkApp.swift
+//  Flight UI - Kitchen Sink Sample
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 import FlightUI
 
@@ -104,6 +111,6 @@ private struct SampleScreenView<Destination: View>: View {
         NavigationLink(destination: destination, label: {
             Text(title)
         })
-        .listRowBackground(theme.color.surfaceLow)
+        .listRowBackground(theme.color.surfaceHigh)
     }
 }

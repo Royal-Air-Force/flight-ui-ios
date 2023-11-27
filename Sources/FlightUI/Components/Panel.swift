@@ -1,3 +1,10 @@
+//
+//  Panel.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 
 // MARK: - Panel View -
@@ -63,9 +70,9 @@ public struct Panel<Content: View, Subtitle: View>: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .background(RoundedRectangle(cornerRadius: theme.panelCornerRadius, style: .continuous)
-            .strokeBorder(theme.panelBackground, lineWidth: theme.panelLineWidth)
-            .background(RoundedRectangle(cornerRadius: theme.panelCornerRadius, style: .continuous).fill(theme.panelViewBackground)))
+        .background(RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous)
+            .strokeBorder(theme.color.surfaceLow, lineWidth: theme.size.border)
+            .background(RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous).fill(theme.color.background)))
     }
 
     private var panelHeaderView: some View {
@@ -82,11 +89,11 @@ public struct Panel<Content: View, Subtitle: View>: View {
                 expandIcon
             }
         }
-        .background(theme.panelBackground)
-        .padding(.bottom, theme.panelPadding)
-        .cornerRadius(theme.panelCornerRadius)
-        .padding(.bottom, -theme.panelPadding)
-        .cornerRadius(showContent ? 0.0 : theme.panelCornerRadius)
+        .background(theme.color.surfaceLow)
+        .padding(.bottom, theme.padding.grid1x)
+        .cornerRadius(theme.radius.medium)
+        .padding(.bottom, -theme.padding.grid1x)
+        .cornerRadius(showContent ? 0.0 : theme.radius.medium)
         .onTapGesture {
             guard expandable else { return }
 
@@ -99,15 +106,15 @@ public struct Panel<Content: View, Subtitle: View>: View {
     private func panelTitleTextView(_ title: String) -> some View {
         Text(title)
             .padding()
-            .font(typography ?? theme.font.title2.font)
-            .foregroundColor(theme.panelForegoround)
+            .font(typography ?? Font.title2)
+            .foregroundColor(theme.color.surfaceLow)
     }
 
     private var expandIcon: some View {
         Image(systemName: "chevron.down")
             .font(.title)
             .fontWeight(.regular)
-            .foregroundColor(theme.panelForegoround)
+            .foregroundColor(theme.color.surfaceLow)
             .rotationEffect(.degrees(expanded ? -180.0 : 0.0))
             .padding()
     }
@@ -116,7 +123,7 @@ public struct Panel<Content: View, Subtitle: View>: View {
         content()
             // -12.0 is a magic number, text pixel alignment is slightly off; goal is
             // to have the content "hug" the Panel and defer padding to component consumer
-            .padding(.top, title == nil ? -theme.panelPadding / 2.0 : -12.0)
+            .padding(.top, title == nil ? -theme.padding.grid1x / 2.0 : -12.0)
     }
 
     private var showContent: Bool {

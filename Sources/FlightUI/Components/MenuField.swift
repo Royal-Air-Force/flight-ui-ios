@@ -1,122 +1,104 @@
+//
+//  MenuField.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 
-public struct OptionalMenuField<SelectionType: CustomStringConvertible & Hashable>: View {
+public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View {
     @EnvironmentObject var theme: Theme
+    @Environment(\.menuFieldStyle) var style: MenuFieldStyle
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    @FocusState private var isFocused: Bool
+
     @Binding var selection: SelectionType?
     var options: [SelectionType]
-    let placeholder: String
+    var placeholder: String?
+    var topLabel: String?
+    var topLabelSpacer: Bool
+    var supportLabelConfig: SupportLabelConfig
 
-    public init(selection: Binding<SelectionType?>,
-                options: [SelectionType],
-                placeholder: String = "Select") {
+    public init(
+        selection: Binding<SelectionType?>,
+        options: [SelectionType],
+        placeholder: String? = nil,
+        topLabel: String? = nil,
+        topLabelSpacer: Bool = false,
+        supportLabelConfig: SupportLabelConfig = .init(isVisible: false)
+    ) {
         self._selection = selection
         self.options = options
         self.placeholder = placeholder
+        self.topLabel = topLabel
+        self.topLabelSpacer = topLabelSpacer
+        self.supportLabelConfig = supportLabelConfig
     }
 
     public var body: some View {
+        VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
+            buildTopLabel()
+            buildMenuField()
+            SupportLabel(supportLabelConfig)
+        }
+    }
+
+    @ViewBuilder
+    private func buildTopLabel() -> some View {
+        if let top = topLabel {
+            Text(top)
+                .foregroundColor(theme.color.primary)
+                .fontStyle(theme.font.subhead)
+        } else if topLabelSpacer {
+            Text("-")
+                .foregroundColor(theme.color.surfaceHigh.opacity(0))
+                .fontStyle(theme.font.subhead)
+        }
+    }
+
+    @ViewBuilder
+    private func buildMenuField() -> some View {
         Menu {
             Picker("", selection: $selection) {
                 ForEach(options, id: \.self) { item in
-                    Text("\(item.description)").tag(Optional(item))
+                    Text(item.description).tag(Optional(item))
                 }
             }
         } label: {
             HStack {
-                Text(selection?.description ?? placeholder)
-                    .fontStyle(theme.font.body)
+                buildLabelText()
                 Spacer()
                 Image(systemName: "chevron.down")
-                    .foregroundColor(theme.menuFieldAccent)
+                    .foregroundColor(style.getFontColor(theme, isPlaceholder: false, isEnabled: isEnabled))
                     .fontWeight(.bold)
-
+            }
+            .padding(.horizontal, theme.padding.grid2x)
+            .frame(height: theme.size.large)
+            .focused($isFocused)
+            .onTapGesture {
+                isFocused = true
             }
         }
-        .padding()
-        .background(theme.menuFieldBackground)
-        .frame(height: theme.menuFieldHeight)
-        .cornerRadius(theme.menuFieldCornerRadius)
-    }
-}
-
-public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View {
-
-    @Environment (\.validationContext) var context
-    @EnvironmentObject var theme: Theme
-    @Binding var selection: SelectionType
-    var options: [SelectionType]
-
-    public init(selection: Binding<SelectionType>,
-                options: [SelectionType]) {
-        self._selection = selection
-        self.options = options
-    }
-
-    public var body: some View {
-        Menu {
-            Picker("", selection: $selection) {
-                ForEach(options, id: \.self) { item in
-                    Text("\(item.description)").tag(item)
-                }
-            }
-        } label: {
-            HStack {
-                Text(selection.description)
-                    .fontStyle(theme.font.body)
-                Spacer()
-                Image(systemName: "chevron.down")
-                    .foregroundColor(theme.menuFieldAccent)
-                    .fontWeight(.bold)
-
-            }
-        }
-        .padding()
-        .background(theme.menuFieldBackground)
-        .frame(height: theme.menuFieldHeight)
-        .cornerRadius(theme.menuFieldCornerRadius)
+        .frame(height: theme.size.large)
+        .background(style.getFieldBackgroundColor(theme, isEnabled: isEnabled))
+        .cornerRadius(style.getCornerRadius(theme))
         .overlay {
-            if context.status != .valid {
-                RoundedRectangle(cornerRadius: theme.radius.medium)
-                    .strokeBorder(overlayColor, lineWidth: theme.staticTextFieldBorderWidth)
-            }
+            RoundedRectangle(cornerRadius: style.getCornerRadius(theme), style: .continuous)
+                .strokeBorder(style.getFieldBorderColor(theme, isEnabled: isEnabled), lineWidth: style.getFieldBorderSize(theme))
         }
     }
 
-    private var overlayColor: Color {
-        switch context.status {
-        case .valid:
-            return theme.validationStatusValid
-        case .warning:
-            return theme.validationStatusWarning
-        case .caution:
-            return theme.validationStatusCaution
-        case .advisory:
-            return theme.validationStatusAdvisory
+    @ViewBuilder
+    private func buildLabelText() -> some View {
+        if let selectedItem = selection?.description {
+            Label(selectedItem, image: "")
+                .labelStyle(MenuLabelStyle(textColor: style.getFontColor(theme, isPlaceholder: false, isEnabled: isEnabled)))
+                .fontStyle(style.config.fontStyle ?? theme.font.bodyBold)
+        } else if let placeholderText = placeholder {
+            Label(placeholderText, image: "")
+                .labelStyle(MenuLabelStyle(textColor: style.getFontColor(theme, isPlaceholder: true, isEnabled: isEnabled)))
+                .fontStyle(style.config.fontStyle ?? theme.font.bodyBold)
         }
-    }
-}
-
-struct MenuField_Previews: PreviewProvider {
-    @State static var optionalSelection: String?
-    @State static var selection: String = "Iron Man"
-    static func fakeValidator(value: String, mode: ValidationMode) -> ValidationStatus { return .caution(message: "") }
-    @State private static var validationStatus: ValidationStatus = .warning(message: "")
-    static let options = ["Thor", "Iron Man", "Captain America"]
-
-    static var previews: some View {
-
-        VStack {
-            OptionalMenuField(selection: $optionalSelection,
-                      options: options)
-
-            OptionalMenuField(selection: $optionalSelection,
-                      options: options,
-                      placeholder: "Custom Placeholder Text")
-            MenuField(selection: $selection, options: options)
-            MenuField(selection: $selection, options: options)
-                .validated(by: fakeValidator, status: $validationStatus)
-        }
-        .padding()
-        .environmentObject(Theme())
     }
 }

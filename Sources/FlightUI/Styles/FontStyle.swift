@@ -1,3 +1,10 @@
+//
+//  FontStyle.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 
 /// Provides theme based customisation to Font views with the use of a view modifier
@@ -8,7 +15,7 @@ import SwiftUI
 public class FontStyle {
 
     private var id: UUID
-    public var font: Font
+    public var size: CGFloat
     public var weight: Font.Weight
     public var design: Font.Design
     public var italic: Bool
@@ -16,7 +23,7 @@ public class FontStyle {
     public var charSpacing: CGFloat
     public var foregroundColor: Color?
 
-    public init(font: Font,
+    public init(size: CGFloat,
                 weight: Font.Weight = .regular,
                 design: Font.Design = .default,
                 italic: Bool = false,
@@ -25,7 +32,7 @@ public class FontStyle {
                 foregroundColor: Color? = nil
     ) {
         self.id = UUID()
-        self.font = font
+        self.size = size
         self.weight = weight
         self.design = design
         self.italic = italic
@@ -37,6 +44,7 @@ public class FontStyle {
 
 struct FontStyleModifier: ViewModifier {
     @EnvironmentObject var theme: Theme
+    @Environment(\.sizeCategory) var sizeCategory
 
     let style: FontStyle
 
@@ -46,10 +54,11 @@ struct FontStyleModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .font(style.font
-                .weight(style.weight)
-                .italic(style.italic))
-            .fontDesign(style.design)
+            .font(.system(
+                size: UIFontMetrics.default.scaledValue(for: style.size),
+                weight: style.weight,
+                design: style.design))
+            .italic(style.italic)
             .lineSpacing(style.lineSpacing)
             .tracking(style.charSpacing)
             .foregroundColor(style.foregroundColor ?? theme.color.primary)

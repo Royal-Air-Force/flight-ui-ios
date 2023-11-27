@@ -1,3 +1,10 @@
+//
+//  CardStyle.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 
 private class Defaults {

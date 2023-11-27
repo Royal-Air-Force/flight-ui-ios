@@ -66,9 +66,13 @@ These colours should not be used for any other forms of content and are intentio
 | Colour | Hex Code | On Background | On Surface Low | On Surface High | Notes |
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | Primary | #050505 | ✅ AAA Pass | ✅ AAA Pass | ✅ AAA Pass | - |
-| Secondary | #515151 | ✅ AAA Pass | ✅ AAA Pass | ✅ AAA Pass | - |
-| Input Output | #0075A3 | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | AAA for large text and graphics |
-| Nominal | #1B7E34 | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | AAA for large text and graphics |
-| Caution | #806A00 | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | AAA for large text and graphics |
-| Warning | #DB0B00 | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | AAA for large text and graphics |
+| Secondary | #515151 | ✅ AAA Pass | ✅ AAA Pass | ✔ AA Pass | - |
+| Input Output | #006E99 | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | AAA for large text and graphics |
+| Nominal | #197630 | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | AAA for large text and graphics |
+| Caution | #7A6600 | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | AAA for large text and graphics |
+| Warning | #CC0A00 | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | AAA for large text and graphics |
 | Graphics | - | ✔ AA Pass | ✔ AA Pass | ✔ AA Pass | Darker colours pass AAA but lighter shades may be AA |
+
+
+
+NEED TO CHECK LIGHT THEME GRAPHICS COLOURS ON SURFACE HIGH

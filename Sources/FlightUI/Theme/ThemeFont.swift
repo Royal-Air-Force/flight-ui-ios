@@ -1,3 +1,10 @@
+//
+//  ThemeFont.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 
 public class ThemeFont {
@@ -7,6 +14,7 @@ public class ThemeFont {
     @Published public var title3: FontStyle
     @Published public var headline: FontStyle
     @Published public var body: FontStyle
+    @Published public var bodyBold: FontStyle
     @Published public var callout: FontStyle
     @Published public var subhead: FontStyle
     @Published public var footnote: FontStyle
@@ -19,6 +27,7 @@ public class ThemeFont {
                 title3: FontStyle = .title3,
                 headline: FontStyle = .headline,
                 body: FontStyle = .body,
+                bodyBold: FontStyle = .bodyBold,
                 callout: FontStyle = .callout,
                 subhead: FontStyle = .subhead,
                 footnote: FontStyle = .footnote,
@@ -31,6 +40,7 @@ public class ThemeFont {
         self.title3 = title3
         self.headline = headline
         self.body = body
+        self.bodyBold = bodyBold
         self.callout = callout
         self.subhead = subhead
         self.footnote = footnote

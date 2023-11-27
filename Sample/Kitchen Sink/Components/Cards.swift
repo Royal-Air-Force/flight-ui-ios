@@ -1,3 +1,10 @@
+//
+//  Cards.swift
+//  Flight UI - Kitchen Sink Sample
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 import FlightUI
 
@@ -24,7 +31,7 @@ struct Cards: View {
                 title: "Elevated Card",
                 subTitle: "Displays a card surrounded by a shadow")
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: theme.padding.grid1x) {
                 Image(uiImage: UIImage(named: "AppIcon")!)
                     .resizable()
                     .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
@@ -34,7 +41,6 @@ struct Cards: View {
                     .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
                     .padding([.leading, .trailing], theme.padding.grid2x)
-                    .padding([.top, .bottom], theme.padding.grid1x)
                 Text("Displays a card surrounded by a shadow")
                     .foregroundColor(theme.color.secondary)
                     .fontStyle(.body)
@@ -52,7 +58,7 @@ struct Cards: View {
                 title: "Filled Card",
                 subTitle: "Displays a card with no border and no shadow")
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: theme.padding.grid1x) {
                 Image(uiImage: UIImage(named: "AppIcon")!)
                     .resizable()
                     .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
@@ -62,7 +68,6 @@ struct Cards: View {
                     .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
                     .padding([.leading, .trailing], theme.padding.grid2x)
-                    .padding([.top, .bottom], theme.padding.grid1x)
                 Text("Displays a card with no border and no shadow")
                     .foregroundColor(theme.color.secondary)
                     .fontStyle(.body)
@@ -80,7 +85,7 @@ struct Cards: View {
                 title: "Outline Card",
                 subTitle: "Displays a card with a border and no background color")
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: theme.padding.grid1x) {
                 Image(uiImage: UIImage(named: "AppIcon")!)
                     .resizable()
                     .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
@@ -90,7 +95,6 @@ struct Cards: View {
                     .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
                     .padding([.leading, .trailing], theme.padding.grid2x)
-                    .padding([.top, .bottom], theme.padding.grid1x)
                 Text("Displays a card with a border and no background color")
                     .foregroundColor(theme.color.secondary)
                     .fontStyle(.body)
@@ -101,14 +105,14 @@ struct Cards: View {
             .padding(.vertical, theme.padding.grid2x)
         }
     }
-    
+
     var customColourCard: some View {
         VStack(alignment: .leading) {
             HeadingView(
                 title: "Custom Card",
                 subTitle: "Displays a card with custom styling such as the background colour and corner radius")
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: theme.padding.grid1x) {
                 Image(uiImage: UIImage(named: "AppIcon")!)
                     .resizable()
                     .clipCorners(theme.radius.innerLarge(padding: theme.padding.grid1x), corners: [.allCorners])
@@ -118,7 +122,6 @@ struct Cards: View {
                     .foregroundColor(theme.color.onCore)
                     .fontStyle(.title1)
                     .padding([.leading, .trailing], theme.padding.grid2x)
-                    .padding([.top, .bottom], theme.padding.grid1x)
                 Text("Displays a card with custom styling such as the background colour, corner radius, and inner padding")
                     .foregroundColor(theme.color.onCore)
                     .fontStyle(.body)
