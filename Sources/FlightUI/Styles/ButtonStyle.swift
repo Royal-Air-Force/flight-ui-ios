@@ -22,7 +22,6 @@ public struct FilledButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding([.leading, .trailing], theme.padding.grid4x)
             .frame(minHeight: theme.size.medium)
             .foregroundColor(getFilledForeground(theme, isEnabled: isEnabled))
             .background(getFilledBackground(theme, isEnabled: isEnabled))

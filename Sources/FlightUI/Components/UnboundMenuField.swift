@@ -17,7 +17,7 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
     let placeholder: String?
     var topLabel: String?
     var topLabelSpacer: Bool
-    var supportLabelConfig: SupportLabelConfig
+    var bottomLabelConfig: BottomLabelConfig
 
     @State private var isSheetShown = false
     @State private var queryString = ""
@@ -36,14 +36,14 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
         placeholder: String? = nil,
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
-        supportLabelConfig: SupportLabelConfig = .init(isVisible: false)
+        bottomLabelConfig: BottomLabelConfig = .init(isVisible: false)
     ) {
         self._selection = selection
         self.options = options
         self.placeholder = placeholder
         self.topLabel = topLabel
         self.topLabelSpacer = topLabelSpacer
-        self.supportLabelConfig = supportLabelConfig
+        self.bottomLabelConfig = bottomLabelConfig
     }
 
     public var body: some View {
@@ -53,7 +53,7 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
                 .onTapGesture {
                     isSheetShown = true
                 }
-            SupportLabel(supportLabelConfig)
+            BottomLabel(bottomLabelConfig)
         }
     }
 
@@ -106,11 +106,8 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
                             Button {
                                 isSheetShown = false
                             } label: {
-                                HStack {
-                                    Image(systemName: "xmark")
-                                    Text("Close")
-                                }
-                                .foregroundColor(theme.color.primary)
+                                Text("Close")
+                                    .foregroundColor(theme.color.primary)
                             }
                         }
                     }
@@ -289,19 +286,19 @@ struct UnboundMenuField_Previews: PreviewProvider {
             HStack(alignment: .top) {
                 UnboundMenuField(selection: .constant(nil),
                              options: UnboundPreviewOptions.allCases,
-                             placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Default Label"))
+                             placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Default Label"))
                 .menuFieldStyle(.default)
                 UnboundMenuField(selection: .constant(nil),
                              options: UnboundPreviewOptions.allCases,
-                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Nominal Label", state: .nominal))
+                          placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Nominal Label", state: .nominal))
                 .menuFieldStyle(.default)
                 UnboundMenuField(selection: .constant(nil),
                              options: UnboundPreviewOptions.allCases,
-                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Caution Label", state: .caution))
+                          placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Caution Label", state: .caution))
                 .menuFieldStyle(.default)
                 UnboundMenuField(selection: .constant(nil),
                              options: UnboundPreviewOptions.allCases,
-                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Warning Label", state: .warning))
+                          placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Warning Label", state: .warning))
                 .menuFieldStyle(.default)
             }
         }

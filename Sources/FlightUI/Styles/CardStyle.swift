@@ -48,7 +48,7 @@ struct CardStyleModifier: ViewModifier {
     init(style: CardStyle) {
         self.style = style
     }
-
+    
     func body(content: Content) -> some View {
         ZStack {
             getBaseCard()

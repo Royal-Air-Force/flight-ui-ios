@@ -75,13 +75,13 @@ struct Inputs: View {
                     "Clear the fields to show the default state.")
 
             HStack(alignment: .top) {
-                InputField(text: $viewModel.nominalStateInput, placeholder: "Nominal", supportLabelConfig: viewModel.nominalAdvisory())
+                InputField(text: $viewModel.nominalStateInput, placeholder: "Nominal", bottomLabelConfig: viewModel.nominalAdvisory())
                     .textFieldStyle(InputFieldStyle(viewModel.nominalState()))
 
-                InputField(text: $viewModel.cautionStateInput, placeholder: "Caution", supportLabelConfig: viewModel.cautionAdvisory())
+                InputField(text: $viewModel.cautionStateInput, placeholder: "Caution", bottomLabelConfig: viewModel.cautionAdvisory())
                     .textFieldStyle(InputFieldStyle(viewModel.cautionState()))
 
-                InputField(text: $viewModel.warningStateInput, placeholder: "Warning", supportLabelConfig: viewModel.warningAdvisory())
+                InputField(text: $viewModel.warningStateInput, placeholder: "Warning", bottomLabelConfig: viewModel.warningAdvisory())
                     .textFieldStyle(InputFieldStyle(viewModel.warningState()))
             }
             .padding(.top, theme.padding.grid2x)
@@ -100,7 +100,7 @@ struct Inputs: View {
                 InputField(text: $viewModel.topLabel, placeholder: "Top Label", topLabel: "Top Label")
                     .textFieldStyle(.default)
 
-                InputField(text: $viewModel.supportLabel, placeholder: "Support Label", topLabelSpacer: true, supportLabelConfig: SupportLabelConfig("Support information goes here"))
+                InputField(text: $viewModel.bottomLabel, placeholder: "Bottom Label", topLabelSpacer: true, bottomLabelConfig: BottomLabelConfig("Bottom Label information goes here"))
                     .textFieldStyle(.default)
             }
             .padding(.top, theme.padding.grid2x)
@@ -115,16 +115,16 @@ struct Inputs: View {
                 subTitle: "Input fields that provide some additional level of management including; formatting on focus change, filtering allowed input, and debounce functionality")
 
             HStack(alignment: .top) {
-                InputField(text: $viewModel.formatInput, placeholder: "Formatter", supportLabelConfig: SupportLabelConfig("Formats numbers to 2dp"), formatter: { typedString in
+                InputField(text: $viewModel.formatInput, placeholder: "Formatter", bottomLabelConfig: BottomLabelConfig("Formats numbers to 2dp"), formatter: { typedString in
                         guard let doubleValue = Double(typedString) else { return typedString }
                         return String(format: "%.2f", doubleValue)
                 })
                 .textFieldStyle(.default)
 
-                InputField(text: $viewModel.keyboardInput, placeholder: "Filter", supportLabelConfig: SupportLabelConfig("Filters out non-digit characters"), filter: .integerOnly)
+                InputField(text: $viewModel.keyboardInput, placeholder: "Filter", bottomLabelConfig: BottomLabelConfig("Filters out non-digit characters"), filter: .integerOnly)
                     .textFieldStyle(.default)
 
-                InputField(text: $viewModel.debounceInput, placeholder: "Debounce", supportLabelConfig: SupportLabelConfig(viewModel.debounceAdvisoryLabel))
+                InputField(text: $viewModel.debounceInput, placeholder: "Debounce", bottomLabelConfig: BottomLabelConfig(viewModel.debounceAdvisoryLabel))
                     .textFieldStyle(.default)
                     .onChange(of: viewModel.debounceInput) { _ in
                         viewModel.debounceAdvisoryLabel = Inputs.ViewModel.defaultDebounceAdvisoryLabel

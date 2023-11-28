@@ -18,7 +18,7 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
     var placeholder: String?
     var topLabel: String?
     var topLabelSpacer: Bool
-    var supportLabelConfig: SupportLabelConfig
+    var bottomLabelConfig: BottomLabelConfig
 
     public init(
         selection: Binding<SelectionType?>,
@@ -26,21 +26,21 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
         placeholder: String? = nil,
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
-        supportLabelConfig: SupportLabelConfig = .init(isVisible: false)
+        bottomLabelConfig: BottomLabelConfig = .init(isVisible: false)
     ) {
         self._selection = selection
         self.options = options
         self.placeholder = placeholder
         self.topLabel = topLabel
         self.topLabelSpacer = topLabelSpacer
-        self.supportLabelConfig = supportLabelConfig
+        self.bottomLabelConfig = bottomLabelConfig
     }
 
     public var body: some View {
         VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
             buildTopLabel()
             buildMenuField()
-            SupportLabel(supportLabelConfig)
+            BottomLabel(bottomLabelConfig)
         }
     }
 
@@ -195,19 +195,19 @@ struct MenuField_Previews: PreviewProvider {
             HStack(alignment: .top) {
                 MenuField(selection: .constant(nil),
                              options: PreviewOptions.allCases,
-                             placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Default Label"))
+                             placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Default Label"))
                 .menuFieldStyle(.default)
                 MenuField(selection: .constant(nil),
                              options: PreviewOptions.allCases,
-                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Nominal Label", state: .nominal))
+                          placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Nominal Label", state: .nominal))
                 .menuFieldStyle(.default)
                 MenuField(selection: .constant(nil),
                              options: PreviewOptions.allCases,
-                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Caution Label", state: .caution))
+                          placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Caution Label", state: .caution))
                 .menuFieldStyle(.default)
                 MenuField(selection: .constant(nil),
                              options: PreviewOptions.allCases,
-                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Warning Label", state: .warning))
+                          placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Warning Label", state: .warning))
                 .menuFieldStyle(.default)
             }
         }

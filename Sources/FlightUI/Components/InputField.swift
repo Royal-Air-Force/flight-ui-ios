@@ -17,7 +17,7 @@ public struct InputField: View {
     var placeholder: String?
     var topLabel: String?
     var topLabelSpacer: Bool
-    var supportLabelConfig: SupportLabelConfig
+    var bottomLabelConfig: BottomLabelConfig
     var formatter: ((String) -> String)?
     var filter: RegexFilter?
 
@@ -26,7 +26,7 @@ public struct InputField: View {
         placeholder: String? = nil,
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
-        supportLabelConfig: SupportLabelConfig = .init(isVisible: false),
+        bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
         formatter: ((String) -> String)? = nil,
         filter: RegexFilter? = nil
     ) {
@@ -34,7 +34,7 @@ public struct InputField: View {
         self.placeholder = placeholder
         self.topLabel = topLabel
         self.topLabelSpacer = topLabelSpacer
-        self.supportLabelConfig = supportLabelConfig
+        self.bottomLabelConfig = bottomLabelConfig
         self.formatter = formatter
         self.filter = filter
     }
@@ -43,7 +43,7 @@ public struct InputField: View {
         VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
             buildTopLabel()
             buildTextField()
-            SupportLabel(supportLabelConfig)
+            BottomLabel(bottomLabelConfig)
         }
     }
 

@@ -20,7 +20,7 @@ extension Inputs {
         @Published var cautionStateInput = "Caution"
         @Published var warningStateInput = "Warning"
         @Published var topLabel = "Top Label"
-        @Published var supportLabel = "Support Label"
+        @Published var bottomLabel = "Bottom Label"
         @Published var formatInput = ""
         @Published var debounceInput = ""
         @Published var debounceAdvisoryLabel = defaultDebounceAdvisoryLabel
@@ -33,8 +33,8 @@ extension Inputs {
             return nominalStateInput.isEmpty ? .default : .nominal
         }
 
-        func nominalAdvisory() -> SupportLabelConfig {
-            return SupportLabelConfig(
+        func nominalAdvisory() -> BottomLabelConfig {
+            return BottomLabelConfig(
                 nominalStateInput.isEmpty ? "Required" : "Extra info",
                 state: nominalStateInput.isEmpty ? .caution : .default
             )
@@ -44,16 +44,16 @@ extension Inputs {
             return cautionStateInput.isEmpty ? .default : .caution
         }
 
-        func cautionAdvisory() -> SupportLabelConfig {
-            return SupportLabelConfig("Extra info", state: cautionState())
+        func cautionAdvisory() -> BottomLabelConfig {
+            return BottomLabelConfig("Extra info", state: cautionState())
         }
 
         func warningState() -> InputAlertingState {
             return warningStateInput.isEmpty ? .default : .warning
         }
 
-        func warningAdvisory() -> SupportLabelConfig {
-            return SupportLabelConfig("Extra info", state: warningState())
+        func warningAdvisory() -> BottomLabelConfig {
+            return BottomLabelConfig("Extra info", state: warningState())
         }
 
         func boundSelectionState() -> InputAlertingState {

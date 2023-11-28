@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct SupportLabelConfig {
+public struct BottomLabelConfig {
     var label: String?
     var state: InputAlertingState
     var isVisible: Bool
@@ -22,11 +22,11 @@ public struct SupportLabelConfig {
     }
 }
 
-struct SupportLabel: View {
+struct BottomLabel: View {
     @EnvironmentObject var theme: Theme
-    var config: SupportLabelConfig
+    var config: BottomLabelConfig
 
-    init(_ config: SupportLabelConfig = SupportLabelConfig()) {
+    init(_ config: BottomLabelConfig = BottomLabelConfig()) {
         self.config = config
     }
 
@@ -65,11 +65,11 @@ struct SupportLabel_Previews: PreviewProvider {
 
     static var previews: some View {
         VStack(spacing: theme.padding.grid2x) {
-            SupportLabel(SupportLabelConfig("Default Support Label"))
-            SupportLabel(SupportLabelConfig("Advisory Support Label", state: .advisory))
-            SupportLabel(SupportLabelConfig("Nominal Support Label", state: .nominal))
-            SupportLabel(SupportLabelConfig("Caution Support Label", state: .caution))
-            SupportLabel(SupportLabelConfig("Warning Support Label", state: .warning))
+            BottomLabel(BottomLabelConfig("Default Support Label"))
+            BottomLabel(BottomLabelConfig("Advisory Support Label", state: .advisory))
+            BottomLabel(BottomLabelConfig("Nominal Support Label", state: .nominal))
+            BottomLabel(BottomLabelConfig("Caution Support Label", state: .caution))
+            BottomLabel(BottomLabelConfig("Warning Support Label", state: .warning))
         }
         .environmentObject(theme)
         .previewDisplayName("Support Label")
