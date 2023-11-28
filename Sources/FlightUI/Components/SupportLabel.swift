@@ -13,8 +13,8 @@ public struct SupportLabelConfig {
     var isVisible: Bool
 
     public init(_ label: String? = nil,
-         state: InputAlertingState = .default,
-         isVisible: Bool = true
+                state: InputAlertingState = .default,
+                isVisible: Bool = true
     ) {
         self.label = label
         self.state = state
