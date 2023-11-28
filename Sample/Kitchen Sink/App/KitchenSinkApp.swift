@@ -35,13 +35,13 @@ struct KitchenSinkApp: App {
                         SampleScreenView(title: "Inputs", destination: Inputs())
                     }
                     .headerProminence(.increased)
-                    Section(
-                        header: HeaderTitleView(title: "Aviation",
-                                                subtitle: "Components and Functionalities specific to aviation")
-                    ) {
-                        SampleScreenView(title: "Flight Crew Alerting", destination: Misc())
-                    }
-                    .headerProminence(.increased)
+//                    Section(
+//                        header: HeaderTitleView(title: "Aviation",
+//                                                subtitle: "Components and Functionalities specific to aviation")
+//                    ) {
+//                        SampleScreenView(title: "Flight Crew Alerting", destination: Misc())
+//                    }
+//                    .headerProminence(.increased)
 //                    Section(
 //                        header: HeaderTitleView(title: "Coming Soon",
 //                                                subtitle: "Functionality coming soon to FlightUI")

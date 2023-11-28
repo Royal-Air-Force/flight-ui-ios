@@ -237,9 +237,17 @@ struct Buttons: View {
     }
 }
 
+#if DEBUG
+
 struct Buttons_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
     static var previews: some View {
         Buttons()
-            .environmentObject(Theme())
+            .environmentObject(theme)
+            .previewDisplayName("Button Samples")
+            .preferredColorScheme(theme.baseScheme)
     }
 }
+
+#endif

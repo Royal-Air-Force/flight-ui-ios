@@ -27,3 +27,18 @@ struct HeadingView: View {
         }
     }
 }
+
+#if DEBUG
+
+struct HeadingView_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        HeadingView(title: "This is a Preview", subTitle: "Heading View is only used in the Kitchen Sink as a consistent header to components")
+            .environmentObject(theme)
+            .previewDisplayName("Heading View Samples")
+            .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+#endif

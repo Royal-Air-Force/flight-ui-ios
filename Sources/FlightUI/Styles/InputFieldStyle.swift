@@ -113,3 +113,49 @@ public struct InputFieldStyle: TextFieldStyle {
         }
     }
 }
+
+#if DEBUG
+
+struct InputFieldStyle_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
+            HStack {
+                InputField(text: .constant("Disabled Style"))
+                    .textFieldStyle(.default)
+                InputField(text: .constant("Default Disabled Style"))
+                    .textFieldStyle(.default)
+                    .disabled(true)
+            }
+            InputField(text: .constant("Advisory Style"))
+                .textFieldStyle(.advisory)
+            HStack {
+                InputField(text: .constant("Nominal Style"))
+                    .textFieldStyle(.nominal)
+                InputField(text: .constant("Nominal Disabled Style"))
+                    .textFieldStyle(.nominal)
+                    .disabled(true)
+            }
+            HStack {
+                InputField(text: .constant("Caution Style"))
+                    .textFieldStyle(.caution)
+                InputField(text: .constant("Caution Disabled Style"))
+                    .textFieldStyle(.caution)
+                    .disabled(true)
+            }
+            HStack {
+                InputField(text: .constant("Warning Style"))
+                    .textFieldStyle(.warning)
+                InputField(text: .constant("Warning Disabled Style"))
+                    .textFieldStyle(.warning)
+                    .disabled(true)
+            }
+        }
+        .environmentObject(theme)
+        .previewDisplayName("Input Field Style")
+        .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+#endif

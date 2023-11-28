@@ -164,3 +164,18 @@ struct Inputs: View {
         .padding(.bottom, theme.padding.grid4x)
     }
 }
+
+#if DEBUG
+
+struct Inputs_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        Inputs()
+            .environmentObject(theme)
+            .previewDisplayName("Input Samples")
+            .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+#endif

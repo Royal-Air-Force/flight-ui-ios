@@ -135,3 +135,18 @@ struct Cards: View {
     }
 
 }
+
+#if DEBUG
+
+struct Cards_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        Cards()
+            .environmentObject(theme)
+            .previewDisplayName("Card Samples")
+            .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+#endif

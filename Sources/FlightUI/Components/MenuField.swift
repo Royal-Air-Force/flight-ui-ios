@@ -102,3 +102,119 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
         }
     }
 }
+
+#if DEBUG
+
+private enum PreviewOptions: String, CaseIterable, CustomStringConvertible {
+    case defaultSelected = "Default Selected"
+    case nominalSelected = "Nominal Selected"
+    case cautionSelected = "Caution Selected"
+    case warningSelected = "Warning Selected"
+
+    var description: String {
+        return rawValue
+    }
+}
+
+struct MenuField_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
+            HStack {
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Default Menu Field")
+                .menuFieldStyle(.default)
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Default Menu Field")
+                .menuFieldStyle(.default)
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Default Disabled")
+                .menuFieldStyle(.default)
+                .disabled(true)
+            }
+            HStack {
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Nominal Menu Field")
+                .menuFieldStyle(.nominal)
+                MenuField(selection: .constant(PreviewOptions.nominalSelected),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Nominal Menu Field")
+                .menuFieldStyle(.nominal)
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Nominal Disabled")
+                .menuFieldStyle(.nominal)
+                .disabled(true)
+            }
+            HStack {
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Caution Menu Field")
+                .menuFieldStyle(.caution)
+                MenuField(selection: .constant(PreviewOptions.cautionSelected),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Caution Menu Field")
+                .menuFieldStyle(.caution)
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Caution Disabled")
+                .menuFieldStyle(.caution)
+                .disabled(true)
+            }
+            HStack {
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Warning Menu Field")
+                .menuFieldStyle(.warning)
+                MenuField(selection: .constant(PreviewOptions.warningSelected),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Warning Menu Field")
+                .menuFieldStyle(.warning)
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Warning Disabled")
+                .menuFieldStyle(.warning)
+                .disabled(true)
+            }
+            Divider()
+            HStack(alignment: .top) {
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Default Top Label", topLabel: "Top Label")
+                .menuFieldStyle(.default)
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Hidden Top Label", topLabelSpacer: true)
+                .menuFieldStyle(.default)
+            }
+            HStack(alignment: .top) {
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                             placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Default Label"))
+                .menuFieldStyle(.default)
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Nominal Label", state: .nominal))
+                .menuFieldStyle(.default)
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Caution Label", state: .caution))
+                .menuFieldStyle(.default)
+                MenuField(selection: .constant(nil),
+                             options: PreviewOptions.allCases,
+                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Warning Label", state: .warning))
+                .menuFieldStyle(.default)
+            }
+        }
+        .environmentObject(theme)
+        .previewDisplayName("Menu Field Style")
+        .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+#endif

@@ -176,3 +176,139 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
         }
     }
 }
+
+#if DEBUG
+
+private enum UnboundPreviewOptions: UnboundSelectionEnum {
+    static var allCases: [UnboundPreviewOptions] {
+        return [.defaultSelected, .nominalSelected, .cautionSelected, .warningSelected]
+    }
+
+    case customSelected(String)
+    case defaultSelected
+    case nominalSelected
+    case cautionSelected
+    case warningSelected
+
+    var description: String {
+        switch self {
+        case .defaultSelected:
+            return "Default Selected"
+        case .nominalSelected:
+            return "Nominal Selected"
+        case .cautionSelected:
+            return "Caution Selected"
+        case .warningSelected:
+            return "Warning Selected"
+        case .customSelected(let customString):
+            return customString
+        }
+    }
+
+    static func custom(string: String) -> UnboundPreviewOptions {
+        return .customSelected(string)
+    }
+}
+
+struct UnboundMenuField_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
+            HStack {
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Default Unbound Menu")
+                .menuFieldStyle(.default)
+                UnboundMenuField(selection: .constant(UnboundPreviewOptions.defaultSelected),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Default Unbound Menu")
+                .menuFieldStyle(.default)
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Default Disabled")
+                .menuFieldStyle(.default)
+                .disabled(true)
+            }
+            HStack {
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Nominal Unbound Menu")
+                .menuFieldStyle(.nominal)
+                UnboundMenuField(selection: .constant(UnboundPreviewOptions.nominalSelected),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Nominal Unbound Menu")
+                .menuFieldStyle(.nominal)
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Nominal Disabled")
+                .menuFieldStyle(.nominal)
+                .disabled(true)
+            }
+            HStack {
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Caution Unbound Menu")
+                .menuFieldStyle(.caution)
+                UnboundMenuField(selection: .constant(UnboundPreviewOptions.cautionSelected),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Caution Unbound Menu")
+                .menuFieldStyle(.caution)
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Caution Disabled")
+                .menuFieldStyle(.caution)
+                .disabled(true)
+            }
+            HStack {
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Warning Unbound Menu")
+                .menuFieldStyle(.warning)
+                UnboundMenuField(selection: .constant(UnboundPreviewOptions.warningSelected),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Warning Unbound Menu")
+                .menuFieldStyle(.warning)
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Warning Disabled")
+                .menuFieldStyle(.warning)
+                .disabled(true)
+            }
+            Divider()
+            HStack(alignment: .top) {
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Default Top Label", topLabel: "Top Label")
+                .menuFieldStyle(.default)
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Hidden Top Label", topLabelSpacer: true)
+                .menuFieldStyle(.default)
+            }
+            HStack(alignment: .top) {
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                             placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Default Label"))
+                .menuFieldStyle(.default)
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Nominal Label", state: .nominal))
+                .menuFieldStyle(.default)
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Caution Label", state: .caution))
+                .menuFieldStyle(.default)
+                UnboundMenuField(selection: .constant(nil),
+                             options: UnboundPreviewOptions.allCases,
+                          placeholder: "Support Label", supportLabelConfig: SupportLabelConfig("Warning Label", state: .warning))
+                .menuFieldStyle(.default)
+            }
+        }
+        .environmentObject(theme)
+        .previewDisplayName("Unbound Menu Field Style")
+        .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+#endif

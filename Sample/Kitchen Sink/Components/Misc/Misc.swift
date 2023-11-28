@@ -14,11 +14,11 @@ struct Misc: View {
     var body: some View {
         ScrollView {
             VStack {
-                expandingPanel
-                    .padding([.bottom], theme.padding.grid6x)
-
-                nonExpandingPanel
-                    .padding([.bottom], theme.padding.grid6x)
+//                expandingPanel
+//                    .padding([.bottom], theme.padding.grid6x)
+//
+//                nonExpandingPanel
+//                    .padding([.bottom], theme.padding.grid6x)
 
                 expandingCard
             }
@@ -26,29 +26,29 @@ struct Misc: View {
         .navigationBarTitle("Misc")
     }
 
-    var expandingPanel: some View {
-        Panel(title: "Expandable Panel", options: .expandable(expanded: true)) {
-            VStack {
-                HStack(alignment: .top) {
-                    Text("Lots of lovely panel content")
-                    Spacer()
-                }
-            }
-            .padding(theme.padding.grid6x)
-        }
-    }
-
-    var nonExpandingPanel: some View {
-        Panel(title: "Expandable Panel", typography: (Font.title)) {
-            VStack {
-                HStack(alignment: .top) {
-                    Text("Lots of lovely panel content")
-                    Spacer()
-                }
-            }
-            .padding(theme.padding.grid6x)
-        }
-    }
+//    var expandingPanel: some View {
+//        Panel(title: "Expandable Panel", options: .expandable(expanded: true)) {
+//            VStack {
+//                HStack(alignment: .top) {
+//                    Text("Lots of lovely panel content")
+//                    Spacer()
+//                }
+//            }
+//            .padding(theme.padding.grid6x)
+//        }
+//    }
+//
+//    var nonExpandingPanel: some View {
+//        Panel(title: "Expandable Panel", typography: (Font.title)) {
+//            VStack {
+//                HStack(alignment: .top) {
+//                    Text("Lots of lovely panel content")
+//                    Spacer()
+//                }
+//            }
+//            .padding(theme.padding.grid6x)
+//        }
+//    }
 
     // Expanding panels will become cards at some point, similar to below, some style tweaking still needed
     @State private var isExpandedCardExpanded = false
