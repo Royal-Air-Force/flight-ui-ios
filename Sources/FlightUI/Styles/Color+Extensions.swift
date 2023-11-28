@@ -81,53 +81,56 @@ fileprivate extension Color {
                                        .flightGrey900]
 
     static let coreColors: [Color] = [.flightDarkBlue,
-                                      .flightDarkGreen,
-                                      .flightDarkYellow,
-                                      .flightDarkRed,
                                       .flightLightBlue,
+                                      .flightDarkGreen,
                                       .flightLightGreen,
+                                      .flightDarkYellow,
                                       .flightLightYellow,
+                                      .flightDarkRed,
                                       .flightLightRed]
 
     static let graphicsColors: [Color] = [.flightGraphicsRed,
+                                          .flightGraphicsDarkRed,
                                           .flightGraphicsYellow,
+                                          .flightGraphicsDarkYellow,
                                           .flightGraphicsGreen,
+                                          .flightGraphicsDarkGreen,
                                           .flightGraphicsMint,
+                                          .flightGraphicsDarkMint,
                                           .flightGraphicsCyan,
+                                          .flightGraphicsDarkCyan,
                                           .flightGraphicsBlue,
+                                          .flightGraphicsDarkBlue,
                                           .flightGraphicsIndigo,
                                           .flightGraphicsPurple,
-                                          .flightGraphicsPink]
+                                          .flightGraphicsDarkPurple,
+                                          .flightGraphicsPink,
+                                          .flightGraphicsDarkPink]
 
     static let customColors: [Color] = generalColors + coreColors + graphicsColors
 }
 
 struct Color_Previews: PreviewProvider {
-    static var colorList: some View {
-        NavigationStack {
-            List(Color.customColors, id: \.self) { color in
-                HStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .strokeBorder(Color.gray, lineWidth: 3.0)
-                        .background(color)
-                        .frame(width: 75, height: 75)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-
-                    Text("\(color.name)")
-                        .fontStyle(Theme().font.title2)
-                        .padding()
-                }
-            }
-            .navigationTitle("Colors")
-        }
-    }
+    static var theme: Theme = Theme(baseScheme: .dark)
 
     static var previews: some View {
-        colorList
-            .preferredColorScheme(.dark)
-            .previewDisplayName("All Colors")
-            .padding()
-            .environmentObject(Theme())
+        List(Color.customColors, id: \.self) { color in
+            HStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .strokeBorder(Color.gray, lineWidth: 3.0)
+                    .background(color)
+                    .frame(width: 75, height: 75)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                Text("\(color.name)")
+                    .fontStyle(Theme().font.title2)
+                    .padding()
+            }
+        }
+        .environmentObject(theme)
+        .preferredColorScheme(theme.baseScheme)
+        .previewDisplayName("All Colors")
+        .padding()
     }
 }
 

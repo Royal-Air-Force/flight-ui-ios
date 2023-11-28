@@ -9,12 +9,12 @@ import SwiftUI
 
 // MARK: - Panel View -
 
-public enum PanelOptions {
+private enum PanelOptions {
     case fixed
     case expandable(expanded: Bool = false)
 }
 
-public struct Panel<Content: View, Subtitle: View>: View {
+private struct Panel<Content: View, Subtitle: View>: View {
     @EnvironmentObject var theme: Theme
     @State private var expanded: Bool
 

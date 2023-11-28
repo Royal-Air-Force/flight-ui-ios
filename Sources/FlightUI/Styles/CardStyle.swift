@@ -80,3 +80,33 @@ extension View {
         modifier(CardStyleModifier(style: style))
     }
 }
+
+#if DEBUG
+
+struct CardStyle_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
+            HStack {
+                Text("Elevated Card")
+            }
+            .cardStyle(.elevated)
+
+            HStack {
+                Text("Filled Card")
+            }
+            .cardStyle(.filled)
+
+            HStack {
+                Text("Outline Card")
+            }
+            .cardStyle(.outline)
+        }
+        .environmentObject(theme)
+        .previewDisplayName("Card Style")
+        .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+#endif

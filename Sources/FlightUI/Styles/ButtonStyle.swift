@@ -272,3 +272,175 @@ private func getCoreForeground(_ theme: Theme, isEnabled: Bool) -> Color {
         return theme.color.onDisabled
     }
 }
+
+#if DEBUG
+
+struct FilledButtonStyle_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
+            // Filled Only Text
+            Button("Default Filled") {}
+                .buttonStyle(.filled)
+            Button("Disabled Filled") {}
+                .buttonStyle(.filled)
+                .disabled(true)
+
+            // Filled Only Icon
+            Button {} label: {
+                Image(systemName: "plus")
+            }.buttonStyle(.filledIcon)
+            Button {} label: {
+                Image(systemName: "plus")
+            }.buttonStyle(.filledIcon)
+                .disabled(true)
+
+            // Filled Text Icon
+            Button {} label: {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Default Filled With Icon")
+                }
+            }.buttonStyle(.filled)
+            Button {} label: {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Disabled Filled With Icon")
+                }
+            }.buttonStyle(.filled)
+                .disabled(true)
+        }
+        .environmentObject(theme)
+        .previewDisplayName("Filled Button Style")
+        .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+struct TonalButtonStyle_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
+            // Tonal Only Text
+            Button("Default Tonal") {}
+                .buttonStyle(.tonal)
+            Button("Disabled Tonal") {}
+                .buttonStyle(.tonal)
+                .disabled(true)
+
+            // Tonal Only Icon
+            Button {} label: {
+                Image(systemName: "plus")
+            }.buttonStyle(.tonalIcon)
+            Button {} label: {
+                Image(systemName: "plus")
+            }.buttonStyle(.tonalIcon)
+                .disabled(true)
+
+            // Tonal Text Icon
+            Button {} label: {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Default Tonal With Icon")
+                }
+            }.buttonStyle(.tonal)
+            Button {} label: {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Disabled Tonal With Icon")
+                }
+            }.buttonStyle(.tonal)
+                .disabled(true)
+        }
+        .environmentObject(theme)
+        .previewDisplayName("Tonal Button Style")
+        .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+struct OutlineButtonStyle_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
+            // Outline Only Text
+            Button("Default Outline") {}
+                .buttonStyle(.outline)
+            Button("Disabled Outline") {}
+                .buttonStyle(.outline)
+                .disabled(true)
+
+            // Outline Only Icon
+            Button {} label: {
+                Image(systemName: "plus")
+            }.buttonStyle(.outlineIcon)
+            Button {} label: {
+                Image(systemName: "plus")
+            }.buttonStyle(.outlineIcon)
+                .disabled(true)
+
+            // Outline Text Icon
+            Button {} label: {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Default Outline With Icon")
+                }
+            }.buttonStyle(.outline)
+            Button {} label: {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Disabled Outline With Icon")
+                }
+            }.buttonStyle(.outline)
+                .disabled(true)
+        }
+        .environmentObject(theme)
+        .previewDisplayName("Outline Button Style")
+        .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+struct TextButtonStyle_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
+            // Text Only Text
+            Button("Default Text") {}
+                .buttonStyle(.text)
+            Button("Disabled Text") {}
+                .buttonStyle(.text)
+                .disabled(true)
+
+            // Text Only Icon
+            Button {} label: {
+                Image(systemName: "plus")
+            }.buttonStyle(.textIcon)
+            Button {} label: {
+                Image(systemName: "plus")
+            }.buttonStyle(.textIcon)
+                .disabled(true)
+
+            // Text Text Icon
+            Button {} label: {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Default Text With Icon")
+                }
+            }.buttonStyle(.text)
+            Button {} label: {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Disabled Text With Icon")
+                }
+            }.buttonStyle(.text)
+                .disabled(true)
+        }
+        .environmentObject(theme)
+        .previewDisplayName("Text Button Style")
+        .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+#endif

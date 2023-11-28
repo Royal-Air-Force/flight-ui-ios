@@ -188,10 +188,17 @@ struct SimpleColorView: View {
     }
 }
 
+#if DEBUG
+
 struct Colours_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
     static var previews: some View {
         Colours()
-            .environmentObject(Theme())
-
+            .environmentObject(theme)
+            .previewDisplayName("Colour Samples")
+            .preferredColorScheme(theme.baseScheme)
     }
 }
+
+#endif

@@ -115,3 +115,18 @@ struct SpacingDisplayBox: View {
         }
     }
 }
+
+#if DEBUG
+
+struct Spacing_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        Spacing()
+            .environmentObject(theme)
+            .previewDisplayName("Spacing Samples")
+            .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+#endif

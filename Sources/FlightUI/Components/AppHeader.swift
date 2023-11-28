@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - AppHeader View -
 
-public struct AppHeader<Content: View>: View {
+private struct AppHeader<Content: View>: View {
     @EnvironmentObject var theme: Theme
 
     private var content: () -> Content

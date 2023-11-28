@@ -11,7 +11,7 @@ import Combine
 public struct InputField: View {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
-    @FocusState private var isFocused: Bool
+    @FocusState var isFocused: Bool
 
     @Binding var text: String
     var placeholder: String?

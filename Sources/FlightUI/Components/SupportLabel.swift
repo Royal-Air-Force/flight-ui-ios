@@ -13,8 +13,8 @@ public struct SupportLabelConfig {
     var isVisible: Bool
 
     public init(_ label: String? = nil,
-         state: InputAlertingState = .default,
-         isVisible: Bool = true
+                state: InputAlertingState = .default,
+                isVisible: Bool = true
     ) {
         self.label = label
         self.state = state
@@ -57,3 +57,24 @@ struct SupportLabel: View {
     }
 
 }
+
+#if DEBUG
+
+struct SupportLabel_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+
+    static var previews: some View {
+        VStack(spacing: theme.padding.grid2x) {
+            SupportLabel(SupportLabelConfig("Default Support Label"))
+            SupportLabel(SupportLabelConfig("Advisory Support Label", state: .advisory))
+            SupportLabel(SupportLabelConfig("Nominal Support Label", state: .nominal))
+            SupportLabel(SupportLabelConfig("Caution Support Label", state: .caution))
+            SupportLabel(SupportLabelConfig("Warning Support Label", state: .warning))
+        }
+        .environmentObject(theme)
+        .previewDisplayName("Support Label")
+        .preferredColorScheme(theme.baseScheme)
+    }
+}
+
+#endif
