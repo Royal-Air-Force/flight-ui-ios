@@ -35,27 +35,6 @@ struct KitchenSinkApp: App {
                         SampleScreenView(title: "Inputs", destination: Inputs())
                     }
                     .headerProminence(.increased)
-//                    Section(
-//                        header: HeaderTitleView(title: "Aviation",
-//                                                subtitle: "Components and Functionalities specific to aviation")
-//                    ) {
-//                        SampleScreenView(title: "Flight Crew Alerting", destination: Misc())
-//                    }
-//                    .headerProminence(.increased)
-//                    Section(
-//                        header: HeaderTitleView(title: "Coming Soon",
-//                                                subtitle: "Functionality coming soon to FlightUI")
-//                    ) {
-//                        SampleScreenView(title: "Banners", destination: Misc())
-//                        SampleScreenView(title: "Chips", destination: Misc())
-//                        SampleScreenView(title: "Menus", destination: Misc())
-//                        SampleScreenView(title: "Navigation", destination: Misc())
-//                        SampleScreenView(title: "Notifications", destination: Misc())
-//                        SampleScreenView(title: "Progress", destination: Misc())
-//                        SampleScreenView(title: "Selection Controls", destination: Misc())
-//                        SampleScreenView(title: "Sliders", destination: Misc())
-//                    }
-//                    .headerProminence(.increased)
                 }
                 .padding([.top], themeManager.current.padding.grid1x)
                 .scrollContentBackground(.hidden)
