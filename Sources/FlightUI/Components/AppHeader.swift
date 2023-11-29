@@ -1,15 +1,22 @@
+//
+//  AppHeader.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 
 // MARK: - AppHeader View -
 
-public struct AppHeader<Content: View>: View {
+private struct AppHeader<Content: View>: View {
     @EnvironmentObject var theme: Theme
-    
+
     private var content: () -> Content
     private var title: String?
     private var imageName: String?
     private var bundle: Bundle?
-    private var typography: Typography?
+    private var typography: Font?
     private let useContent: Bool
 
     public init(@ViewBuilder content: @escaping () -> Content) {
@@ -18,11 +25,11 @@ public struct AppHeader<Content: View>: View {
     }
 
     public init (title: String? = nil,
-                 typograhy: Typography = .h3,
+                 typography: Font? = nil,
                  imageName: String? = nil,
                  bundle: Bundle? = nil) where Content == EmptyView {
         self.title = title
-        self.typography = typograhy
+        self.typography = typography
         self.imageName = imageName
         self.bundle = bundle
         self.content = { EmptyView() }
@@ -42,15 +49,15 @@ public struct AppHeader<Content: View>: View {
                         .frame(width: 30, height: 30)
                         .padding(5)
                 }
-                if let title, let typography {
+                if let title {
                     Text(title)
-                        .typography(typography)
+                        .font(typography ?? Font.title3)
                 }
             }
             Spacer()
         }
         .padding()
-        .background(theme.appHeaderBackground)
+        .background(theme.color.background)
     }
 }
 
@@ -68,7 +75,7 @@ struct AppHeader_Previews: PreviewProvider {
             AppHeader(title: "App Header")
 
             AppHeader(title: "FlightUI",
-                      typograhy: .h3,
+                      typography: Font.title3,
                       imageName: "plane",
                       bundle: .module)
 
@@ -77,7 +84,7 @@ struct AppHeader_Previews: PreviewProvider {
 
             Spacer()
         }
-        .background(Color.flightBlack)
+        .background(Color.flightGrey0)
         .environmentObject(Theme())
         .previewDisplayName("Header")
         .preferredColorScheme(.dark)
