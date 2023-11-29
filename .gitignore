@@ -5,6 +5,9 @@
 ## User settings
 xcuserdata/
 
+# Workspace Data
+!*.xcworkspace/contents.xcworkspacedata
+
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
 *.xccheckout
@@ -95,4 +98,7 @@ iOSInjectionProject/
 # Appivate Developer
 SCRATCH.md
 scratch/
+
+# IDE
+.idea/
 
