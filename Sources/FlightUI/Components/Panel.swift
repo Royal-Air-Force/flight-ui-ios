@@ -1,31 +1,37 @@
+//
+//  Panel.swift
+//  flight-ui-ios
+//
+//  Created by Appivate 2023
+//
+
 import SwiftUI
 
 // MARK: - Panel View -
 
-public enum PanelOptions {
+private enum PanelOptions {
     case fixed
     case expandable(expanded: Bool = false)
 }
 
-public struct Panel<Content: View, Subtitle: View>: View {
+private struct Panel<Content: View, Subtitle: View>: View {
     @EnvironmentObject var theme: Theme
     @State private var expanded: Bool
 
     private var title: String?
-    private var typography: Typography
+    private var typography: Font?
     private var expandable: Bool
 
     private var subtitle: () -> Subtitle
     private let content: () -> Content
 
     public init(title: String? = nil,
-                typography: Typography = .h2,
+                typography: Font? = nil,
                 options: PanelOptions = .fixed,
                 subtitle: @escaping () -> Subtitle,
                 @ViewBuilder content: @escaping () -> Content) {
 
         self.title = title
-        self.typography = typography
         self.subtitle = subtitle
         self.content = content
 
@@ -36,10 +42,12 @@ public struct Panel<Content: View, Subtitle: View>: View {
             self.expandable = false
             self.expanded = false
         }
+
+        self.typography = typography
     }
-    
+
     public init(title: String? = nil,
-                typography: Typography = .h2,
+                typography: Font? = nil,
                 options: PanelOptions = .fixed,
                 @ViewBuilder content: @escaping () -> Content) where Subtitle == EmptyView {
         self.init(title: title,
@@ -57,14 +65,14 @@ public struct Panel<Content: View, Subtitle: View>: View {
         VStack {
             panelHeaderView
 
-            if (showContent) {
+            if showContent {
                 panelContentView
             }
         }
         .frame(maxWidth: .infinity)
-        .background(RoundedRectangle(cornerRadius: theme.panelCornerRadius, style: .continuous)
-            .strokeBorder(theme.panelBackground, lineWidth: theme.panelLineWidth)
-            .background(RoundedRectangle(cornerRadius: theme.panelCornerRadius, style: .continuous).fill(theme.panelViewBackground)))
+        .background(RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous)
+            .strokeBorder(theme.color.surfaceLow, lineWidth: theme.size.border)
+            .background(RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous).fill(theme.color.background)))
     }
 
     private var panelHeaderView: some View {
@@ -74,18 +82,18 @@ public struct Panel<Content: View, Subtitle: View>: View {
             }
 
             Spacer()
-            
+
             subtitle()
 
             if expandable {
                 expandIcon
             }
         }
-        .background(theme.panelBackground)
-        .padding(.bottom, theme.panelPadding)
-        .cornerRadius(theme.panelCornerRadius)
-        .padding(.bottom, -theme.panelPadding)
-        .cornerRadius(showContent ? 0.0 : theme.panelCornerRadius)
+        .background(theme.color.surfaceLow)
+        .padding(.bottom, theme.padding.grid1x)
+        .cornerRadius(theme.radius.medium)
+        .padding(.bottom, -theme.padding.grid1x)
+        .cornerRadius(showContent ? 0.0 : theme.radius.medium)
         .onTapGesture {
             guard expandable else { return }
 
@@ -98,15 +106,15 @@ public struct Panel<Content: View, Subtitle: View>: View {
     private func panelTitleTextView(_ title: String) -> some View {
         Text(title)
             .padding()
-            .typography(typography)
-            .foregroundColor(theme.panelForegoround)
+            .font(typography ?? Font.title2)
+            .foregroundColor(theme.color.surfaceLow)
     }
 
     private var expandIcon: some View {
         Image(systemName: "chevron.down")
-            .typography(.h1)
+            .font(.title)
             .fontWeight(.regular)
-            .foregroundColor(theme.panelForegoround)
+            .foregroundColor(theme.color.surfaceLow)
             .rotationEffect(.degrees(expanded ? -180.0 : 0.0))
             .padding()
     }
@@ -115,7 +123,7 @@ public struct Panel<Content: View, Subtitle: View>: View {
         content()
             // -12.0 is a magic number, text pixel alignment is slightly off; goal is
             // to have the content "hug" the Panel and defer padding to component consumer
-            .padding(.top, title == nil ? -theme.panelPadding / 2.0 : -12.0)
+            .padding(.top, title == nil ? -theme.padding.grid1x / 2.0 : -12.0)
     }
 
     private var showContent: Bool {
@@ -137,15 +145,13 @@ struct Panel_Previews: PreviewProvider {
             Panel(title: "Default Panel") {
                 content
             }
-            
-            
-            Panel(title: "Expandable Panel with subtitle", typography: .button, options: .expandable()) {
+
+            Panel(title: "Expandable Panel with subtitle", typography: .body, options: .expandable()) {
                 Text("This is a subtitle")
-                    .typography(.caption)
+                    .fontStyle(Theme().font.caption1)
             } content: {
                 content
             }
-
 
             Panel(title: "Panel (not expanded)", options: .expandable()) {
                 content
@@ -159,7 +165,7 @@ struct Panel_Previews: PreviewProvider {
                 Panel {
                     HStack {
                         Text("Side by Side")
-                            .typography(.h1)
+                            .fontStyle(Theme().font.title1)
                             .padding()
 
                         Spacer()
@@ -178,7 +184,7 @@ struct Panel_Previews: PreviewProvider {
 
     @ViewBuilder private static var content: some View {
         Text("Content")
-            .typography(.h2)
+            .fontStyle(Theme().font.title2)
             .padding()
     }
 }

@@ -15,6 +15,7 @@ line_length:
   ignores_urls: false
 
 identifier_name:
+  allowed_symbols: "_"
   min_length:
     warning: 3
   max_length:
@@ -50,3 +51,6 @@ custom_rules:
 
 excluded:
   - Pods
+
+disabled_rules:
+  - superfluous_disable_command

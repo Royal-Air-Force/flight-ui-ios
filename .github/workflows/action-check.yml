@@ -1,0 +1,34 @@
+name: Check
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      fail-on-lint-warning:
+        description: 'When true is provided, the lint stage will fail on lint warnings'
+        required: false
+        type: string
+        default: 'false'
+      xcode-version:
+        description: 'Defines the Xcode version to select when running on cloud runners'
+        required: false
+        type: string
+        default: '14.3'
+
+jobs:
+  lint:
+    runs-on: macos-13
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Lenient Lint Check
+        if: ${{ inputs.fail-on-lint-warning == 'false' }}
+        run: |
+          set -o pipefail
+          swiftlint lint --quiet | sed -E 's/^(.*):([0-9]+):([0-9]+): (warning|error|[^:]+): (.*)/::\4 title=Lint error,file=\1,line=\2,col=\3::\5\n\1:\2:\3/'
+
+      - name: Strict Lint Check
+        if: ${{ inputs.fail-on-lint-warning == 'true' }}
+        run: |
+          set -o pipefail
+          swiftlint lint --quiet | sed "s/warning:/error:/" | sed -E 's/^(.*):([0-9]+):([0-9]+): (warning|error|[^:]+): (.*)/::\4 title=Lint error,file=\1,line=\2,col=\3::\5\n\1:\2:\3/'
