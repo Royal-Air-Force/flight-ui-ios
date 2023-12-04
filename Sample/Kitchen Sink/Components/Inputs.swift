@@ -41,7 +41,7 @@ struct Inputs: View {
 
                 InputField(text: $viewModel.generalHint, placeholder: "Hint")
                     .textFieldStyle(.default)
-                    .onChange(of: viewModel.generalHint) { newText in
+                    .onChange(of: viewModel.generalHint) { oldText, newText in
                         print("General hint changed to \(newText)")
                     }
 
@@ -126,7 +126,7 @@ struct Inputs: View {
 
                 InputField(text: $viewModel.debounceInput, placeholder: "Debounce", bottomLabelConfig: BottomLabelConfig(viewModel.debounceAdvisoryLabel))
                     .textFieldStyle(.default)
-                    .onChange(of: viewModel.debounceInput) { _ in
+                    .onChange(of: viewModel.debounceInput) {
                         viewModel.debounceAdvisoryLabel = Inputs.ViewModel.defaultDebounceAdvisoryLabel
                     }
                     .onDebounce(of: viewModel.debounceInput, duration: .seconds(2)) { debouncedValue in

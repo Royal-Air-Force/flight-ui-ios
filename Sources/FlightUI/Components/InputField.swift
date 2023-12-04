@@ -76,7 +76,7 @@ public struct InputField: View {
                 }
             }
             .focused($isFocused)
-            .onChange(of: isFocused) { newFocus in
+            .onChange(of: isFocused) { oldFocus, newFocus in
                 if !newFocus, let format = formatter {
                     text = format(text)
                 }
@@ -92,7 +92,7 @@ public struct InputField: View {
                     }
                 }
                 .focused($isFocused)
-                .onChange(of: isFocused) { newFocus in
+                .onChange(of: isFocused) { oldFocus, newFocus in
                     if !newFocus, let format = formatter {
                         text = format(text)
                     }

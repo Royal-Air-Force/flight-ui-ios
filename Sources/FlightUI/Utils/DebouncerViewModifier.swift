@@ -16,11 +16,11 @@ struct DebounceViewModifier<Value>: ViewModifier where Value: Equatable {
     let delay: @Sendable () async throws -> Void
 
     func body(content: Content) -> some View {
-        content.onChange(of: observable) { value in
+        content.onChange(of: observable) { oldValue, newValue in
             debounceTask?.cancel()
             debounceTask = Task {
                 do { try await delay() } catch { return }
-                action(value)
+                action(newValue)
             }
         }
     }

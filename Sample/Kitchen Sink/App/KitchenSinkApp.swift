@@ -44,8 +44,8 @@ struct KitchenSinkApp: App {
                 .toolbarBackground(themeManager.current.color.background, for: .navigationBar)
                 .toolbar {
                     Toggle("Dark Theme", isOn: $isDarkTheme)
-                        .onChange(of: isDarkTheme) { value in
-                            if value {
+                        .onChange(of: isDarkTheme) { oldValue, newValue in
+                            if newValue {
                                 themeManager.updateTheme(.dark)
                             } else {
                                 themeManager.updateTheme(.light)
