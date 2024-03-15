@@ -101,7 +101,10 @@ struct UnitConverter: View {
         InputField(text: $demonstrationVM.kgInputString,
                    placeholder: demonstrationVM.kgHint,
                    bottomLabelConfig: BottomLabelConfig(demonstrationVM.bottomKgLabel),
-                   filter: .doubleOnly)
+                   formatter: { typedString in
+            guard let decimalValue = Decimal(string: typedString) else { return typedString }
+            return demonstrationVM.toString2DP(value: decimalValue)
+        }, filter: .doubleOnly)
         .textFieldStyle(demonstrationVM.emptyFields ? DefaultTextFieldStyle.caution : DefaultTextFieldStyle.default)
     }
 
@@ -109,9 +112,13 @@ struct UnitConverter: View {
         InputField(text: $demonstrationVM.lbsInputString,
                    placeholder: demonstrationVM.lbHint,
                    bottomLabelConfig: BottomLabelConfig(demonstrationVM.bottomlbLabel),
-                   filter: .doubleOnly)
+                   formatter: { typedString in
+            guard let decimalValue = Decimal(string: typedString) else { return typedString }
+            return demonstrationVM.toString2DP(value: decimalValue)
+        }, filter: .doubleOnly)
         .textFieldStyle(demonstrationVM.emptyFields ? DefaultTextFieldStyle.caution : DefaultTextFieldStyle.default)
     }
+
 
     var createSwapButton: some View  {
         Button(action:  {

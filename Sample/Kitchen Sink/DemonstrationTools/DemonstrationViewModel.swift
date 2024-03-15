@@ -23,8 +23,8 @@ import SwiftUI
     @Published var boundSelectionOutput : lengthType? = .metres
 
      private let feetToMetresConversionRate: Decimal = 3.28084
-     private let metresToFeetConversionRate: Decimal = 0.3048
-     private let kgToLbConversionRate: Decimal = 2.205
+     private let metresToFeetConversionRate: Decimal = 0.3048006096
+     private let kgToLbConversionRate: Decimal = 2.20462262
 
     let adjustableConversionTitle = "Adjustable conversion"
     let adjustableConversionSubTitle = "Example of conversion with Menu Picker"
@@ -70,10 +70,10 @@ import SwiftUI
          return Decimal(string: string) ?? 0.0
      }
 
-    func toString2DP(value: Decimal) -> String {
-        let doubleValue = NSDecimalNumber(decimal: value).doubleValue
-        return String(format: "%.2f", doubleValue)
-    }
+     func toString2DP(value: Decimal) -> String {
+         let formattedValue = NSDecimalNumber(decimal: value).rounding(accordingToBehavior: NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false))
+         return String(format: "%.2f", formattedValue.doubleValue)
+     }
 
     func convertKgsToLbs(kgs: Decimal) -> Decimal {
         return (kgs * kgToLbConversionRate)

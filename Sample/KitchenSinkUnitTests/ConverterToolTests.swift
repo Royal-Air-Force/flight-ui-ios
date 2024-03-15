@@ -57,7 +57,7 @@ final class ConverterToolTest: XCTestCase {
 
     func testToString2DP() {
         XCTAssertEqual(viewModel.toString2DP(value: 10.12345), "10.12") // Double value should be formatted to 2 decimal places
-        XCTAssertEqual(viewModel.toString2DP(value: 10), "10.00") // Integer value should be formatted with 2 decimal places
+        XCTAssertEqual(viewModel.toString2DP(value: 10.00), "10.00") // Integer value should be formatted with 2 decimal places
     }
 
     func testConvertToMeters() {
