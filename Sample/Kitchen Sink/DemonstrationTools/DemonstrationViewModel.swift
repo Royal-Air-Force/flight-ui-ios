@@ -22,9 +22,9 @@ import SwiftUI
     @Published var boundSelectionInput : lengthType? = .feet
     @Published var boundSelectionOutput : lengthType? = .metres
 
-    private let feetToMetresConversionRate = 3.28084
-    private let metresToFeetConversionRate = 0.3048
-    private let kgToLbConversionRate = 2.205
+     private let feetToMetresConversionRate: Decimal = 3.28084
+     private let metresToFeetConversionRate: Decimal = 0.3048
+     private let kgToLbConversionRate: Decimal = 2.205
 
     let adjustableConversionTitle = "Adjustable conversion"
     let adjustableConversionSubTitle = "Example of conversion with Menu Picker"
@@ -41,13 +41,13 @@ import SwiftUI
     let lbHint = "Enter Lgs"
 
     func runLengthConversion() {
-        let inputAsDouble = toDouble(string: inputValue)
-        let inputUnitInMetres = convertToMeters(value: inputAsDouble, from: boundSelectionInput ?? .metres )
+        let inputDecimal = toDecimal(string: inputValue)
+        let inputUnitInMetres = convertToMeters(value: inputDecimal, from: boundSelectionInput ?? .metres )
         let outputInMetres = convertFromMeters(value: inputUnitInMetres, from: boundSelectionOutput ?? .metres )
         outputValue = toString2DP(value: outputInMetres)
     }
 
-    func convertToMeters(value: Double, from unit: lengthType) -> Double {
+    func convertToMeters(value: Decimal, from unit: lengthType) -> Decimal {
            switch unit {
 
            case .feet:
@@ -57,7 +57,7 @@ import SwiftUI
            }
        }
 
-    func convertFromMeters(value: Double, from unit: lengthType) -> Double {
+    func convertFromMeters(value: Decimal, from unit: lengthType) -> Decimal {
         switch unit {
         case .feet:
             return value / metresToFeetConversionRate
@@ -66,19 +66,20 @@ import SwiftUI
         }
     }
 
-    func toDouble(string: String) -> Double {
-        return Double(string) ?? 0.0
+     func toDecimal(string: String) -> Decimal {
+         return Decimal(string: string) ?? 0.0
+     }
+
+    func toString2DP(value: Decimal) -> String {
+        let doubleValue = NSDecimalNumber(decimal: value).doubleValue
+        return String(format: "%.2f", doubleValue)
     }
 
-    func toString2DP(value: Double) -> String {
-        return String (format: "%.2f", value)
-    }
-
-    func convertKgsToLbs(kgs: Double) -> Double {
+    func convertKgsToLbs(kgs: Decimal) -> Decimal {
         return (kgs * kgToLbConversionRate)
     }
 
-    func convertLbsToKg(lbs: Double) -> Double {
+    func convertLbsToKg(lbs: Decimal) -> Decimal {
         return (lbs / kgToLbConversionRate)
     }
 
@@ -89,12 +90,12 @@ import SwiftUI
 
     func runWeightConversion(kgToLbConversion: Bool) {
         if (kgToLbConversion) {
-            let lbsDouble = toDouble(string: kgInputString)
-            let convertedValue = convertKgsToLbs(kgs: lbsDouble)
+            let lbsDecimal = toDecimal(string: kgInputString)
+            let convertedValue = convertKgsToLbs(kgs: lbsDecimal)
             lbsInputString = toString2DP(value: convertedValue)
         }else {
-            let kgDouble = toDouble(string: lbsInputString)
-            var convertedValue = convertLbsToKg(lbs: kgDouble)
+            let kgDecimal = toDecimal(string: lbsInputString)
+            var convertedValue = convertLbsToKg(lbs: kgDecimal)
             kgInputString = toString2DP(value: convertedValue)
         }
     }

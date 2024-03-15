@@ -48,11 +48,11 @@ final class ConverterToolTest: XCTestCase {
         XCTAssertFalse(viewModel.fieldsAreEmpty()) // After setting kgInputString, the fields should not be empty
     }
 
-    func testToDouble() {
-        XCTAssertEqual(viewModel.toDouble(string: "10"), 10.0) // Valid string should convert to double
-        XCTAssertEqual(viewModel.toDouble(string: "3.25"), 10.0) // Valid string should convert to double
-        XCTAssertEqual(viewModel.toDouble(string: ""), 0.0) // Empty string should convert to 0.0
-        XCTAssertEqual(viewModel.toDouble(string: "abc"), 0.0) // Invalid string should convert to 0.0
+    func testToDecimal() {
+        XCTAssertEqual(viewModel.toDecimal(string: "10"), 10.0) // Valid string should convert to double
+        XCTAssertEqual(viewModel.toDecimal(string: "3.25"), 3.25) // Valid string should convert to double
+        XCTAssertEqual(viewModel.toDecimal(string: ""), 0.0) // Empty string should convert to 0.0
+        XCTAssertEqual(viewModel.toDecimal(string: "abc"), 0.0) // Invalid string should convert to 0.0
     }
 
     func testToString2DP() {
@@ -61,13 +61,13 @@ final class ConverterToolTest: XCTestCase {
     }
 
     func testConvertToMeters() {
-        XCTAssertEqual(viewModel.convertToMeters(value: 10, from: .feet), 3.047999902464003) // 10 feet should be approximately 3.048 meters
+        XCTAssertEqual(viewModel.convertToMeters(value: 10, from: .feet), 3.047999902464003072, accuracy: 0.001) // 10 feet should be approximately 3.048 meters
         XCTAssertEqual(viewModel.convertToMeters(value: 10, from: .metres), 10) // Value in meters should remain the same
     }
 
     func testConvertFromMeters() {
         XCTAssertEqual(viewModel.convertFromMeters(value: 10, from: .metres), 10) // Value in meters should remain the same
-        XCTAssertEqual(viewModel.convertFromMeters(value: 10, from: .feet), 32.808398950131235) // 10 meters should be approximately 32.8084 feet
+        XCTAssertEqual(viewModel.convertFromMeters(value: 10, from: .feet), 32.80839895013123072, accuracy: 0.001) // 10 meters should be approximately 32.8084 feet
     }
 
     func testConvertKgsToLbs() {
