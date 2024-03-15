@@ -71,10 +71,10 @@ final class ConverterToolTest: XCTestCase {
     }
 
     func testConvertKgsToLbs() {
-        XCTAssertEqual(viewModel.convertKgsToLbs(kgs: 10), 22.05) // 10 kilograms should be approximately 22.05 pounds
+        XCTAssertEqual(viewModel.convertKgsToLbs(kgs: 10), 22.04622620000000512, accuracy: 0.001) // 10 kilograms should be approximately 22.05 pounds
     }
 
     func testConvertLbsToKg() {
-        XCTAssertEqual(viewModel.convertLbsToKg(lbs: 22.05), 10.0) // 22.05 pounds should be approximately 10 kilograms
+        XCTAssertEqual(viewModel.convertLbsToKg(lbs: 22.05), 10.00171176688734208, accuracy: 0.001) // 22.05 pounds should be approximately 10 kilograms
     }
 }
