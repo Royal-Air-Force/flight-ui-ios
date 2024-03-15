@@ -12,49 +12,107 @@ import FlightUI
 struct UnitConverter: View {
     @EnvironmentObject var theme: Theme
     @StateObject var themeManager = ThemeManager(current: .dark)
-    @ObservedObject var viewModel = DemonstrationViewModel()
-    @State private var isSwapped = false
+    @ObservedObject var demonstrationVM = DemonstrationViewModel()
+    @State private var weightValuesSwapped = false
 
     var body: some View {
         ScrollView {
+
             VStack {
+                HeadingView(
+                    title: demonstrationVM.weightTitle,
+                    subTitle: demonstrationVM.weightSubtitle)
+
                 HStack {
-                    if (isSwapped) {
-                        createKgInputField()
-                        createSwapButton()
-                        createLbInputField()
+                    if (weightValuesSwapped) {
+                        kgInputField
+                        createSwapButton
+                        lbInputField
                     } else {
-                        createLbInputField()
-                        createSwapButton()
-                        createKgInputField()
+                        lbInputField
+                        createSwapButton
+                        kgInputField
                     }
-                    createConvertButton()
+                    convertButton1
                 }
-
-                .padding(themeManager.current.padding.grid4x)
             }
+
+            HStack {
+                VStack {
+                    HeadingView(
+                        title: demonstrationVM.adjustableConversionTitle,
+                        subTitle: demonstrationVM.adjustableConversionSubTitle)
+                    HStack {
+                        lengthInput
+                        lengthInputUnitPicker
+                    }
+
+                    HStack {
+                        calculationResult
+                        lengthOutputUnitPicker
+                    }
+                }
+                VStack {
+                    Spacer()
+                    convertButton2
+                        .padding([.bottom], themeManager.current.padding.grid2x)
+                }
+            }
+            .padding([.top], themeManager.current.padding.grid2x)
         }
-        .background(theme.color.background)
-        .navigationBarTitle("Unit Converter")
+        .padding([.leading, .trailing], themeManager.current.padding.grid2x)
+    .background(theme.color.background)
+    .navigationBarTitle(demonstrationVM.naivgationBarTitle)
     }
 
-    func createKgInputField() -> some View {
-        InputField(text: $viewModel.kgInputString,
-                   placeholder: viewModel.kgHint,
-                   bottomLabelConfig: BottomLabelConfig("Kilograms"),
+    var calculationResult: some View {
+        InputField(text: $demonstrationVM.outputValue, placeholder: demonstrationVM.calculatedField)
+            .textFieldStyle(.advisory)
+            .padding([.bottom], themeManager.current.padding.grid2x)
+    }
+
+    var lengthInput: some View {
+        InputField(text: $demonstrationVM.inputValue,
+                   placeholder: demonstrationVM.lengthPalceholder,
+                   bottomLabelConfig: BottomLabelConfig(""),
                    filter: .doubleOnly)
         .textFieldStyle(.default)
     }
 
-    func createLbInputField() -> some View {
-        InputField(text: $viewModel.lbsInputString,
-                   placeholder: viewModel.lbHint,
-                   bottomLabelConfig: BottomLabelConfig("Pounds"),
-                   filter: .doubleOnly)
-        .textFieldStyle(.default)
+        var lengthInputUnitPicker: some View {
+            MenuField(selection: $demonstrationVM.boundSelectionInput,
+                      options: DemonstrationViewModel.lengthType.allCases,
+                      placeholder: "")
+            .menuFieldStyle(.default)
+            .padding([.bottom], themeManager.current.padding.grid2x)
+        }
+
+
+    var lengthOutputUnitPicker: some View {
+        MenuField(selection: $demonstrationVM.boundSelectionOutput,
+                  options: DemonstrationViewModel.lengthType.allCases,
+                  placeholder: "")
+        .menuFieldStyle(.default)
+        .padding([.bottom], themeManager.current.padding.grid2x)
     }
 
-    func createSwapButton() -> some View {
+    var kgInputField: some View {
+        InputField(text: $demonstrationVM.kgInputString,
+                   placeholder: demonstrationVM.kgHint,
+                   bottomLabelConfig: BottomLabelConfig(demonstrationVM.bottomKgLabel),
+                   filter: .doubleOnly)
+        .textFieldStyle(demonstrationVM.emptyFields ? DefaultTextFieldStyle.caution : DefaultTextFieldStyle.default)
+    }
+
+    var lbInputField: some View {
+        InputField(text: $demonstrationVM.lbsInputString,
+                   placeholder: demonstrationVM.lbHint,
+                   bottomLabelConfig: BottomLabelConfig(demonstrationVM.bottomlbLabel),
+                   filter: .doubleOnly)
+        .textFieldStyle(demonstrationVM.emptyFields ? DefaultTextFieldStyle.caution : DefaultTextFieldStyle.default)
+    }
+
+    var createSwapButton: some View  {
         Button(action:  {
             withAnimation(.easeInOut(duration: 0.5)) {
                 swapFields()
@@ -69,16 +127,43 @@ struct UnitConverter: View {
         }
     }
 
-    func swapFields() {
-        isSwapped.toggle()
+    var convertButton1: some View {
+        Button(action: {
+            convertStaticUnits()
+        })
+        {
+            Text(demonstrationVM.convert)
+                .padding([.bottom],theme.padding.grid2x)
+
+        }
+        .buttonStyle(.text)
     }
 
-    func createConvertButton() -> some View {
+    var convertButton2: some View {
         Button(action: {
-            viewModel.runWeightConversion(isSwapped: isSwapped)
-        }) {
-            Text("Convert")
+            runLengthConversion()
+        })
+        {
+            Text(demonstrationVM.convert)
+                .padding([.bottom],theme.padding.grid2x)
+
         }
+        .buttonStyle(.text)
+    }
+
+    func convertStaticUnits() {
+        if (!demonstrationVM.fieldsAreEmpty()) {
+            demonstrationVM.runWeightConversion(kgToLbConversion: weightValuesSwapped)
+        }
+    }
+
+    func runLengthConversion() {
+        demonstrationVM.runLengthConversion()
+    }
+
+    func swapFields() {
+        weightValuesSwapped.toggle()
+        convertStaticUnits()
     }
 }
 
@@ -86,7 +171,6 @@ struct UnitConverter: View {
 
     struct UnitConverter_Previews: PreviewProvider {
         static var theme: Theme = Theme(baseScheme: .dark)
-
         static var previews: some View {
             UnitConverter()
                 .environmentObject(theme)
