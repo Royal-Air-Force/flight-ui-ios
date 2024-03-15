@@ -14,6 +14,6 @@ extension Shape {
         fill fillContent: F
     ) -> some View {
         self.stroke(strokeContent, lineWidth: lineWidth)
-            .background(fill(fillContent))
+        .background(fill(fillContent))
     }
 }
