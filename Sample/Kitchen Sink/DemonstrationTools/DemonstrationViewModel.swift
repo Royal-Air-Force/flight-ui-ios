@@ -76,7 +76,15 @@ import SwiftUI
      }
 
      func getNSDecimalNumber(value: Decimal) -> NSDecimalNumber {
-         return NSDecimalNumber(decimal: value).rounding(accordingToBehavior: NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false))
+         let roundingHandler = NSDecimalNumberHandler(
+             roundingMode: .plain,
+             scale: 2,
+             raiseOnExactness: false,
+             raiseOnOverflow: false,
+             raiseOnUnderflow: false,
+             raiseOnDivideByZero: false
+         )
+         return NSDecimalNumber(decimal: value).rounding(accordingToBehavior: roundingHandler)
      }
 
     func convertKgsToLbs(kgs: Decimal) -> Decimal {
