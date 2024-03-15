@@ -25,7 +25,18 @@
 		AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABAD73C2A473C0E00967197 /* Color+Extensions.swift */; };
 		FB10BD802B9F58F1002489AB /* UnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */; };
 		FB10BD822B9F5F08002489AB /* DemonstrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10BD812B9F5F08002489AB /* DemonstrationViewModel.swift */; };
+		FB86F2042BA4657A00B51D99 /* ConverterToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB86F2032BA4657A00B51D99 /* ConverterToolTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FB86F2052BA4657A00B51D99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83C93DB82986C53A00A911A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83C93DBF2986C53A00A911A9;
+			remoteInfo = "Kitchen Sink";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		556931482AC713FD00259236 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
@@ -47,6 +58,8 @@
 		AABAD73C2A473C0E00967197 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverter.swift; sourceTree = "<group>"; };
 		FB10BD812B9F5F08002489AB /* DemonstrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemonstrationViewModel.swift; sourceTree = "<group>"; };
+		FB86F2012BA4657900B51D99 /* KitchenSinkUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KitchenSinkUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB86F2032BA4657A00B51D99 /* ConverterToolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterToolTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +68,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				55B64F3B2AC4C01C00AC21F5 /* FlightUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB86F1FE2BA4657900B51D99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +128,7 @@
 			children = (
 				55B64F382AC4BEEF00AC21F5 /* Packages */,
 				83C93DC22986C53A00A911A9 /* Kitchen Sink */,
+				FB86F2022BA4657A00B51D99 /* KitchenSinkUnitTests */,
 				83C93DC12986C53A00A911A9 /* Products */,
 				837FC6D72986D2620076C720 /* Frameworks */,
 			);
@@ -117,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				83C93DC02986C53A00A911A9 /* Kitchen Sink.app */,
+				FB86F2012BA4657900B51D99 /* KitchenSinkUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -182,6 +204,14 @@
 			path = DemonstrationTools;
 			sourceTree = "<group>";
 		};
+		FB86F2022BA4657A00B51D99 /* KitchenSinkUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				FB86F2032BA4657A00B51D99 /* ConverterToolTests.swift */,
+			);
+			path = KitchenSinkUnitTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -205,6 +235,24 @@
 			productReference = 83C93DC02986C53A00A911A9 /* Kitchen Sink.app */;
 			productType = "com.apple.product-type.application";
 		};
+		FB86F2002BA4657900B51D99 /* KitchenSinkUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB86F2092BA4657A00B51D99 /* Build configuration list for PBXNativeTarget "KitchenSinkUnitTests" */;
+			buildPhases = (
+				FB86F1FD2BA4657900B51D99 /* Sources */,
+				FB86F1FE2BA4657900B51D99 /* Frameworks */,
+				FB86F1FF2BA4657900B51D99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FB86F2062BA4657A00B51D99 /* PBXTargetDependency */,
+			);
+			name = KitchenSinkUnitTests;
+			productName = KitchenSinkUnitTests;
+			productReference = FB86F2012BA4657900B51D99 /* KitchenSinkUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -212,11 +260,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					83C93DBF2986C53A00A911A9 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					FB86F2002BA4657900B51D99 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 83C93DBF2986C53A00A911A9;
 					};
 				};
 			};
@@ -236,6 +288,7 @@
 			projectRoot = "";
 			targets = (
 				83C93DBF2986C53A00A911A9 /* Kitchen Sink */,
+				FB86F2002BA4657900B51D99 /* KitchenSinkUnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -247,6 +300,13 @@
 			files = (
 				83C93DCB2986C53C00A911A9 /* Preview Assets.xcassets in Resources */,
 				83C93DC82986C53C00A911A9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB86F1FF2BA4657900B51D99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,7 +335,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FB86F1FD2BA4657900B51D99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB86F2042BA4657A00B51D99 /* ConverterToolTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FB86F2062BA4657A00B51D99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83C93DBF2986C53A00A911A9 /* Kitchen Sink */;
+			targetProxy = FB86F2052BA4657A00B51D99 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		83C93DE22986C53D00A911A9 /* Debug */ = {
@@ -464,6 +540,53 @@
 			};
 			name = Release;
 		};
+		FB86F2072BA4657A00B51D99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92PN342Y7S;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.testAppivate.KitchenSinkUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kitchen Sink.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kitchen Sink";
+			};
+			name = Debug;
+		};
+		FB86F2082BA4657A00B51D99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 92PN342Y7S;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.testAppivate.KitchenSinkUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kitchen Sink.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kitchen Sink";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -481,6 +604,15 @@
 			buildConfigurations = (
 				83C93DE52986C53D00A911A9 /* Debug */,
 				83C93DE62986C53D00A911A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB86F2092BA4657A00B51D99 /* Build configuration list for PBXNativeTarget "KitchenSinkUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB86F2072BA4657A00B51D99 /* Debug */,
+				FB86F2082BA4657A00B51D99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

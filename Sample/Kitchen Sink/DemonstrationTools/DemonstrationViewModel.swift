@@ -10,7 +10,7 @@ import Combine
 import FlightUI
 import SwiftUI
 
-class DemonstrationViewModel : ObservableObject {
+ class DemonstrationViewModel : ObservableObject {
 
     @Published var kgInputString: String = ""
     @Published var lbsInputString: String = ""
@@ -49,8 +49,9 @@ class DemonstrationViewModel : ObservableObject {
 
     func convertToMeters(value: Double, from unit: lengthType) -> Double {
            switch unit {
+
            case .feet:
-               return value * feetToMetresConversionRate
+               return value / feetToMetresConversionRate
            case .metres:
                return value
            }
