@@ -16,11 +16,11 @@ import SwiftUI
     @Published var lbsInputString: String = ""
     @Published var emptyFields = false
     @Published var inputValue: String = ""
-    @Published var inputUnit: lengthType = .feet
-    @Published var outputUnit: lengthType = .metres
+    @Published var inputUnit: LengthType = .feet
+    @Published var outputUnit: LengthType = .metres
     @Published var outputValue: String = ""
-    @Published var boundSelectionInput : lengthType? = .feet
-    @Published var boundSelectionOutput : lengthType? = .metres
+    @Published var boundSelectionInput : LengthType? = .feet
+    @Published var boundSelectionOutput : LengthType? = .metres
 
      private let feetToMetresConversionRate: Decimal = 3.28084
      private let metresToFeetConversionRate: Decimal = 0.3048006096
@@ -47,7 +47,7 @@ import SwiftUI
         outputValue = toString2DP(value: outputInMetres)
     }
 
-    func convertToMeters(value: Decimal, from unit: lengthType) -> Decimal {
+    func convertToMeters(value: Decimal, from unit: LengthType) -> Decimal {
            switch unit {
 
            case .feet:
@@ -57,7 +57,7 @@ import SwiftUI
            }
        }
 
-    func convertFromMeters(value: Decimal, from unit: lengthType) -> Decimal {
+    func convertFromMeters(value: Decimal, from unit: LengthType) -> Decimal {
         switch unit {
         case .feet:
             return value / metresToFeetConversionRate
@@ -71,8 +71,12 @@ import SwiftUI
      }
 
      func toString2DP(value: Decimal) -> String {
-         let formattedValue = NSDecimalNumber(decimal: value).rounding(accordingToBehavior: NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false))
+         let formattedValue = getNSDecimalNumber(value: value)
          return String(format: "%.2f", formattedValue.doubleValue)
+     }
+
+     func getNSDecimalNumber(value: Decimal) -> NSDecimalNumber {
+         return NSDecimalNumber(decimal: value).rounding(accordingToBehavior: NSDecimalNumberHandler(roundingMode: .plain, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false))
      }
 
     func convertKgsToLbs(kgs: Decimal) -> Decimal {
@@ -100,7 +104,7 @@ import SwiftUI
         }
     }
 
-    enum lengthType: String, CaseIterable, CustomStringConvertible {
+    enum LengthType: String, CaseIterable, CustomStringConvertible {
         case feet = "Feet"
         case metres = "Metres"
         var description: String {

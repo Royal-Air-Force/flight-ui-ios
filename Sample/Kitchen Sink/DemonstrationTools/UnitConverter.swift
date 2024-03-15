@@ -82,7 +82,7 @@ struct UnitConverter: View {
 
         var lengthInputUnitPicker: some View {
             MenuField(selection: $demonstrationVM.boundSelectionInput,
-                      options: DemonstrationViewModel.lengthType.allCases,
+                      options: DemonstrationViewModel.LengthType.allCases,
                       placeholder: "")
             .menuFieldStyle(.default)
             .padding([.bottom], themeManager.current.padding.grid2x)
@@ -91,7 +91,7 @@ struct UnitConverter: View {
 
     var lengthOutputUnitPicker: some View {
         MenuField(selection: $demonstrationVM.boundSelectionOutput,
-                  options: DemonstrationViewModel.lengthType.allCases,
+                  options: DemonstrationViewModel.LengthType.allCases,
                   placeholder: "")
         .menuFieldStyle(.default)
         .padding([.bottom], themeManager.current.padding.grid2x)
