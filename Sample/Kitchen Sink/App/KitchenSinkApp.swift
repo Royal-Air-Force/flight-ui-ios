@@ -40,6 +40,7 @@ struct KitchenSinkApp: App {
                                                 subtitle: "Functional tools for demonstration")
                     ) {
                         SampleScreenView(title: "Unit Converter", destination: UnitConverter())
+                        SampleScreenView(title: "Cross Wind calculator", destination: CrossWindCalculator())
                     }
 
                     .headerProminence(.increased)

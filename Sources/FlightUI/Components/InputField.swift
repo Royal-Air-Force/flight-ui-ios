@@ -20,6 +20,7 @@ public struct InputField: View {
     var bottomLabelConfig: BottomLabelConfig
     var formatter: ((String) -> String)?
     var filter: RegexFilter?
+    var maxCharacterCount: Int
 
     public init(
         text: Binding<String>,
@@ -28,7 +29,8 @@ public struct InputField: View {
         topLabelSpacer: Bool = false,
         bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
         formatter: ((String) -> String)? = nil,
-        filter: RegexFilter? = nil
+        filter: RegexFilter? = nil,
+        maxCharacterCount: Int = 10000000
     ) {
         self._text = text
         self.placeholder = placeholder
@@ -37,6 +39,7 @@ public struct InputField: View {
         self.bottomLabelConfig = bottomLabelConfig
         self.formatter = formatter
         self.filter = filter
+        self.maxCharacterCount = maxCharacterCount
     }
 
     public var body: some View {
@@ -73,6 +76,10 @@ public struct InputField: View {
                     if replaced != newValue {
                         self.text = replaced
                     }
+                    // Limit character count
+                    if text.count > maxCharacterCount {
+                        text = String(text.prefix(maxCharacterCount))
+                    }
                 }
             }
             .focused($isFocused)
@@ -88,6 +95,9 @@ public struct InputField: View {
                         let replaced = newValue.replacingOccurrences(of: regex, with: "", options: .regularExpression)
                         if replaced != newValue {
                             self.text = replaced
+                        }
+                        if text.count > maxCharacterCount {
+                            text = String(text.prefix(maxCharacterCount))
                         }
                     }
                 }
