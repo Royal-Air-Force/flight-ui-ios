@@ -1,8 +1,8 @@
 //
-//  UnitConverter.swift
-//  Kitchen Sink
+//  Shape+Extensions.swift
+//  flight-ui-ios
 //
-//  Created by Jake Dove on 11/03/2024.
+//  Created by Appivate 2023
 //
 
 import Foundation
@@ -12,7 +12,7 @@ import FlightUI
 struct UnitConverter: View {
     @EnvironmentObject var theme: Theme
     @StateObject var themeManager = ThemeManager(current: .dark)
-    @ObservedObject var demonstrationVM = DemonstrationViewModel()
+    @ObservedObject var demonstrationVM = UnitConverterViewModel()
     @State private var weightValuesSwapped = false
 
     var body: some View {
@@ -24,7 +24,7 @@ struct UnitConverter: View {
                     subTitle: demonstrationVM.weightSubtitle)
 
                 HStack {
-                    if (weightValuesSwapped) {
+                    if  weightValuesSwapped {
                         kgInputField
                         createSwapButton
                         lbInputField
@@ -82,7 +82,7 @@ struct UnitConverter: View {
 
         var lengthInputUnitPicker: some View {
             MenuField(selection: $demonstrationVM.boundSelectionInput,
-                      options: DemonstrationViewModel.LengthType.allCases,
+                      options: UnitConverterViewModel.LengthType.allCases,
                       placeholder: "")
             .menuFieldStyle(.default)
             .padding([.bottom], themeManager.current.padding.grid2x)
@@ -91,7 +91,7 @@ struct UnitConverter: View {
 
     var lengthOutputUnitPicker: some View {
         MenuField(selection: $demonstrationVM.boundSelectionOutput,
-                  options: DemonstrationViewModel.LengthType.allCases,
+                  options: UnitConverterViewModel.LengthType.allCases,
                   placeholder: "")
         .menuFieldStyle(.default)
         .padding([.bottom], themeManager.current.padding.grid2x)
@@ -120,8 +120,8 @@ struct UnitConverter: View {
     }
 
 
-    var createSwapButton: some View  {
-        Button(action:  {
+    var createSwapButton: some View {
+        Button(action: {
             withAnimation(.easeInOut(duration: 0.5)) {
                 swapFields()
             }
@@ -142,7 +142,6 @@ struct UnitConverter: View {
         {
             Text(demonstrationVM.convert)
                 .padding([.bottom],theme.padding.grid2x)
-
         }
         .buttonStyle(.text)
     }
@@ -154,13 +153,12 @@ struct UnitConverter: View {
         {
             Text(demonstrationVM.convert)
                 .padding([.bottom],theme.padding.grid2x)
-
         }
         .buttonStyle(.text)
     }
 
     func convertStaticUnits() {
-        if (!demonstrationVM.fieldsAreEmpty()) {
+        if !demonstrationVM.fieldsAreEmpty() {
             demonstrationVM.runWeightConversion(kgToLbConversion: weightValuesSwapped)
         }
     }

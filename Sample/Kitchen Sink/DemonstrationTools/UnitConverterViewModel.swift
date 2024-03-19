@@ -1,8 +1,8 @@
 //
-//  DemonstrationViewModel.swift
-//  Kitchen Sink
+//  Shape+Extensions.swift
+//  flight-ui-ios
 //
-//  Created by Jake Dove on 11/03/2024.
+//  Created by Appivate 2023
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import Combine
 import FlightUI
 import SwiftUI
 
- class DemonstrationViewModel : ObservableObject {
+ class UnitConverterViewModel : ObservableObject {
 
     @Published var kgInputString: String = ""
     @Published var lbsInputString: String = ""
@@ -22,9 +22,9 @@ import SwiftUI
     @Published var boundSelectionInput : LengthType? = .feet
     @Published var boundSelectionOutput : LengthType? = .metres
 
-     private let feetToMetresConversionRate: Decimal = 3.28084
-     private let metresToFeetConversionRate: Decimal = 0.3048006096
-     private let kgToLbConversionRate: Decimal = 2.20462262
+    private let feetToMetresConversionRate: Decimal = 3.28084
+    private let metresToFeetConversionRate: Decimal = 0.3048006096
+    private let kgToLbConversionRate: Decimal = 2.20462262
 
     let adjustableConversionTitle = "Adjustable conversion"
     let adjustableConversionSubTitle = "Example of conversion with Menu Picker"
@@ -49,7 +49,6 @@ import SwiftUI
 
     func convertToMeters(value: Decimal, from unit: LengthType) -> Decimal {
            switch unit {
-
            case .feet:
                return value / feetToMetresConversionRate
            case .metres:
@@ -101,11 +100,11 @@ import SwiftUI
     }
 
     func runWeightConversion(kgToLbConversion: Bool) {
-        if (kgToLbConversion) {
+        if kgToLbConversion {
             let lbsDecimal = toDecimal(string: kgInputString)
             let convertedValue = convertKgsToLbs(kgs: lbsDecimal)
             lbsInputString = toString2DP(value: convertedValue)
-        }else {
+        } else {
             let kgDecimal = toDecimal(string: lbsInputString)
             var convertedValue = convertLbsToKg(lbs: kgDecimal)
             kgInputString = toString2DP(value: convertedValue)
