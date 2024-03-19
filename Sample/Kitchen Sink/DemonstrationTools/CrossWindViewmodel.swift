@@ -1,8 +1,8 @@
 //
-//  CrossWindViewmodel.swift
-//  Kitchen Sink
+//  Shape+Extensions.swift
+//  flight-ui-ios
 //
-//  Created by Jake Dove on 15/03/2024.
+//  Created by Appivate 2023
 //
 
 import Foundation
@@ -42,7 +42,7 @@ class CrosswindCalculatorViewModel: ObservableObject {
                 else {
                     return
                 }
-                //vall 3 required fields are not null
+                //if the 3 required fields are not null:
                 self!.convertValuesToRadians(runwayNumberDouble, windDirectionValue, windSpeedValue)
             }
             .store(in: &cancellables)
@@ -54,14 +54,13 @@ class CrosswindCalculatorViewModel: ObservableObject {
         calculateWindSpeeds(windspeed: windSpeed, windDirection: windDirectionRadians, runwayHeading: airplaneHeadingRadians)
     }
 
-
-
     func calculateWindSpeeds(windspeed: Double, windDirection: Double, runwayHeading: Double) {
         let crosswind = windspeed * sin(windDirection - runwayHeading)
         let headwind = windspeed * cos(windDirection - runwayHeading)
         let absoluteCrosswindComponent = abs(crosswind)
+        let absoluteHeadwindComponent = abs(headwind)
         crosswindString = toString2DP(value: absoluteCrosswindComponent)
-        headwindString = toString2DP(value: headwind)
+        headwindString = toString2DP(value: absoluteHeadwindComponent)
     }
 
     func runwayHeadingInDegrees(_ runwayNumber: Double) -> Double {

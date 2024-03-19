@@ -1,8 +1,8 @@
 //
-//  CrossWindCalculator.swift
-//  Kitchen Sink
+//  Shape+Extensions.swift
+//  flight-ui-ios
 //
-//  Created by Jake Dove on 15/03/2024.
+//  Created by Appivate 2023
 //
 
 import SwiftUI
@@ -74,7 +74,6 @@ struct CrossWindCalculator: View {
                 .padding(.top, theme.padding.grid2x)
         }
     }
-
 }
 
 #if DEBUG
@@ -90,5 +89,3 @@ struct CrossWind_Preview: PreviewProvider {
 }
 
 #endif
-
-

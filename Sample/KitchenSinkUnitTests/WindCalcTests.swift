@@ -1,8 +1,8 @@
 //
-//  WindCalcTests.swift
-//  KitchenSinkUnitTests
+//  Shape+Extensions.swift
+//  flight-ui-ios
 //
-//  Created by Jake Dove on 18/03/2024.
+//  Created by Appivate 2023
 //
 
 import Foundation
@@ -66,8 +66,6 @@ class WindCalcTests: XCTestCase {
         XCTAssertEqual(viewModel.headwindString, "0.00")
     }
 
-
-
     func testExtremeWindValues() {
         var runwayheadingRadius = 20 * Double.pi / 180
         var windDirectionRadius = viewModel.degreesToRadians(18.0)
@@ -86,7 +84,6 @@ class WindCalcTests: XCTestCase {
         XCTAssertEqual(viewModel.runwayHeadingInDegrees(12), 120.0)
         XCTAssertEqual(viewModel.runwayHeadingInDegrees(24), 240.0)
         XCTAssertEqual(viewModel.runwayHeadingInDegrees(36), 360.0)
-
     }
 }
 
