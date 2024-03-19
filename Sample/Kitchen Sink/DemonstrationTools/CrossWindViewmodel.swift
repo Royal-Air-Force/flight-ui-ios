@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 
-
 class CrosswindCalculatorViewModel: ObservableObject {
 
     @Published var windSpeedPlaceholder = "0.0 Kts"
