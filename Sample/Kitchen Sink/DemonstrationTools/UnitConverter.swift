@@ -26,11 +26,11 @@ struct UnitConverter: View {
                 HStack {
                     if  weightValuesSwapped {
                         kgInputField
-                        createSwapButton
+                        swapButton
                         lbInputField
                     } else {
                         lbInputField
-                        createSwapButton
+                        swapButton
                         kgInputField
                     }
                     convertButton1
@@ -118,19 +118,19 @@ struct UnitConverter: View {
         .textFieldStyle(demonstrationVM.emptyFields ? DefaultTextFieldStyle.caution : DefaultTextFieldStyle.default)
     }
 
-    var createSwapButton: some View {
+    var swapButton: some View {
         Button(action: {
             withAnimation(.easeInOut(duration: 0.5)) {
                 swapFields()
             }
-        }) {
+        }, label: {
             Image(systemName: "arrow.left.arrow.right")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40, height: 40)
                 .foregroundColor(theme.color.nominal)
                 .padding([.bottom], theme.padding.grid2x)
-        }
+        })
     }
 
     var convertButton1: some View {
