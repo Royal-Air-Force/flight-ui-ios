@@ -9,7 +9,6 @@ import XCTest
 import SwiftUI
 @testable import Kitchen_Sink
 
-
 final class ConverterToolTest: XCTestCase {
 
     var viewModel: UnitConverterViewModel!

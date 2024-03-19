@@ -88,7 +88,6 @@ struct UnitConverter: View {
         .padding([.bottom], themeManager.current.padding.grid2x)
     }
 
-
     var lengthOutputUnitPicker: some View {
         MenuField(selection: $demonstrationVM.boundSelectionOutput,
                   options: UnitConverterViewModel.LengthType.allCases,
@@ -119,7 +118,6 @@ struct UnitConverter: View {
         .textFieldStyle(demonstrationVM.emptyFields ? DefaultTextFieldStyle.caution : DefaultTextFieldStyle.default)
     }
 
-
     var createSwapButton: some View {
         Button(action: {
             withAnimation(.easeInOut(duration: 0.5)) {
@@ -149,8 +147,7 @@ struct UnitConverter: View {
     var convertButton2: some View {
         Button(action: {
             runLengthConversion()
-        })
-        {
+        }){
             Text(demonstrationVM.convert)
                 .padding([.bottom], theme.padding.grid2x)
         }
@@ -186,5 +183,3 @@ struct UnitConverter_Previews: PreviewProvider {
 }
 
 #endif
-
-
