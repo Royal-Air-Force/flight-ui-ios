@@ -136,21 +136,21 @@ struct UnitConverter: View {
     var convertButton1: some View {
         Button(action: {
             convertStaticUnits()
-        })
-        {
+        }, label: {
             Text(demonstrationVM.convert)
                 .padding([.bottom], theme.padding.grid2x)
-        }
+        })
         .buttonStyle(.text)
     }
+
 
     var convertButton2: some View {
         Button(action: {
             runLengthConversion()
-        }){
+        }, label: {
             Text(demonstrationVM.convert)
                 .padding([.bottom], theme.padding.grid2x)
-        }
+        })
         .buttonStyle(.text)
     }
 
