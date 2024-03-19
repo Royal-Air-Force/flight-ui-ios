@@ -10,7 +10,7 @@ import Combine
 import FlightUI
 import SwiftUI
 
- class UnitConverterViewModel : ObservableObject {
+ class UnitConverterViewModel: ObservableObject {
 
     @Published var kgInputString: String = ""
     @Published var lbsInputString: String = ""
@@ -19,8 +19,8 @@ import SwiftUI
     @Published var inputUnit: LengthType = .feet
     @Published var outputUnit: LengthType = .metres
     @Published var outputValue: String = ""
-    @Published var boundSelectionInput : LengthType? = .feet
-    @Published var boundSelectionOutput : LengthType? = .metres
+    @Published var boundSelectionInput: LengthType? = .feet
+    @Published var boundSelectionOutput: LengthType? = .metres
 
     private let feetToMetresConversionRate: Decimal = 3.28084
     private let metresToFeetConversionRate: Decimal = 0.3048006096

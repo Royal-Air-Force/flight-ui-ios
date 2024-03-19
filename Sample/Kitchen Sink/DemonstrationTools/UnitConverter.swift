@@ -62,8 +62,8 @@ struct UnitConverter: View {
             .padding([.top], themeManager.current.padding.grid2x)
         }
         .padding([.leading, .trailing], themeManager.current.padding.grid2x)
-    .background(theme.color.background)
-    .navigationBarTitle(demonstrationVM.naivgationBarTitle)
+        .background(theme.color.background)
+        .navigationBarTitle(demonstrationVM.naivgationBarTitle)
     }
 
     var calculationResult: some View {
@@ -80,13 +80,13 @@ struct UnitConverter: View {
         .textFieldStyle(.default)
     }
 
-        var lengthInputUnitPicker: some View {
-            MenuField(selection: $demonstrationVM.boundSelectionInput,
-                      options: UnitConverterViewModel.LengthType.allCases,
-                      placeholder: "")
-            .menuFieldStyle(.default)
-            .padding([.bottom], themeManager.current.padding.grid2x)
-        }
+    var lengthInputUnitPicker: some View {
+        MenuField(selection: $demonstrationVM.boundSelectionInput,
+                  options: UnitConverterViewModel.LengthType.allCases,
+                  placeholder: "")
+        .menuFieldStyle(.default)
+        .padding([.bottom], themeManager.current.padding.grid2x)
+    }
 
 
     var lengthOutputUnitPicker: some View {
@@ -131,7 +131,7 @@ struct UnitConverter: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40, height: 40)
                 .foregroundColor(theme.color.nominal)
-                .padding([.bottom],theme.padding.grid2x)
+                .padding([.bottom], theme.padding.grid2x)
         }
     }
 
@@ -141,7 +141,7 @@ struct UnitConverter: View {
         })
         {
             Text(demonstrationVM.convert)
-                .padding([.bottom],theme.padding.grid2x)
+                .padding([.bottom], theme.padding.grid2x)
         }
         .buttonStyle(.text)
     }
@@ -152,7 +152,7 @@ struct UnitConverter: View {
         })
         {
             Text(demonstrationVM.convert)
-                .padding([.bottom],theme.padding.grid2x)
+                .padding([.bottom], theme.padding.grid2x)
         }
         .buttonStyle(.text)
     }
@@ -175,15 +175,15 @@ struct UnitConverter: View {
 
 #if DEBUG
 
-    struct UnitConverter_Previews: PreviewProvider {
-        static var theme: Theme = Theme(baseScheme: .dark)
-        static var previews: some View {
-            UnitConverter()
-                .environmentObject(theme)
-                .previewDisplayName("Unit Converter")
-                .preferredColorScheme(theme.baseScheme)
-        }
+struct UnitConverter_Previews: PreviewProvider {
+    static var theme: Theme = Theme(baseScheme: .dark)
+    static var previews: some View {
+        UnitConverter()
+            .environmentObject(theme)
+            .previewDisplayName("Unit Converter")
+            .preferredColorScheme(theme.baseScheme)
     }
+}
 
 #endif
 
