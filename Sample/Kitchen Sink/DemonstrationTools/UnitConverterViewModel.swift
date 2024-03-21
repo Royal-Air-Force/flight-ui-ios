@@ -1,5 +1,5 @@
 //
-//  Shape+Extensions.swift
+//  UnitConverterViewModel.swift
 //  flight-ui-ios
 //
 //  Created by Appivate 2023
@@ -10,17 +10,19 @@ import Combine
 import FlightUI
 import SwiftUI
 
- class UnitConverterViewModel: ObservableObject {
+class UnitConverterViewModel: ObservableObject {
 
     @Published var kgInputString: String = ""
     @Published var lbsInputString: String = ""
-    @Published var emptyFields = false
     @Published var inputValue: String = ""
-    @Published var inputUnit: LengthType = .feet
-    @Published var outputUnit: LengthType = .metres
     @Published var outputValue: String = ""
     @Published var boundSelectionInput: LengthType? = .feet
     @Published var boundSelectionOutput: LengthType? = .metres
+    @Published var weightValuesSwapped = false
+    @Published var emptyFields = false
+    @Published var kgInputFieldStyle: InputFieldStyle? = DefaultTextFieldStyle.default
+    @Published var lbInputFieldStyle: InputFieldStyle? = DefaultTextFieldStyle.default
+
 
     private let feetToMetresConversionRate: Decimal = 3.28084
     private let metresToFeetConversionRate: Decimal = 0.3048006096
@@ -38,7 +40,7 @@ import SwiftUI
     let bottomKgLabel = "Kilograms"
     let bottomlbLabel = "Pounds"
     let kgHint = "Enter Kgs"
-    let lbHint = "Enter Lgs"
+    let lbHint = "Enter Lbs"
 
     func runLengthConversion() {
         let inputDecimal = toDecimal(string: inputValue)
@@ -48,13 +50,13 @@ import SwiftUI
     }
 
     func convertToMeters(value: Decimal, from unit: LengthType) -> Decimal {
-           switch unit {
-           case .feet:
-               return value / feetToMetresConversionRate
-           case .metres:
-               return value
-           }
-       }
+        switch unit {
+        case .feet:
+            return value / feetToMetresConversionRate
+        case .metres:
+            return value
+        }
+    }
 
     func convertFromMeters(value: Decimal, from unit: LengthType) -> Decimal {
         switch unit {
@@ -65,26 +67,26 @@ import SwiftUI
         }
     }
 
-     func toDecimal(string: String) -> Decimal {
-         return Decimal(string: string) ?? 0.0
-     }
+    func toDecimal(string: String) -> Decimal {
+        return Decimal(string: string) ?? 0.0
+    }
 
-     func toString2DP(value: Decimal) -> String {
-         let formattedValue = getNSDecimalNumber(value: value)
-         return String(format: "%.2f", formattedValue.doubleValue)
-     }
+    func toString2DP(value: Decimal) -> String {
+        let formattedValue = getNSDecimalNumber(value: value)
+        return String(format: "%.2f", formattedValue.doubleValue)
+    }
 
-     func getNSDecimalNumber(value: Decimal) -> NSDecimalNumber {
-         let roundingHandler = NSDecimalNumberHandler(
-             roundingMode: .plain,
-             scale: 2,
-             raiseOnExactness: false,
-             raiseOnOverflow: false,
-             raiseOnUnderflow: false,
-             raiseOnDivideByZero: false
-         )
-         return NSDecimalNumber(decimal: value).rounding(accordingToBehavior: roundingHandler)
-     }
+    func getNSDecimalNumber(value: Decimal) -> NSDecimalNumber {
+        let roundingHandler = NSDecimalNumberHandler(
+            roundingMode: .plain,
+            scale: 2,
+            raiseOnExactness: false,
+            raiseOnOverflow: false,
+            raiseOnUnderflow: false,
+            raiseOnDivideByZero: false
+        )
+        return NSDecimalNumber(decimal: value).rounding(accordingToBehavior: roundingHandler)
+    }
 
     func convertKgsToLbs(kgs: Decimal) -> Decimal {
         return (kgs * kgToLbConversionRate)
@@ -94,19 +96,39 @@ import SwiftUI
         return (lbs / kgToLbConversionRate)
     }
 
-    func fieldsAreEmpty() -> Bool {
-        emptyFields = kgInputString.isEmpty && lbsInputString.isEmpty
-        return emptyFields
+    func checkForEmptyFields() {
+
+        if weightValuesSwapped {
+            emptyFields = kgInputString.isEmpty
+            if emptyFields { // if the field is empty, adjust the style of the empty field & reset the converted display
+                kgInputFieldStyle = DefaultTextFieldStyle.caution
+                lbsInputString = ""
+            } else {
+                kgInputFieldStyle = DefaultTextFieldStyle.default
+                lbInputFieldStyle = DefaultTextFieldStyle.advisory
+            }
+        }
+
+        else {
+            emptyFields = lbsInputString.isEmpty
+            if emptyFields { // if the field is empty, adjust the style of the empty field & reset the converted display
+                lbInputFieldStyle = DefaultTextFieldStyle.caution
+                kgInputString = ""
+            } else {
+                lbInputFieldStyle = DefaultTextFieldStyle.default
+                kgInputFieldStyle = DefaultTextFieldStyle.advisory
+            }
+        }
     }
 
-    func runWeightConversion(kgToLbConversion: Bool) {
-        if kgToLbConversion {
+    func runWeightConversion() {
+        if weightValuesSwapped {
             let lbsDecimal = toDecimal(string: kgInputString)
             let convertedValue = convertKgsToLbs(kgs: lbsDecimal)
             lbsInputString = toString2DP(value: convertedValue)
         } else {
             let kgDecimal = toDecimal(string: lbsInputString)
-            var convertedValue = convertLbsToKg(lbs: kgDecimal)
+            let convertedValue = convertLbsToKg(lbs: kgDecimal)
             kgInputString = toString2DP(value: convertedValue)
         }
     }
@@ -118,4 +140,7 @@ import SwiftUI
             return rawValue
         }
     }
+    
+    
+
 }
