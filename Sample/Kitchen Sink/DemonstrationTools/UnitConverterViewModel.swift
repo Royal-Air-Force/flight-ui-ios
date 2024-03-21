@@ -121,6 +121,13 @@ class UnitConverterViewModel: ObservableObject {
         }
     }
 
+    func convertStaticUnits() {
+        demonstrationVM.checkForEmptyFields()
+        if !demonstrationVM.emptyFields {
+            demonstrationVM.runWeightConversion()
+        }
+    }
+
     func runWeightConversion() {
         if weightValuesSwapped {
             let lbsDecimal = toDecimal(string: kgInputString)

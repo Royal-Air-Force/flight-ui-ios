@@ -116,49 +116,29 @@ struct UnitConverter: View {
             Image(systemName: "arrow.left.arrow.right")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
+                .frame(width: theme.size.medium, height: theme.size.medium)
                 .foregroundColor(theme.color.nominal)
                 .padding([.bottom], theme.padding.grid2x)
         })
     }
 
     var convertButton1: some View {
-        Button(action: {
-            convertStaticUnits()
-        }, label: {
-            Text(demonstrationVM.convert)
-                .padding([.bottom], theme.padding.grid2x)
-        })
-        .buttonStyle(.text)
+        Button(demonstrationVM.convert,
+               action: {demonstrationVM.convertStaticUnits()})
+        .buttonStyle(.filled)
+        .padding([.bottom], theme.padding.grid2x)
     }
 
     var convertButton2: some View {
-        VStack {
-            Spacer()
-            Button(action: {
-                runLengthConversion()
-            }, label: {
-                Text(demonstrationVM.convert)
-                    .padding([.bottom], theme.padding.grid2x)
-            })
-            .buttonStyle(.text)
-        }
-    }
-
-    func convertStaticUnits() {
-        demonstrationVM.checkForEmptyFields()
-        if !demonstrationVM.emptyFields {
-            demonstrationVM.runWeightConversion()
-        }
-    }
-
-    func runLengthConversion() {
-        demonstrationVM.runLengthConversion()
+        Button(demonstrationVM.convert,
+               action: {demonstrationVM.runLengthConversion()})
+        .buttonStyle(.filled)
+        .padding([.bottom], theme.padding.grid2x)
     }
 
     func swapFields() {
         demonstrationVM.weightValuesSwapped.toggle()
-        convertStaticUnits()
+        demonstrationVM.convertStaticUnits()
     }
 }
 
