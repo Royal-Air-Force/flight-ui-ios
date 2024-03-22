@@ -20,7 +20,7 @@ public struct InputField: View {
     var bottomLabelConfig: BottomLabelConfig
     var formatter: ((String) -> String)?
     var filter: RegexFilter?
-    var maxCharacterCount: Int
+    var maxCharacterCount: Int?
 
     public init(
         text: Binding<String>,
@@ -30,7 +30,7 @@ public struct InputField: View {
         bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
         formatter: ((String) -> String)? = nil,
         filter: RegexFilter? = nil,
-        maxCharacterCount: Int = 10000000
+        maxCharacterCount: Int? = nil
     ) {
         self._text = text
         self.placeholder = placeholder
@@ -76,9 +76,11 @@ public struct InputField: View {
                     if replaced != newValue {
                         self.text = replaced
                     }
-                    // Limit character count
-                    if text.count > maxCharacterCount {
-                        text = String(text.prefix(maxCharacterCount))
+                }
+                // Limit character count
+                if let maxCount = maxCharacterCount {
+                    if text.count > maxCount {
+                        text = String(text.prefix(maxCount))
                     }
                 }
             }
@@ -96,8 +98,10 @@ public struct InputField: View {
                         if replaced != newValue {
                             self.text = replaced
                         }
-                        if text.count > maxCharacterCount {
-                            text = String(text.prefix(maxCharacterCount))
+                        if let maxCount = maxCharacterCount {
+                            if text.count > maxCount {
+                                text = String(text.prefix(maxCount))
+                            }
                         }
                     }
                 }

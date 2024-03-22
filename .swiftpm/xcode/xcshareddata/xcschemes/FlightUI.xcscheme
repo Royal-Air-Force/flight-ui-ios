@@ -78,6 +78,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "83C93DBF2986C53A00A911A9"
+            BuildableName = "Kitchen Sink.app"
+            BlueprintName = "Kitchen Sink"
+            ReferencedContainer = "container:Sample/Kitchen Sink.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
