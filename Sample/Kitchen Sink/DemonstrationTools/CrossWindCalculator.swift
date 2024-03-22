@@ -17,11 +17,7 @@ struct CrossWindCalculator: View {
     var body: some View {
         ScrollView {
             VStack {
-                HStack() {
-                    runwayNumber
-                    windSpeedInput
-                    windDirection
-                }
+                windSpeedInput
                 windspeedOutput
                     .padding([.top],theme.padding.grid8x)
             }
@@ -30,29 +26,26 @@ struct CrossWindCalculator: View {
         }
     }
 
-    var runwayNumber: some View {
-        MenuField(selection: $viewModel.runwayNumber,
-                  options: Array(1...36),
-                  placeholder: "1",
-                  topLabel: viewModel.runwayNumberLabel)
-    }
-
     var windSpeedInput: some View {
-        InputField(text: $viewModel.windSpeed,
-                   placeholder: viewModel.windSpeedPlaceholder,
-                   topLabel: viewModel.windSpeedLabel,
-                   filter: .doubleOnly,
-                   maxCharacterCount: 3)
-        .textFieldStyle(.default)
-    }
+        HStack() {
+            MenuField(selection: $viewModel.runwayNumber,
+                      options: Array(1...36),
+                      placeholder: "1",
+                      topLabel: viewModel.runwayNumberLabel)
+            InputField(text: $viewModel.windSpeed,
+                       placeholder: viewModel.windSpeedPlaceholder,
+                       topLabel: viewModel.windSpeedLabel,
+                       filter: .doubleOnly,
+                       maxCharacterCount: 3)
+            .textFieldStyle(.default)
 
-    var windDirection: some View {
-        InputField(text: $viewModel.windDirection,
-                   placeholder: viewModel.windDirectionPlaceholder,
-                   topLabel: viewModel.windDirectionLabel,
-                   filter: .integerOnly,
-                   maxCharacterCount: 3)
-        .textFieldStyle(.default)
+            InputField(text: $viewModel.windDirection,
+                       placeholder: viewModel.windDirectionPlaceholder,
+                       topLabel: viewModel.windDirectionLabel,
+                       filter: .integerOnly,
+                       maxCharacterCount: 3)
+            .textFieldStyle(.default)
+        }
     }
 
     var windspeedOutput: some View {
@@ -69,7 +62,6 @@ struct CrossWindCalculator: View {
                        placeholder: "",
                        topLabel: viewModel.headwindLabel
             )
-
             .textFieldStyle(.advisory)
             .frame(width: 240)
             .padding(.top, theme.padding.grid2x)

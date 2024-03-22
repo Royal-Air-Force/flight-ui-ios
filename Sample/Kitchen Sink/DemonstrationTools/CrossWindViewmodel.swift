@@ -1,5 +1,5 @@
 //
-//  Shape+Extensions.swift
+//  CrossWindViewModel.swift
 //  flight-ui-ios
 //
 //  Created by Appivate 2023
@@ -75,7 +75,7 @@ class CrosswindCalculatorViewModel: ObservableObject {
     }
 }
 
-extension Int {
+private extension Int {
     func toDouble() -> Double {
         return Double(self)
     }
