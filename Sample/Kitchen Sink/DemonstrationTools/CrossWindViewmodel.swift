@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+
 class CrosswindCalculatorViewModel: ObservableObject {
 
     @Published var windSpeedPlaceholder = "0.0 Kts"
@@ -58,16 +59,12 @@ class CrosswindCalculatorViewModel: ObservableObject {
         let headwind = windspeed * cos(windDirection - runwayHeading)
         let absoluteCrosswindComponent = abs(crosswind)
         let absoluteHeadwindComponent = abs(headwind)
-        crosswindString = toString2DP(value: absoluteCrosswindComponent)
-        headwindString = toString2DP(value: absoluteHeadwindComponent)
+        crosswindString = absoluteCrosswindComponent.toDecimalString(decimalPlaces: 2)
+        headwindString =  absoluteHeadwindComponent.toDecimalString(decimalPlaces: 2)
     }
 
     func runwayHeadingInDegrees(_ runwayNumber: Double) -> Double {
         return runwayNumber * 10.0
-    }
-
-    func toString2DP(value: Double) -> String {
-        return String(format: "%.2f", value)
     }
 
     func degreesToRadians(_ degrees: Double) -> Double {
@@ -79,6 +76,5 @@ private extension Int {
     func toDouble() -> Double {
         return Double(self)
     }
-
 }
 
