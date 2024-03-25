@@ -34,6 +34,15 @@ struct KitchenSinkApp: App {
                         SampleScreenView(title: "Cards", destination: Cards())
                         SampleScreenView(title: "Inputs", destination: Inputs())
                     }
+
+                    Section(
+                        header: HeaderTitleView(title: "Demonstrations",
+                                                subtitle: "Functional tools for demonstration")
+                    ) {
+                        SampleScreenView(title: "Unit Converter", destination: UnitConverter())
+                        SampleScreenView(title: "Cross Wind calculator", destination: CrossWindCalculator())
+                    }
+
                     .headerProminence(.increased)
                 }
                 .padding([.top], themeManager.current.padding.grid1x)

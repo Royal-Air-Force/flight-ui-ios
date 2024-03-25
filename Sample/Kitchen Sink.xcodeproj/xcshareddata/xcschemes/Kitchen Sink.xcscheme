@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1420"
-   version = "1.3">
+   LastUpgradeVersion = "1530"
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,38 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FlightUI_FlightUI"
-               BuildableName = "FlightUI_FlightUI"
-               BlueprintName = "FlightUI_FlightUI"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FlightUI"
-               BuildableName = "FlightUI"
-               BlueprintName = "FlightUI"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FlightUITests"
-               BuildableName = "FlightUITests"
-               BlueprintName = "FlightUITests"
-               ReferencedContainer = "container:">
+               BlueprintIdentifier = "83C93DBF2986C53A00A911A9"
+               BuildableName = "Kitchen Sink.app"
+               BlueprintName = "Kitchen Sink"
+               ReferencedContainer = "container:Kitchen Sink.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -54,16 +27,18 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "NO"
+            parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FlightUITests"
-               BuildableName = "FlightUITests"
-               BlueprintName = "FlightUITests"
-               ReferencedContainer = "container:">
+               BlueprintIdentifier = "FB86F2002BA4657900B51D99"
+               BuildableName = "KitchenSinkUnitTests.xctest"
+               BlueprintName = "KitchenSinkUnitTests"
+               ReferencedContainer = "container:Kitchen Sink.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -85,7 +60,7 @@
             BlueprintIdentifier = "83C93DBF2986C53A00A911A9"
             BuildableName = "Kitchen Sink.app"
             BlueprintName = "Kitchen Sink"
-            ReferencedContainer = "container:Sample/Kitchen Sink.xcodeproj">
+            ReferencedContainer = "container:Kitchen Sink.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -95,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FlightUI_FlightUI"
-            BuildableName = "FlightUI_FlightUI"
-            BlueprintName = "FlightUI_FlightUI"
-            ReferencedContainer = "container:">
+            BlueprintIdentifier = "83C93DBF2986C53A00A911A9"
+            BuildableName = "Kitchen Sink.app"
+            BlueprintName = "Kitchen Sink"
+            ReferencedContainer = "container:Kitchen Sink.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
