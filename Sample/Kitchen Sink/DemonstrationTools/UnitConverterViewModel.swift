@@ -122,9 +122,9 @@ class UnitConverterViewModel: ObservableObject {
     }
 
     func convertStaticUnits() {
-        demonstrationVM.checkForEmptyFields()
-        if !demonstrationVM.emptyFields {
-            demonstrationVM.runWeightConversion()
+        checkForEmptyFields()
+        if emptyFields {
+            runWeightConversion()
         }
     }
 
