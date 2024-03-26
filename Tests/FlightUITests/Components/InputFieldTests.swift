@@ -32,5 +32,4 @@ class InputFieldTests: XCTestCase {
         // then
         XCTAssertEqual(text.wrappedValue, "Test Binding")
     }
-
 }

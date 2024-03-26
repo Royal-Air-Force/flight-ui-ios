@@ -12,7 +12,7 @@ public enum RegexFilter {
     public var regex: String {
         switch self {
         case .integerOnly:
-          return "[^0-9]"
+            return "[^0-9]"
         case .doubleOnly:
             return "[^0-9.]"
         case .letterOnly:
