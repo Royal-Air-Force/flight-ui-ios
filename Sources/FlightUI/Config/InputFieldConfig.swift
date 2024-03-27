@@ -11,6 +11,8 @@ internal class InputFieldDefaults {
     static let disabledOpacity: CGFloat = 0.38
     static let stateBackgroundOpacity: CGFloat = 0.08
     static let hintOpacity: CGFloat = 0.54
+    static let advisoryOpacity: CGFloat = 0.08
+    static let advisoryBorderOpacity: CGFloat = 0.2
 }
 
 public struct InputFieldConfig {

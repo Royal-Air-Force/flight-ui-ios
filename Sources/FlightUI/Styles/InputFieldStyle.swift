@@ -68,7 +68,7 @@ public struct InputFieldStyle: TextFieldStyle {
         case .default:
             return theme.color.surfaceHigh
         case .advisory:
-            return theme.color.surfaceHigh
+            return theme.color.surfaceHigh.opacity(InputFieldDefaults.advisoryOpacity)
         case .nominal:
             return theme.color.nominal.opacity(InputFieldDefaults.stateBackgroundOpacity)
         case .caution:
@@ -94,7 +94,7 @@ public struct InputFieldStyle: TextFieldStyle {
         case .default:
             return theme.color.surfaceHigh
         case .advisory:
-            return theme.color.primary.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
+            return theme.color.primary.opacity(InputFieldDefaults.advisoryBorderOpacity)
         case .nominal:
             return theme.color.nominal.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
         case .caution:
@@ -108,6 +108,8 @@ public struct InputFieldStyle: TextFieldStyle {
         switch inputFieldState {
         case .nominal, .caution, .warning:
             return theme.size.border
+        case .advisory:
+            return 1
         default:
             return 0
         }

@@ -15,53 +15,63 @@ struct KitchenSinkApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                List {
-                    Section(
-                        header: HeaderTitleView(title: "Styles",
-                                                subtitle: "Base atoms used across components")
-                    ) {
-                        SampleScreenView(title: "Colours", destination: Colours())
-                        SampleScreenView(title: "Spacing", destination: Spacing())
-                        SampleScreenView(title: "Typography", destination: Typography())
-                    }
-                    .headerProminence(.increased)
-                    Section(
-                        header: HeaderTitleView(title: "Components",
-                                                subtitle: "Complex interactable UI components")
-                    ) {
-                        SampleScreenView(title: "Buttons", destination: Buttons())
-                        SampleScreenView(title: "Cards", destination: Cards())
-                        SampleScreenView(title: "Inputs", destination: Inputs())
-                    }
-                    .headerProminence(.increased)
-
-                    Section(
-                        header: HeaderTitleView(title: "Demonstrations",
-                                                subtitle: "Functional tools for demonstration")
-                    ) {
-                        SampleScreenView(title: "Unit Converter", destination: UnitConverter())
-                        SampleScreenView(title: "Cross Wind calculator", destination: CrossWindCalculator())
-                    }
-
-                    .headerProminence(.increased)
+            VStack {
+                HStack {
+                    Text("TRIALS USE ONLY (NOT ASSURED) MUST NOT BE USED AS A PRIMARY REFERENCE")
+                        .fontStyle(.subhead)
+                        .fontWeight(.bold)
+                        .padding(themeManager.current.padding.grid2x)
+                        .frame(maxWidth: .infinity)
                 }
-                .padding([.top], themeManager.current.padding.grid1x)
-                .scrollContentBackground(.hidden)
-                .background(themeManager.current.color.background)
-                .navigationBarTitle("FlightUI")
-                .navigationBarTitleDisplayMode(.large)
-                .toolbarBackground(themeManager.current.color.background, for: .navigationBar)
-                .toolbar {
-                    Toggle("Dark Theme", isOn: $isDarkTheme)
-                        .onChange(of: isDarkTheme) { value in
-                            if value {
-                                themeManager.updateTheme(.dark)
-                            } else {
-                                themeManager.updateTheme(.light)
-                            }
+                .background(.red)
+                
+                NavigationStack {
+                    List {
+                        Section(
+                            header: HeaderTitleView(title: "Styles",
+                                                    subtitle: "Base atoms used across components")
+                        ) {
+                            SampleScreenView(title: "Colours", destination: Colours())
+                            SampleScreenView(title: "Spacing", destination: Spacing())
+                            SampleScreenView(title: "Typography", destination: Typography())
                         }
-                        .toggleStyle(SwitchToggleStyle(tint: .green))
+                        .headerProminence(.increased)
+                        Section(
+                            header: HeaderTitleView(title: "Components",
+                                                    subtitle: "Complex interactable UI components")
+                        ) {
+                            SampleScreenView(title: "Buttons", destination: Buttons())
+                            SampleScreenView(title: "Cards", destination: Cards())
+                            SampleScreenView(title: "Inputs", destination: Inputs())
+                        }
+                        .headerProminence(.increased)
+
+                        Section(
+                            header: HeaderTitleView(title: "Demonstrations",
+                                                    subtitle: "Functional tools for demonstration")
+                        ) {
+                            SampleScreenView(title: "Unit Converter", destination: UnitConverter())
+                            SampleScreenView(title: "Cross Wind calculator", destination: CrossWindCalculator())
+                        }
+
+                        .headerProminence(.increased)
+                    }
+                    .scrollContentBackground(.hidden)
+                    .background(themeManager.current.color.background)
+                    .navigationBarTitle("FlightUI")
+                    .navigationBarTitleDisplayMode(.large)
+                    .toolbarBackground(themeManager.current.color.background, for: .navigationBar)
+                    .toolbar {
+                        Toggle("Dark Theme", isOn: $isDarkTheme)
+                            .onChange(of: isDarkTheme) { value in
+                                if value {
+                                    themeManager.updateTheme(.dark)
+                                } else {
+                                    themeManager.updateTheme(.light)
+                                }
+                            }
+                            .toggleStyle(SwitchToggleStyle(tint: .green))
+                    }
                 }
             }
             .environmentObject(themeManager)
