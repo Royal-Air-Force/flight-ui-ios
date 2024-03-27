@@ -35,6 +35,15 @@ struct KitchenSinkApp: App {
                         SampleScreenView(title: "Inputs", destination: Inputs())
                     }
                     .headerProminence(.increased)
+
+                    Section(
+                        header: HeaderTitleView(title: "Demonstrations",
+                                                subtitle: "Functional tools for demonstration")
+                    ) {
+                        SampleScreenView(title: "Unit Converter", destination: UnitConverter())
+                    }
+
+                    .headerProminence(.increased)
                 }
                 .padding([.top], themeManager.current.padding.grid1x)
                 .scrollContentBackground(.hidden)

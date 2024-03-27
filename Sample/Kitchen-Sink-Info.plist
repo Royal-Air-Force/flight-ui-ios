@@ -2,7 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>FiLEHEADER</key>
+	<string>/**
+
+/**
+
+___CLASSNAME___
+
+Flight UI - Kitchen Sink Sample 
+Created by Appivate ___YEAR
+
+
+</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>CFBundleIdentifier</key>
+	<string></string>
 </dict>
 </plist>
