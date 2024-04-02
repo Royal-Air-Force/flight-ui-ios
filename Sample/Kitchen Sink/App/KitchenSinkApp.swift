@@ -15,53 +15,56 @@ struct KitchenSinkApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                List {
-                    Section(
-                        header: HeaderTitleView(title: "Styles",
-                                                subtitle: "Base atoms used across components")
-                    ) {
-                        SampleScreenView(title: "Colours", destination: Colours())
-                        SampleScreenView(title: "Spacing", destination: Spacing())
-                        SampleScreenView(title: "Typography", destination: Typography())
-                    }
-                    .headerProminence(.increased)
-                    Section(
-                        header: HeaderTitleView(title: "Components",
-                                                subtitle: "Complex interactable UI components")
-                    ) {
-                        SampleScreenView(title: "Buttons", destination: Buttons())
-                        SampleScreenView(title: "Cards", destination: Cards())
-                        SampleScreenView(title: "Inputs", destination: Inputs())
-                    }
-                    .headerProminence(.increased)
-
-                    Section(
-                        header: HeaderTitleView(title: "Demonstrations",
-                                                subtitle: "Functional tools for demonstration")
-                    ) {
-                        SampleScreenView(title: "Unit Converter", destination: UnitConverter())
-                        SampleScreenView(title: "Cross Wind calculator", destination: CrossWindCalculator())
-                    }
-
-                    .headerProminence(.increased)
-                }
-                .padding([.top], themeManager.current.padding.grid1x)
-                .scrollContentBackground(.hidden)
-                .background(themeManager.current.color.background)
-                .navigationBarTitle("FlightUI")
-                .navigationBarTitleDisplayMode(.large)
-                .toolbarBackground(themeManager.current.color.background, for: .navigationBar)
-                .toolbar {
-                    Toggle("Dark Theme", isOn: $isDarkTheme)
-                        .onChange(of: isDarkTheme) { value in
-                            if value {
-                                themeManager.updateTheme(.dark)
-                            } else {
-                                themeManager.updateTheme(.light)
-                            }
+            VStack(spacing: 0) {
+                AssuranceBanner()
+                
+                NavigationStack {
+                    List {
+                        Section(
+                            header: HeadingView(title: "Styles",
+                                                subTitle: "Base atoms used across components")
+                        ) {
+                            SampleScreenView(title: "Colours", destination: Colours())
+                            SampleScreenView(title: "Spacing", destination: Spacing())
+                            SampleScreenView(title: "Typography", destination: Typography())
                         }
-                        .toggleStyle(SwitchToggleStyle(tint: .green))
+                        .headerProminence(.increased)
+                        Section(
+                            header: HeadingView(title: "Components",
+                                                subTitle: "Complex interactable UI components")
+                        ) {
+                            SampleScreenView(title: "Buttons", destination: Buttons())
+                            SampleScreenView(title: "Cards", destination: Cards())
+                            SampleScreenView(title: "Inputs", destination: Inputs())
+                        }
+                        .headerProminence(.increased)
+                        
+                        Section(
+                            header: HeadingView(title: "Demos",
+                                                subTitle: "Functional tools for demonstrating use of FlightUI")
+                        ) {
+                            SampleScreenView(title: "Unit Converter", destination: UnitConverter())
+                            SampleScreenView(title: "Cross Wind Calculator", destination: CrossWindCalculator())
+                            SampleScreenView(title: "Top of Descent (TOD) Calculator", destination: TODCalculator(viewModel: TODCalculatorViewModel()))
+                        }
+                        .headerProminence(.increased)
+                    }
+                    .scrollContentBackground(.hidden)
+                    .background(themeManager.current.color.background)
+                    .navigationBarTitle("FlightUI")
+                    .navigationBarTitleDisplayMode(.large)
+                    .toolbarBackground(themeManager.current.color.background, for: .navigationBar)
+                    .toolbar {
+                        Toggle("Dark Theme", isOn: $isDarkTheme)
+                            .onChange(of: isDarkTheme) { value in
+                                if value {
+                                    themeManager.updateTheme(.dark)
+                                } else {
+                                    themeManager.updateTheme(.light)
+                                }
+                            }
+                            .toggleStyle(SwitchToggleStyle(tint: .green))
+                    }
                 }
             }
             .environmentObject(themeManager)
@@ -72,21 +75,18 @@ struct KitchenSinkApp: App {
     }
 }
 
-private struct HeaderTitleView: View {
+private struct AssuranceBanner: View {
     @EnvironmentObject var theme: Theme
-
-    var title: String
-    var subtitle: String
-
+    
     var body: some View {
-        VStack {
-            Text(title)
-                .fontStyle(theme.font.title1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text(subtitle)
-                .fontStyle(theme.font.body)
-                .frame(maxWidth: .infinity, alignment: .leading)
+        HStack {
+            Text("TRIALS USE ONLY (NOT ASSURED) MUST NOT BE USED AS A PRIMARY REFERENCE")
+                .fontStyle(.subhead)
+                .fontWeight(.bold)
+                .padding(theme.padding.grid2x)
+                .frame(maxWidth: .infinity)
         }
+        .background(.red)
     }
 }
 
