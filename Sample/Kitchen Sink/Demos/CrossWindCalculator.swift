@@ -10,9 +10,8 @@ import Foundation
 import FlightUI
 
 struct CrossWindCalculator: View {
-
-    @StateObject var viewModel = CrosswindCalculatorViewModel()
     @EnvironmentObject var theme: Theme
+    @StateObject var viewModel = CrosswindCalculatorViewModel()
 
     var body: some View {
         ScrollView {
