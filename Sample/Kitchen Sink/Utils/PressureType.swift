@@ -32,4 +32,13 @@ enum PressureType: String, CaseIterable, CustomStringConvertible {
             return .inhg
         }
     }
+    
+    var unitName: String {
+        switch self {
+        case .inhg:
+            return UnitConverter.pressureInhgHint
+        case .mb:
+            return UnitConverter.pressureMbHint
+        }
+    }
 }

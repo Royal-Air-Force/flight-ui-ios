@@ -30,16 +30,15 @@ class UnitConverterViewModel: ObservableObject {
     @Published var airspeedTemperatureTextFieldStyle: InputFieldStyle = .init(.default)
     
     @Published var airspeedInputValue: String = ""
-    @Published var airspeedInputPlaceholder: String = "True Airspeed"
+    @Published var airspeedInputPlaceholder: String = ""
     @Published var airspeedInputSelection: AirspeedType? = .tas
-    @Published var airspeedOutputPlaceholder: String = "Mach Result Type"
+    @Published var airspeedOutputPlaceholder: String = ""
     @Published var airspeedOutputValue: String = ""
     
     // MARK: Pressure
     @Published var pressureConversionInput: String = ""
     @Published var pressureConversionOutput: String = ""
     @Published var pressureSelectedInputType: PressureType = .inhg
-    // TODO: These can all be cleaned up, text can be in enums etc
     var pressureConversionInputPlaceholder: String {
         "0.0 \(pressureSelectedInputType)"
     }
@@ -47,64 +46,24 @@ class UnitConverterViewModel: ObservableObject {
         "0.0 \(pressureSelectedInputType.inverse)"
     }
     var pressureInputBottomLabel: String {
-        switch pressureSelectedInputType {
-        case .inhg:
-            return "Inches of Mercury"
-        case .mb:
-            return "Millibars"
-        }
+        return pressureSelectedInputType.unitName
     }
     var pressureOutputBottomLabel: String {
-        switch pressureSelectedInputType {
-        case .inhg:
-            return "Millibars"
-        case .mb:
-            return "Inches of Mercury"
-        }
+        return pressureSelectedInputType.inverse.unitName
     }
     
     private let feetToMetresConversionRate: Decimal = 3.28084
     private let metresToFeetConversionRate: Decimal = 0.3048006096
     private let kgToLbConversionRate: Decimal = 2.20462262
-
-    // TODO: Sort Strings Management
-    let adjustableConversionTitle = "Length Converter"
-    let adjustableConversionSubTitle = "Example of conversion with Menu Picker"
-    let weightTitle = "Weight Converter"
-    let weightSubtitle = "Example of fixed weight conversion with reversable function"
-    let naivgationBarTitle = "Unit Converter"
-    let calculatedField = "Calculated result"
-    let convert = "Convert"
-
-    let lengthPalceholder = "Enter Length"
-    let bottomKgLabel = "Kilograms"
-    let bottomlbLabel = "Pounds"
-    let kgHint = "Enter Kgs"
-    let lbHint = "Enter Lbs"
-    
-    let airspeedConverterTitle = "Airspeed Converter"
-    let airspeedConverterSubTitle = "Example of converting between Mach and TAS with required fields"
-    let airspeedOATLabel = "Outside Air Temperature"
-    
-    let pressureConverterTitle = "Pressure Converter"
-    let pressureConverterSubTitle = "Example of pressure conversion between Inches of Mercury and Millibars"
     
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        // TODO: Ew
         $airspeedInputSelection
             .sink { [weak self] airspeedSelection in
                 self?.airspeedOutputValue = ""
-                
-                switch airspeedSelection {
-                case .mach:
-                    self?.airspeedInputPlaceholder = "Mach Number"
-                    self?.airspeedOutputPlaceholder = "TAS Result Value"
-                default:
-                    self?.airspeedInputPlaceholder = "True Airspeed"
-                    self?.airspeedOutputPlaceholder = "Mach Result Value"
-                }
+                self?.airspeedInputPlaceholder = airspeedSelection?.unitName ?? ""
+                self?.airspeedOutputPlaceholder = airspeedSelection?.inverse.unitName ?? ""
             }
             .store(in: &cancellables)
         $airspeedTemperatureType
@@ -166,6 +125,11 @@ class UnitConverterViewModel: ObservableObject {
         return NSDecimalNumber(decimal: value).rounding(accordingToBehavior: roundingHandler)
     }
 
+    func swapWeightFields() {
+        weightValuesSwapped.toggle()
+        convertStaticUnits()
+    }
+    
     func convertKgsToLbs(kgs: Decimal) -> Decimal {
         return (kgs * kgToLbConversionRate)
     }
@@ -230,7 +194,7 @@ class UnitConverterViewModel: ObservableObject {
     // MARK: Airspeed Functions
     func convertAirspeed() {
         if airspeedTemperature.isEmpty {
-            airspeedTemperatureBottomConfig = .init("Required", state: .warning)
+            airspeedTemperatureBottomConfig = .init(UnitConverter.required, state: .warning)
             airspeedTemperatureTextFieldStyle = .init(.warning)
             return
         } else {
@@ -285,7 +249,7 @@ class UnitConverterViewModel: ObservableObject {
 
         switch pressureSelectedInputType {
         case .inhg:
-            pressureConversionOutput = "\(pressure.converted(to: .millibars).value.toDecimalString(decimalPlaces: 2)) mg"
+            pressureConversionOutput = "\(pressure.converted(to: .millibars).value.toDecimalString(decimalPlaces: 2)) mb"
         case .mb:
             pressureConversionOutput = "\(pressure.converted(to: .inchesOfMercury).value.toDecimalString(decimalPlaces: 2)) inHg"
         }
