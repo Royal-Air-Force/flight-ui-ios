@@ -19,7 +19,7 @@ struct UnitConverter: View {
                 HeadingView(
                     title: demonstrationVM.weightTitle,
                     subTitle: demonstrationVM.weightSubtitle)
-
+                
                 HStack {
                     if  demonstrationVM.weightValuesSwapped {
                         kgInputField
@@ -32,10 +32,13 @@ struct UnitConverter: View {
                     }
                     convertButton1
                 }
+                
+                headingView
+                convertButton2
+                
+                airspeedConverterView
+                pressureConverterView
             }
-
-            headingView
-            convertButton2
         }
         .padding([.top], theme.padding.grid2x)
         .padding([.leading, .trailing], theme.padding.grid3x)
@@ -139,6 +142,96 @@ struct UnitConverter: View {
     func swapFields() {
         demonstrationVM.weightValuesSwapped.toggle()
         demonstrationVM.convertStaticUnits()
+    }
+    
+    var airspeedConverterView: some View {
+        VStack {
+            HeadingView(
+                title: demonstrationVM.airspeedConverterTitle,
+                subTitle: demonstrationVM.airspeedConverterSubTitle)
+            
+            HStack(alignment: .top) {
+                InputField(text: $demonstrationVM.airspeedTemperature,
+                           placeholder: demonstrationVM.airspeedOATLabel,
+                           bottomLabelConfig: demonstrationVM.airspeedTemperatureBottomConfig,
+                           filter: .doubleOnly)
+                .keyboardType(.numberPad)
+                .textFieldStyle(demonstrationVM.airspeedTemperatureTextFieldStyle)
+                .padding([.trailing], theme.padding.grid2x)
+                
+                MenuField(selection: $demonstrationVM.airspeedTemperatureType,
+                          options: TemperatureType.allCases)
+                .menuFieldStyle(.default)
+                .frame(width: 260)
+            }
+            .padding([.top], theme.padding.grid2x)
+            
+            HStack {
+                InputField(text: $demonstrationVM.airspeedInputValue,
+                           placeholder: demonstrationVM.airspeedInputPlaceholder,
+                           filter: .doubleOnly)
+                .keyboardType(.numberPad)
+                .textFieldStyle(.default)
+                .padding([.trailing], theme.padding.grid2x)
+                
+                MenuField(selection: $demonstrationVM.airspeedInputSelection,
+                          options: AirspeedType.allCases)
+                .menuFieldStyle(.default)
+                .frame(width: 260)
+            }
+            .padding([.top], theme.padding.grid1x)
+            
+            Button(demonstrationVM.convert,
+                   action: { demonstrationVM.convertAirspeed() })
+            .buttonStyle(.filled)
+            .padding([.vertical], theme.padding.grid1x)
+            
+            InputField(text: $demonstrationVM.airspeedOutputValue,
+                       placeholder: demonstrationVM.airspeedOutputPlaceholder)
+            .textFieldStyle(.advisory)
+        }
+    }
+        
+    var pressureConverterView: some View {
+        VStack {
+            HeadingView(
+                title: demonstrationVM.pressureConverterTitle,
+                subTitle: demonstrationVM.pressureConverterSubTitle)
+
+            HStack(alignment: .top, spacing: theme.padding.grid1x) {
+                InputField(text: $demonstrationVM.pressureConversionInput,
+                           placeholder: demonstrationVM.pressureConversionInputPlaceholder,
+                           bottomLabelConfig: BottomLabelConfig(demonstrationVM.pressureInputBottomLabel),
+                           filter: .doubleOnly)
+                .keyboardType(.numberPad)
+                .textFieldStyle(.default)
+                
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        demonstrationVM.swapPressureFields()
+                    }
+                }, label: {
+                    Image(systemName: "arrow.left.arrow.right")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: theme.size.medium, height: theme.size.medium)
+                        .foregroundColor(theme.color.nominal)
+                        .padding([.bottom], theme.padding.grid2x)
+                })
+
+                InputField(text: $demonstrationVM.pressureConversionOutput,
+                           placeholder: demonstrationVM.pressureConversionOutputPlaceholder,
+                           bottomLabelConfig: BottomLabelConfig(demonstrationVM.pressureOutputBottomLabel))
+                .textFieldStyle(.advisory)
+
+                Button(demonstrationVM.convert,
+                       action: {demonstrationVM.convertPressure()})
+                .buttonStyle(.filled)
+                .padding([.bottom], theme.padding.grid2x)
+            }
+            .padding([.top], theme.padding.grid2x)
+        }
+        .padding([.top], theme.padding.grid4x)
     }
 }
 
