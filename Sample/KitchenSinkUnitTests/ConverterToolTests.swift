@@ -1,21 +1,20 @@
 //
-//  KitchenSinkUnitTests.swift
-//  KitchenSinkUnitTests
+//  Shape+Extensions.swift
+//  flight-ui-ios
 //
-//  Created by Jake Dove on 15/03/2024.
+//  Created by Appivate 2023
 //
 
 import XCTest
 import SwiftUI
 @testable import Kitchen_Sink
 
-
 final class ConverterToolTest: XCTestCase {
 
-    var viewModel: DemonstrationViewModel!
+    var viewModel: UnitConverterViewModel!
 
     override func setUpWithError() throws {
-        viewModel = DemonstrationViewModel()
+        viewModel = UnitConverterViewModel()
     }
 
     override func tearDownWithError() throws {

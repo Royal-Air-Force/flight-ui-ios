@@ -34,6 +34,7 @@ struct KitchenSinkApp: App {
                         SampleScreenView(title: "Cards", destination: Cards())
                         SampleScreenView(title: "Inputs", destination: Inputs())
                     }
+                    .headerProminence(.increased)
 
                     Section(
                         header: HeaderTitleView(title: "Demonstrations",
