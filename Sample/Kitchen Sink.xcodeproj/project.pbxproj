@@ -25,6 +25,9 @@
 		AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABAD73C2A473C0E00967197 /* Color+Extensions.swift */; };
 		AAF99A112BBC3FD6004A1FCF /* TODCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A102BBC3FD6004A1FCF /* TODCalculator.swift */; };
 		AAF99A132BBC3FE5004A1FCF /* TODCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A122BBC3FE5004A1FCF /* TODCalculatorViewModel.swift */; };
+		AAF99A152BBC46C4004A1FCF /* TemperatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */; };
+		AAF99A172BBC46E8004A1FCF /* PressureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A162BBC46E8004A1FCF /* PressureType.swift */; };
+		AAF99A192BBC470D004A1FCF /* AirspeedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A182BBC470D004A1FCF /* AirspeedType.swift */; };
 		FB10BD802B9F58F1002489AB /* UnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */; };
 		FB10BD822B9F5F08002489AB /* UnitConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10BD812B9F5F08002489AB /* UnitConverterViewModel.swift */; };
 		FB86F2042BA4657A00B51D99 /* ConverterToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB86F2032BA4657A00B51D99 /* ConverterToolTests.swift */; };
@@ -64,6 +67,9 @@
 		AABAD73C2A473C0E00967197 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		AAF99A102BBC3FD6004A1FCF /* TODCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODCalculator.swift; sourceTree = "<group>"; };
 		AAF99A122BBC3FE5004A1FCF /* TODCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODCalculatorViewModel.swift; sourceTree = "<group>"; };
+		AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureType.swift; sourceTree = "<group>"; };
+		AAF99A162BBC46E8004A1FCF /* PressureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureType.swift; sourceTree = "<group>"; };
+		AAF99A182BBC470D004A1FCF /* AirspeedType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirspeedType.swift; sourceTree = "<group>"; };
 		FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverter.swift; sourceTree = "<group>"; };
 		FB10BD812B9F5F08002489AB /* UnitConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterViewModel.swift; sourceTree = "<group>"; };
 		FB86F2012BA4657900B51D99 /* KitchenSinkUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KitchenSinkUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +196,9 @@
 			isa = PBXGroup;
 			children = (
 				AA4832C12A8E1DCD004B5F45 /* HeadingView.swift */,
+				AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */,
+				AAF99A162BBC46E8004A1FCF /* PressureType.swift */,
+				AAF99A182BBC470D004A1FCF /* AirspeedType.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -341,6 +350,8 @@
 				AAF99A112BBC3FD6004A1FCF /* TODCalculator.swift in Sources */,
 				AA4D62A52A4EE6E9009303DF /* Spacing.swift in Sources */,
 				FB86F20D2BA4945100B51D99 /* CrossWindViewModel.swift in Sources */,
+				AAF99A192BBC470D004A1FCF /* AirspeedType.swift in Sources */,
+				AAF99A152BBC46C4004A1FCF /* TemperatureType.swift in Sources */,
 				AAF99A132BBC3FE5004A1FCF /* TODCalculatorViewModel.swift in Sources */,
 				AA3E69102A671900007B6860 /* KitchenSinkApp.swift in Sources */,
 				AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */,
@@ -349,6 +360,7 @@
 				FB86F20B2BA4942800B51D99 /* CrossWindCalculator.swift in Sources */,
 				556931492AC713FD00259236 /* Cards.swift in Sources */,
 				838E7E2B2987D873000F691D /* String+Extensions.swift in Sources */,
+				AAF99A172BBC46E8004A1FCF /* PressureType.swift in Sources */,
 				FB10BD822B9F5F08002489AB /* UnitConverterViewModel.swift in Sources */,
 				AA3C83B62A3CD34C00A3F40B /* Misc+ViewModel.swift in Sources */,
 				AA3C83B12A3CB78800A3F40B /* InputsViewModel.swift in Sources */,
