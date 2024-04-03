@@ -32,60 +32,83 @@ struct UnitConverter: View {
             HeadingView(
                 title: UnitConverter.weightTitle,
                 subTitle: UnitConverter.weightSubTitle)
-            .padding([.bottom], theme.padding.grid2x)
-            
-            HStack(alignment: .top) {
-                if  viewModel.weightValuesSwapped {
-                    kgInputField
-                    swapWeightsButton
-                    lbInputField
-                } else {
-                    lbInputField
-                    swapWeightsButton
-                    kgInputField
-                }
+
+            HStack(alignment: .top, spacing: theme.padding.grid1x) {
+                InputField(text: $viewModel.weightConversionInput,
+                           placeholder: viewModel.weightConversionInputPlaceholder,
+                           bottomLabelConfig: BottomLabelConfig(viewModel.weightInputBottomLabel),
+                           formatter: { typedString in
+                    return viewModel.formatInputValue(value: typedString)
+                },
+                           filter: .doubleOnly)
+                .keyboardType(.numberPad)
+                .textFieldStyle(.default)
                 
+                Button {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        viewModel.swapWeightFields()
+                    }
+                } label: {
+                    Image(systemName: "arrow.left.arrow.right")
+                }.buttonStyle(.tonalIcon)
+                    .padding([.vertical], theme.padding.grid0_5x)
+
+                InputField(text: $viewModel.weightConversionOutput,
+                           placeholder: viewModel.weightConversionOutputPlaceholder,
+                           bottomLabelConfig: BottomLabelConfig(viewModel.weightOutputBottomLabel))
+                .textFieldStyle(.advisory)
+
                 Button(UnitConverter.convertButton,
-                       action: {viewModel.convertStaticUnits()})
+                       action: {viewModel.convertWeight()})
                 .buttonStyle(.filled)
                 .padding([.bottom], theme.padding.grid2x)
             }
+            .padding([.top], theme.padding.grid2x)
         }
         .padding([.all], theme.padding.grid3x)
         .cardStyle(theme.cards.filled)
     }
     
-    var kgInputField: some View {
-        InputField(text: $viewModel.kgInputString,
-                   placeholder: UnitConverter.weightKgsHint,
-                   bottomLabelConfig: BottomLabelConfig(UnitConverter.weightKgsLabel),
-                   formatter: { typedString in
-            guard let decimalValue = Decimal(string: typedString) else { return typedString }
-            return viewModel.toString2DP(value: decimalValue)
-        }, filter: .doubleOnly)
-        .textFieldStyle(viewModel.kgInputFieldStyle ?? DefaultTextFieldStyle.default)
-    }
+    var pressureConverterView: some View {
+        VStack {
+            HeadingView(
+                title: UnitConverter.pressureTitle,
+                subTitle: UnitConverter.pressureSubTitle)
 
-    var lbInputField: some View {
-        InputField(text: $viewModel.lbsInputString,
-                   placeholder: UnitConverter.weightLbsHint,
-                   bottomLabelConfig: BottomLabelConfig(UnitConverter.weightLbsLabel),
-                   formatter: { typedString in
-            guard let decimalValue = Decimal(string: typedString) else { return typedString }
-            return viewModel.toString2DP(value: decimalValue)
-        }, filter: .doubleOnly)
-        .textFieldStyle(viewModel.lbInputFieldStyle ?? DefaultTextFieldStyle.default)
-    }
+            HStack(alignment: .top, spacing: theme.padding.grid1x) {
+                InputField(text: $viewModel.pressureConversionInput,
+                           placeholder: viewModel.pressureConversionInputPlaceholder,
+                           bottomLabelConfig: BottomLabelConfig(viewModel.pressureInputBottomLabel),
+                           formatter: { typedString in
+                    return viewModel.formatInputValue(value: typedString)
+                },
+                           filter: .doubleOnly)
+                .keyboardType(.numberPad)
+                .textFieldStyle(.default)
+                
+                Button {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        viewModel.swapPressureFields()
+                    }
+                } label: {
+                    Image(systemName: "arrow.left.arrow.right")
+                }.buttonStyle(.tonalIcon)
+                    .padding([.vertical], theme.padding.grid0_5x)
 
-    var swapWeightsButton: some View {
-        Button {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                viewModel.swapWeightFields()
+                InputField(text: $viewModel.pressureConversionOutput,
+                           placeholder: viewModel.pressureConversionOutputPlaceholder,
+                           bottomLabelConfig: BottomLabelConfig(viewModel.pressureOutputBottomLabel))
+                .textFieldStyle(.advisory)
+
+                Button(UnitConverter.convertButton,
+                       action: {viewModel.convertPressure()})
+                .buttonStyle(.filled)
+                .padding([.bottom], theme.padding.grid2x)
             }
-        } label: {
-            Image(systemName: "arrow.left.arrow.right")
-        }.buttonStyle(.tonalIcon)
-            .padding([.vertical], theme.padding.grid0_5x)
+            .padding([.top], theme.padding.grid2x)
+        }
+        .padding([.all], theme.padding.grid3x)
+        .cardStyle(theme.cards.filled)
     }
     
     var lengthConverterView: some View {
@@ -102,7 +125,7 @@ struct UnitConverter: View {
                 .textFieldStyle(.default)
 
                 MenuField(selection: $viewModel.boundSelectionInput,
-                          options: UnitConverterViewModel.LengthType.allCases)
+                          options: LengthType.allCases)
                 .menuFieldStyle(.default)
                 .padding([.bottom], theme.padding.grid2x)
             }
@@ -115,7 +138,7 @@ struct UnitConverter: View {
                     .padding([.bottom], theme.padding.grid2x)
 
                 MenuField(selection: $viewModel.boundSelectionOutput,
-                          options: UnitConverterViewModel.LengthType.allCases)
+                          options: LengthType.allCases)
                 .menuFieldStyle(.default)
                 .padding([.bottom], theme.padding.grid2x)
             }
@@ -174,45 +197,6 @@ struct UnitConverter: View {
             InputField(text: $viewModel.airspeedOutputValue,
                        placeholder: viewModel.airspeedOutputPlaceholder)
             .textFieldStyle(.advisory)
-        }
-        .padding([.all], theme.padding.grid3x)
-        .cardStyle(theme.cards.filled)
-    }
-        
-    var pressureConverterView: some View {
-        VStack {
-            HeadingView(
-                title: UnitConverter.pressureTitle,
-                subTitle: UnitConverter.pressureSubTitle)
-
-            HStack(alignment: .top, spacing: theme.padding.grid1x) {
-                InputField(text: $viewModel.pressureConversionInput,
-                           placeholder: viewModel.pressureConversionInputPlaceholder,
-                           bottomLabelConfig: BottomLabelConfig(viewModel.pressureInputBottomLabel),
-                           filter: .doubleOnly)
-                .keyboardType(.numberPad)
-                .textFieldStyle(.default)
-                
-                Button {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        viewModel.swapPressureFields()
-                    }
-                } label: {
-                    Image(systemName: "arrow.left.arrow.right")
-                }.buttonStyle(.tonalIcon)
-                    .padding([.vertical], theme.padding.grid0_5x)
-
-                InputField(text: $viewModel.pressureConversionOutput,
-                           placeholder: viewModel.pressureConversionOutputPlaceholder,
-                           bottomLabelConfig: BottomLabelConfig(viewModel.pressureOutputBottomLabel))
-                .textFieldStyle(.advisory)
-
-                Button(UnitConverter.convertButton,
-                       action: {viewModel.convertPressure()})
-                .buttonStyle(.filled)
-                .padding([.bottom], theme.padding.grid2x)
-            }
-            .padding([.top], theme.padding.grid2x)
         }
         .padding([.all], theme.padding.grid3x)
         .cardStyle(theme.cards.filled)
