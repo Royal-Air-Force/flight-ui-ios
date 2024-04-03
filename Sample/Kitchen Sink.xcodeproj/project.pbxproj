@@ -28,6 +28,9 @@
 		AAF99A152BBC46C4004A1FCF /* TemperatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */; };
 		AAF99A172BBC46E8004A1FCF /* PressureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A162BBC46E8004A1FCF /* PressureType.swift */; };
 		AAF99A192BBC470D004A1FCF /* AirspeedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A182BBC470D004A1FCF /* AirspeedType.swift */; };
+		AAF99A1B2BBC58B2004A1FCF /* UnitConverter+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A1A2BBC58B2004A1FCF /* UnitConverter+Strings.swift */; };
+		AAF99A1D2BBC645E004A1FCF /* LengthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A1C2BBC645E004A1FCF /* LengthType.swift */; };
+		AAF99A1F2BBC6C79004A1FCF /* WeightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A1E2BBC6C79004A1FCF /* WeightType.swift */; };
 		FB10BD802B9F58F1002489AB /* UnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */; };
 		FB10BD822B9F5F08002489AB /* UnitConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10BD812B9F5F08002489AB /* UnitConverterViewModel.swift */; };
 		FB86F2042BA4657A00B51D99 /* ConverterToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB86F2032BA4657A00B51D99 /* ConverterToolTests.swift */; };
@@ -70,6 +73,9 @@
 		AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureType.swift; sourceTree = "<group>"; };
 		AAF99A162BBC46E8004A1FCF /* PressureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureType.swift; sourceTree = "<group>"; };
 		AAF99A182BBC470D004A1FCF /* AirspeedType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirspeedType.swift; sourceTree = "<group>"; };
+		AAF99A1A2BBC58B2004A1FCF /* UnitConverter+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnitConverter+Strings.swift"; sourceTree = "<group>"; };
+		AAF99A1C2BBC645E004A1FCF /* LengthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LengthType.swift; sourceTree = "<group>"; };
+		AAF99A1E2BBC6C79004A1FCF /* WeightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightType.swift; sourceTree = "<group>"; };
 		FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverter.swift; sourceTree = "<group>"; };
 		FB10BD812B9F5F08002489AB /* UnitConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterViewModel.swift; sourceTree = "<group>"; };
 		FB86F2012BA4657900B51D99 /* KitchenSinkUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KitchenSinkUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,6 +205,8 @@
 				AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */,
 				AAF99A162BBC46E8004A1FCF /* PressureType.swift */,
 				AAF99A182BBC470D004A1FCF /* AirspeedType.swift */,
+				AAF99A1C2BBC645E004A1FCF /* LengthType.swift */,
+				AAF99A1E2BBC6C79004A1FCF /* WeightType.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -220,6 +228,7 @@
 			children = (
 				FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */,
 				FB10BD812B9F5F08002489AB /* UnitConverterViewModel.swift */,
+				AAF99A1A2BBC58B2004A1FCF /* UnitConverter+Strings.swift */,
 				FB86F20A2BA4942800B51D99 /* CrossWindCalculator.swift */,
 				FB86F20C2BA4945100B51D99 /* CrossWindViewModel.swift */,
 				AAF99A102BBC3FD6004A1FCF /* TODCalculator.swift */,
@@ -344,17 +353,20 @@
 			files = (
 				FB10BD802B9F58F1002489AB /* UnitConverter.swift in Sources */,
 				837FC6D42986D1900076C720 /* Typography.swift in Sources */,
+				AAF99A1F2BBC6C79004A1FCF /* WeightType.swift in Sources */,
 				838E7E2E2987FBF3000F691D /* Buttons.swift in Sources */,
 				AA3C83B42A3CBE5800A3F40B /* Misc.swift in Sources */,
 				AA3C83AF2A3CB5B100A3F40B /* Inputs.swift in Sources */,
 				AAF99A112BBC3FD6004A1FCF /* TODCalculator.swift in Sources */,
 				AA4D62A52A4EE6E9009303DF /* Spacing.swift in Sources */,
+				AAF99A1D2BBC645E004A1FCF /* LengthType.swift in Sources */,
 				FB86F20D2BA4945100B51D99 /* CrossWindViewModel.swift in Sources */,
 				AAF99A192BBC470D004A1FCF /* AirspeedType.swift in Sources */,
 				AAF99A152BBC46C4004A1FCF /* TemperatureType.swift in Sources */,
 				AAF99A132BBC3FE5004A1FCF /* TODCalculatorViewModel.swift in Sources */,
 				AA3E69102A671900007B6860 /* KitchenSinkApp.swift in Sources */,
 				AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */,
+				AAF99A1B2BBC58B2004A1FCF /* UnitConverter+Strings.swift in Sources */,
 				837FC6D02986D0F60076C720 /* Colours.swift in Sources */,
 				AA4832C22A8E1DCD004B5F45 /* HeadingView.swift in Sources */,
 				FB86F20B2BA4942800B51D99 /* CrossWindCalculator.swift in Sources */,

@@ -12,16 +12,45 @@ import SwiftUI
 
 class UnitConverterViewModel: ObservableObject {
 
-    @Published var kgInputString: String = ""
-    @Published var lbsInputString: String = ""
+    // MARK: Weight
+    @Published var weightConversionInput: String = ""
+    @Published var weightConversionOutput: String = ""
+    @Published var weightSelectedInputType: WeightType = .pounds
+    var weightConversionInputPlaceholder: String {
+        "0.0 \(weightSelectedInputType)"
+    }
+    var weightConversionOutputPlaceholder: String {
+        "0.0 \(weightSelectedInputType.inverse)"
+    }
+    var weightInputBottomLabel: String {
+        return weightSelectedInputType.unitName
+    }
+    var weightOutputBottomLabel: String {
+        return weightSelectedInputType.inverse.unitName
+    }
+    
+    // MARK: Pressure
+    @Published var pressureConversionInput: String = ""
+    @Published var pressureConversionOutput: String = ""
+    @Published var pressureSelectedInputType: PressureType = .inhg
+    var pressureConversionInputPlaceholder: String {
+        "0.0 \(pressureSelectedInputType)"
+    }
+    var pressureConversionOutputPlaceholder: String {
+        "0.0 \(pressureSelectedInputType.inverse)"
+    }
+    var pressureInputBottomLabel: String {
+        return pressureSelectedInputType.unitName
+    }
+    var pressureOutputBottomLabel: String {
+        return pressureSelectedInputType.inverse.unitName
+    }
+    
+    // MARK: Length
     @Published var inputValue: String = ""
     @Published var outputValue: String = ""
     @Published var boundSelectionInput: LengthType? = .feet
     @Published var boundSelectionOutput: LengthType? = .metres
-    @Published var weightValuesSwapped = false
-    @Published var emptyFields = false
-    @Published var kgInputFieldStyle: InputFieldStyle? = DefaultTextFieldStyle.default
-    @Published var lbInputFieldStyle: InputFieldStyle? = DefaultTextFieldStyle.default
     
     // MARK: Airspeed
     @Published var airspeedTemperature: String = ""
@@ -30,96 +59,173 @@ class UnitConverterViewModel: ObservableObject {
     @Published var airspeedTemperatureTextFieldStyle: InputFieldStyle = .init(.default)
     
     @Published var airspeedInputValue: String = ""
-    @Published var airspeedInputPlaceholder: String = "True Airspeed"
+    @Published var airspeedInputPlaceholder: String = ""
     @Published var airspeedInputSelection: AirspeedType? = .tas
-    @Published var airspeedOutputPlaceholder: String = "Mach Result Type"
+    @Published var airspeedOutputPlaceholder: String = ""
     @Published var airspeedOutputValue: String = ""
-    
-    // MARK: Pressure
-    @Published var pressureConversionInput: String = ""
-    @Published var pressureConversionOutput: String = ""
-    @Published var pressureSelectedInputType: PressureType = .inhg
-    // TODO: These can all be cleaned up, text can be in enums etc
-    var pressureConversionInputPlaceholder: String {
-        "0.0 \(pressureSelectedInputType)"
-    }
-    var pressureConversionOutputPlaceholder: String {
-        "0.0 \(pressureSelectedInputType.inverse)"
-    }
-    var pressureInputBottomLabel: String {
-        switch pressureSelectedInputType {
-        case .inhg:
-            return "Inches of Mercury"
-        case .mb:
-            return "Millibars"
-        }
-    }
-    var pressureOutputBottomLabel: String {
-        switch pressureSelectedInputType {
-        case .inhg:
-            return "Millibars"
-        case .mb:
-            return "Inches of Mercury"
-        }
-    }
     
     private let feetToMetresConversionRate: Decimal = 3.28084
     private let metresToFeetConversionRate: Decimal = 0.3048006096
-    private let kgToLbConversionRate: Decimal = 2.20462262
-
-    // TODO: Sort Strings Management
-    let adjustableConversionTitle = "Length Converter"
-    let adjustableConversionSubTitle = "Example of conversion with Menu Picker"
-    let weightTitle = "Weight Converter"
-    let weightSubtitle = "Example of fixed weight conversion with reversable function"
-    let naivgationBarTitle = "Unit Converter"
-    let calculatedField = "Calculated result"
-    let convert = "Convert"
-
-    let lengthPalceholder = "Enter Length"
-    let bottomKgLabel = "Kilograms"
-    let bottomlbLabel = "Pounds"
-    let kgHint = "Enter Kgs"
-    let lbHint = "Enter Lbs"
-    
-    let airspeedConverterTitle = "Airspeed Converter"
-    let airspeedConverterSubTitle = "Example of converting between Mach and TAS with required fields"
-    let airspeedOATLabel = "Outside Air Temperature"
-    
-    let pressureConverterTitle = "Pressure Converter"
-    let pressureConverterSubTitle = "Example of pressure conversion between Inches of Mercury and Millibars"
     
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        // TODO: Ew
-        $airspeedInputSelection
-            .sink { [weak self] airspeedSelection in
-                self?.airspeedOutputValue = ""
-                
-                switch airspeedSelection {
-                case .mach:
-                    self?.airspeedInputPlaceholder = "Mach Number"
-                    self?.airspeedOutputPlaceholder = "TAS Result Value"
-                default:
-                    self?.airspeedInputPlaceholder = "True Airspeed"
-                    self?.airspeedOutputPlaceholder = "Mach Result Value"
-                }
-            }
-            .store(in: &cancellables)
-        $airspeedTemperatureType
+        setupWeightConverter()
+        setupPressureConverter()
+        setupAirspeedConverter()
+    }
+
+    func toDecimal(string: String) -> Decimal {
+        return Decimal(string: string) ?? 0.0
+    }
+
+    func toString2DP(value: Decimal) -> String {
+        let formattedValue = getNSDecimalNumber(value: value)
+        return String(format: "%.2f", formattedValue.doubleValue)
+    }
+
+    func getNSDecimalNumber(value: Decimal) -> NSDecimalNumber {
+        let roundingHandler = NSDecimalNumberHandler(
+            roundingMode: .plain,
+            scale: 2,
+            raiseOnExactness: false,
+            raiseOnOverflow: false,
+            raiseOnUnderflow: false,
+            raiseOnDivideByZero: false
+        )
+        return NSDecimalNumber(decimal: value).rounding(accordingToBehavior: roundingHandler)
+    }
+    
+    func formatInputValue(value: String) -> String {
+        guard let decimalValue = Decimal(string: value) else { return value }
+        return toString2DP(value: decimalValue)
+    }
+
+//    func swapWeightFields() {
+//        weightValuesSwapped.toggle()
+//        convertStaticUnits()
+//    }
+//    
+//    func convertKgsToLbs(kgs: Decimal) -> Decimal {
+//        return (kgs * kgToLbConversionRate)
+//    }
+//
+//    func convertLbsToKg(lbs: Decimal) -> Decimal {
+//        return (lbs / kgToLbConversionRate)
+//    }
+//
+//    func checkForEmptyFields() {
+//
+//        if weightValuesSwapped {
+//            emptyFields = kgInputString.isEmpty
+//            if emptyFields { // if the field is empty, adjust the style of the empty field & reset the converted display
+//                kgInputFieldStyle = DefaultTextFieldStyle.caution
+//                lbsInputString = ""
+//            } else {
+//                kgInputFieldStyle = DefaultTextFieldStyle.default
+//                lbInputFieldStyle = DefaultTextFieldStyle.advisory
+//            }
+//        }
+//
+//        else {
+//            emptyFields = lbsInputString.isEmpty
+//            if emptyFields { // if the field is empty, adjust the style of the empty field & reset the converted display
+//                lbInputFieldStyle = DefaultTextFieldStyle.caution
+//                kgInputString = ""
+//            } else {
+//                lbInputFieldStyle = DefaultTextFieldStyle.default
+//                kgInputFieldStyle = DefaultTextFieldStyle.advisory
+//            }
+//        }
+//    }
+//
+//    func convertStaticUnits() {
+//        checkForEmptyFields()
+//        if emptyFields {
+//            runWeightConversion()
+//        }
+//    }
+//
+//    func runWeightConversion() {
+//        if weightValuesSwapped {
+//            let lbsDecimal = toDecimal(string: kgInputString)
+//            let convertedValue = convertKgsToLbs(kgs: lbsDecimal)
+//            lbsInputString = toString2DP(value: convertedValue)
+//        } else {
+//            let kgDecimal = toDecimal(string: lbsInputString)
+//            let convertedValue = convertLbsToKg(lbs: kgDecimal)
+//            kgInputString = toString2DP(value: convertedValue)
+//        }
+//    }
+}
+
+// MARK: Weight
+extension UnitConverterViewModel {
+    
+    private func setupWeightConverter() {
+        $weightSelectedInputType
             .sink { [weak self] _ in
-                self?.airspeedOutputValue = ""
+                self?.weightConversionOutput = ""
             }
             .store(in: &cancellables)
+    }
+    
+    func swapWeightFields() {
+        weightSelectedInputType = weightSelectedInputType.inverse
+    }
+    
+    func convertWeight() {
+        let weight: Measurement<UnitMass> = .init(
+            value: weightConversionInput.toDouble(),
+            unit: weightSelectedInputType.unitMass)
         
+        switch weightSelectedInputType {
+        case .kilograms:
+            weightConversionOutput = "\(weight.converted(to: .pounds).value.toDecimalString(decimalPlaces: 2)) lbs"
+        case .pounds:
+            weightConversionOutput = "\(weight.converted(to: .kilograms).value.toDecimalString(decimalPlaces: 2)) kgs"
+        }
+    }
+    
+}
+
+// MARK: Pressure
+extension UnitConverterViewModel {
+    
+    private func setupPressureConverter() {
         $pressureSelectedInputType
             .sink { [weak self] _ in
                 self?.pressureConversionOutput = ""
             }
             .store(in: &cancellables)
     }
+    
+    func swapPressureFields() {
+        switch pressureSelectedInputType {
+        case .inhg:
+            pressureSelectedInputType = .mb
+        case .mb:
+            pressureSelectedInputType = .inhg
+        }
+    }
+    
+    func convertPressure() {
+        let pressure: Measurement<UnitPressure> = 
+            .init(value: pressureConversionInput.toDouble(),
+                  unit: pressureSelectedInputType.unitPressure)
 
+        switch pressureSelectedInputType {
+        case .inhg:
+            pressureConversionOutput = "\(pressure.converted(to: .millibars).value.toDecimalString(decimalPlaces: 2)) mb"
+        case .mb:
+            pressureConversionOutput = "\(pressure.converted(to: .inchesOfMercury).value.toDecimalString(decimalPlaces: 2)) inHg"
+        }
+    }
+}
+
+// MARK: Length
+extension UnitConverterViewModel {
+    
     func runLengthConversion() {
         let inputDecimal = toDecimal(string: inputValue)
         let inputUnitInMetres = convertToMeters(value: inputDecimal, from: boundSelectionInput ?? .metres )
@@ -144,93 +250,30 @@ class UnitConverterViewModel: ObservableObject {
             return value
         }
     }
+    
+}
 
-    func toDecimal(string: String) -> Decimal {
-        return Decimal(string: string) ?? 0.0
-    }
-
-    func toString2DP(value: Decimal) -> String {
-        let formattedValue = getNSDecimalNumber(value: value)
-        return String(format: "%.2f", formattedValue.doubleValue)
-    }
-
-    func getNSDecimalNumber(value: Decimal) -> NSDecimalNumber {
-        let roundingHandler = NSDecimalNumberHandler(
-            roundingMode: .plain,
-            scale: 2,
-            raiseOnExactness: false,
-            raiseOnOverflow: false,
-            raiseOnUnderflow: false,
-            raiseOnDivideByZero: false
-        )
-        return NSDecimalNumber(decimal: value).rounding(accordingToBehavior: roundingHandler)
-    }
-
-    func convertKgsToLbs(kgs: Decimal) -> Decimal {
-        return (kgs * kgToLbConversionRate)
-    }
-
-    func convertLbsToKg(lbs: Decimal) -> Decimal {
-        return (lbs / kgToLbConversionRate)
-    }
-
-    func checkForEmptyFields() {
-
-        if weightValuesSwapped {
-            emptyFields = kgInputString.isEmpty
-            if emptyFields { // if the field is empty, adjust the style of the empty field & reset the converted display
-                kgInputFieldStyle = DefaultTextFieldStyle.caution
-                lbsInputString = ""
-            } else {
-                kgInputFieldStyle = DefaultTextFieldStyle.default
-                lbInputFieldStyle = DefaultTextFieldStyle.advisory
+// MARK: Airspeed
+extension UnitConverterViewModel {
+    
+    private func setupAirspeedConverter() {
+        $airspeedInputSelection
+            .sink { [weak self] airspeedSelection in
+                self?.airspeedOutputValue = ""
+                self?.airspeedInputPlaceholder = airspeedSelection?.unitName ?? ""
+                self?.airspeedOutputPlaceholder = airspeedSelection?.inverse.unitName ?? ""
             }
-        }
-
-        else {
-            emptyFields = lbsInputString.isEmpty
-            if emptyFields { // if the field is empty, adjust the style of the empty field & reset the converted display
-                lbInputFieldStyle = DefaultTextFieldStyle.caution
-                kgInputString = ""
-            } else {
-                lbInputFieldStyle = DefaultTextFieldStyle.default
-                kgInputFieldStyle = DefaultTextFieldStyle.advisory
+            .store(in: &cancellables)
+        $airspeedTemperatureType
+            .sink { [weak self] _ in
+                self?.airspeedOutputValue = ""
             }
-        }
-    }
-
-    func convertStaticUnits() {
-        checkForEmptyFields()
-        if emptyFields {
-            runWeightConversion()
-        }
-    }
-
-    func runWeightConversion() {
-        if weightValuesSwapped {
-            let lbsDecimal = toDecimal(string: kgInputString)
-            let convertedValue = convertKgsToLbs(kgs: lbsDecimal)
-            lbsInputString = toString2DP(value: convertedValue)
-        } else {
-            let kgDecimal = toDecimal(string: lbsInputString)
-            let convertedValue = convertLbsToKg(lbs: kgDecimal)
-            kgInputString = toString2DP(value: convertedValue)
-        }
-    }
-
-    enum LengthType: String, CaseIterable, CustomStringConvertible {
-        case feet = "Feet"
-        case metres = "Metres"
-        var description: String {
-            return rawValue
-        }
+            .store(in: &cancellables)
     }
     
-    
-    // MARK: Airspeed Functions
     func convertAirspeed() {
         if airspeedTemperature.isEmpty {
-            airspeedTemperatureBottomConfig = .init("Required", state: .warning)
+            airspeedTemperatureBottomConfig = .init(UnitConverter.required, state: .warning)
             airspeedTemperatureTextFieldStyle = .init(.warning)
             return
         } else {
@@ -266,28 +309,5 @@ class UnitConverterViewModel: ObservableObject {
         let outsideTemp = temperature.converted(to: .celsius).value
         let squareRoot = sqrt(outsideTemp + 273.15)
         return 38.967854 * squareRoot
-    }
-    
-    // MARK: Pressure Functions
-    func swapPressureFields() {
-        switch pressureSelectedInputType {
-        case .inhg:
-            pressureSelectedInputType = .mb
-        case .mb:
-            pressureSelectedInputType = .inhg
-        }
-    }
-    
-    func convertPressure() {
-        let pressure: Measurement<UnitPressure> = .init(value:
-                                                    pressureConversionInput.toDouble(),
-                                                        unit: pressureSelectedInputType.unitPressure)
-
-        switch pressureSelectedInputType {
-        case .inhg:
-            pressureConversionOutput = "\(pressure.converted(to: .millibars).value.toDecimalString(decimalPlaces: 2)) mg"
-        case .mb:
-            pressureConversionOutput = "\(pressure.converted(to: .inchesOfMercury).value.toDecimalString(decimalPlaces: 2)) inHg"
-        }
     }
 }
