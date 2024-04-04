@@ -24,6 +24,7 @@
 		AA4D62A52A4EE6E9009303DF /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D62A42A4EE6E9009303DF /* Spacing.swift */; };
 		AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABAD73C2A473C0E00967197 /* Color+Extensions.swift */; };
 		AADAE5952BBEAF8700CF00B7 /* Number+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADAE5942BBEAF8700CF00B7 /* Number+Extensions.swift */; };
+		AADAE5972BBEC29700CF00B7 /* CalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADAE5962BBEC29700CF00B7 /* CalculatorService.swift */; };
 		AAF99A112BBC3FD6004A1FCF /* TODCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A102BBC3FD6004A1FCF /* TODCalculator.swift */; };
 		AAF99A132BBC3FE5004A1FCF /* TODCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A122BBC3FE5004A1FCF /* TODCalculatorViewModel.swift */; };
 		AAF99A152BBC46C4004A1FCF /* TemperatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */; };
@@ -70,6 +71,7 @@
 		AA4D62A42A4EE6E9009303DF /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		AABAD73C2A473C0E00967197 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		AADAE5942BBEAF8700CF00B7 /* Number+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Extensions.swift"; sourceTree = "<group>"; };
+		AADAE5962BBEC29700CF00B7 /* CalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorService.swift; sourceTree = "<group>"; };
 		AAF99A102BBC3FD6004A1FCF /* TODCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODCalculator.swift; sourceTree = "<group>"; };
 		AAF99A122BBC3FE5004A1FCF /* TODCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODCalculatorViewModel.swift; sourceTree = "<group>"; };
 		AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureType.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				AAF99A182BBC470D004A1FCF /* AirspeedType.swift */,
 				AAF99A1C2BBC645E004A1FCF /* LengthType.swift */,
 				AAF99A1E2BBC6C79004A1FCF /* WeightType.swift */,
+				AADAE5962BBEC29700CF00B7 /* CalculatorService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				FB86F20D2BA4945100B51D99 /* CrossWindViewModel.swift in Sources */,
 				AAF99A192BBC470D004A1FCF /* AirspeedType.swift in Sources */,
 				AAF99A152BBC46C4004A1FCF /* TemperatureType.swift in Sources */,
+				AADAE5972BBEC29700CF00B7 /* CalculatorService.swift in Sources */,
 				AAF99A132BBC3FE5004A1FCF /* TODCalculatorViewModel.swift in Sources */,
 				AA3E69102A671900007B6860 /* KitchenSinkApp.swift in Sources */,
 				AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */,
