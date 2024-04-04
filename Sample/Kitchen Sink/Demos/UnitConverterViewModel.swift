@@ -16,41 +16,41 @@ class UnitConverterViewModel: ObservableObject {
     @Published var weightConversionInput: String = ""
     @Published var weightConversionOutput: String = ""
     @Published var weightSelectedInputType: WeightType = .pounds
+    @Published var weightInputFieldStyle: InputFieldStyle = .init(.default)
+    @Published var weightInputBottomLabel: BottomLabelConfig = .init(WeightType.pounds.unitName)
     var weightConversionInputPlaceholder: String {
         "0.0 \(weightSelectedInputType)"
     }
     var weightConversionOutputPlaceholder: String {
         "0.0 \(weightSelectedInputType.inverse)"
     }
-    var weightInputBottomLabel: String {
-        return weightSelectedInputType.unitName
-    }
     var weightOutputBottomLabel: String {
-        return weightSelectedInputType.inverse.unitName
+        weightSelectedInputType.inverse.unitName
     }
     
     // MARK: Pressure
     @Published var pressureConversionInput: String = ""
     @Published var pressureConversionOutput: String = ""
     @Published var pressureSelectedInputType: PressureType = .inhg
+    @Published var pressureInputFieldStyle: InputFieldStyle = .init(.default)
+    @Published var pressureInputBottomLabel: BottomLabelConfig = .init(PressureType.inhg.unitName)
     var pressureConversionInputPlaceholder: String {
         "0.0 \(pressureSelectedInputType)"
     }
     var pressureConversionOutputPlaceholder: String {
         "0.0 \(pressureSelectedInputType.inverse)"
     }
-    var pressureInputBottomLabel: String {
-        return pressureSelectedInputType.unitName
-    }
     var pressureOutputBottomLabel: String {
-        return pressureSelectedInputType.inverse.unitName
+        pressureSelectedInputType.inverse.unitName
     }
     
     // MARK: Length
-    @Published var inputValue: String = ""
-    @Published var outputValue: String = ""
-    @Published var boundSelectionInput: LengthType? = .feet
-    @Published var boundSelectionOutput: LengthType? = .metres
+    @Published var lengthConversionInput: String = ""
+    @Published var lengthConversionOutput: String = ""
+    @Published var lengthSelectedInputType: LengthType? = .feet
+    @Published var lengthSelectedOutputType: LengthType? = .metres
+    @Published var lengthInputFieldStyle: InputFieldStyle = .init(.default)
+    @Published var lengthInputBottomLabel: BottomLabelConfig = .init(isVisible: false)
     
     // MARK: Airspeed
     @Published var airspeedTemperature: String = ""
@@ -61,102 +61,24 @@ class UnitConverterViewModel: ObservableObject {
     @Published var airspeedInputValue: String = ""
     @Published var airspeedInputPlaceholder: String = ""
     @Published var airspeedInputSelection: AirspeedType? = .tas
+    @Published var airspeedInputBottomConfig: BottomLabelConfig = .init(isVisible: false)
+    @Published var airspeedInputTextFieldStyle: InputFieldStyle = .init(.default)
     @Published var airspeedOutputPlaceholder: String = ""
     @Published var airspeedOutputValue: String = ""
-    
-    private let feetToMetresConversionRate: Decimal = 3.28084
-    private let metresToFeetConversionRate: Decimal = 0.3048006096
     
     private var cancellables = Set<AnyCancellable>()
     
     init() {
         setupWeightConverter()
         setupPressureConverter()
+        setupLengthConverter()
         setupAirspeedConverter()
-    }
-
-    func toDecimal(string: String) -> Decimal {
-        return Decimal(string: string) ?? 0.0
-    }
-
-    func toString2DP(value: Decimal) -> String {
-        let formattedValue = getNSDecimalNumber(value: value)
-        return String(format: "%.2f", formattedValue.doubleValue)
-    }
-
-    func getNSDecimalNumber(value: Decimal) -> NSDecimalNumber {
-        let roundingHandler = NSDecimalNumberHandler(
-            roundingMode: .plain,
-            scale: 2,
-            raiseOnExactness: false,
-            raiseOnOverflow: false,
-            raiseOnUnderflow: false,
-            raiseOnDivideByZero: false
-        )
-        return NSDecimalNumber(decimal: value).rounding(accordingToBehavior: roundingHandler)
     }
     
     func formatInputValue(value: String) -> String {
         guard let decimalValue = Decimal(string: value) else { return value }
-        return toString2DP(value: decimalValue)
+        return decimalValue.toDecimalString()
     }
-
-//    func swapWeightFields() {
-//        weightValuesSwapped.toggle()
-//        convertStaticUnits()
-//    }
-//    
-//    func convertKgsToLbs(kgs: Decimal) -> Decimal {
-//        return (kgs * kgToLbConversionRate)
-//    }
-//
-//    func convertLbsToKg(lbs: Decimal) -> Decimal {
-//        return (lbs / kgToLbConversionRate)
-//    }
-//
-//    func checkForEmptyFields() {
-//
-//        if weightValuesSwapped {
-//            emptyFields = kgInputString.isEmpty
-//            if emptyFields { // if the field is empty, adjust the style of the empty field & reset the converted display
-//                kgInputFieldStyle = DefaultTextFieldStyle.caution
-//                lbsInputString = ""
-//            } else {
-//                kgInputFieldStyle = DefaultTextFieldStyle.default
-//                lbInputFieldStyle = DefaultTextFieldStyle.advisory
-//            }
-//        }
-//
-//        else {
-//            emptyFields = lbsInputString.isEmpty
-//            if emptyFields { // if the field is empty, adjust the style of the empty field & reset the converted display
-//                lbInputFieldStyle = DefaultTextFieldStyle.caution
-//                kgInputString = ""
-//            } else {
-//                lbInputFieldStyle = DefaultTextFieldStyle.default
-//                kgInputFieldStyle = DefaultTextFieldStyle.advisory
-//            }
-//        }
-//    }
-//
-//    func convertStaticUnits() {
-//        checkForEmptyFields()
-//        if emptyFields {
-//            runWeightConversion()
-//        }
-//    }
-//
-//    func runWeightConversion() {
-//        if weightValuesSwapped {
-//            let lbsDecimal = toDecimal(string: kgInputString)
-//            let convertedValue = convertKgsToLbs(kgs: lbsDecimal)
-//            lbsInputString = toString2DP(value: convertedValue)
-//        } else {
-//            let kgDecimal = toDecimal(string: lbsInputString)
-//            let convertedValue = convertLbsToKg(lbs: kgDecimal)
-//            kgInputString = toString2DP(value: convertedValue)
-//        }
-//    }
 }
 
 // MARK: Weight
@@ -168,23 +90,48 @@ extension UnitConverterViewModel {
                 self?.weightConversionOutput = ""
             }
             .store(in: &cancellables)
+        $weightConversionInput
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.clearWeightValidation()
+            }
+            .store(in: &cancellables)
     }
     
     func swapWeightFields() {
         weightSelectedInputType = weightSelectedInputType.inverse
+        clearWeightValidation()
     }
     
     func convertWeight() {
-        let weight: Measurement<UnitMass> = .init(
-            value: weightConversionInput.toDouble(),
-            unit: weightSelectedInputType.unitMass)
-        
-        switch weightSelectedInputType {
-        case .kilograms:
-            weightConversionOutput = "\(weight.converted(to: .pounds).value.toDecimalString(decimalPlaces: 2)) lbs"
-        case .pounds:
-            weightConversionOutput = "\(weight.converted(to: .kilograms).value.toDecimalString(decimalPlaces: 2)) kgs"
+        if isWeightInputValid() {
+            let weight: Measurement<UnitMass> = .init(
+                value: weightConversionInput.toDouble(),
+                unit: weightSelectedInputType.unitMass)
+            
+            switch weightSelectedInputType {
+            case .kilograms:
+                weightConversionOutput = "\(weight.converted(to: .pounds).value.toDecimalString(decimalPlaces: 2)) lbs"
+            case .pounds:
+                weightConversionOutput = "\(weight.converted(to: .kilograms).value.toDecimalString(decimalPlaces: 2)) kgs"
+            }
         }
+    }
+    
+    private func isWeightInputValid() -> Bool {
+        if weightConversionInput.isEmpty {
+            weightInputFieldStyle = .init(.warning)
+            weightInputBottomLabel = .init(UnitConverter.required, state: .warning)
+            return false
+        } else {
+            clearWeightValidation()
+            return true
+        }
+    }
+    
+    private func clearWeightValidation() {
+        weightInputFieldStyle = .init(.default)
+        weightInputBottomLabel = .init(weightSelectedInputType.unitName, state: .default)
     }
     
 }
@@ -198,96 +145,155 @@ extension UnitConverterViewModel {
                 self?.pressureConversionOutput = ""
             }
             .store(in: &cancellables)
+        $pressureConversionInput
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.clearPressureValidation()
+            }
+            .store(in: &cancellables)
     }
     
     func swapPressureFields() {
-        switch pressureSelectedInputType {
-        case .inhg:
-            pressureSelectedInputType = .mb
-        case .mb:
-            pressureSelectedInputType = .inhg
-        }
+        pressureSelectedInputType = pressureSelectedInputType.inverse
+        clearPressureValidation()
     }
     
     func convertPressure() {
-        let pressure: Measurement<UnitPressure> = 
-            .init(value: pressureConversionInput.toDouble(),
-                  unit: pressureSelectedInputType.unitPressure)
+        if isPressureInputValid() {
+            let pressure: Measurement<UnitPressure> =
+                .init(value: pressureConversionInput.toDouble(),
+                      unit: pressureSelectedInputType.unitPressure)
 
-        switch pressureSelectedInputType {
-        case .inhg:
-            pressureConversionOutput = "\(pressure.converted(to: .millibars).value.toDecimalString(decimalPlaces: 2)) mb"
-        case .mb:
-            pressureConversionOutput = "\(pressure.converted(to: .inchesOfMercury).value.toDecimalString(decimalPlaces: 2)) inHg"
+            switch pressureSelectedInputType {
+            case .inhg:
+                pressureConversionOutput = "\(pressure.converted(to: .millibars).value.toDecimalString(decimalPlaces: 2)) mb"
+            case .mb:
+                pressureConversionOutput = "\(pressure.converted(to: .inchesOfMercury).value.toDecimalString(decimalPlaces: 2)) inHg"
+            }
         }
+    }
+    
+    private func isPressureInputValid() -> Bool {
+        if pressureConversionInput.isEmpty {
+            pressureInputFieldStyle = .init(.warning)
+            pressureInputBottomLabel = .init(UnitConverter.required, state: .warning)
+            return false
+        } else {
+            clearPressureValidation()
+            return true
+        }
+    }
+    
+    private func clearPressureValidation() {
+        pressureInputFieldStyle = .init(.default)
+        pressureInputBottomLabel = .init(pressureSelectedInputType.unitName, state: .default)
     }
 }
 
 // MARK: Length
 extension UnitConverterViewModel {
     
+    private func setupLengthConverter() {
+        $lengthSelectedInputType
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.lengthConversionOutput = ""
+                self?.clearLengthValidation()
+            }
+            .store(in: &cancellables)
+        $lengthSelectedOutputType
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.lengthConversionOutput = ""
+                self?.clearLengthValidation()
+            }
+            .store(in: &cancellables)
+        $lengthConversionInput
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.clearLengthValidation()
+            }
+            .store(in: &cancellables)
+    }
+    
     func runLengthConversion() {
-        let inputDecimal = toDecimal(string: inputValue)
-        let inputUnitInMetres = convertToMeters(value: inputDecimal, from: boundSelectionInput ?? .metres )
-        let outputInMetres = convertFromMeters(value: inputUnitInMetres, from: boundSelectionOutput ?? .metres )
-        outputValue = toString2DP(value: outputInMetres)
-    }
+        if isLengthInputValid() {
+            let length: Measurement<UnitLength> =
+                .init(value: lengthConversionInput.toDouble(),
+                      unit: lengthSelectedInputType?.unitLength ?? .meters)
 
-    func convertToMeters(value: Decimal, from unit: LengthType) -> Decimal {
-        switch unit {
-        case .feet:
-            return value / feetToMetresConversionRate
-        case .metres:
-            return value
-        }
-    }
-
-    func convertFromMeters(value: Decimal, from unit: LengthType) -> Decimal {
-        switch unit {
-        case .feet:
-            return value / metresToFeetConversionRate
-        case .metres:
-            return value
+            switch lengthSelectedOutputType {
+            case .metres:
+                lengthConversionOutput = "\(length.converted(to: .meters).value.toDecimalString(decimalPlaces: 2)) m"
+            case .feet:
+                lengthConversionOutput = "\(length.converted(to: .feet).value.toDecimalString(decimalPlaces: 2)) ft"
+            default:
+                lengthConversionOutput = ""
+            }
         }
     }
     
+    private func isLengthInputValid() -> Bool {
+        if lengthConversionInput.isEmpty {
+            lengthInputFieldStyle = .init(.warning)
+            lengthInputBottomLabel = .init(UnitConverter.required, state: .warning)
+            return false
+        } else {
+            clearLengthValidation()
+            return true
+        }
+    }
+    
+    private func clearLengthValidation() {
+        lengthInputFieldStyle = .init(.default)
+        lengthInputBottomLabel = .init(isVisible: false)
+    }
 }
 
 // MARK: Airspeed
 extension UnitConverterViewModel {
     
     private func setupAirspeedConverter() {
+        $airspeedTemperature
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.clearAirspeedValidation()
+            }
+            .store(in: &cancellables)
+        
+        $airspeedInputValue
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.clearAirspeedValidation()
+            }
+            .store(in: &cancellables)
+        
         $airspeedInputSelection
             .sink { [weak self] airspeedSelection in
                 self?.airspeedOutputValue = ""
                 self?.airspeedInputPlaceholder = airspeedSelection?.unitName ?? ""
                 self?.airspeedOutputPlaceholder = airspeedSelection?.inverse.unitName ?? ""
+                self?.clearAirspeedValidation()
             }
             .store(in: &cancellables)
         $airspeedTemperatureType
             .sink { [weak self] _ in
                 self?.airspeedOutputValue = ""
+                self?.clearAirspeedValidation()
             }
             .store(in: &cancellables)
     }
     
     func convertAirspeed() {
-        if airspeedTemperature.isEmpty {
-            airspeedTemperatureBottomConfig = .init(UnitConverter.required, state: .warning)
-            airspeedTemperatureTextFieldStyle = .init(.warning)
-            return
-        } else {
-            airspeedTemperatureBottomConfig = .init(isVisible: false)
-            airspeedTemperatureTextFieldStyle = .init(.default)
-        }
+        if isAirspeedInputValid() {
+            let temperature: Measurement<UnitTemperature> = .init(value: airspeedTemperature.toDouble(), unit: airspeedTemperatureType?.unitTemperature ?? .celsius)
 
-        let temperature: Measurement<UnitTemperature> = .init(value: airspeedTemperature.toDouble(), unit: airspeedTemperatureType?.unitTemperature ?? .celsius)
-
-        switch (airspeedInputSelection) {
-        case .mach:
-            airspeedOutputValue = calculateTAS(mach: airspeedInputValue, temperature: temperature)
-        default:
-            airspeedOutputValue = calculateMach(tas: airspeedInputValue, temperature: temperature)
+            switch (airspeedInputSelection) {
+            case .mach:
+                airspeedOutputValue = calculateTAS(mach: airspeedInputValue, temperature: temperature)
+            default:
+                airspeedOutputValue = calculateMach(tas: airspeedInputValue, temperature: temperature)
+            }
         }
     }
 
@@ -309,5 +315,34 @@ extension UnitConverterViewModel {
         let outsideTemp = temperature.converted(to: .celsius).value
         let squareRoot = sqrt(outsideTemp + 273.15)
         return 38.967854 * squareRoot
+    }
+    
+    private func isAirspeedInputValid() -> Bool {
+        var isValid = true
+        
+        if airspeedTemperature.isEmpty {
+            airspeedTemperatureTextFieldStyle = .init(.warning)
+            airspeedTemperatureBottomConfig = .init(UnitConverter.required, state: .warning)
+            isValid = false
+        }
+        if airspeedInputValue.isEmpty {
+            airspeedInputTextFieldStyle = .init(.warning)
+            airspeedInputBottomConfig = .init(UnitConverter.required, state: .warning)
+            isValid = false
+        }
+        
+        if isValid {
+            clearLengthValidation()
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func clearAirspeedValidation() {
+        airspeedTemperatureTextFieldStyle = .init(.default)
+        airspeedTemperatureBottomConfig = .init(isVisible: false)
+        airspeedInputTextFieldStyle = .init(.default)
+        airspeedInputBottomConfig = .init(isVisible: false)
     }
 }
