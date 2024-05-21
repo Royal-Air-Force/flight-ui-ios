@@ -54,6 +54,11 @@ extension CrossWindCalculator {
     internal static let windSpeedLabel = "Wind Speed"
     internal static let windDirectionLabel = "Wind Direction"
     
+    internal static let runwayHeadingPlaceholder = "1"
+    internal static let windSpeedPlaceholder = "0.0 Kts"
+    internal static let windDirectionPlaceholder = "0°"
+    internal static let windDirectionError = "Must be between 0° and 360°"
+    
     // MARK: Outputs
     internal static let headwindLabel = "Headwind"
     internal static let crosswindLabel = "Crosswind"

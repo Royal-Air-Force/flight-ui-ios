@@ -33,7 +33,7 @@ struct CrossWindCalculator: View {
                 
                 MenuField(selection: $viewModel.runwayHeading,
                           options: Array(1...36),
-                          placeholder: "1")
+                          placeholder: CrossWindCalculator.runwayHeadingPlaceholder)
             }
             
             HStack {
@@ -42,7 +42,7 @@ struct CrossWindCalculator: View {
                     .frame(width: 200, alignment: .leading)
                 
                 InputField(text: $viewModel.windSpeed,
-                           placeholder: viewModel.windSpeedPlaceholder,
+                           placeholder: CrossWindCalculator.windSpeedPlaceholder,
                            filter: .doubleOnly,
                            maxCharacterCount: 3)
                 .textFieldStyle(.default)
@@ -54,10 +54,11 @@ struct CrossWindCalculator: View {
                     .frame(width: 200, alignment: .leading)
                 
                 InputField(text: $viewModel.windDirection,
-                           placeholder: viewModel.windDirectionPlaceholder,
+                           placeholder: CrossWindCalculator.windDirectionPlaceholder,
+                           bottomLabelConfig: viewModel.windDirectionBottomConfig,
                            filter: .integerOnly,
                            maxCharacterCount: 3)
-                .textFieldStyle(.default)
+                .textFieldStyle(viewModel.windDirectionTextFieldStyle)
             }
         }
         .padding([.all], theme.padding.grid3x)
