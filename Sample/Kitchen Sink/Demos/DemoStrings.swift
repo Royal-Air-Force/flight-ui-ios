@@ -1,8 +1,8 @@
 //
-//  UnitConverter+Strings.swift
+//  DemoStrings.swift
 //  flight-ui-ios
 //
-//  Created by Appivate 2024
+//  Created by Appivate 2023
 //
 
 import Foundation
@@ -40,5 +40,23 @@ extension UnitConverter {
     internal static let airspeedOatHint = "Outside Air Temperature"
     internal static let airspeedMachHint = "Mach Number"
     internal static let airspeedTasHint = "True Airspeed"
+    
+}
+
+extension CrossWindCalculator {
+    
+    // MARK: Titles
+    internal static let crosswindTitle = "Crosswind Calculator"
+    internal static let crosswindResultsTitle = "Results"
+    
+    // MARK: Inputs
+    internal static let runwayHeadingLabel = "Runway Name"
+    internal static let windSpeedLabel = "Wind Speed"
+    internal static let windDirectionLabel = "Wind Direction"
+    
+    // MARK: Outputs
+    internal static let headwindLabel = "Headwind"
+    internal static let crosswindLabel = "Crosswind"
+    internal static let outputUnit = "Kts"
     
 }
