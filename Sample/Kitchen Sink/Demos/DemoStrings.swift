@@ -65,3 +65,35 @@ extension CrossWindCalculator {
     internal static let outputUnit = "Kts"
     
 }
+
+extension TODCalculator {
+    
+    // MARK: Titles
+    internal static let todCalculatorTitle = "Top of Descent Calculator"
+    internal static let startOfDescentTitle = "Start of Descent"
+    internal static let descentDistanceTitle = "Descent Distance"
+    internal static let descentRateTitle = "Descent Rate"
+    internal static let verticalSpeedTitle = "Vertical Speed"
+    internal static let todCalculatorClear = "Clear"
+    
+    // MARK: Start of Descent
+    internal static let initialAltitudeLabel = "Initial Altitude (ft)"
+    internal static let initialAltitudePlaceholder = "33000 ft"
+    internal static let finalAltitudeLabel = "Final Altitude (ft)"
+    internal static let finalAltitudePlaceholder = "10000 ft"
+    internal static let descentAngleLabel = "Descent Angle (°)"
+    internal static let descentAnglePlaceholder = "3°"
+    internal static let descentDistanceLabel = "TOD Position (NM)"
+    
+    internal static let descentAngleError = "Must be between 0° and 360°"
+    
+    // MARK: Descent Rate
+    internal static let descentRateLabel = "Descent Rate (%)"
+    internal static let descentRatePlaceholder = "5.2%"
+    internal static let groundSpeedLabel = "Ground Speed (kts)"
+    internal static let groundSpeedPlaceholder = "110 kts"
+    internal static let verticalSpeedLabel = "Vertical Speed (ft/min)"
+    
+    internal static let descentRateError = "Must be between 0% and 100%"
+    
+}
