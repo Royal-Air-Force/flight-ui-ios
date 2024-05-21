@@ -27,9 +27,12 @@ class TODCalculatorViewModel: ObservableObject {
     @Published var descentDistanceOutput = ""
     @Published var verticalSpeedOutput = ""
     
+    private var calculator: CalculatorService
     private var cancellables = Set<AnyCancellable>()
     
-    init() {
+    init(calculatorService: CalculatorService) {
+        self.calculator = calculatorService
+        
         $descentAngleInput
             .sink { [weak self] descentAngle in
                 guard !descentAngle.isEmpty, let descentAngle = Double(descentAngle) else { return }
@@ -59,7 +62,7 @@ class TODCalculatorViewModel: ObservableObject {
                 }
                 
                 if self?.validateDescentAngle(descentAngle) ?? false {
-                    self?.calculateDecentDistance(initialAltitude: initialAltitude, finalAltitude: finalAltitude, descentAngle: descentAngle)
+                    self?.descentDistanceOutput = self?.formatDescentDistance(self?.calculator.calculateDecentDistance(initialAltitude: initialAltitude, finalAltitude: finalAltitude, descentAngle: descentAngle) ?? "") ?? ""
                 } else {
                     self?.clearDescentDistance()
                 }
@@ -78,7 +81,11 @@ class TODCalculatorViewModel: ObservableObject {
                 }
                 
                 if self?.validateDescentRate(descentRate) ?? false {
-                    self?.calculateVerticalSpeed(descentRate: descentRate, groundSpeed: groundSpeed)
+                    let verticalSpeed = self?.calculator.calculateVerticalSpeed(descentRate: descentRate, groundSpeed: groundSpeed) ?? ""
+                    self?.verticalSpeedOutput = self?.formatVerticalSpeed(verticalSpeed) ?? ""
+                    
+//                    self?.verticalSpeedOutput =
+//                    self?.formatVerticalSpeed(self?.calculator.calculateVerticalSpeed(descentRate: descentRate, groundSpeed: groundSpeed)) ?? ""
                 } else {
                     self?.clearVerticalSpeed()
                 }
@@ -98,15 +105,6 @@ class TODCalculatorViewModel: ObservableObject {
         return validAngle
     }
     
-    func calculateDecentDistance(initialAltitude: Double, finalAltitude: Double, descentAngle: Double) {
-        
-        descentDistanceOutput = (((initialAltitude - finalAltitude) / 100) / descentAngle).toDecimalString(decimalPlaces: 2)
-    }
-    
-    func clearDescentDistance() {
-        descentDistanceOutput = ""
-    }
-    
     func validateDescentRate(_ descentRate: Double) -> Bool {
         let validRate = 0 <= descentRate && descentRate <= 100
         if validRate {
@@ -119,9 +117,16 @@ class TODCalculatorViewModel: ObservableObject {
         return validRate
     }
     
-    func calculateVerticalSpeed(descentRate: Double, groundSpeed: Double) {
-        
-        verticalSpeedOutput = (descentRate * groundSpeed).toDecimalString(decimalPlaces: 2)
+    func formatDescentDistance(_ descentDistance: String) -> String {
+        return "\(descentDistance) \(TODCalculator.descentDistanceUnits)"
+    }
+    
+    func formatVerticalSpeed(_ verticalSpeed: String) -> String {
+        return "\(verticalSpeed) \(TODCalculator.verticalSpeedUnits)"
+    }
+    
+    func clearDescentDistance() {
+        descentDistanceOutput = ""
     }
     
     func clearVerticalSpeed() {

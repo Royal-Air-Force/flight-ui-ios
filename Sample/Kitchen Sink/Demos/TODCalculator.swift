@@ -11,7 +11,7 @@ import FlightUI
 struct TODCalculator: View {
     
     @EnvironmentObject var theme: Theme
-    @StateObject var viewModel: TODCalculatorViewModel
+    @StateObject var viewModel = TODCalculatorViewModel(calculatorService: CalculatorService())
     
     var body: some View {
         ScrollView {
@@ -83,8 +83,7 @@ struct TODCalculator: View {
                         .fontStyle(theme.font.bodyBold)
                         .frame(width: 200, alignment: .leading)
                     
-                    InputField(text: $viewModel.descentDistanceOutput,
-                               filter: .doubleOnly)
+                    InputField(text: $viewModel.descentDistanceOutput)
                     .textFieldStyle(.advisory)
                 }
             }
@@ -136,8 +135,7 @@ struct TODCalculator: View {
                         .fontStyle(theme.font.bodyBold)
                         .frame(width: 200, alignment: .leading)
                     
-                    InputField(text: $viewModel.verticalSpeedOutput,
-                               filter: .doubleOnly)
+                    InputField(text: $viewModel.verticalSpeedOutput)
                     .textFieldStyle(.advisory)
                 }
             }

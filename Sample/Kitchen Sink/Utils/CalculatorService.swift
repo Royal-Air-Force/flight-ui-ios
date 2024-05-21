@@ -68,4 +68,36 @@ class CalculatorService {
         return 38.967854 * squareRoot
     }
     
+    func calculateCrossWind(speed: Double, direction: Double, runway: Double) -> String {
+        let directionRadians = degreesToRadians(direction)
+        let runwayRadians = degreesToRadians(runwayHeadingInDegrees(runway))
+        let crosswind = abs(speed * sin(directionRadians - runwayRadians))
+        
+        return crosswind.toDecimalString(decimalPlaces: 2)
+    }
+    
+    func calculateHeadWind(speed: Double, direction: Double, runway: Double) -> String {
+        let directionRadians = degreesToRadians(direction)
+        let runwayRadians = degreesToRadians(runwayHeadingInDegrees(runway))
+        let headwind = abs(speed * cos(directionRadians - runwayRadians))
+        
+        return headwind.toDecimalString(decimalPlaces: 2)
+    }
+    
+    private func runwayHeadingInDegrees(_ runwayNumber: Double) -> Double {
+        return runwayNumber * 10.0
+    }
+
+    private func degreesToRadians(_ degrees: Double) -> Double {
+        return degrees * Double.pi / 180
+    }
+    
+    func calculateDecentDistance(initialAltitude: Double, finalAltitude: Double, descentAngle: Double) -> String {
+        return (((initialAltitude - finalAltitude) / 100) / descentAngle).toDecimalString(decimalPlaces: 2)
+    }
+    
+    func calculateVerticalSpeed(descentRate: Double, groundSpeed: Double) -> String {
+        return (descentRate * groundSpeed).toDecimalString(decimalPlaces: 2)
+    }
+    
 }

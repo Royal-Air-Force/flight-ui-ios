@@ -84,6 +84,7 @@ extension TODCalculator {
     internal static let descentAngleLabel = "Descent Angle (°)"
     internal static let descentAnglePlaceholder = "3°"
     internal static let descentDistanceLabel = "TOD Position (NM)"
+    internal static let descentDistanceUnits = "NM"
     
     internal static let descentAngleError = "Must be between 0° and 360°"
     
@@ -93,6 +94,7 @@ extension TODCalculator {
     internal static let groundSpeedLabel = "Ground Speed (kts)"
     internal static let groundSpeedPlaceholder = "110 kts"
     internal static let verticalSpeedLabel = "Vertical Speed (ft/min)"
+    internal static let verticalSpeedUnits = "ft/min"
     
     internal static let descentRateError = "Must be between 0% and 100%"
     
