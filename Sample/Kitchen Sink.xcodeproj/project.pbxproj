@@ -23,14 +23,17 @@
 		AA4832C22A8E1DCD004B5F45 /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4832C12A8E1DCD004B5F45 /* HeadingView.swift */; };
 		AA4D62A52A4EE6E9009303DF /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D62A42A4EE6E9009303DF /* Spacing.swift */; };
 		AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABAD73C2A473C0E00967197 /* Color+Extensions.swift */; };
+		AADAE5952BBEAF8700CF00B7 /* Number+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADAE5942BBEAF8700CF00B7 /* Number+Extensions.swift */; };
+		AADAE5972BBEC29700CF00B7 /* CalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADAE5962BBEC29700CF00B7 /* CalculatorService.swift */; };
 		AAF99A112BBC3FD6004A1FCF /* TODCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A102BBC3FD6004A1FCF /* TODCalculator.swift */; };
 		AAF99A132BBC3FE5004A1FCF /* TODCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A122BBC3FE5004A1FCF /* TODCalculatorViewModel.swift */; };
 		AAF99A152BBC46C4004A1FCF /* TemperatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */; };
 		AAF99A172BBC46E8004A1FCF /* PressureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A162BBC46E8004A1FCF /* PressureType.swift */; };
 		AAF99A192BBC470D004A1FCF /* AirspeedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A182BBC470D004A1FCF /* AirspeedType.swift */; };
-		AAF99A1B2BBC58B2004A1FCF /* UnitConverter+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A1A2BBC58B2004A1FCF /* UnitConverter+Strings.swift */; };
 		AAF99A1D2BBC645E004A1FCF /* LengthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A1C2BBC645E004A1FCF /* LengthType.swift */; };
 		AAF99A1F2BBC6C79004A1FCF /* WeightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A1E2BBC6C79004A1FCF /* WeightType.swift */; };
+		DC4FCDB92BC42F1A00C7528D /* CalculatorServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4FCDB82BC42F1A00C7528D /* CalculatorServiceTest.swift */; };
+		DCB567992BFCAF4F0083A0E6 /* DemoStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB567982BFCAF4F0083A0E6 /* DemoStrings.swift */; };
 		FB10BD802B9F58F1002489AB /* UnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */; };
 		FB10BD822B9F5F08002489AB /* UnitConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10BD812B9F5F08002489AB /* UnitConverterViewModel.swift */; };
 		FB86F2042BA4657A00B51D99 /* ConverterToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB86F2032BA4657A00B51D99 /* ConverterToolTests.swift */; };
@@ -68,14 +71,17 @@
 		AA4832C12A8E1DCD004B5F45 /* HeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
 		AA4D62A42A4EE6E9009303DF /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		AABAD73C2A473C0E00967197 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		AADAE5942BBEAF8700CF00B7 /* Number+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Extensions.swift"; sourceTree = "<group>"; };
+		AADAE5962BBEC29700CF00B7 /* CalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorService.swift; sourceTree = "<group>"; };
 		AAF99A102BBC3FD6004A1FCF /* TODCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODCalculator.swift; sourceTree = "<group>"; };
 		AAF99A122BBC3FE5004A1FCF /* TODCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODCalculatorViewModel.swift; sourceTree = "<group>"; };
 		AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureType.swift; sourceTree = "<group>"; };
 		AAF99A162BBC46E8004A1FCF /* PressureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureType.swift; sourceTree = "<group>"; };
 		AAF99A182BBC470D004A1FCF /* AirspeedType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirspeedType.swift; sourceTree = "<group>"; };
-		AAF99A1A2BBC58B2004A1FCF /* UnitConverter+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnitConverter+Strings.swift"; sourceTree = "<group>"; };
 		AAF99A1C2BBC645E004A1FCF /* LengthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LengthType.swift; sourceTree = "<group>"; };
 		AAF99A1E2BBC6C79004A1FCF /* WeightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightType.swift; sourceTree = "<group>"; };
+		DC4FCDB82BC42F1A00C7528D /* CalculatorServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorServiceTest.swift; sourceTree = "<group>"; };
+		DCB567982BFCAF4F0083A0E6 /* DemoStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoStrings.swift; sourceTree = "<group>"; };
 		FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverter.swift; sourceTree = "<group>"; };
 		FB10BD812B9F5F08002489AB /* UnitConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterViewModel.swift; sourceTree = "<group>"; };
 		FB86F2012BA4657900B51D99 /* KitchenSinkUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KitchenSinkUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +148,7 @@
 			children = (
 				838E7E2A2987D873000F691D /* String+Extensions.swift */,
 				AABAD73C2A473C0E00967197 /* Color+Extensions.swift */,
+				AADAE5942BBEAF8700CF00B7 /* Number+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -207,6 +214,7 @@
 				AAF99A182BBC470D004A1FCF /* AirspeedType.swift */,
 				AAF99A1C2BBC645E004A1FCF /* LengthType.swift */,
 				AAF99A1E2BBC6C79004A1FCF /* WeightType.swift */,
+				AADAE5962BBEC29700CF00B7 /* CalculatorService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -223,16 +231,24 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		DC4FCDB72BC42F0C00C7528D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DC4FCDB82BC42F1A00C7528D /* CalculatorServiceTest.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		FB10BD7E2B9F58D4002489AB /* Demos */ = {
 			isa = PBXGroup;
 			children = (
 				FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */,
 				FB10BD812B9F5F08002489AB /* UnitConverterViewModel.swift */,
-				AAF99A1A2BBC58B2004A1FCF /* UnitConverter+Strings.swift */,
 				FB86F20A2BA4942800B51D99 /* CrossWindCalculator.swift */,
 				FB86F20C2BA4945100B51D99 /* CrossWindViewModel.swift */,
 				AAF99A102BBC3FD6004A1FCF /* TODCalculator.swift */,
 				AAF99A122BBC3FE5004A1FCF /* TODCalculatorViewModel.swift */,
+				DCB567982BFCAF4F0083A0E6 /* DemoStrings.swift */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -240,6 +256,7 @@
 		FB86F2022BA4657A00B51D99 /* KitchenSinkUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				DC4FCDB72BC42F0C00C7528D /* Utils */,
 				FB86F2032BA4657A00B51D99 /* ConverterToolTests.swift */,
 				FB86F20F2BA88A8F00B51D99 /* WindCalcTests.swift */,
 			);
@@ -355,6 +372,7 @@
 				837FC6D42986D1900076C720 /* Typography.swift in Sources */,
 				AAF99A1F2BBC6C79004A1FCF /* WeightType.swift in Sources */,
 				838E7E2E2987FBF3000F691D /* Buttons.swift in Sources */,
+				AADAE5952BBEAF8700CF00B7 /* Number+Extensions.swift in Sources */,
 				AA3C83B42A3CBE5800A3F40B /* Misc.swift in Sources */,
 				AA3C83AF2A3CB5B100A3F40B /* Inputs.swift in Sources */,
 				AAF99A112BBC3FD6004A1FCF /* TODCalculator.swift in Sources */,
@@ -363,10 +381,11 @@
 				FB86F20D2BA4945100B51D99 /* CrossWindViewModel.swift in Sources */,
 				AAF99A192BBC470D004A1FCF /* AirspeedType.swift in Sources */,
 				AAF99A152BBC46C4004A1FCF /* TemperatureType.swift in Sources */,
+				AADAE5972BBEC29700CF00B7 /* CalculatorService.swift in Sources */,
 				AAF99A132BBC3FE5004A1FCF /* TODCalculatorViewModel.swift in Sources */,
+				DCB567992BFCAF4F0083A0E6 /* DemoStrings.swift in Sources */,
 				AA3E69102A671900007B6860 /* KitchenSinkApp.swift in Sources */,
 				AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */,
-				AAF99A1B2BBC58B2004A1FCF /* UnitConverter+Strings.swift in Sources */,
 				837FC6D02986D0F60076C720 /* Colours.swift in Sources */,
 				AA4832C22A8E1DCD004B5F45 /* HeadingView.swift in Sources */,
 				FB86F20B2BA4942800B51D99 /* CrossWindCalculator.swift in Sources */,
@@ -384,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB86F2042BA4657A00B51D99 /* ConverterToolTests.swift in Sources */,
+				DC4FCDB92BC42F1A00C7528D /* CalculatorServiceTest.swift in Sources */,
 				FB86F2102BA88A8F00B51D99 /* WindCalcTests.swift in Sources */,
 				FB86F20E2BA85B9C00B51D99 /* CrossWindViewModel.swift in Sources */,
 			);
@@ -524,7 +544,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Kitchen Sink/Preview Content\"";
 				DEVELOPMENT_TEAM = 5PRV5PD957;
 				ENABLE_PREVIEWS = YES;
@@ -540,7 +560,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appivate.flightui-kitchen-sink";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -558,7 +578,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Kitchen Sink/Preview Content\"";
 				DEVELOPMENT_TEAM = 5PRV5PD957;
 				ENABLE_PREVIEWS = YES;
@@ -574,7 +594,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appivate.flightui-kitchen-sink";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -597,7 +617,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.testAppivate.KitchenSinkUnitTests;
@@ -621,7 +641,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.testAppivate.KitchenSinkUnitTests;

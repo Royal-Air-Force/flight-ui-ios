@@ -7,74 +7,72 @@
 
 import Foundation
 import Combine
-
+import FlightUI
 
 class CrosswindCalculatorViewModel: ObservableObject {
 
-    @Published var windSpeedPlaceholder = "0.0 Kts"
-    @Published var windDirectionPlaceholder = "0°"
-
+    @Published var runwayHeading: Int? = 1
     @Published var windSpeed = ""
     @Published var windDirection = ""
-    @Published var crosswindString = ""
-    @Published var headwindString = ""
-    @Published var runwayNumber: Int?
+    
+    @Published var crosswindOutput = ""
+    @Published var headwindOutput = ""
+    
+    @Published var windDirectionTextFieldStyle: InputFieldStyle = .init(.default)
+    @Published var windDirectionBottomConfig: BottomLabelConfig = .init(isVisible: false)
 
-    let windSpeedLabel = "Wind speed"
-    let runwayNumberLabel = "Runway number"
-    let windDirectionLabel = "Wind Direction"
-    let headwindLabel = "Headwind"
-    let crosswindLabel = "Crosswind"
-
-    @Published private var crosswind: Double = 0
-    @Published private var headwind: Double = 0
+    private var calculator: CalculatorService
     private var cancellables = Set<AnyCancellable>()
 
-    init() {
-        // Combine publishers to observe changes to input values and update crosswind and headwind
-        Publishers.CombineLatest3($windSpeed, $windDirection, $runwayNumber)
-            .sink { [weak self] windSpeed, windDirection, runwayHeading in
+    init(calculatorService: CalculatorService) {
+        self.calculator = calculatorService
+        
+        Publishers.CombineLatest3($runwayHeading, $windSpeed, $windDirection)
+            .sink { [weak self] runwayHeading, windSpeed, windDirection in
 
                 guard !windSpeed.isEmpty, !windDirection.isEmpty, runwayHeading != nil,
-                      let windSpeedValue = Double(windSpeed),
-                      let windDirectionValue = Double(windDirection),
-                      let runwayNumberDouble = self?.runwayNumber?.toDouble()
+                      let windSpeed = Double(windSpeed),
+                      let windDirection = Double(windDirection),
+                      let runwayHeading = self?.runwayHeading?.toDouble()
                 else {
+                    self?.clearCalculations()
                     return
                 }
-                //if the 3 required fields are not null:
-                self!.convertValuesToRadians(runwayNumberDouble, windDirectionValue, windSpeedValue)
+                if self?.validateWindDirection(windDirection) ?? false {
+                    self?.calculateWinds(speed: windSpeed, direction: windDirection, runway: runwayHeading)
+                } else {
+                    self?.clearCalculations()
+                }
             }
             .store(in: &cancellables)
     }
+    
+    func validateWindDirection(_ windDirection: Double) -> Bool {
+        let validDirection = 0 <= windDirection && windDirection <= 360
+        if validDirection {
+            windDirectionTextFieldStyle = .init(.default)
+            windDirectionBottomConfig = .init(isVisible: false)
+        } else {
+            windDirectionTextFieldStyle = .init(.warning)
+            windDirectionBottomConfig = .init(CrossWindCalculator.windDirectionError, state: .warning, isVisible: true)
+        }
 
-    func convertValuesToRadians(_ runwayNumber: Double, _ windDirection: Double, _ windSpeed: Double) {
-        let windDirectionRadians = degreesToRadians(windDirection)
-        let airplaneHeadingRadians = degreesToRadians(runwayHeadingInDegrees(runwayNumber))
-        calculateWindSpeeds(windspeed: windSpeed, windDirection: windDirectionRadians, runwayHeading: airplaneHeadingRadians)
+        return validDirection
     }
-
-    func calculateWindSpeeds(windspeed: Double, windDirection: Double, runwayHeading: Double) {
-        let crosswind = windspeed * sin(windDirection - runwayHeading)
-        let headwind = windspeed * cos(windDirection - runwayHeading)
-        let absoluteCrosswindComponent = abs(crosswind)
-        let absoluteHeadwindComponent = abs(headwind)
-        crosswindString = absoluteCrosswindComponent.toDecimalString(decimalPlaces: 2)
-        headwindString =  absoluteHeadwindComponent.toDecimalString(decimalPlaces: 2)
+    
+    func calculateWinds(speed: Double, direction: Double, runway: Double) {
+        
+        crosswindOutput = formatOutputUnits(calculator.calculateCrossWind(speed: speed, direction: direction, runway: runway))
+        
+        headwindOutput = formatOutputUnits(calculator.calculateHeadWind(speed: speed, direction: direction, runway: runway))
     }
-
-    func runwayHeadingInDegrees(_ runwayNumber: Double) -> Double {
-        return runwayNumber * 10.0
+    
+    func formatOutputUnits(_ value: String) -> String {
+        return "\(value) \(CrossWindCalculator.outputUnit)"
     }
-
-    func degreesToRadians(_ degrees: Double) -> Double {
-        return degrees * Double.pi / 180
+    
+    func clearCalculations() {
+        crosswindOutput = ""
+        headwindOutput = ""
     }
 }
-
-private extension Int {
-    func toDouble() -> Double {
-        return Double(self)
-    }
-}
-
