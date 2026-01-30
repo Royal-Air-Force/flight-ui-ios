@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		556931492AC713FD00259236 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556931482AC713FD00259236 /* Cards.swift */; };
 		55B64F3B2AC4C01C00AC21F5 /* FlightUI in Frameworks */ = {isa = PBXBuildFile; productRef = 55B64F3A2AC4C01C00AC21F5 /* FlightUI */; };
+		8317AEB52F2D0A5800688532 /* FlightUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8317AEB42F2D0A5800688532 /* FlightUI */; };
+		831FE8552F2D0AA900F7B652 /* FlightUI in Frameworks */ = {isa = PBXBuildFile; productRef = 831FE8542F2D0AA900F7B652 /* FlightUI */; };
 		837FC6D02986D0F60076C720 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6CF2986D0F60076C720 /* Colours.swift */; };
 		837FC6D42986D1900076C720 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6D32986D1900076C720 /* Typography.swift */; };
 		838E7E2B2987D873000F691D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838E7E2A2987D873000F691D /* String+Extensions.swift */; };
@@ -25,10 +27,6 @@
 		FB10BD802B9F58F1002489AB /* UnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */; };
 		FB10BD822B9F5F08002489AB /* UnitConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10BD812B9F5F08002489AB /* UnitConverterViewModel.swift */; };
 		FB86F2042BA4657A00B51D99 /* ConverterToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB86F2032BA4657A00B51D99 /* ConverterToolTests.swift */; };
-		FB86F20B2BA4942800B51D99 /* CrossWindCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB86F20A2BA4942800B51D99 /* CrossWindCalculator.swift */; };
-		FB86F20D2BA4945100B51D99 /* CrossWindViewmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB86F20C2BA4945100B51D99 /* CrossWindViewmodel.swift */; };
-		FB86F20E2BA85B9C00B51D99 /* CrossWindViewmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB86F20C2BA4945100B51D99 /* CrossWindViewmodel.swift */; };
-		FB86F2102BA88A8F00B51D99 /* WindCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB86F20F2BA88A8F00B51D99 /* WindCalcTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +41,6 @@
 
 /* Begin PBXFileReference section */
 		556931482AC713FD00259236 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
-		55B64F392AC4BEEF00AC21F5 /* flight-ui-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "flight-ui-ios"; path = ..; sourceTree = "<group>"; };
 		837FC6CF2986D0F60076C720 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		837FC6D32986D1900076C720 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		838E7E2A2987D873000F691D /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -61,9 +58,6 @@
 		FB10BD812B9F5F08002489AB /* UnitConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterViewModel.swift; sourceTree = "<group>"; };
 		FB86F2012BA4657900B51D99 /* KitchenSinkUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KitchenSinkUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB86F2032BA4657A00B51D99 /* ConverterToolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterToolTests.swift; sourceTree = "<group>"; };
-		FB86F20A2BA4942800B51D99 /* CrossWindCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossWindCalculator.swift; sourceTree = "<group>"; };
-		FB86F20C2BA4945100B51D99 /* CrossWindViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossWindViewmodel.swift; sourceTree = "<group>"; };
-		FB86F20F2BA88A8F00B51D99 /* WindCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindCalcTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +65,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				831FE8552F2D0AA900F7B652 /* FlightUI in Frameworks */,
 				83F3071E2F12ED5E0010D75C /* FlightUI in Frameworks */,
 				55B64F3B2AC4C01C00AC21F5 /* FlightUI in Frameworks */,
+				8317AEB52F2D0A5800688532 /* FlightUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,14 +90,6 @@
 				AA4D62A42A4EE6E9009303DF /* Spacing.swift */,
 			);
 			path = Styles;
-			sourceTree = "<group>";
-		};
-		55B64F382AC4BEEF00AC21F5 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				55B64F392AC4BEEF00AC21F5 /* flight-ui-ios */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		837FC6CE2986D0C70076C720 /* App */ = {
@@ -131,7 +119,6 @@
 		83C93DB72986C53A00A911A9 = {
 			isa = PBXGroup;
 			children = (
-				55B64F382AC4BEEF00AC21F5 /* Packages */,
 				83C93DC22986C53A00A911A9 /* Kitchen Sink */,
 				FB86F2022BA4657A00B51D99 /* KitchenSinkUnitTests */,
 				83C93DC12986C53A00A911A9 /* Products */,
@@ -195,8 +182,6 @@
 			children = (
 				FB10BD7F2B9F58F1002489AB /* UnitConverter.swift */,
 				FB10BD812B9F5F08002489AB /* UnitConverterViewModel.swift */,
-				FB86F20A2BA4942800B51D99 /* CrossWindCalculator.swift */,
-				FB86F20C2BA4945100B51D99 /* CrossWindViewmodel.swift */,
 			);
 			path = DemonstrationTools;
 			sourceTree = "<group>";
@@ -205,7 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				FB86F2032BA4657A00B51D99 /* ConverterToolTests.swift */,
-				FB86F20F2BA88A8F00B51D99 /* WindCalcTests.swift */,
 			);
 			path = KitchenSinkUnitTests;
 			sourceTree = "<group>";
@@ -229,6 +213,8 @@
 			packageProductDependencies = (
 				55B64F3A2AC4C01C00AC21F5 /* FlightUI */,
 				83F3071D2F12ED5E0010D75C /* FlightUI */,
+				8317AEB42F2D0A5800688532 /* FlightUI */,
+				831FE8542F2D0AA900F7B652 /* FlightUI */,
 			);
 			productName = "Kitchen Sink";
 			productReference = 83C93DC02986C53A00A911A9 /* Kitchen Sink.app */;
@@ -281,7 +267,7 @@
 			);
 			mainGroup = 83C93DB72986C53A00A911A9;
 			packageReferences = (
-				83F3071C2F12ED5E0010D75C /* XCLocalSwiftPackageReference "../../flight-ui-ios" */,
+				831FE8532F2D0AA900F7B652 /* XCLocalSwiftPackageReference "../../FlightUI" */,
 			);
 			productRefGroup = 83C93DC12986C53A00A911A9 /* Products */;
 			projectDirPath = "";
@@ -322,12 +308,10 @@
 				838E7E2E2987FBF3000F691D /* Buttons.swift in Sources */,
 				AA3C83AF2A3CB5B100A3F40B /* Inputs.swift in Sources */,
 				AA4D62A52A4EE6E9009303DF /* Spacing.swift in Sources */,
-				FB86F20D2BA4945100B51D99 /* CrossWindViewmodel.swift in Sources */,
 				AA3E69102A671900007B6860 /* KitchenSinkApp.swift in Sources */,
 				AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */,
 				837FC6D02986D0F60076C720 /* Colours.swift in Sources */,
 				AA4832C22A8E1DCD004B5F45 /* HeadingView.swift in Sources */,
-				FB86F20B2BA4942800B51D99 /* CrossWindCalculator.swift in Sources */,
 				556931492AC713FD00259236 /* Cards.swift in Sources */,
 				838E7E2B2987D873000F691D /* String+Extensions.swift in Sources */,
 				FB10BD822B9F5F08002489AB /* UnitConverterViewModel.swift in Sources */,
@@ -340,8 +324,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB86F2042BA4657A00B51D99 /* ConverterToolTests.swift in Sources */,
-				FB86F2102BA88A8F00B51D99 /* WindCalcTests.swift in Sources */,
-				FB86F20E2BA85B9C00B51D99 /* CrossWindViewmodel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,14 +616,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		83F3071C2F12ED5E0010D75C /* XCLocalSwiftPackageReference "../../flight-ui-ios" */ = {
+		831FE8532F2D0AA900F7B652 /* XCLocalSwiftPackageReference "../../FlightUI" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../flight-ui-ios";
+			relativePath = ../../FlightUI;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		55B64F3A2AC4C01C00AC21F5 /* FlightUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FlightUI;
+		};
+		8317AEB42F2D0A5800688532 /* FlightUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FlightUI;
+		};
+		831FE8542F2D0AA900F7B652 /* FlightUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FlightUI;
 		};

@@ -5,304 +5,223 @@ import SwiftUI
 private enum ButtonDefaults {
     static let pressedOpacity: CGFloat = 0.6
     static let pressedScale: CGFloat = 0.95
+    static let tonalBackgroundOpacity: CGFloat = 0.18
 }
 
-// MARK: - Filled Button Style
+// MARK: - Button Variant
 
-public struct FilledButtonStyle: ButtonStyle {
-    @Environment(\.theme) private var theme
-    @Environment(\.isEnabled) private var isEnabled
-
-    public init() {}
-
-    public func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(.horizontal, theme.spacing.grid4x)
-            .frame(minHeight: theme.size.medium)
-            .foregroundColor(foregroundColor)
-            .background(backgroundColor)
-            .fontStyle(theme.typography.bodyBold)
-            .clipShape(Capsule())
-            .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
-            .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
-    }
-
-    private var backgroundColor: Color {
-        isEnabled ? theme.color.nominal : theme.color.disabled
-    }
-
-    private var foregroundColor: Color {
-        isEnabled ? theme.color.onCore : theme.color.onDisabled
-    }
+public enum ButtonVariant: Sendable {
+    case filled
+    case tonal
+    case outline
+    case text
 }
 
-// MARK: - Filled Icon Button Style
+// MARK: - Button Shape
 
-public struct FilledIconButtonStyle: ButtonStyle {
-    @Environment(\.theme) private var theme
-    @Environment(\.isEnabled) private var isEnabled
-
-    public init() {}
-
-    public func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
-            .foregroundColor(foregroundColor)
-            .background(backgroundColor)
-            .fontStyle(theme.typography.bodyBold)
-            .clipShape(Circle())
-            .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
-            .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
-    }
-
-    private var backgroundColor: Color {
-        isEnabled ? theme.color.nominal : theme.color.disabled
-    }
-
-    private var foregroundColor: Color {
-        isEnabled ? theme.color.onCore : theme.color.onDisabled
-    }
+public enum ButtonShape: Sendable {
+    case capsule
+    case circle
 }
 
-// MARK: - Tonal Button Style
-
-public struct TonalButtonStyle: ButtonStyle {
-    @Environment(\.theme) private var theme
-    @Environment(\.isEnabled) private var isEnabled
-
-    public init() {}
-
-    public func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(.horizontal, theme.spacing.grid4x)
-            .frame(minHeight: theme.size.medium)
-            .foregroundColor(foregroundColor)
-            .background(backgroundColor)
-            .fontStyle(theme.typography.bodyBold)
-            .clipShape(Capsule())
-            .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
-            .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
-    }
-
-    private var backgroundColor: Color {
-        isEnabled ? theme.color.nominal.opacity(0.18) : theme.color.disabled
-    }
-
-    private var foregroundColor: Color {
-        isEnabled ? theme.color.nominal : theme.color.onDisabled
-    }
-}
-
-// MARK: - Tonal Icon Button Style
-
-public struct TonalIconButtonStyle: ButtonStyle {
-    @Environment(\.theme) private var theme
-    @Environment(\.isEnabled) private var isEnabled
-
-    public init() {}
-
-    public func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
-            .foregroundColor(foregroundColor)
-            .background(backgroundColor)
-            .fontStyle(theme.typography.bodyBold)
-            .clipShape(Circle())
-            .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
-            .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
-    }
-
-    private var backgroundColor: Color {
-        isEnabled ? theme.color.nominal.opacity(0.18) : theme.color.disabled
-    }
-
-    private var foregroundColor: Color {
-        isEnabled ? theme.color.nominal : theme.color.onDisabled
-    }
-}
-
-// MARK: - Outline Button Style
-
-public struct OutlineButtonStyle: ButtonStyle {
-    @Environment(\.theme) private var theme
-    @Environment(\.isEnabled) private var isEnabled
-
-    public init() {}
-
-    public func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(.horizontal, theme.spacing.grid4x)
-            .frame(minHeight: theme.size.medium)
-            .foregroundColor(foregroundColor)
-            .fontStyle(theme.typography.bodyBold)
-            .clipShape(Capsule())
-            .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
-            .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
-            .overlay(
-                Capsule(style: .circular)
-                    .strokeBorder(foregroundColor, style: StrokeStyle(lineWidth: theme.size.border))
-                    .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
-                    .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
-            )
-    }
-
-    private var foregroundColor: Color {
-        isEnabled ? theme.color.nominal : theme.color.onDisabled
-    }
-}
-
-// MARK: - Outline Icon Button Style
-
-public struct OutlineIconButtonStyle: ButtonStyle {
-    @Environment(\.theme) private var theme
-    @Environment(\.isEnabled) private var isEnabled
-
-    public init() {}
-
-    public func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
-            .foregroundColor(foregroundColor)
-            .fontStyle(theme.typography.bodyBold)
-            .clipShape(Circle())
-            .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
-            .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
-            .overlay(
-                Circle()
-                    .strokeBorder(foregroundColor, style: StrokeStyle(lineWidth: theme.size.border))
-                    .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
-                    .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
-            )
-    }
-
-    private var foregroundColor: Color {
-        isEnabled ? theme.color.nominal : theme.color.onDisabled
-    }
-}
-
-// MARK: - Text Button Style
-
-public struct TextButtonStyle: ButtonStyle {
-    @Environment(\.theme) private var theme
-    @Environment(\.isEnabled) private var isEnabled
-
-    public init() {}
-
-    public func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(.horizontal, theme.spacing.grid4x)
-            .frame(minHeight: theme.size.medium)
-            .foregroundColor(foregroundColor)
-            .fontStyle(theme.typography.bodyBold)
-            .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
-            .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
-    }
-
-    private var foregroundColor: Color {
-        isEnabled ? theme.color.nominal : theme.color.onDisabled
-    }
-}
-
-// MARK: - Text Icon Button Style
-
-public struct TextIconButtonStyle: ButtonStyle {
-    @Environment(\.theme) private var theme
-    @Environment(\.isEnabled) private var isEnabled
-
-    public init() {}
-
-    public func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(minWidth: theme.size.medium, minHeight: theme.size.medium)
-            .foregroundColor(foregroundColor)
-            .fontStyle(theme.typography.bodyBold)
-            .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
-            .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
-    }
-
-    private var foregroundColor: Color {
-        isEnabled ? theme.color.nominal : theme.color.onDisabled
-    }
-}
-
-// MARK: - Core Button Style
+// MARK: - Core Button Type
 
 public enum CoreButtonType: Sendable {
-    case advisory, caution, warning
+    case nominal
+    case advisory
+    case caution
+    case warning
 }
 
-public struct CoreButtonStyle: ButtonStyle {
+// MARK: - Flight Button Style
+
+public struct FlightButtonStyle: ButtonStyle {
     @Environment(\.theme) private var theme
     @Environment(\.isEnabled) private var isEnabled
 
-    private let coreType: CoreButtonType
+    private let variant: ButtonVariant
+    private let shape: ButtonShape
+    private let coreType: CoreButtonType?
 
-    public init(coreType: CoreButtonType) {
+    public init(
+        variant: ButtonVariant,
+        shape: ButtonShape = .capsule,
+        coreType: CoreButtonType? = nil
+    ) {
+        self.variant = variant
+        self.shape = shape
         self.coreType = coreType
     }
 
     public func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(.horizontal, theme.spacing.grid4x)
-            .frame(minHeight: theme.size.medium)
-            .foregroundColor(foregroundColor)
-            .background(backgroundColor)
-            .fontStyle(theme.typography.bodyBold)
-            .clipShape(Capsule())
-            .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
-            .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
+        Group {
+            switch shape {
+            case .capsule:
+                configuration.label
+                    .padding(.horizontal, horizontalPadding)
+                    .frame(minWidth: minSize, minHeight: minSize)
+                    .foregroundColor(foregroundColor)
+                    .background(backgroundColor)
+                    .fontStyle(theme.typography.bodyBold)
+                    .clipShape(Capsule())
+                    .overlay {
+                        if variant == .outline {
+                            Capsule()
+                                .strokeBorder(foregroundColor, lineWidth: theme.size.border)
+                        }
+                    }
+            case .circle:
+                configuration.label
+                    .frame(minWidth: minSize, minHeight: minSize)
+                    .foregroundColor(foregroundColor)
+                    .background(backgroundColor)
+                    .fontStyle(theme.typography.bodyBold)
+                    .clipShape(Circle())
+                    .overlay {
+                        if variant == .outline {
+                            Circle()
+                                .strokeBorder(foregroundColor, lineWidth: theme.size.border)
+                        }
+                    }
+            }
+        }
+        .opacity(configuration.isPressed ? ButtonDefaults.pressedOpacity : 1.0)
+        .scaleEffect(configuration.isPressed ? ButtonDefaults.pressedScale : 1.0)
+        .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
     }
 
-    private var backgroundColor: Color {
-        guard isEnabled else { return theme.color.disabled }
-        switch coreType {
-        case .advisory: return theme.color.primary
-        case .caution: return theme.color.caution
-        case .warning: return theme.color.warning
+    // MARK: - Computed Properties
+
+    private var horizontalPadding: CGFloat {
+        switch shape {
+        case .capsule:
+            return theme.spacing.grid4x
+        case .circle:
+            return 0
         }
     }
 
+    private var minSize: CGFloat {
+        theme.size.medium
+    }
+
+    // MARK: - Colors
+
     private var foregroundColor: Color {
-        isEnabled ? theme.color.onCore : theme.color.onDisabled
+        guard isEnabled else { return theme.color.onDisabled }
+
+        switch variant {
+        case .filled:
+            return theme.color.onCore
+        case .tonal, .outline, .text:
+            return coreColor
+        }
+    }
+
+    private var backgroundColor: Color {
+        guard isEnabled else {
+            return variant == .text || variant == .outline ? .clear : theme.color.disabled
+        }
+
+        switch variant {
+        case .filled:
+            return coreColor
+        case .tonal:
+            return coreColor.opacity(ButtonDefaults.tonalBackgroundOpacity)
+        case .outline, .text:
+            return .clear
+        }
+    }
+
+    private var coreColor: Color {
+        guard let coreType else { return theme.color.nominal }
+
+        switch coreType {
+        case .nominal:
+            return theme.color.nominal
+        case .advisory:
+            return theme.color.primary
+        case .caution:
+            return theme.color.caution
+        case .warning:
+            return theme.color.warning
+        }
     }
 }
 
 // MARK: - ButtonStyle Extensions
 
-public extension ButtonStyle where Self == FilledButtonStyle {
-    static var filled: Self { .init() }
-}
+public extension ButtonStyle where Self == FlightButtonStyle {
 
-public extension ButtonStyle where Self == FilledIconButtonStyle {
-    static var filledIcon: Self { .init() }
-}
+    // MARK: Standard Variants (Capsule Shape)
 
-public extension ButtonStyle where Self == TonalButtonStyle {
-    static var tonal: Self { .init() }
-}
+    /// Filled button with solid background
+    static var filled: FlightButtonStyle {
+        FlightButtonStyle(variant: .filled, shape: .capsule)
+    }
 
-public extension ButtonStyle where Self == TonalIconButtonStyle {
-    static var tonalIcon: Self { .init() }
-}
+    /// Tonal button with translucent background
+    static var tonal: FlightButtonStyle {
+        FlightButtonStyle(variant: .tonal, shape: .capsule)
+    }
 
-public extension ButtonStyle where Self == OutlineButtonStyle {
-    static var outline: Self { .init() }
-}
+    /// Outline button with border only
+    static var outline: FlightButtonStyle {
+        FlightButtonStyle(variant: .outline, shape: .capsule)
+    }
 
-public extension ButtonStyle where Self == OutlineIconButtonStyle {
-    static var outlineIcon: Self { .init() }
-}
+    /// Text-only button with no background
+    static var text: FlightButtonStyle {
+        FlightButtonStyle(variant: .text, shape: .capsule)
+    }
 
-public extension ButtonStyle where Self == TextButtonStyle {
-    static var text: Self { .init() }
-}
+    // MARK: Icon Variants (Circle Shape)
 
-public extension ButtonStyle where Self == TextIconButtonStyle {
-    static var textIcon: Self { .init() }
-}
+    /// Filled circular icon button
+    static var filledIcon: FlightButtonStyle {
+        FlightButtonStyle(variant: .filled, shape: .circle)
+    }
 
-public extension ButtonStyle where Self == CoreButtonStyle {
-    static var advisory: Self { .init(coreType: .advisory) }
-    static var caution: Self { .init(coreType: .caution) }
-    static var warning: Self { .init(coreType: .warning) }
+    /// Tonal circular icon button
+    static var tonalIcon: FlightButtonStyle {
+        FlightButtonStyle(variant: .tonal, shape: .circle)
+    }
+
+    /// Outline circular icon button
+    static var outlineIcon: FlightButtonStyle {
+        FlightButtonStyle(variant: .outline, shape: .circle)
+    }
+
+    /// Text-only circular icon button
+    static var textIcon: FlightButtonStyle {
+        FlightButtonStyle(variant: .text, shape: .circle)
+    }
+
+    // MARK: Core Alert Variants
+
+    /// Advisory button (uses primary color)
+    static var advisory: FlightButtonStyle {
+        FlightButtonStyle(variant: .filled, shape: .capsule, coreType: .advisory)
+    }
+
+    /// Caution button (yellow/amber)
+    static var caution: FlightButtonStyle {
+        FlightButtonStyle(variant: .filled, shape: .capsule, coreType: .caution)
+    }
+
+    /// Warning button (red)
+    static var warning: FlightButtonStyle {
+        FlightButtonStyle(variant: .filled, shape: .capsule, coreType: .warning)
+    }
+
+    // MARK: Custom Configuration
+
+    /// Create a custom button style with specific variant, shape, and core type
+    static func custom(
+        variant: ButtonVariant,
+        shape: ButtonShape = .capsule,
+        coreType: CoreButtonType? = nil
+    ) -> FlightButtonStyle {
+        FlightButtonStyle(variant: variant, shape: shape, coreType: coreType)
+    }
 }

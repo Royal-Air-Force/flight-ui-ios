@@ -34,7 +34,7 @@ struct Inputs: View {
 
                 InputField(text: $viewModel.generalHint, placeholder: "Hint")
                     .textFieldStyle(.default)
-                    .onChange(of: viewModel.generalHint) { oldValue, newValue in
+                    .onChange(of: viewModel.generalHint) { _, newValue in
                         print("General hint changed to \(newValue)")
                     }
 

@@ -1,11 +1,11 @@
-//import XCTest
-//import SwiftUI
+// import XCTest
+// import SwiftUI
 //
-//import ViewInspector
+// import ViewInspector
 //
-//@testable import FlightUI
+// @testable import FlightUI
 //
-//class InputFieldTests: XCTestCase {
+// class InputFieldTests: XCTestCase {
 //
 //    // MARK: - Input Field -
 //
@@ -32,4 +32,4 @@
 //        // then
 //        XCTAssertEqual(text.wrappedValue, "Test Binding")
 //    }
-//}
+// }

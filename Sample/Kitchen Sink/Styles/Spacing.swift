@@ -110,4 +110,3 @@ struct SpacingDisplayBox: View {
         .padding([.top, .bottom], theme.spacing.grid0_5x)
     }
 }
-

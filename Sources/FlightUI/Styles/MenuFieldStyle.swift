@@ -18,28 +18,28 @@ public struct MenuFieldStyle: Sendable {
 
     public func getFontColor(_ theme: ThemeData, isPlaceholder: Bool, isEnabled: Bool) -> Color {
         if isPlaceholder {
-            return theme.color.primary.opacity(MenuFieldDefaults.hintOpacity)
+            return theme.color.primary.opacity(FieldDefaults.hintOpacity)
         } else if let overrideColor = config.fontColor {
-            return overrideColor.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+            return overrideColor.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         } else {
-            return theme.color.inputOutput.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+            return theme.color.inputOutput.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         }
     }
 
     public func getFieldBackgroundColor(_ theme: ThemeData, isEnabled: Bool) -> Color {
         if !isEnabled {
-            return theme.color.surfaceHigh.opacity(MenuFieldDefaults.disabledOpacity)
+            return theme.color.surfaceHigh.opacity(FieldDefaults.disabledOpacity)
         }
         if let overrideColor = config.backgroundColor {
             return overrideColor
         }
         switch state {
         case .nominal:
-            return theme.color.nominal.opacity(MenuFieldDefaults.stateBackgroundOpacity)
+            return theme.color.nominal.opacity(FieldDefaults.stateBackgroundOpacity)
         case .caution:
-            return theme.color.caution.opacity(MenuFieldDefaults.stateBackgroundOpacity)
+            return theme.color.caution.opacity(FieldDefaults.stateBackgroundOpacity)
         case .warning:
-            return theme.color.warning.opacity(MenuFieldDefaults.stateBackgroundOpacity)
+            return theme.color.warning.opacity(FieldDefaults.stateBackgroundOpacity)
         default:
             return theme.color.surfaceHigh
         }
@@ -55,11 +55,11 @@ public struct MenuFieldStyle: Sendable {
         }
         switch state {
         case .nominal:
-            return theme.color.nominal.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+            return theme.color.nominal.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         case .caution:
-            return theme.color.caution.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+            return theme.color.caution.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         case .warning:
-            return theme.color.warning.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+            return theme.color.warning.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         default:
             return theme.color.surfaceHigh
         }

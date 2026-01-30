@@ -21,7 +21,6 @@ identifier_name:
   max_length:
     warning: 70
     error: 100
-  severity: error
   excluded:
     - x
     - y

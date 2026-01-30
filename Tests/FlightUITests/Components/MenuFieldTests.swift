@@ -1,11 +1,11 @@
-//import XCTest
-//import SwiftUI
+// import XCTest
+// import SwiftUI
 //
-//import ViewInspector
+// import ViewInspector
 //
-//@testable import FlightUI
+// @testable import FlightUI
 //
-//class MenuFieldTests: XCTestCase {
+// class MenuFieldTests: XCTestCase {
 //
 //    // MARK: - Menu Field -
 //
@@ -47,4 +47,4 @@
 //        XCTAssertEqual(try actualAttributes.font(), try expectedAttributes.font())
 //        XCTAssertEqual(try actualAttributes.foregroundColor(), try expectedAttributes.foregroundColor())
 //    }
-//}
+// }

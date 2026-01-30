@@ -2,7 +2,7 @@ import SwiftUI
 
 // MARK: - Input Field Style
 
-public struct InputFieldStyle: @preconcurrency TextFieldStyle {
+public struct InputFieldStyle: @MainActor TextFieldStyle {
     @Environment(\.theme) private var theme
     @Environment(\.isEnabled) private var isEnabled
     @FocusState private var isFocused: Bool
@@ -47,14 +47,14 @@ public struct InputFieldStyle: @preconcurrency TextFieldStyle {
         case .advisory:
             return theme.color.primary
         default:
-            return theme.color.inputOutput.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
+            return theme.color.inputOutput.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         }
     }
 
     @MainActor
     private var fieldBackgroundColor: Color {
         if !isEnabled {
-            return theme.color.surfaceHigh.opacity(InputFieldDefaults.disabledOpacity)
+            return theme.color.surfaceHigh.opacity(FieldDefaults.disabledOpacity)
         }
         if let overrideColor = config.backgroundColor {
             return overrideColor
@@ -63,11 +63,11 @@ public struct InputFieldStyle: @preconcurrency TextFieldStyle {
         case .default, .advisory:
             return theme.color.surfaceHigh
         case .nominal:
-            return theme.color.nominal.opacity(InputFieldDefaults.stateBackgroundOpacity)
+            return theme.color.nominal.opacity(FieldDefaults.stateBackgroundOpacity)
         case .caution:
-            return theme.color.caution.opacity(InputFieldDefaults.stateBackgroundOpacity)
+            return theme.color.caution.opacity(FieldDefaults.stateBackgroundOpacity)
         case .warning:
-            return theme.color.warning.opacity(InputFieldDefaults.stateBackgroundOpacity)
+            return theme.color.warning.opacity(FieldDefaults.stateBackgroundOpacity)
         }
     }
 
@@ -85,13 +85,13 @@ public struct InputFieldStyle: @preconcurrency TextFieldStyle {
         case .default:
             return theme.color.surfaceHigh
         case .advisory:
-            return theme.color.primary.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
+            return theme.color.primary.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         case .nominal:
-            return theme.color.nominal.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
+            return theme.color.nominal.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         case .caution:
-            return theme.color.caution.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
+            return theme.color.caution.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         case .warning:
-            return theme.color.warning.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
+            return theme.color.warning.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         }
     }
 

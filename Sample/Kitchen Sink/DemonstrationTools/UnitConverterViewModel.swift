@@ -3,19 +3,19 @@ import Combine
 import FlightUI
 import SwiftUI
 
-class UnitConverterViewModel: ObservableObject {
+@Observable
+class UnitConverterViewModel {
 
-    @Published var kgInputString: String = ""
-    @Published var lbsInputString: String = ""
-    @Published var inputValue: String = ""
-    @Published var outputValue: String = ""
-    @Published var boundSelectionInput: LengthType? = .feet
-    @Published var boundSelectionOutput: LengthType? = .metres
-    @Published var weightValuesSwapped = false
-    @Published var emptyFields = false
-    @Published var kgInputFieldStyle: InputFieldStyle? = InputFieldStyle(.default)
-    @Published var lbInputFieldStyle: InputFieldStyle? = InputFieldStyle(.default)
-
+    var kgInputString: String = ""
+    var lbsInputString: String = ""
+    var inputValue: String = ""
+    var outputValue: String = ""
+    var boundSelectionInput: LengthType? = .feet
+    var boundSelectionOutput: LengthType? = .metres
+    var weightValuesSwapped = false
+    var emptyFields = false
+    var kgInputFieldStyle: InputFieldStyle? = InputFieldStyle(.default)
+    var lbInputFieldStyle: InputFieldStyle? = InputFieldStyle(.default)
 
     private let feetToMetresConversionRate: Decimal = 3.28084
     private let metresToFeetConversionRate: Decimal = 0.3048006096
@@ -100,9 +100,7 @@ class UnitConverterViewModel: ObservableObject {
                 kgInputFieldStyle = InputFieldStyle(.default)
                 lbInputFieldStyle = InputFieldStyle(.advisory)
             }
-        }
-
-        else {
+        } else {
             emptyFields = lbsInputString.isEmpty
             if emptyFields { // if the field is empty, adjust the style of the empty field & reset the converted display
                 lbInputFieldStyle = InputFieldStyle(.caution)
