@@ -1,35 +1,41 @@
 # 👛 Modifying the Library
 
 ## 🎨 Customisation
-Although by default FlightUI provides a set of approved components, there may be times where you feel the need to modify certain aspects or elements of the library in order to consistently achieve a desired look within your app.
+Although by default FlightUI provides a set of approved components, there may be times where you need to modify certain aspects to achieve a consistent look within your app.
 
-In order to do this, it is possible to create your own instance of the `Theme` object, and override only the values you wish to change while keeping the defaults the same. You can then provide your customised instance of the `Theme` object to the `ThemeManager`.
+`ThemeData` is an immutable struct, so customisation is done by creating a modified copy using the provided `with...` methods. You then pass the custom `ThemeData` to your `ThemeManager`.
 
-The `Theme` object takes in objects either for base level styling or components, such as `ThemeColors` for all the colour information, and `ThemeButtons` for all the button component styling. Changing the background colour of your application to yellow if you were so inclined can be as simple as;
-
-```
+For example, to change the background colour:
+```swift
 @main
 struct MyApp: App {
-    @StateObject var themeManager = ThemeManager(current: Theme(
-        color: ThemeColors(background: .yellow)
-    ))
+    @State private var themeManager = ThemeManager(
+        .dark.withColors(ThemeColorData(
+            background: .yellow,
+            // ... all other required colour properties
+        ))
+    )
 }
 ```
 
-Where possible, existing SwiftUI structs and protocols have been used, making overriding consistent with implementing a theme from scratch yourself. For example, if you wished to change the `filled` button style, for example modifying the font or the colour, you can create your own implementation of the `ButtonStyle` protocol and provide this as part of your theme;
+For smaller targeted changes, the `with...` convenience methods on `ThemeData` make it straightforward to override a single aspect while keeping all other defaults:
+```swift
+// Override only spacing
+let customTheme = ThemeData.dark.withSpacing(ThemeSpacingData(
+    grid0_5x: 2, grid1x: 4, grid1_5x: 6, grid2x: 8,
+    grid2_5x: 10, grid3x: 12, grid4x: 16, grid5x: 20,
+    grid6x: 24, grid7x: 28, grid8x: 32, grid9x: 36, grid10x: 40
+))
 ```
-struct MyCustomButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.largeTitle)
-            .background(.blue)
-    }
-}
 
-@main
-struct MyApp: App {
-    @StateObject var themeManager = ThemeManager(current: Theme(
-        button: ThemeButtons(filled: MyCustomButtonStyle())
-    ))
-}
+The full set of `with...` methods available on `ThemeData` is:
+- `withColors(_ colors: ThemeColorData) -> ThemeData`
+- `withSpacing(_ spacing: ThemeSpacingData) -> ThemeData`
+- `withSize(_ size: ThemeSizeData) -> ThemeData`
+- `withRadius(_ radius: ThemeRadiusData) -> ThemeData`
+- `withTypography(_ typography: ThemeTypographyData) -> ThemeData`
+
+There is also a `scaled(by:)` method that proportionally scales spacing, size, radius, and typography by a given factor — useful for density or accessibility adjustments:
+```swift
+let compactTheme = ThemeData.dark.scaled(by: 0.75)
 ```

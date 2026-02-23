@@ -16,71 +16,70 @@
 - Click the '+' button and select the FlightUI package from the list
 - Click 'Add'
 
-## Providing the Theme as an Environment Object
-Our recommended approach to utilising FlightUI is to provide the `ThemeManager` and `Theme` object as an Environment variable. This can be achieved by the following steps;
+## Providing the Theme
 
-1. Create the `ThemeManager` instance as a State Object within your App Struct. You can provide a customised `Theme` object to the theme manager within it's constructor.
-```
+FlightUI uses Swift's `@Observable` macro (iOS 17+) and a custom environment key. The recommended approach is:
+
+1. Create the `ThemeManager` as a `@State` variable in your App struct.
+```swift
 import FlightUI
 
 @main
 struct MyApp: App {
-    @StateObject var themeManager = ThemeManager()
-    // or
-    @StateObject var themeManager = ThemeManager(current: .dark)
+    @State private var themeManager = ThemeManager()
+    // or start with a specific theme:
+    @State private var themeManager = ThemeManager(.dark)
 }
 ```
-2. Provide the `themeManager` and `themeManager.current` as environment objects to your navigation stack, and set the colour scheme environment to match.
-```
+
+2. Apply the theme to your view hierarchy using `.flightTheme()` and set the preferred colour scheme to match.
+```swift
 var body: some Scene {
     WindowGroup {
         NavigationStack {
             ...
         }
-        .environmentObject(themeManager)
-        .environmentObject(themeManager.current)
-        .accentColor(themeManager.current.onBackground.default)
-        .environment(\.colorScheme, themeManager.current.baseScheme)
+        .flightTheme(themeManager.current)
+        .accentColor(themeManager.current.color.primary)
+        .preferredColorScheme(themeManager.current.baseScheme == .dark ? .dark : .light)
     }
 }
 ```
-3. When you need to access elements of FlightUI, ensure it is passed through as an environment object and then access it directly inside your View struct
-```
+
+3. Access the theme inside any view using `@Environment(\.theme)`.
+```swift
 struct MyView: View {
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) var theme
 
     var body: some View {
         VStack {
             ...
         }
-        .background(theme.color.surface)
-        .padding(.all, theme.padding.grid4x)
+        .background(theme.color.background)
+        .padding(.all, theme.spacing.grid4x)
     }
 }
 ```
-4. If you want to change the theme, for example between light and dark, then access your Theme Manager object as an environment object and call the `updateTheme` function
-```
+
+4. To change the theme, call `apply(_:)` on the `ThemeManager`, or use `toggle()` to switch between light and dark.
+```swift
 struct ThemeToggleButton: View {
-    @EnvironmentObject var themeManager: ThemeManager
-    @EnvironmentObject var theme: Theme
+    @State private var isDarkTheme = true
 
     var body: some View {
-        Button("Light Theme", action: { 
-                themeManager.updateTheme(.light)
-            })
-            .buttonStyle(theme.button.filled)
-            .padding(.all, theme.padding.grid2x)
+        Button {
+            withAnimation {
+                isDarkTheme.toggle()
+                themeManager.apply(isDarkTheme ? .dark : .light)
+            }
+        } label: {
+            Text(isDarkTheme ? "Dark" : "Light")
+        }
     }
 }
 ```
-5. By default, calling `updateTheme` will also change the app environment colour scheme to the one defined in your `Theme.baseScheme`, if you have customised this or are managing the environment manually, then you can prevent this by setting `changeBaseTheme` to `false`
-```
-...
-var body: some View {
-    Button("Light Theme", action: { 
-            themeManager.updateTheme(.light, changeBaseTheme: false)
-        })
-        .buttonStyle(theme.button.filled)
-        .padding(.all, theme.padding.grid2x)
-}
+
+Alternatively, use `toggle()` as a shorthand:
+```swift
+themeManager.toggle()
 ```
