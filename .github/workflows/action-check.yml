@@ -15,6 +15,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Install SwiftLint
+        run: |
+          brew install swiftlint
         
       - name: Lenient Lint Check
         if: ${{ inputs.fail-on-lint-warning == 'false' }}
