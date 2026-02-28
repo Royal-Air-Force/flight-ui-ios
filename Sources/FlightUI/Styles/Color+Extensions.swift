@@ -1,11 +1,6 @@
-//
-//  Color+Extensions.swift
-//  flight-ui-ios
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
+
+// MARK: - FlightUI Color Palette
 
 public extension Color {
     // N/A
@@ -52,86 +47,3 @@ public extension Color {
     static let flightGraphicsPink = Color("flightGraphicsPink", bundle: .module)
     static let flightGraphicsDarkPink = Color("flightGraphicsDarkPink", bundle: .module)
 }
-
-// MARK: - FilePrivate Preview Code -
-
-#if DEBUG
-
-fileprivate extension Color {
-    var name: String {
-        let description = self.description
-        if !description.starts(with: "NamedColor") { return description }
-        let firstOccurenceIndex = description.firstIndex(of: "\"") ?? description.startIndex
-        let startIndex = description.index(firstOccurenceIndex, offsetBy: 1)
-        let suffix = description.suffix(from: startIndex)
-        let lastOccurenceIndex = suffix.firstIndex(of: "\"") ?? description.endIndex
-        let name = suffix.prefix(upTo: lastOccurenceIndex)
-        return String(name)
-    }
-
-    static let generalColors: [Color] = [.flightGrey0,
-                                       .flightGrey100,
-                                       .flightGrey200,
-                                       .flightGrey300,
-                                       .flightGrey400,
-                                       .flightGrey500,
-                                       .flightGrey600,
-                                       .flightGrey700,
-                                       .flightGrey800,
-                                       .flightGrey900]
-
-    static let coreColors: [Color] = [.flightDarkBlue,
-                                      .flightLightBlue,
-                                      .flightDarkGreen,
-                                      .flightLightGreen,
-                                      .flightDarkYellow,
-                                      .flightLightYellow,
-                                      .flightDarkRed,
-                                      .flightLightRed]
-
-    static let graphicsColors: [Color] = [.flightGraphicsRed,
-                                          .flightGraphicsDarkRed,
-                                          .flightGraphicsYellow,
-                                          .flightGraphicsDarkYellow,
-                                          .flightGraphicsGreen,
-                                          .flightGraphicsDarkGreen,
-                                          .flightGraphicsMint,
-                                          .flightGraphicsDarkMint,
-                                          .flightGraphicsCyan,
-                                          .flightGraphicsDarkCyan,
-                                          .flightGraphicsBlue,
-                                          .flightGraphicsDarkBlue,
-                                          .flightGraphicsIndigo,
-                                          .flightGraphicsPurple,
-                                          .flightGraphicsDarkPurple,
-                                          .flightGraphicsPink,
-                                          .flightGraphicsDarkPink]
-
-    static let customColors: [Color] = generalColors + coreColors + graphicsColors
-}
-
-struct Color_Previews: PreviewProvider {
-    static var theme: Theme = Theme(baseScheme: .dark)
-
-    static var previews: some View {
-        List(Color.customColors, id: \.self) { color in
-            HStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(Color.gray, lineWidth: 3.0)
-                    .background(color)
-                    .frame(width: 75, height: 75)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-
-                Text("\(color.name)")
-                    .fontStyle(Theme().font.title2)
-                    .padding()
-            }
-        }
-        .environmentObject(theme)
-        .preferredColorScheme(theme.baseScheme)
-        .previewDisplayName("All Colors")
-        .padding()
-    }
-}
-
-#endif

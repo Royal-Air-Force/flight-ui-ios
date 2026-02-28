@@ -1,16 +1,9 @@
-//
-//  AppHeader.swift
-//  flight-ui-ios
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 
-// MARK: - AppHeader View -
+// MARK: - App Header View
 
-private struct AppHeader<Content: View>: View {
-    @EnvironmentObject var theme: Theme
+public struct AppHeader<Content: View>: View {
+    @Environment(\.theme) var theme
 
     private var content: () -> Content
     private var title: String?
@@ -21,13 +14,19 @@ private struct AppHeader<Content: View>: View {
 
     public init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
+        self.title = nil
+        self.imageName = nil
+        self.bundle = nil
+        self.typography = nil
         self.useContent = true
     }
 
-    public init (title: String? = nil,
-                 typography: Font? = nil,
-                 imageName: String? = nil,
-                 bundle: Bundle? = nil) where Content == EmptyView {
+    public init(
+        title: String? = nil,
+        typography: Font? = nil,
+        imageName: String? = nil,
+        bundle: Bundle? = nil
+    ) where Content == EmptyView {
         self.title = title
         self.typography = typography
         self.imageName = imageName
@@ -60,35 +59,3 @@ private struct AppHeader<Content: View>: View {
         .background(theme.color.background)
     }
 }
-
-// MARK: - Preview Code -
-
-#if DEBUG
-
-struct AppHeader_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            AppHeader {
-                Text("Custom View App Header")
-            }
-
-            AppHeader(title: "App Header")
-
-            AppHeader(title: "FlightUI",
-                      typography: Font.title3,
-                      imageName: "plane",
-                      bundle: .module)
-
-            AppHeader(imageName: "plane",
-                      bundle: .module)
-
-            Spacer()
-        }
-        .background(Color.flightGrey0)
-        .environmentObject(Theme())
-        .previewDisplayName("Header")
-        .preferredColorScheme(.dark)
-    }
-}
-
-#endif

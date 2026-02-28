@@ -8,18 +8,17 @@ on:
         required: false
         type: string
         default: 'false'
-      xcode-version:
-        description: 'Defines the Xcode version to select when running on cloud runners'
-        required: false
-        type: string
-        default: '14.3'
 
 jobs:
   lint:
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Install SwiftLint
+        run: |
+          brew install swiftlint
         
       - name: Lenient Lint Check
         if: ${{ inputs.fail-on-lint-warning == 'false' }}

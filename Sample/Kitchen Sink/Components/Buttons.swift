@@ -1,15 +1,8 @@
-//
-//  Buttons.swift
-//  Flight UI - Kitchen Sink Sample
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 import FlightUI
 
 struct Buttons: View {
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) var theme
 
     @State private var showingAlert = false
 
@@ -26,7 +19,7 @@ struct Buttons: View {
                 textButton
                 coreButton
             }
-            .padding(.horizontal, theme.padding.grid3x)
+            .padding(.horizontal, theme.spacing.grid3x)
         }
         .background(theme.color.background)
         .navigationBarTitle("Buttons")
@@ -39,7 +32,7 @@ struct Buttons: View {
             HStack {
                 Button("Enabled", action: { showingAlert = true })
                     .buttonStyle(.filled)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
                     .alert("Important message", isPresented: $showingAlert) {
                         Button("OK", role: .cancel) { }
                     }
@@ -50,11 +43,11 @@ struct Buttons: View {
                         Text("With Icon")
                     }
                 }.buttonStyle(.filled)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
 
                 Button("Disabled", action: {})
                     .buttonStyle(.filled)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
                     .disabled(true)
 
                 Button {} label: {
@@ -62,9 +55,9 @@ struct Buttons: View {
                 }.buttonStyle(.filledIcon)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, theme.padding.grid1x)
+            .padding(.top, theme.spacing.grid1x)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.spacing.grid4x)
     }
 
     var tonalButton: some View {
@@ -76,7 +69,7 @@ struct Buttons: View {
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
                     .buttonStyle(.tonal)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
 
                 Button {} label: {
                     HStack {
@@ -84,11 +77,11 @@ struct Buttons: View {
                         Text("With Icon")
                     }
                 }.buttonStyle(.tonal)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
 
                 Button("Disabled", action: {})
                     .buttonStyle(.tonal)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
                     .disabled(true)
 
                 Button {} label: {
@@ -96,9 +89,9 @@ struct Buttons: View {
                 }.buttonStyle(.tonalIcon)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, theme.padding.grid1x)
+            .padding(.top, theme.spacing.grid1x)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.spacing.grid4x)
     }
 
     var outlinedButton: some View {
@@ -110,7 +103,7 @@ struct Buttons: View {
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
                     .buttonStyle(.outline)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
 
                 Button {} label: {
                     HStack {
@@ -118,11 +111,11 @@ struct Buttons: View {
                         Text("With Icon")
                     }
                 }.buttonStyle(.outline)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
 
                 Button("Disabled", action: {})
                     .buttonStyle(.outline)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
                     .disabled(true)
 
                 Button {} label: {
@@ -130,9 +123,9 @@ struct Buttons: View {
                 }.buttonStyle(.outlineIcon)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, theme.padding.grid1x)
+            .padding(.top, theme.spacing.grid1x)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.spacing.grid4x)
     }
 
     var textButton: some View {
@@ -145,7 +138,7 @@ struct Buttons: View {
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
                     .buttonStyle(.text)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
 
                 Button {} label: {
                     HStack {
@@ -153,11 +146,11 @@ struct Buttons: View {
                         Text("With Icon")
                     }
                 }.buttonStyle(.text)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
 
                 Button("Disabled", action: {})
                     .buttonStyle(.text)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
                     .disabled(true)
 
                 Button {} label: {
@@ -165,9 +158,9 @@ struct Buttons: View {
                 }.buttonStyle(.textIcon)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, theme.padding.grid1x)
+            .padding(.top, theme.spacing.grid1x)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.spacing.grid4x)
     }
 
     var coreButton: some View {
@@ -178,7 +171,7 @@ struct Buttons: View {
                 GridRow {
                     Button("Advisory", action: { print("Advisory Tapped") })
                         .buttonStyle(.advisory)
-                        .padding([.trailing], theme.padding.grid2x)
+                        .padding([.trailing], theme.spacing.grid2x)
 
                     Button {} label: {
                         HStack {
@@ -186,17 +179,17 @@ struct Buttons: View {
                             Text("Advisory w/ Icon")
                         }
                     }.buttonStyle(.advisory)
-                        .padding([.trailing], theme.padding.grid2x)
+                        .padding([.trailing], theme.spacing.grid2x)
 
                     Button("Advisory Disabled", action: {})
                         .buttonStyle(.advisory)
-                        .padding([.trailing], theme.padding.grid2x)
+                        .padding([.trailing], theme.spacing.grid2x)
                         .disabled(true)
                 }
                 GridRow {
                     Button("Caution", action: { print("Caution Tapped") })
                         .buttonStyle(.caution)
-                        .padding([.trailing], theme.padding.grid2x)
+                        .padding([.trailing], theme.spacing.grid2x)
 
                     Button {} label: {
                         HStack {
@@ -204,17 +197,17 @@ struct Buttons: View {
                             Text("Caution w/ Icon")
                         }
                     }.buttonStyle(.caution)
-                        .padding([.trailing], theme.padding.grid2x)
+                        .padding([.trailing], theme.spacing.grid2x)
 
                     Button("Caution Disabled", action: {})
                         .buttonStyle(.caution)
-                        .padding([.trailing], theme.padding.grid2x)
+                        .padding([.trailing], theme.spacing.grid2x)
                         .disabled(true)
                 }
                 GridRow {
                     Button("Warning", action: { print("Warning Tapped") })
                         .buttonStyle(.warning)
-                        .padding([.trailing], theme.padding.grid2x)
+                        .padding([.trailing], theme.spacing.grid2x)
 
                     Button {} label: {
                         HStack {
@@ -222,32 +215,17 @@ struct Buttons: View {
                             Text("Warning w/ Icon")
                         }
                     }.buttonStyle(.warning)
-                        .padding([.trailing], theme.padding.grid2x)
+                        .padding([.trailing], theme.spacing.grid2x)
 
                     Button("Warning Disabled", action: {})
                         .buttonStyle(.warning)
-                        .padding([.trailing], theme.padding.grid2x)
+                        .padding([.trailing], theme.spacing.grid2x)
                         .disabled(true)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, theme.padding.grid1x)
+            .padding(.top, theme.spacing.grid1x)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.spacing.grid4x)
     }
 }
-
-#if DEBUG
-
-struct Buttons_Previews: PreviewProvider {
-    static var theme: Theme = Theme(baseScheme: .dark)
-
-    static var previews: some View {
-        Buttons()
-            .environmentObject(theme)
-            .previewDisplayName("Button Samples")
-            .preferredColorScheme(theme.baseScheme)
-    }
-}
-
-#endif

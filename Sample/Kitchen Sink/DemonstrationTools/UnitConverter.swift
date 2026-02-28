@@ -1,17 +1,10 @@
-//
-//  Shape+Extensions.swift
-//  flight-ui-ios
-//
-//  Created by Appivate 2023
-//
-
 import Foundation
 import SwiftUI
 import FlightUI
 
 struct UnitConverter: View {
-    @EnvironmentObject var theme: Theme
-    @ObservedObject var demonstrationVM = UnitConverterViewModel()
+    @Environment(\.theme) var theme
+    @State var demonstrationVM = UnitConverterViewModel()
 
     var body: some View {
         ScrollView {
@@ -21,7 +14,7 @@ struct UnitConverter: View {
                     subTitle: demonstrationVM.weightSubtitle)
 
                 HStack {
-                    if  demonstrationVM.weightValuesSwapped {
+                    if demonstrationVM.weightValuesSwapped {
                         kgInputField
                         swapButton
                         lbInputField
@@ -37,8 +30,8 @@ struct UnitConverter: View {
             headingView
             convertButton2
         }
-        .padding([.top], theme.padding.grid2x)
-        .padding([.leading, .trailing], theme.padding.grid3x)
+        .padding([.top], theme.spacing.grid2x)
+        .padding([.leading, .trailing], theme.spacing.grid3x)
 
         .background(theme.color.background)
         .navigationBarTitle(demonstrationVM.naivgationBarTitle)
@@ -53,7 +46,7 @@ struct UnitConverter: View {
                 lengthInput
                 calculationResult
             }
-            .padding([.top], theme.padding.grid4x)
+            .padding([.top], theme.spacing.grid4x)
         }
     }
 
@@ -61,12 +54,12 @@ struct UnitConverter: View {
         HStack {
             InputField(text: $demonstrationVM.outputValue, placeholder: demonstrationVM.calculatedField)
                 .textFieldStyle(.advisory)
-                .padding([.bottom], theme.padding.grid2x)
+                .padding([.bottom], theme.spacing.grid2x)
 
             MenuField(selection: $demonstrationVM.boundSelectionOutput,
                       options: UnitConverterViewModel.LengthType.allCases)
             .menuFieldStyle(.default)
-            .padding([.bottom], theme.padding.grid2x)
+            .padding([.bottom], theme.spacing.grid2x)
         }
     }
 
@@ -81,7 +74,7 @@ struct UnitConverter: View {
             MenuField(selection: $demonstrationVM.boundSelectionInput,
                       options: UnitConverterViewModel.LengthType.allCases)
             .menuFieldStyle(.default)
-            .padding([.bottom], theme.padding.grid2x)
+            .padding([.bottom], theme.spacing.grid2x)
         }
     }
 
@@ -93,7 +86,7 @@ struct UnitConverter: View {
             guard let decimalValue = Decimal(string: typedString) else { return typedString }
             return demonstrationVM.toString2DP(value: decimalValue)
         }, filter: .doubleOnly)
-        .textFieldStyle(demonstrationVM.kgInputFieldStyle ?? DefaultTextFieldStyle.default)
+        .textFieldStyle(demonstrationVM.kgInputFieldStyle ?? InputFieldStyle(.default))
     }
 
     var lbInputField: some View {
@@ -104,7 +97,7 @@ struct UnitConverter: View {
             guard let decimalValue = Decimal(string: typedString) else { return typedString }
             return demonstrationVM.toString2DP(value: decimalValue)
         }, filter: .doubleOnly)
-        .textFieldStyle(demonstrationVM.lbInputFieldStyle ?? DefaultTextFieldStyle.default)
+        .textFieldStyle(demonstrationVM.lbInputFieldStyle ?? InputFieldStyle(.default))
     }
 
     var swapButton: some View {
@@ -118,7 +111,7 @@ struct UnitConverter: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: theme.size.medium, height: theme.size.medium)
                 .foregroundColor(theme.color.nominal)
-                .padding([.bottom], theme.padding.grid2x)
+                .padding([.bottom], theme.spacing.grid2x)
         })
     }
 
@@ -126,14 +119,14 @@ struct UnitConverter: View {
         Button(demonstrationVM.convert,
                action: {demonstrationVM.convertStaticUnits()})
         .buttonStyle(.filled)
-        .padding([.bottom], theme.padding.grid2x)
+        .padding([.bottom], theme.spacing.grid2x)
     }
 
     var convertButton2: some View {
         Button(demonstrationVM.convert,
                action: {demonstrationVM.runLengthConversion()})
         .buttonStyle(.filled)
-        .padding([.bottom], theme.padding.grid2x)
+        .padding([.bottom], theme.spacing.grid2x)
     }
 
     func swapFields() {
@@ -141,17 +134,3 @@ struct UnitConverter: View {
         demonstrationVM.convertStaticUnits()
     }
 }
-
-#if DEBUG
-
-struct UnitConverter_Previews: PreviewProvider {
-    static var theme: Theme = Theme(baseScheme: .dark)
-    static var previews: some View {
-        UnitConverter()
-            .environmentObject(theme)
-            .previewDisplayName("Unit Converter")
-            .preferredColorScheme(theme.baseScheme)
-    }
-}
-
-#endif

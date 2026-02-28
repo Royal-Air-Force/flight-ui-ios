@@ -1,15 +1,8 @@
-//
-//  Spacing.swift
-//  Flight UI - Kitchen Sink Sample
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 import FlightUI
 
 struct Spacing: View {
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) var theme
 
     var body: some View {
         ScrollView {
@@ -19,7 +12,7 @@ struct Spacing: View {
                 sizes
                 radius
             }
-            .padding(.horizontal, theme.padding.grid3x)
+            .padding(.horizontal, theme.spacing.grid3x)
         }
         .background(theme.color.background)
         .navigationBarTitle("Spacing")
@@ -32,21 +25,21 @@ struct Spacing: View {
                 subTitle: "Used for spacing between components on screen, follows the standard 8pt grid")
 
             VStack {
-                SpacingDisplayBox(name: "Grid 0.5x", space: theme.padding.grid0_5x)
-                SpacingDisplayBox(name: "Grid 1x", space: theme.padding.grid1x)
-                SpacingDisplayBox(name: "Grid 1.5x", space: theme.padding.grid1_5x)
-                SpacingDisplayBox(name: "Grid 2x", space: theme.padding.grid2x)
-                SpacingDisplayBox(name: "Grid 2.5x", space: theme.padding.grid2_5x)
-                SpacingDisplayBox(name: "Grid 3x", space: theme.padding.grid3x)
-                SpacingDisplayBox(name: "Grid 4x", space: theme.padding.grid4x)
+                SpacingDisplayBox(name: "Grid 0.5x", space: theme.spacing.grid0_5x)
+                SpacingDisplayBox(name: "Grid 1x", space: theme.spacing.grid1x)
+                SpacingDisplayBox(name: "Grid 1.5x", space: theme.spacing.grid1_5x)
+                SpacingDisplayBox(name: "Grid 2x", space: theme.spacing.grid2x)
+                SpacingDisplayBox(name: "Grid 2.5x", space: theme.spacing.grid2_5x)
+                SpacingDisplayBox(name: "Grid 3x", space: theme.spacing.grid3x)
+                SpacingDisplayBox(name: "Grid 4x", space: theme.spacing.grid4x)
             }
             VStack {
-                SpacingDisplayBox(name: "Grid 5x", space: theme.padding.grid5x)
-                SpacingDisplayBox(name: "Grid 6x", space: theme.padding.grid6x)
-                SpacingDisplayBox(name: "Grid 7x", space: theme.padding.grid7x)
-                SpacingDisplayBox(name: "Grid 8x", space: theme.padding.grid8x)
-                SpacingDisplayBox(name: "Grid 9x", space: theme.padding.grid9x)
-                SpacingDisplayBox(name: "Grid 10x", space: theme.padding.grid10x)
+                SpacingDisplayBox(name: "Grid 5x", space: theme.spacing.grid5x)
+                SpacingDisplayBox(name: "Grid 6x", space: theme.spacing.grid6x)
+                SpacingDisplayBox(name: "Grid 7x", space: theme.spacing.grid7x)
+                SpacingDisplayBox(name: "Grid 8x", space: theme.spacing.grid8x)
+                SpacingDisplayBox(name: "Grid 9x", space: theme.spacing.grid9x)
+                SpacingDisplayBox(name: "Grid 10x", space: theme.spacing.grid10x)
             }
         }
     }
@@ -89,15 +82,15 @@ struct Spacing: View {
                 subTitle: "When a rounded component is inside another rounded component, the corner radius should work well with the parent. " +
                 "This is calculated based on the margin between the inner and outer component, the following examples use a value of 8pt padding")
 
-            SpacingDisplayBox(name: "Inner Radius Small", space: theme.radius.innerSmall(padding: 8.0))
-            SpacingDisplayBox(name: "Inner Radius Medium", space: theme.radius.innerMedium(padding: 8.0))
-            SpacingDisplayBox(name: "Inner Radius Large", space: theme.radius.innerLarge(padding: 8.0))
+            SpacingDisplayBox(name: "Inner Radius Small", space: theme.radius.innerSmall(padding: 8))
+            SpacingDisplayBox(name: "Inner Radius Medium", space: theme.radius.innerMedium(padding: 8))
+            SpacingDisplayBox(name: "Inner Radius Large", space: theme.radius.innerLarge(padding: 8))
         }
     }
 }
 
 struct SpacingDisplayBox: View {
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) var theme
 
     var name: String
     var space: CGFloat
@@ -105,28 +98,15 @@ struct SpacingDisplayBox: View {
     var body: some View {
         HStack {
             Rectangle()
-                .fill(theme.color.primary)
-                .frame(width: space, height: space, alignment: .leading)
-                .padding(theme.padding.grid1x)
-            Text("\(name) - \(String(format: "%.0f", space))pt")
-                .fontStyle(theme.font.body)
-                .padding(theme.padding.grid1x)
+                .fill(theme.color.nominal)
+                .frame(width: space, height: 30)
+
+            Text("\(name) - \(Int(space))pt")
+                .foregroundColor(theme.color.primary)
+                .fontStyle(theme.typography.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, theme.spacing.grid1x)
         }
+        .padding([.top, .bottom], theme.spacing.grid0_5x)
     }
 }
-
-#if DEBUG
-
-struct Spacing_Previews: PreviewProvider {
-    static var theme: Theme = Theme(baseScheme: .dark)
-
-    static var previews: some View {
-        Spacing()
-            .environmentObject(theme)
-            .previewDisplayName("Spacing Samples")
-            .preferredColorScheme(theme.baseScheme)
-    }
-}
-
-#endif

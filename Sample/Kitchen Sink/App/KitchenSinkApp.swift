@@ -1,16 +1,9 @@
-//
-//  KitchenSinkApp.swift
-//  Flight UI - Kitchen Sink Sample
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 import FlightUI
 
 @main
 struct KitchenSinkApp: App {
-    @StateObject var themeManager = ThemeManager(current: .dark)
+    @State private var themeManager = ThemeManager(.dark)
     @State private var isDarkTheme = true
 
     var body: some Scene {
@@ -41,39 +34,43 @@ struct KitchenSinkApp: App {
                                                 subtitle: "Functional tools for demonstration")
                     ) {
                         SampleScreenView(title: "Unit Converter", destination: UnitConverter())
-                        SampleScreenView(title: "Cross Wind calculator", destination: CrossWindCalculator())
                     }
 
                     .headerProminence(.increased)
                 }
-                .padding([.top], themeManager.current.padding.grid1x)
+                .padding([.top], themeManager.current.spacing.grid1x)
                 .scrollContentBackground(.hidden)
                 .background(themeManager.current.color.background)
-                .navigationBarTitle("FlightUI")
-                .navigationBarTitleDisplayMode(.large)
+                .navigationTitle("FlightUI")
+                .toolbarTitleDisplayMode(.inline)
                 .toolbarBackground(themeManager.current.color.background, for: .navigationBar)
                 .toolbar {
-                    Toggle("Dark Theme", isOn: $isDarkTheme)
-                        .onChange(of: isDarkTheme) { value in
-                            if value {
-                                themeManager.updateTheme(.dark)
-                            } else {
-                                themeManager.updateTheme(.light)
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            withAnimation {
+                                isDarkTheme.toggle()
+                                themeManager.apply(isDarkTheme ? .dark : .light)
                             }
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: isDarkTheme ? "moon.fill" : "sun.max.fill")
+                                Text(isDarkTheme ? "Dark" : "Light")
+                                    .font(.subheadline)
+                            }
+                            .foregroundStyle(isDarkTheme ? .yellow : .orange)
                         }
-                        .toggleStyle(SwitchToggleStyle(tint: .green))
+                    }
                 }
             }
-            .environmentObject(themeManager)
-            .environmentObject(themeManager.current)
+            .flightTheme(themeManager.current)
             .accentColor(themeManager.current.color.primary)
-            .environment(\.colorScheme, themeManager.current.baseScheme)
+            .preferredColorScheme(themeManager.current.baseScheme == .dark ? .dark : .light)
         }
     }
 }
 
 private struct HeaderTitleView: View {
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) var theme
 
     var title: String
     var subtitle: String
@@ -81,17 +78,17 @@ private struct HeaderTitleView: View {
     var body: some View {
         VStack {
             Text(title)
-                .fontStyle(theme.font.title1)
+                .fontStyle(theme.typography.title1)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Text(subtitle)
-                .fontStyle(theme.font.body)
+                .fontStyle(theme.typography.body)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
 
 private struct SampleScreenView<Destination: View>: View {
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) var theme
 
     var title: String
     var destination: Destination

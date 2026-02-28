@@ -1,35 +1,24 @@
-//
-//  Colours.swift
-//  Flight UI - Kitchen Sink Sample
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 import FlightUI
 
 struct Colours: View {
-    @EnvironmentObject var theme: Theme
-
-    fileprivate let boxMinHeight: CGFloat = 126
-    fileprivate let boxIdealWidth: CGFloat = 194
+    @Environment(\.theme) var theme
 
     var body: some View {
         ScrollView {
             VStack {
                 Spacer()
-                backgroundColors
-                foregroundColors
+                generalColors
                 coreColors
                 graphicsColors
             }
-            .padding(.horizontal, theme.padding.grid3x)
+            .padding(.horizontal, theme.spacing.grid3x)
         }
         .background(theme.color.background)
         .navigationBarTitle("Colours")
     }
 
-    var backgroundColors: some View {
+    var generalColors: some View {
         VStack {
             HeadingView(
                 title: "General colours",
@@ -48,11 +37,8 @@ struct Colours: View {
             ColorView(colorName: "Surface High",
                       colorDescription: "Colour for component surfaces closer to the user such as text fields and alert dialogs",
                       colorValue: theme.color.surfaceHigh)
-        }
-    }
+            Spacer()
 
-    var foregroundColors: some View {
-        VStack {
             ColorView(colorName: "Primary",
                       colorDescription: "Default colour for all content including text, icons, and non-context based components",
                       colorValue: theme.color.primary)
@@ -72,7 +58,7 @@ struct Colours: View {
                       colorDescription: "Colour for disabled content on top of a disabled component, for example the text shown on a disabled button",
                       colorValue: theme.color.onDisabled)
         }
-        .padding(.bottom, theme.padding.grid2x)
+        .padding(.bottom, theme.spacing.grid2x)
     }
 
     var coreColors: some View {
@@ -105,7 +91,7 @@ struct Colours: View {
                       colorDescription: "Default colour to display components such as text on top of any of the other core colours",
                       colorValue: theme.color.onCore)
         }
-        .padding(.bottom, theme.padding.grid2x)
+        .padding(.bottom, theme.spacing.grid2x)
     }
 
     var graphicsColors: some View {
@@ -128,13 +114,12 @@ struct Colours: View {
                 SimpleColorView(colorName: "Graphics Pink", colorValue: theme.color.graphicsPink)
             }
         }
-        .padding(.bottom, theme.padding.grid2x)
+        .padding(.bottom, theme.spacing.grid2x)
     }
 }
 
 struct ColorView: View {
-
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) var theme
 
     var colorName: String
     var colorDescription: String
@@ -150,21 +135,21 @@ struct ColorView: View {
             VStack {
                 Text("\(colorName) - \(colorValue.hexaRGBA?.uppercased() ?? "")")
                     .foregroundColor(theme.color.primary)
-                    .fontStyle(theme.font.headline)
+                    .fontStyle(theme.typography.headline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Text("\(colorDescription)")
                     .foregroundColor(theme.color.secondary)
-                    .fontStyle(theme.font.caption2)
+                    .fontStyle(theme.typography.caption2)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(.leading, theme.padding.grid1x)
+            .padding(.leading, theme.spacing.grid1x)
         }
-        .padding([.top, .bottom], theme.padding.grid0_5x)
+        .padding([.top, .bottom], theme.spacing.grid0_5x)
     }
 }
 
 struct SimpleColorView: View {
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) var theme
 
     var colorName: String
     var colorValue: Color
@@ -179,26 +164,11 @@ struct SimpleColorView: View {
             VStack {
                 Text("\(colorName) - \(colorValue.hexaRGBA?.uppercased() ?? "")")
                     .foregroundColor(theme.color.primary)
-                    .fontStyle(theme.font.body)
+                    .fontStyle(theme.typography.body)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(.leading, theme.padding.grid1x)
+            .padding(.leading, theme.spacing.grid1x)
         }
-        .padding([.top, .bottom], theme.padding.grid0_5x)
+        .padding([.top, .bottom], theme.spacing.grid0_5x)
     }
 }
-
-#if DEBUG
-
-struct Colours_Previews: PreviewProvider {
-    static var theme: Theme = Theme(baseScheme: .dark)
-
-    static var previews: some View {
-        Colours()
-            .environmentObject(theme)
-            .previewDisplayName("Colour Samples")
-            .preferredColorScheme(theme.baseScheme)
-    }
-}
-
-#endif
