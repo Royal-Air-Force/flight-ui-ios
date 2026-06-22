@@ -287,17 +287,30 @@ extension CoordinateField {
     }
 
     func buildLatSegmentsDDM() -> some View {
-        buildDDMSegmentsRow(degrees: $latDegreesText, degreesPlaceholder: "00", degreesMaxChar: 2,
-                            degreesState: latDegreesState, minutes: $latMinutesText,
-                            minutesState: latMinDecState) { cardinalLat() }
+        HStack(spacing: theme.spacing.grid0_5x) {
+            CoordinateSegmentField($latDegreesText, placeholder: "00", suffix: "°",
+                                   filter: .integerOnly, maxChar: 2,
+                                   state: latDegreesState, config: segmentInputConfig)
+            CoordinateSegmentField($latMinutesText, placeholder: "00.000", suffix: "'",
+                                   filter: .doubleOnly, maxChar: 7,
+                                   state: latMinDecState, config: segmentInputConfig)
+            cardinalLat()
+        }
     }
 
     func buildLatSegmentsDMS() -> some View {
-        buildDMSSegmentsRow(degrees: $latDegreesText, degreesPlaceholder: "00", degreesMaxChar: 2,
-                            degreesState: latDegreesState, minutes: $latMinutesText,
-                            minutesState: latMinIntState, seconds: $latSecondsText,
-                            secondsPlaceholder: latSecondsPlaceholder, secondsMaxChar: latSecondsMaxChar,
-                            secondsState: latSecondsState) { cardinalLat() }
+        HStack(spacing: theme.spacing.grid0_5x) {
+            CoordinateSegmentField($latDegreesText, placeholder: "00", suffix: "°",
+                                   filter: .integerOnly, maxChar: 2,
+                                   state: latDegreesState, config: segmentInputConfig)
+            CoordinateSegmentField($latMinutesText, placeholder: "00", suffix: "'",
+                                   filter: .integerOnly, maxChar: 2,
+                                   state: latMinIntState, config: segmentInputConfig)
+            CoordinateSegmentField($latSecondsText, placeholder: latSecondsPlaceholder, suffix: "\"",
+                                   filter: .doubleOnly, maxChar: latSecondsMaxChar,
+                                   state: latSecondsState, config: segmentInputConfig)
+            cardinalLat()
+        }
     }
 
     @ViewBuilder
@@ -325,52 +338,29 @@ extension CoordinateField {
     }
 
     func buildLonSegmentsDDM() -> some View {
-        buildDDMSegmentsRow(degrees: $lonDegreesText, degreesPlaceholder: "000", degreesMaxChar: 3,
-                            degreesState: lonDegreesState, minutes: $lonMinutesText,
-                            minutesState: lonMinDecState) { cardinalLon() }
-    }
-
-    func buildLonSegmentsDMS() -> some View {
-        buildDMSSegmentsRow(degrees: $lonDegreesText, degreesPlaceholder: "000", degreesMaxChar: 3,
-                            degreesState: lonDegreesState, minutes: $lonMinutesText,
-                            minutesState: lonMinIntState, seconds: $lonSecondsText,
-                            secondsPlaceholder: lonSecondsPlaceholder, secondsMaxChar: lonSecondsMaxChar,
-                            secondsState: lonSecondsState) { cardinalLon() }
-    }
-
-    private func buildDDMSegmentsRow<C: View>(
-        degrees: Binding<String>, degreesPlaceholder: String, degreesMaxChar: Int,
-        degreesState: InputAlertingState, minutes: Binding<String>, minutesState: InputAlertingState,
-        @ViewBuilder cardinal: () -> C
-    ) -> some View {
         HStack(spacing: theme.spacing.grid0_5x) {
-            CoordinateSegmentField(degrees, placeholder: degreesPlaceholder, suffix: "°",
-                                   filter: .integerOnly, maxChar: degreesMaxChar,
-                                   state: degreesState, config: segmentInputConfig)
-            CoordinateSegmentField(minutes, placeholder: "00.000", suffix: "'",
+            CoordinateSegmentField($lonDegreesText, placeholder: "000", suffix: "°",
+                                   filter: .integerOnly, maxChar: 3,
+                                   state: lonDegreesState, config: segmentInputConfig)
+            CoordinateSegmentField($lonMinutesText, placeholder: "00.000", suffix: "'",
                                    filter: .doubleOnly, maxChar: 7,
-                                   state: minutesState, config: segmentInputConfig)
-            cardinal()
+                                   state: lonMinDecState, config: segmentInputConfig)
+            cardinalLon()
         }
     }
 
-    private func buildDMSSegmentsRow<C: View>(
-        degrees: Binding<String>, degreesPlaceholder: String, degreesMaxChar: Int,
-        degreesState: InputAlertingState, minutes: Binding<String>, minutesState: InputAlertingState,
-        seconds: Binding<String>, secondsPlaceholder: String, secondsMaxChar: Int,
-        secondsState: InputAlertingState, @ViewBuilder cardinal: () -> C
-    ) -> some View {
+    func buildLonSegmentsDMS() -> some View {
         HStack(spacing: theme.spacing.grid0_5x) {
-            CoordinateSegmentField(degrees, placeholder: degreesPlaceholder, suffix: "°",
-                                   filter: .integerOnly, maxChar: degreesMaxChar,
-                                   state: degreesState, config: segmentInputConfig)
-            CoordinateSegmentField(minutes, placeholder: "00", suffix: "'",
+            CoordinateSegmentField($lonDegreesText, placeholder: "000", suffix: "°",
+                                   filter: .integerOnly, maxChar: 3,
+                                   state: lonDegreesState, config: segmentInputConfig)
+            CoordinateSegmentField($lonMinutesText, placeholder: "00", suffix: "'",
                                    filter: .integerOnly, maxChar: 2,
-                                   state: minutesState, config: segmentInputConfig)
-            CoordinateSegmentField(seconds, placeholder: secondsPlaceholder, suffix: "\"",
-                                   filter: .doubleOnly, maxChar: secondsMaxChar,
-                                   state: secondsState, config: segmentInputConfig)
-            cardinal()
+                                   state: lonMinIntState, config: segmentInputConfig)
+            CoordinateSegmentField($lonSecondsText, placeholder: lonSecondsPlaceholder, suffix: "\"",
+                                   filter: .doubleOnly, maxChar: lonSecondsMaxChar,
+                                   state: lonSecondsState, config: segmentInputConfig)
+            cardinalLon()
         }
     }
 

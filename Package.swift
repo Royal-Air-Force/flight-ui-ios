@@ -10,16 +10,13 @@ let package = Package(
             targets: ["FlightUI"])
     ],
     dependencies: [
-        .package(path: "../../danleedham/AviationMaths")
+        .package(url: "https://github.com/Haelix-Code/AviationMathsFramework", from: "0.2.0")
     ],
     targets: [
         .target(
             name: "FlightUI",
             dependencies: [
-                .product(name: "AviationMaths", package: "AviationMaths")
-            ],
-            swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency")
+                .product(name: "AviationMaths", package: "AviationMathsFramework")
             ]
         ),
         .testTarget(
