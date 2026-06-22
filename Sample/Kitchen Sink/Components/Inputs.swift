@@ -119,7 +119,7 @@ struct Inputs: View {
 
                 InputField(text: $viewModel.debounceInput, placeholder: "Debounce", bottomLabelConfig: BottomLabelConfig(viewModel.debounceAdvisoryLabel))
                     .textFieldStyle(.default)
-                    .onChange(of: viewModel.debounceInput) { _ in
+                    .onChange(of: viewModel.debounceInput) { _, _ in
                         viewModel.debounceAdvisoryLabel = Inputs.ViewModel.defaultDebounceAdvisoryLabel
                     }
                     .onDebounce(of: viewModel.debounceInput, duration: .seconds(2)) { debouncedValue in
