@@ -7,12 +7,9 @@
 
 import Foundation
 import Combine
-
+import FlightUI
 
 class CrosswindCalculatorViewModel: ObservableObject {
-
-    @Published var windSpeedPlaceholder = "0.0 Kts"
-    @Published var windDirectionPlaceholder = "0°"
 
     @Published var runwayHeading: Int? = 1
     @Published var windSpeed = ""
@@ -20,6 +17,9 @@ class CrosswindCalculatorViewModel: ObservableObject {
     
     @Published var crosswindOutput = ""
     @Published var headwindOutput = ""
+    
+    @Published var windDirectionTextFieldStyle: InputFieldStyle = .init(.default)
+    @Published var windDirectionBottomConfig: BottomLabelConfig = .init(isVisible: false)
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -35,9 +35,26 @@ class CrosswindCalculatorViewModel: ObservableObject {
                     self?.clearCalculations()
                     return
                 }
-                self?.calculateWinds(speed: windSpeed, direction: windDirection, runway: runwayHeading)
+                if self?.validateWindDirection(windDirection) ?? false {
+                    self?.calculateWinds(speed: windSpeed, direction: windDirection, runway: runwayHeading)
+                } else {
+                    self?.clearCalculations()
+                }
             }
             .store(in: &cancellables)
+    }
+    
+    func validateWindDirection(_ windDirection: Double) -> Bool {
+        let validDirection = 0 <= windDirection && windDirection <= 360
+        if validDirection {
+            windDirectionTextFieldStyle = .init(.default)
+            windDirectionBottomConfig = .init(isVisible: false)
+        } else {
+            windDirectionTextFieldStyle = .init(.warning)
+            windDirectionBottomConfig = .init(CrossWindCalculator.windDirectionError, state: .warning, isVisible: true)
+        }
+
+        return validDirection
     }
     
     func calculateWinds(speed: Double, direction: Double, runway: Double) {
