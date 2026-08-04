@@ -11,7 +11,7 @@ import FlightUI
 
 struct UnitConverter: View {
     @EnvironmentObject var theme: Theme
-    @StateObject var viewModel = UnitConverterViewModel()
+    @StateObject var viewModel = UnitConverterViewModel(CalculatorService())
 
     var body: some View {
         ScrollView {
@@ -37,9 +37,6 @@ struct UnitConverter: View {
                 InputField(text: $viewModel.weightConversionInput,
                            placeholder: viewModel.weightConversionInputPlaceholder,
                            bottomLabelConfig: viewModel.weightInputBottomLabel,
-                           formatter: { typedString in
-                    return viewModel.formatInputValue(value: typedString)
-                },
                            filter: .doubleOnly)
                 .keyboardType(.numberPad)
                 .textFieldStyle(viewModel.weightInputFieldStyle)
@@ -82,9 +79,6 @@ struct UnitConverter: View {
                 InputField(text: $viewModel.pressureConversionInput,
                            placeholder: viewModel.pressureConversionInputPlaceholder,
                            bottomLabelConfig: viewModel.pressureInputBottomLabel,
-                           formatter: { typedString in
-                    return viewModel.formatInputValue(value: typedString)
-                },
                            filter: .doubleOnly)
                 .keyboardType(.numberPad)
                 .textFieldStyle(viewModel.pressureInputFieldStyle)
