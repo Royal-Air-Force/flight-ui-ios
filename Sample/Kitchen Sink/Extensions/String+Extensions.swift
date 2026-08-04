@@ -5,14 +5,18 @@
 //  Created by Appivate 2023
 //
 
+import Foundation
+
 extension String {
     var isEmptyTrimmed: Bool {
         self.trimmingCharacters(in: .whitespaces).isEmpty
     }
-}
-
-extension Double {
-    func toDecimalString(decimalPlaces: Int) -> String {
-        return String(format: "%.\(decimalPlaces)f", self)
+    
+    func toDouble() -> Double {
+        return Double(self) ?? 0.0
+    }
+    
+    func toDecimal() -> Decimal {
+        return Decimal(string: self) ?? 0.0
     }
 }

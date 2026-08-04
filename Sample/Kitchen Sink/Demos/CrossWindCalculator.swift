@@ -11,59 +11,91 @@ import FlightUI
 
 struct CrossWindCalculator: View {
     @EnvironmentObject var theme: Theme
-    @StateObject var viewModel = CrosswindCalculatorViewModel()
+    @StateObject var viewModel = CrosswindCalculatorViewModel(calculatorService: CalculatorService())
 
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: theme.padding.grid6x) {
                 windSpeedInput
                 windspeedOutput
-                    .padding([.top],theme.padding.grid8x)
             }
-            .padding(theme.padding.grid2x)
-            .navigationBarTitle("Crosswind Calculator")
+            .padding(theme.padding.grid3x)
         }
+        .background(theme.color.background)
+        .navigationBarTitle(CrossWindCalculator.crosswindTitle)
     }
 
     var windSpeedInput: some View {
-        HStack() {
-            MenuField(selection: $viewModel.runwayNumber,
-                      options: Array(1...36),
-                      placeholder: "1",
-                      topLabel: viewModel.runwayNumberLabel)
-            InputField(text: $viewModel.windSpeed,
-                       placeholder: viewModel.windSpeedPlaceholder,
-                       topLabel: viewModel.windSpeedLabel,
-                       filter: .doubleOnly,
-                       maxCharacterCount: 3)
-            .textFieldStyle(.default)
-
-            InputField(text: $viewModel.windDirection,
-                       placeholder: viewModel.windDirectionPlaceholder,
-                       topLabel: viewModel.windDirectionLabel,
-                       filter: .integerOnly,
-                       maxCharacterCount: 3)
-            .textFieldStyle(.default)
+        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
+            HStack {
+                Text(CrossWindCalculator.runwayHeadingLabel)
+                    .fontStyle(theme.font.bodyBold)
+                    .frame(width: 200, alignment: .leading)
+                
+                MenuField(selection: $viewModel.runwayHeading,
+                          options: Array(1...36),
+                          placeholder: CrossWindCalculator.runwayHeadingPlaceholder)
+            }
+            
+            HStack {
+                Text(CrossWindCalculator.windSpeedLabel)
+                    .fontStyle(theme.font.bodyBold)
+                    .frame(width: 200, alignment: .leading)
+                
+                InputField(text: $viewModel.windSpeed,
+                           placeholder: CrossWindCalculator.windSpeedPlaceholder,
+                           filter: .doubleOnly)
+                .textFieldStyle(.default)
+            }
+            
+            HStack {
+                Text(CrossWindCalculator.windDirectionLabel)
+                    .fontStyle(theme.font.bodyBold)
+                    .frame(width: 200, alignment: .leading)
+                
+                InputField(text: $viewModel.windDirection,
+                           placeholder: CrossWindCalculator.windDirectionPlaceholder,
+                           bottomLabelConfig: viewModel.windDirectionBottomConfig,
+                           filter: .integerOnly,
+                           maxCharacterCount: 3)
+                .textFieldStyle(viewModel.windDirectionTextFieldStyle)
+            }
         }
+        .padding([.all], theme.padding.grid3x)
+        .cardStyle(.filled)
     }
 
     var windspeedOutput: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            InputField(text: $viewModel.crosswindString,
-                       placeholder: "",
-                       topLabel: viewModel.crosswindLabel,
-                       maxCharacterCount: 3)
-            .textFieldStyle(.advisory)
-            .frame(width: 240)
-            .padding(.top, theme.padding.grid2x)
-
-            InputField(text: $viewModel.headwindString,
-                       placeholder: "",
-                       topLabel: viewModel.headwindLabel
-            )
-            .textFieldStyle(.advisory)
-            .frame(width: 240)
-            .padding(.top, theme.padding.grid2x)
+        VStack(spacing: theme.padding.grid2x) {
+            Text(CrossWindCalculator.crosswindResultsTitle)
+                .fontStyle(theme.font.title1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            HStack(spacing: theme.padding.grid4x) {
+                VStack {
+                    Text(CrossWindCalculator.crosswindLabel)
+                        .fontStyle(theme.font.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    InputField(text: $viewModel.crosswindOutput,
+                               placeholder: "")
+                    .textFieldStyle(.advisory)
+                }
+                .padding([.all], theme.padding.grid2x)
+                .cardStyle(.filled)
+                
+                VStack {
+                    Text(CrossWindCalculator.headwindLabel)
+                        .fontStyle(theme.font.headline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    InputField(text: $viewModel.headwindOutput,
+                               placeholder: "")
+                    .textFieldStyle(.advisory)
+                }
+                .padding([.all], theme.padding.grid2x)
+                .cardStyle(.filled)
+            }
         }
     }
 }

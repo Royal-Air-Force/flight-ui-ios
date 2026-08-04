@@ -11,134 +11,202 @@ import FlightUI
 
 struct UnitConverter: View {
     @EnvironmentObject var theme: Theme
-    @StateObject var demonstrationVM = UnitConverterViewModel()
+    @StateObject var viewModel = UnitConverterViewModel(CalculatorService())
 
     var body: some View {
         ScrollView {
-            VStack {
-                HeadingView(
-                    title: demonstrationVM.weightTitle,
-                    subTitle: demonstrationVM.weightSubtitle)
-
-                HStack {
-                    if  demonstrationVM.weightValuesSwapped {
-                        kgInputField
-                        swapButton
-                        lbInputField
-                    } else {
-                        lbInputField
-                        swapButton
-                        kgInputField
-                    }
-                    convertButton1
-                }
+            VStack(spacing: theme.padding.grid3x) {
+                weightConverterView
+                pressureConverterView
+                lengthConverterView
+                airspeedConverterView
             }
-
-            headingView
-            convertButton2
+            .padding([.all], theme.padding.grid3x)
         }
-        .padding([.top], theme.padding.grid2x)
-        .padding([.leading, .trailing], theme.padding.grid3x)
-
         .background(theme.color.background)
-        .navigationBarTitle(demonstrationVM.naivgationBarTitle)
+        .navigationBarTitle(UnitConverter.screenTitle)
     }
+    
+    var weightConverterView: some View {
+        VStack {
+            HeadingView(
+                title: UnitConverter.weightTitle,
+                subTitle: UnitConverter.weightSubTitle)
 
-    var headingView: some View {
-        HStack {
-            VStack {
-                HeadingView(
-                    title: demonstrationVM.adjustableConversionTitle,
-                    subTitle: demonstrationVM.adjustableConversionSubTitle)
-                lengthInput
-                calculationResult
-            }
-            .padding([.top], theme.padding.grid4x)
-        }
-    }
+            HStack(alignment: .top, spacing: theme.padding.grid1x) {
+                InputField(text: $viewModel.weightConversionInput,
+                           placeholder: viewModel.weightConversionInputPlaceholder,
+                           bottomLabelConfig: viewModel.weightInputBottomLabel,
+                           filter: .doubleOnly)
+                .keyboardType(.numberPad)
+                .textFieldStyle(viewModel.weightInputFieldStyle)
+                
+                Button {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        viewModel.swapWeightFields()
+                    }
+                } label: {
+                    Image(systemName: "arrow.left.arrow.right")
+                }.buttonStyle(.tonalIcon)
+                    .padding([.vertical], theme.padding.grid0_5x)
 
-    var calculationResult: some View {
-        HStack {
-            InputField(text: $demonstrationVM.outputValue, placeholder: demonstrationVM.calculatedField)
+                InputField(text: $viewModel.weightConversionOutput,
+                           placeholder: viewModel.weightConversionOutputPlaceholder,
+                           bottomLabelConfig: BottomLabelConfig(viewModel.weightOutputBottomLabel))
                 .textFieldStyle(.advisory)
+
+                Button(UnitConverter.convertButton, action: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        viewModel.convertWeight()
+                    }}
+                )
+                .buttonStyle(.filled)
                 .padding([.bottom], theme.padding.grid2x)
-
-            MenuField(selection: $demonstrationVM.boundSelectionOutput,
-                      options: UnitConverterViewModel.LengthType.allCases)
-            .menuFieldStyle(.default)
-            .padding([.bottom], theme.padding.grid2x)
-        }
-    }
-
-    var lengthInput: some View {
-        HStack {
-            InputField(text: $demonstrationVM.inputValue,
-                       placeholder: demonstrationVM.lengthPalceholder,
-                       bottomLabelConfig: BottomLabelConfig(""),
-                       filter: .doubleOnly)
-            .textFieldStyle(.default)
-
-            MenuField(selection: $demonstrationVM.boundSelectionInput,
-                      options: UnitConverterViewModel.LengthType.allCases)
-            .menuFieldStyle(.default)
-            .padding([.bottom], theme.padding.grid2x)
-        }
-    }
-
-    var kgInputField: some View {
-        InputField(text: $demonstrationVM.kgInputString,
-                   placeholder: demonstrationVM.kgHint,
-                   bottomLabelConfig: BottomLabelConfig(demonstrationVM.bottomKgLabel),
-                   formatter: { typedString in
-            guard let decimalValue = Decimal(string: typedString) else { return typedString }
-            return demonstrationVM.toString2DP(value: decimalValue)
-        }, filter: .doubleOnly)
-        .textFieldStyle(demonstrationVM.kgInputFieldStyle ?? DefaultTextFieldStyle.default)
-    }
-
-    var lbInputField: some View {
-        InputField(text: $demonstrationVM.lbsInputString,
-                   placeholder: demonstrationVM.lbHint,
-                   bottomLabelConfig: BottomLabelConfig(demonstrationVM.bottomlbLabel),
-                   formatter: { typedString in
-            guard let decimalValue = Decimal(string: typedString) else { return typedString }
-            return demonstrationVM.toString2DP(value: decimalValue)
-        }, filter: .doubleOnly)
-        .textFieldStyle(demonstrationVM.lbInputFieldStyle ?? DefaultTextFieldStyle.default)
-    }
-
-    var swapButton: some View {
-        Button(action: {
-            withAnimation(.easeInOut(duration: 0.5)) {
-                swapFields()
             }
-        }, label: {
-            Image(systemName: "arrow.left.arrow.right")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: theme.size.medium, height: theme.size.medium)
-                .foregroundColor(theme.color.nominal)
+            .padding([.top], theme.padding.grid2x)
+        }
+        .padding([.all], theme.padding.grid3x)
+        .cardStyle(theme.cards.filled)
+    }
+    
+    var pressureConverterView: some View {
+        VStack {
+            HeadingView(
+                title: UnitConverter.pressureTitle,
+                subTitle: UnitConverter.pressureSubTitle)
+
+            HStack(alignment: .top, spacing: theme.padding.grid1x) {
+                InputField(text: $viewModel.pressureConversionInput,
+                           placeholder: viewModel.pressureConversionInputPlaceholder,
+                           bottomLabelConfig: viewModel.pressureInputBottomLabel,
+                           filter: .doubleOnly)
+                .keyboardType(.numberPad)
+                .textFieldStyle(viewModel.pressureInputFieldStyle)
+                
+                Button {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        viewModel.swapPressureFields()
+                    }
+                } label: {
+                    Image(systemName: "arrow.left.arrow.right")
+                }.buttonStyle(.tonalIcon)
+                    .padding([.vertical], theme.padding.grid0_5x)
+
+                InputField(text: $viewModel.pressureConversionOutput,
+                           placeholder: viewModel.pressureConversionOutputPlaceholder,
+                           bottomLabelConfig: BottomLabelConfig(viewModel.pressureOutputBottomLabel))
+                .textFieldStyle(.advisory)
+
+                Button(UnitConverter.convertButton, action: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        viewModel.convertPressure()
+                    }
+                })
+                .buttonStyle(.filled)
                 .padding([.bottom], theme.padding.grid2x)
-        })
+            }
+            .padding([.top], theme.padding.grid2x)
+        }
+        .padding([.all], theme.padding.grid3x)
+        .cardStyle(theme.cards.filled)
     }
+    
+    var lengthConverterView: some View {
+        VStack {
+            HeadingView(
+                title: UnitConverter.lengthTitle,
+                subTitle: UnitConverter.lengthSubTitle)
+            
+            HStack(alignment: .top) {
+                InputField(text: $viewModel.lengthConversionInput,
+                           placeholder: UnitConverter.lengthHint,
+                           bottomLabelConfig: viewModel.lengthInputBottomLabel,
+                           filter: .doubleOnly)
+                .textFieldStyle(viewModel.lengthInputFieldStyle)
+                .padding([.trailing], theme.padding.grid2x)
 
-    var convertButton1: some View {
-        Button(demonstrationVM.convert,
-               action: {demonstrationVM.convertStaticUnits()})
-        .buttonStyle(.filled)
-        .padding([.bottom], theme.padding.grid2x)
+                MenuField(selection: $viewModel.lengthSelectedInputType,
+                          options: LengthType.allCases)
+                .menuFieldStyle(.default)
+            }
+            .padding([.top], theme.padding.grid2x)
+            
+            HStack(alignment: .top) {
+                InputField(text: $viewModel.lengthConversionOutput,
+                           placeholder: UnitConverter.lengthResultHint)
+                    .textFieldStyle(.advisory)
+                    .padding([.trailing], theme.padding.grid2x)
+
+                MenuField(selection: $viewModel.lengthSelectedOutputType,
+                          options: LengthType.allCases)
+                .menuFieldStyle(.default)
+            }
+            .padding([.top], theme.padding.grid1x)
+            
+            Button(UnitConverter.convertButton, action: {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    viewModel.runLengthConversion()
+                }
+            })
+            .buttonStyle(.filled)
+            .padding([.top], theme.padding.grid2x)
+        }
+        .padding([.all], theme.padding.grid3x)
+        .cardStyle(theme.cards.filled)
     }
-
-    var convertButton2: some View {
-        Button(demonstrationVM.convert,
-               action: {demonstrationVM.runLengthConversion()})
-        .buttonStyle(.filled)
-        .padding([.bottom], theme.padding.grid2x)
-    }
-
-    func swapFields() {
-        demonstrationVM.weightValuesSwapped.toggle()
-        demonstrationVM.convertStaticUnits()
+    
+    var airspeedConverterView: some View {
+        VStack {
+            HeadingView(
+                title: UnitConverter.airspeedTitle,
+                subTitle: UnitConverter.airspeedSubTitle)
+            
+            HStack(alignment: .top) {
+                InputField(text: $viewModel.airspeedTemperature,
+                           placeholder: UnitConverter.airspeedOatHint,
+                           bottomLabelConfig: viewModel.airspeedTemperatureBottomConfig,
+                           filter: .doubleOnly)
+                .keyboardType(.numberPad)
+                .textFieldStyle(viewModel.airspeedTemperatureTextFieldStyle)
+                .padding([.trailing], theme.padding.grid2x)
+                
+                MenuField(selection: $viewModel.airspeedTemperatureType,
+                          options: TemperatureType.allCases)
+                .menuFieldStyle(.default)
+                .frame(width: 260)
+            }
+            .padding([.top], theme.padding.grid2x)
+            
+            HStack {
+                InputField(text: $viewModel.airspeedInputValue,
+                           placeholder: viewModel.airspeedInputPlaceholder,
+                           bottomLabelConfig: viewModel.airspeedInputBottomConfig,
+                           filter: .doubleOnly)
+                .keyboardType(.numberPad)
+                .textFieldStyle(viewModel.airspeedInputTextFieldStyle)
+                .padding([.trailing], theme.padding.grid2x)
+                
+                MenuField(selection: $viewModel.airspeedInputSelection,
+                          options: AirspeedType.allCases)
+                .menuFieldStyle(.default)
+                .frame(width: 260)
+            }
+            .padding([.top], theme.padding.grid1x)
+            
+            Button(UnitConverter.convertButton, action: {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    viewModel.convertAirspeed()
+                }
+            })
+            .buttonStyle(.filled)
+            .padding([.vertical], theme.padding.grid1x)
+            
+            InputField(text: $viewModel.airspeedOutputValue,
+                       placeholder: viewModel.airspeedOutputPlaceholder)
+            .textFieldStyle(.advisory)
+        }
+        .padding([.all], theme.padding.grid3x)
+        .cardStyle(theme.cards.filled)
     }
 }
 
