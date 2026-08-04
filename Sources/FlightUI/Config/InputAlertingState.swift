@@ -11,4 +11,5 @@ public enum InputAlertingState {
     case nominal
     case caution
     case warning
+    case test
 }
