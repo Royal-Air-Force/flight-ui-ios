@@ -9,6 +9,10 @@ extension String {
     var isEmptyTrimmed: Bool {
         self.trimmingCharacters(in: .whitespaces).isEmpty
     }
+    
+    func toDouble() -> Double {
+        return Double(self) ?? 0.0
+    }
 }
 
 extension Double {
