@@ -11,7 +11,7 @@ import FlightUI
 
 struct UnitConverter: View {
     @EnvironmentObject var theme: Theme
-    @ObservedObject var demonstrationVM = UnitConverterViewModel()
+    @StateObject var demonstrationVM = UnitConverterViewModel()
 
     var body: some View {
         ScrollView {

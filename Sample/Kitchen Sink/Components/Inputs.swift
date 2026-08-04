@@ -10,7 +10,7 @@ import FlightUI
 
 struct Inputs: View {
     @EnvironmentObject var theme: Theme
-    @StateObject private var viewModel = ViewModel()
+    @StateObject private var viewModel = InputsViewModel()
 
     var body: some View {
         ScrollView {
@@ -127,11 +127,11 @@ struct Inputs: View {
                 InputField(text: $viewModel.debounceInput, placeholder: "Debounce", bottomLabelConfig: BottomLabelConfig(viewModel.debounceAdvisoryLabel))
                     .textFieldStyle(.default)
                     .onChange(of: viewModel.debounceInput) { _ in
-                        viewModel.debounceAdvisoryLabel = Inputs.ViewModel.defaultDebounceAdvisoryLabel
+                        viewModel.debounceAdvisoryLabel = InputsViewModel.defaultDebounceAdvisoryLabel
                     }
                     .onDebounce(of: viewModel.debounceInput, duration: .seconds(2)) { debouncedValue in
                         if debouncedValue.isEmpty {
-                            viewModel.debounceAdvisoryLabel = Inputs.ViewModel.defaultDebounceAdvisoryLabel
+                            viewModel.debounceAdvisoryLabel = InputsViewModel.defaultDebounceAdvisoryLabel
                         } else {
                             viewModel.debounceAdvisoryLabel = debouncedValue
                         }
@@ -150,12 +150,12 @@ struct Inputs: View {
 
             HStack {
                 MenuField(selection: $viewModel.boundSelectionInput,
-                             options: ViewModel.BoundSelectionTypes.allCases,
+                             options: InputsViewModel.BoundSelectionTypes.allCases,
                              placeholder: "Bound Selection Input")
                 .menuFieldStyle(MenuFieldStyle(viewModel.boundSelectionState()))
 
                 UnboundMenuField(selection: $viewModel.unboundSelectionInput,
-                                 options: ViewModel.UnboundDefaultSelectionTypes.allCases,
+                                 options: InputsViewModel.UnboundDefaultSelectionTypes.allCases,
                                  placeholder: "Unbound Selection Input")
                 .menuFieldStyle(MenuFieldStyle(viewModel.unboundSelectionState()))
             }
