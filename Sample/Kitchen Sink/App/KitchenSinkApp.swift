@@ -45,7 +45,7 @@ struct KitchenSinkApp: App {
                         ) {
                             SampleScreenView(title: "Unit Converter", destination: UnitConverter())
                             SampleScreenView(title: "Cross Wind Calculator", destination: CrossWindCalculator())
-                            SampleScreenView(title: "Top of Descent (TOD) Calculator", destination: TODCalculator(viewModel: TODCalculatorViewModel()))
+                            SampleScreenView(title: "Top of Descent (TOD) Calculator", destination: TODCalculator())
                         }
                         .headerProminence(.increased)
                     }
