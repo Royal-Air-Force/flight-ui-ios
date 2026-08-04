@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4023B92430222D6900B11FE7 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023B92330222D6900B11FE7 /* UIImage+Extensions.swift */; };
 		556931492AC713FD00259236 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556931482AC713FD00259236 /* Cards.swift */; };
 		55B64F3B2AC4C01C00AC21F5 /* FlightUI in Frameworks */ = {isa = PBXBuildFile; productRef = 55B64F3A2AC4C01C00AC21F5 /* FlightUI */; };
 		837FC6D02986D0F60076C720 /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837FC6CF2986D0F60076C720 /* Colours.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4023B92330222D6900B11FE7 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		556931482AC713FD00259236 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		55B64F392AC4BEEF00AC21F5 /* flight-ui-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "flight-ui-ios"; path = ..; sourceTree = "<group>"; };
 		837FC6CF2986D0F60076C720 /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				838E7E2A2987D873000F691D /* String+Extensions.swift */,
 				AABAD73C2A473C0E00967197 /* Color+Extensions.swift */,
 				AADAE5942BBEAF8700CF00B7 /* Number+Extensions.swift */,
+				4023B92330222D6900B11FE7 /* UIImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				FB10BD802B9F58F1002489AB /* UnitConverter.swift in Sources */,
 				837FC6D42986D1900076C720 /* Typography.swift in Sources */,
 				AAF99A1F2BBC6C79004A1FCF /* WeightType.swift in Sources */,
+				4023B92430222D6900B11FE7 /* UIImage+Extensions.swift in Sources */,
 				838E7E2E2987FBF3000F691D /* Buttons.swift in Sources */,
 				AADAE5952BBEAF8700CF00B7 /* Number+Extensions.swift in Sources */,
 				AA3C83B42A3CBE5800A3F40B /* Misc.swift in Sources */,
