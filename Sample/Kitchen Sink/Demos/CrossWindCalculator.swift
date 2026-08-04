@@ -20,8 +20,9 @@ struct CrossWindCalculator: View {
                 windspeedOutput
             }
             .padding(theme.padding.grid3x)
-            .navigationBarTitle(CrossWindCalculator.crosswindTitle)
         }
+        .background(theme.color.background)
+        .navigationBarTitle(CrossWindCalculator.crosswindTitle)
     }
 
     var windSpeedInput: some View {

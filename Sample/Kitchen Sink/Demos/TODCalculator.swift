@@ -20,11 +20,12 @@ struct TODCalculator: View {
                 descentRateCalculation
             }
             .padding(theme.padding.grid3x)
-            .navigationBarTitle(TODCalculator.todCalculatorTitle)
-            .toolbar {
-                Button(TODCalculator.todCalculatorClear) {
-                    viewModel.clearInputs()
-                }
+        }
+        .background(theme.color.background)
+        .navigationBarTitle(TODCalculator.todCalculatorTitle)
+        .toolbar {
+            Button(TODCalculator.todCalculatorClear) {
+                viewModel.clearInputs()
             }
         }
     }
