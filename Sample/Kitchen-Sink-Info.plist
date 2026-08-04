@@ -18,5 +18,7 @@ Created by Appivate ___YEAR
 	<false/>
 	<key>CFBundleIdentifier</key>
 	<string></string>
+	<key>LSMinimumSystemVersion</key>
+	<string>13.3</string>
 </dict>
 </plist>
