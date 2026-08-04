@@ -36,13 +36,13 @@ struct UnitConverter: View {
             HStack(alignment: .top, spacing: theme.padding.grid1x) {
                 InputField(text: $viewModel.weightConversionInput,
                            placeholder: viewModel.weightConversionInputPlaceholder,
-                           bottomLabelConfig: BottomLabelConfig(viewModel.weightInputBottomLabel),
+                           bottomLabelConfig: viewModel.weightInputBottomLabel,
                            formatter: { typedString in
                     return viewModel.formatInputValue(value: typedString)
                 },
                            filter: .doubleOnly)
                 .keyboardType(.numberPad)
-                .textFieldStyle(.default)
+                .textFieldStyle(viewModel.weightInputFieldStyle)
                 
                 Button {
                     withAnimation(.easeInOut(duration: 0.3)) {
@@ -58,8 +58,11 @@ struct UnitConverter: View {
                            bottomLabelConfig: BottomLabelConfig(viewModel.weightOutputBottomLabel))
                 .textFieldStyle(.advisory)
 
-                Button(UnitConverter.convertButton,
-                       action: {viewModel.convertWeight()})
+                Button(UnitConverter.convertButton, action: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        viewModel.convertWeight()
+                    }}
+                )
                 .buttonStyle(.filled)
                 .padding([.bottom], theme.padding.grid2x)
             }
@@ -78,13 +81,13 @@ struct UnitConverter: View {
             HStack(alignment: .top, spacing: theme.padding.grid1x) {
                 InputField(text: $viewModel.pressureConversionInput,
                            placeholder: viewModel.pressureConversionInputPlaceholder,
-                           bottomLabelConfig: BottomLabelConfig(viewModel.pressureInputBottomLabel),
+                           bottomLabelConfig: viewModel.pressureInputBottomLabel,
                            formatter: { typedString in
                     return viewModel.formatInputValue(value: typedString)
                 },
                            filter: .doubleOnly)
                 .keyboardType(.numberPad)
-                .textFieldStyle(.default)
+                .textFieldStyle(viewModel.pressureInputFieldStyle)
                 
                 Button {
                     withAnimation(.easeInOut(duration: 0.3)) {
@@ -100,8 +103,11 @@ struct UnitConverter: View {
                            bottomLabelConfig: BottomLabelConfig(viewModel.pressureOutputBottomLabel))
                 .textFieldStyle(.advisory)
 
-                Button(UnitConverter.convertButton,
-                       action: {viewModel.convertPressure()})
+                Button(UnitConverter.convertButton, action: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        viewModel.convertPressure()
+                    }
+                })
                 .buttonStyle(.filled)
                 .padding([.bottom], theme.padding.grid2x)
             }
@@ -117,36 +123,39 @@ struct UnitConverter: View {
                 title: UnitConverter.lengthTitle,
                 subTitle: UnitConverter.lengthSubTitle)
             
-            HStack {
-                InputField(text: $viewModel.inputValue,
+            HStack(alignment: .top) {
+                InputField(text: $viewModel.lengthConversionInput,
                            placeholder: UnitConverter.lengthHint,
-                           bottomLabelConfig: BottomLabelConfig(""),
+                           bottomLabelConfig: viewModel.lengthInputBottomLabel,
                            filter: .doubleOnly)
-                .textFieldStyle(.default)
+                .textFieldStyle(viewModel.lengthInputFieldStyle)
+                .padding([.trailing], theme.padding.grid2x)
 
-                MenuField(selection: $viewModel.boundSelectionInput,
+                MenuField(selection: $viewModel.lengthSelectedInputType,
                           options: LengthType.allCases)
                 .menuFieldStyle(.default)
-                .padding([.bottom], theme.padding.grid2x)
             }
             .padding([.top], theme.padding.grid2x)
             
-            HStack {
-                InputField(text: $viewModel.outputValue, 
+            HStack(alignment: .top) {
+                InputField(text: $viewModel.lengthConversionOutput,
                            placeholder: UnitConverter.lengthResultHint)
                     .textFieldStyle(.advisory)
-                    .padding([.bottom], theme.padding.grid2x)
+                    .padding([.trailing], theme.padding.grid2x)
 
-                MenuField(selection: $viewModel.boundSelectionOutput,
+                MenuField(selection: $viewModel.lengthSelectedOutputType,
                           options: LengthType.allCases)
                 .menuFieldStyle(.default)
-                .padding([.bottom], theme.padding.grid2x)
             }
+            .padding([.top], theme.padding.grid1x)
             
-            Button(UnitConverter.convertButton,
-                   action: {viewModel.runLengthConversion()})
+            Button(UnitConverter.convertButton, action: {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    viewModel.runLengthConversion()
+                }
+            })
             .buttonStyle(.filled)
-            .padding([.bottom], theme.padding.grid2x)
+            .padding([.top], theme.padding.grid2x)
         }
         .padding([.all], theme.padding.grid3x)
         .cardStyle(theme.cards.filled)
@@ -177,9 +186,10 @@ struct UnitConverter: View {
             HStack {
                 InputField(text: $viewModel.airspeedInputValue,
                            placeholder: viewModel.airspeedInputPlaceholder,
+                           bottomLabelConfig: viewModel.airspeedInputBottomConfig,
                            filter: .doubleOnly)
                 .keyboardType(.numberPad)
-                .textFieldStyle(.default)
+                .textFieldStyle(viewModel.airspeedInputTextFieldStyle)
                 .padding([.trailing], theme.padding.grid2x)
                 
                 MenuField(selection: $viewModel.airspeedInputSelection,
@@ -189,8 +199,11 @@ struct UnitConverter: View {
             }
             .padding([.top], theme.padding.grid1x)
             
-            Button(UnitConverter.convertButton,
-                   action: { viewModel.convertAirspeed() })
+            Button(UnitConverter.convertButton, action: {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    viewModel.convertAirspeed()
+                }
+            })
             .buttonStyle(.filled)
             .padding([.vertical], theme.padding.grid1x)
             

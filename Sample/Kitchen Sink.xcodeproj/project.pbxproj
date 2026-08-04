@@ -23,6 +23,7 @@
 		AA4832C22A8E1DCD004B5F45 /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4832C12A8E1DCD004B5F45 /* HeadingView.swift */; };
 		AA4D62A52A4EE6E9009303DF /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4D62A42A4EE6E9009303DF /* Spacing.swift */; };
 		AABAD73D2A473C0E00967197 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABAD73C2A473C0E00967197 /* Color+Extensions.swift */; };
+		AADAE5952BBEAF8700CF00B7 /* Number+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADAE5942BBEAF8700CF00B7 /* Number+Extensions.swift */; };
 		AAF99A112BBC3FD6004A1FCF /* TODCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A102BBC3FD6004A1FCF /* TODCalculator.swift */; };
 		AAF99A132BBC3FE5004A1FCF /* TODCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A122BBC3FE5004A1FCF /* TODCalculatorViewModel.swift */; };
 		AAF99A152BBC46C4004A1FCF /* TemperatureType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */; };
@@ -68,6 +69,7 @@
 		AA4832C12A8E1DCD004B5F45 /* HeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
 		AA4D62A42A4EE6E9009303DF /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		AABAD73C2A473C0E00967197 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		AADAE5942BBEAF8700CF00B7 /* Number+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Extensions.swift"; sourceTree = "<group>"; };
 		AAF99A102BBC3FD6004A1FCF /* TODCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODCalculator.swift; sourceTree = "<group>"; };
 		AAF99A122BBC3FE5004A1FCF /* TODCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODCalculatorViewModel.swift; sourceTree = "<group>"; };
 		AAF99A142BBC46C4004A1FCF /* TemperatureType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureType.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				838E7E2A2987D873000F691D /* String+Extensions.swift */,
 				AABAD73C2A473C0E00967197 /* Color+Extensions.swift */,
+				AADAE5942BBEAF8700CF00B7 /* Number+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				837FC6D42986D1900076C720 /* Typography.swift in Sources */,
 				AAF99A1F2BBC6C79004A1FCF /* WeightType.swift in Sources */,
 				838E7E2E2987FBF3000F691D /* Buttons.swift in Sources */,
+				AADAE5952BBEAF8700CF00B7 /* Number+Extensions.swift in Sources */,
 				AA3C83B42A3CBE5800A3F40B /* Misc.swift in Sources */,
 				AA3C83AF2A3CB5B100A3F40B /* Inputs.swift in Sources */,
 				AAF99A112BBC3FD6004A1FCF /* TODCalculator.swift in Sources */,
