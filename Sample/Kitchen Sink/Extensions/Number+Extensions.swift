@@ -7,13 +7,19 @@
 
 import Foundation
 
-extension Double {
+public extension Int {
+    func toDouble() -> Double {
+        return Double(self)
+    }
+}
+
+public extension Double {
     func toDecimalString(decimalPlaces: Int) -> String {
         return String(format: "%.\(decimalPlaces)f", self)
     }
 }
 
-extension Decimal {
+public extension Decimal {
     func toDecimalString() -> String {
         let roundedValue = getNSDecimalNumber()
         return String(format: "%.2f", roundedValue)
