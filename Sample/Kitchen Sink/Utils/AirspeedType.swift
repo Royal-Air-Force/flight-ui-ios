@@ -14,4 +14,22 @@ enum AirspeedType: String, CaseIterable, CustomStringConvertible {
     var description: String {
         return rawValue
     }
+    
+    var inverse: AirspeedType {
+        switch self {
+        case .mach:
+            return .tas
+        case .tas:
+            return .mach
+        }
+    }
+    
+    var unitName: String {
+        switch self {
+        case .mach:
+            return UnitConverter.airspeedMachHint
+        case .tas:
+            return UnitConverter.airspeedTasHint
+        }
+    }
 }
