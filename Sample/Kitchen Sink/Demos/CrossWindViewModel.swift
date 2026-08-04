@@ -21,9 +21,12 @@ class CrosswindCalculatorViewModel: ObservableObject {
     @Published var windDirectionTextFieldStyle: InputFieldStyle = .init(.default)
     @Published var windDirectionBottomConfig: BottomLabelConfig = .init(isVisible: false)
 
+    private var calculator: CalculatorService
     private var cancellables = Set<AnyCancellable>()
 
-    init() {
+    init(calculatorService: CalculatorService) {
+        self.calculator = calculatorService
+        
         Publishers.CombineLatest3($runwayHeading, $windSpeed, $windDirection)
             .sink { [weak self] runwayHeading, windSpeed, windDirection in
 
@@ -58,14 +61,10 @@ class CrosswindCalculatorViewModel: ObservableObject {
     }
     
     func calculateWinds(speed: Double, direction: Double, runway: Double) {
-        let directionRadians = degreesToRadians(direction)
-        let runwayRadians = degreesToRadians(runwayHeadingInDegrees(runway))
         
-        let crosswind = abs(speed * sin(directionRadians - runwayRadians))
-        let headwind = abs(speed * cos(directionRadians - runwayRadians))
+        crosswindOutput = formatOutputUnits(calculator.calculateCrossWind(speed: speed, direction: direction, runway: runway))
         
-        crosswindOutput = formatOutputUnits(crosswind.toDecimalString(decimalPlaces: 2))
-        headwindOutput = formatOutputUnits(headwind.toDecimalString(decimalPlaces: 2))
+        headwindOutput = formatOutputUnits(calculator.calculateHeadWind(speed: speed, direction: direction, runway: runway))
     }
     
     func formatOutputUnits(_ value: String) -> String {
@@ -75,13 +74,5 @@ class CrosswindCalculatorViewModel: ObservableObject {
     func clearCalculations() {
         crosswindOutput = ""
         headwindOutput = ""
-    }
-
-    func runwayHeadingInDegrees(_ runwayNumber: Double) -> Double {
-        return runwayNumber * 10.0
-    }
-
-    func degreesToRadians(_ degrees: Double) -> Double {
-        return degrees * Double.pi / 180
     }
 }

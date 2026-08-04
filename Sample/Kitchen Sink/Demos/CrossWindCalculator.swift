@@ -11,7 +11,7 @@ import FlightUI
 
 struct CrossWindCalculator: View {
     @EnvironmentObject var theme: Theme
-    @StateObject var viewModel = CrosswindCalculatorViewModel()
+    @StateObject var viewModel = CrosswindCalculatorViewModel(calculatorService: CalculatorService())
 
     var body: some View {
         ScrollView {
@@ -43,8 +43,7 @@ struct CrossWindCalculator: View {
                 
                 InputField(text: $viewModel.windSpeed,
                            placeholder: CrossWindCalculator.windSpeedPlaceholder,
-                           filter: .doubleOnly,
-                           maxCharacterCount: 3)
+                           filter: .doubleOnly)
                 .textFieldStyle(.default)
             }
             
