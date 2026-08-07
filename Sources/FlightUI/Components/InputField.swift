@@ -68,62 +68,104 @@ public struct InputField: View {
 
     @ViewBuilder
     private func buildTextField() -> some View {
-        if let placeholderText = placeholder {
-            TextField(text: $text) {
+        TextField(text: $text) {
+            if let placeholderText = placeholder {
                 Text(placeholderText)
                     .foregroundColor(theme.color.primary.opacity(isEnabled ? InputFieldDefaults.hintOpacity : InputFieldDefaults.disabledOpacity))
             }
-            .onReceive(Just(text)) { newValue in
-                if let regex = filter?.regex {
-                    let replaced = newValue.replacingOccurrences(of: regex, with: "", options: .regularExpression)
-                    if replaced != newValue {
-                        self.text = replaced
-                    }
-                }
-                // Limit character count
-                if let maxCount = maxCharacterCount {
-                    if text.count > maxCount {
-                        text = String(text.prefix(maxCount))
-                    }
-                }
-            }
-            .focused($isFocused)
-            .onChange(of: isFocused) { newFocus in
-                if !newFocus {
-                    if let format = formatter {
-                        text = format(text)
-                    }
-                    if let valid = validator {
-                        valid(text)
-                    }
-                }
-            }
-        } else {
-            TextField("", text: $text)
-                .onReceive(Just(text)) { newValue in
-                    if let regex = filter?.regex {
-                        let replaced = newValue.replacingOccurrences(of: regex, with: "", options: .regularExpression)
-                        if replaced != newValue {
-                            self.text = replaced
-                        }
-                        if let maxCount = maxCharacterCount {
-                            if text.count > maxCount {
-                                text = String(text.prefix(maxCount))
-                            }
-                        }
-                    }
-                }
-                .focused($isFocused)
-                .onChange(of: isFocused) { newFocus in
-                    if !newFocus {
-                        if let format = formatter {
-                            text = format(text)
-                        }
-                        if let valid = validator {
-                            valid(text)
-                        }
-                    }
-                }
         }
+        .onReceive(Just(text)) { newValue in
+            if let regex = filter?.regex {
+                let replaced = newValue.replacingOccurrences(
+                    of: regex,
+                    with: "",
+                    options: .regularExpression
+                )
+                if replaced != newValue {
+                    self.text = replaced
+                }
+            }
+            // Limit character count
+            if let maxCount = maxCharacterCount {
+                if text.count > maxCount {
+                    text = String(text.prefix(maxCount))
+                }
+            }
+        }
+        .focused($isFocused)
+        .onChange(of: isFocused) { newFocus in
+            if !newFocus {
+                if let format = formatter {
+                    text = format(
+                        text
+                    )
+                }
+                if let valid = validator {
+                    valid(
+                        text
+                    )
+                }
+            }
+        }
+
+// -- Alot Of Repeated Code!
+        
+//        if let placeholderText = placeholder {
+//            TextField(text: $text) {
+//                Text(placeholderText)
+//                    .foregroundColor(theme.color.primary.opacity(isEnabled ? InputFieldDefaults.hintOpacity : InputFieldDefaults.disabledOpacity))
+//            }
+//            .onReceive(Just(text)) { newValue in
+//                if let regex = filter?.regex {
+//                    let replaced = newValue.replacingOccurrences(of: regex, with: "", options: .regularExpression)
+//                    if replaced != newValue {
+//                        self.text = replaced
+//                    }
+//                }
+//                // Limit character count
+//                if let maxCount = maxCharacterCount {
+//                    if text.count > maxCount {
+//                        text = String(text.prefix(maxCount))
+//                    }
+//                }
+//            }
+//            .focused($isFocused)
+//            .onChange(of: isFocused) { newFocus in
+//                if !newFocus {
+//                    if let format = formatter {
+//                        text = format(text)
+//                    }
+//                    if let valid = validator {
+//                        valid(text)
+//                    }
+//                }
+//            }
+//        } else {
+//            TextField("", text: $text)
+//                .onReceive(Just(text)) { newValue in
+//                    if let regex = filter?.regex {
+//                        let replaced = newValue.replacingOccurrences(of: regex, with: "", options: .regularExpression)
+//                        if replaced != newValue {
+//                            self.text = replaced
+//                        }
+//                        if let maxCount = maxCharacterCount {
+//                            if text.count > maxCount {
+//                                text = String(text.prefix(maxCount))
+//                            }
+//                        }
+//                    }
+//                }
+//                .focused($isFocused)
+//                .onChange(of: isFocused) { newFocus in
+//                    if !newFocus {
+//                        if let format = formatter {
+//                            text = format(text)
+//                        }
+//                        if let valid = validator {
+//                            valid(text)
+//                        }
+//                    }
+//                }
+//        }
     }
 }
