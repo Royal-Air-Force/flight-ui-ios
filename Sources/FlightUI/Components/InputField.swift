@@ -23,7 +23,7 @@ public struct CustomInputField: View {
     var filter: RegexFilter?
     var maxCharacterCount: Int?
     var customKeyboard: UIInputViewController?
-    var keyboardType: UIKeyboardType
+    var keyboardType: UIKeyboardType = .default
 
     public init(
         text: Binding<String>,
@@ -36,7 +36,6 @@ public struct CustomInputField: View {
         validator: ((String) -> Void)? = nil,
         maxCharacterCount: Int? = nil,
         customKeyboard: UIInputViewController? = nil,
-        keyboardType: UIKeyboardType = .default
     ) {
         self._text = text
         self.placeholder = placeholder
@@ -47,8 +46,6 @@ public struct CustomInputField: View {
         self.validator = validator
         self.filter = filter
         self.maxCharacterCount = maxCharacterCount
-        self.customKeyboard = customKeyboard
-        self.keyboardType = keyboardType
     }
 
     public var body: some View {
