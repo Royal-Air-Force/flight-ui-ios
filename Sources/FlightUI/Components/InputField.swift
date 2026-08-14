@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-public struct CustomInputField: View {
+public struct InputField: View {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState var isFocused: Bool
@@ -73,7 +73,7 @@ public struct CustomInputField: View {
     private func buildTextField() -> some View {
         Group {
             if let customKeyboard = customKeyboard {
-                CustomUIKitTextField(
+                UIKitTextField(
                     text: $text,
                     placeholder: placeholder,
                     keyboardType: keyboardType,
@@ -121,7 +121,7 @@ public struct CustomInputField: View {
     }
 }
 
-private class CustomInputTextField: UITextField {
+private class InputTextField: UITextField {
     var customInputViewController: UIInputViewController?
     
     override var inputViewController: UIInputViewController? {
@@ -129,14 +129,14 @@ private class CustomInputTextField: UITextField {
     }
 }
 
-private struct CustomUIKitTextField: UIViewRepresentable {
+private struct UIKitTextField: UIViewRepresentable {
     @Binding var text: String
     var placeholder: String?
     var keyboardType: UIKeyboardType
     var customKeyboard: UIInputViewController
     
-    func makeUIView(context: Context) -> CustomInputTextField {
-        let textField = CustomInputTextField()
+    func makeUIView(context: Context) -> InputTextField {
+        let textField = InputTextField()
         textField.delegate = context.coordinator
         textField.keyboardType = keyboardType
         textField.placeholder = placeholder
@@ -152,7 +152,7 @@ private struct CustomUIKitTextField: UIViewRepresentable {
         return textField
     }
     
-    func updateUIView(_ uiView: CustomInputTextField, context: Context) {
+    func updateUIView(_ uiView: InputTextField, context: Context) {
         if uiView.text != text {
             uiView.text = text
         }
@@ -165,9 +165,9 @@ private struct CustomUIKitTextField: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, UITextFieldDelegate {
-        var parent: CustomUIKitTextField
+        var parent: UIKitTextField
         
-        init(_ parent: CustomUIKitTextField) {
+        init(_ parent: UIKitTextField) {
             self.parent = parent
         }
         
