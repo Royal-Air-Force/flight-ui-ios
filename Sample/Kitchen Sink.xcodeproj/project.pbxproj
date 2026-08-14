@@ -336,6 +336,7 @@
 			);
 			mainGroup = 83C93DB72986C53A00A911A9;
 			packageReferences = (
+				409C08B23026005D00CD8BA6 /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			productRefGroup = 83C93DC12986C53A00A911A9 /* Products */;
 			projectDirPath = "";
@@ -550,7 +551,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Kitchen Sink/Preview Content\"";
-				DEVELOPMENT_TEAM = 5PRV5PD957;
+				DEVELOPMENT_TEAM = GU589Z3L3V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Kitchen Sink";
@@ -584,7 +585,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Kitchen Sink/Preview Content\"";
-				DEVELOPMENT_TEAM = 5PRV5PD957;
+				DEVELOPMENT_TEAM = GU589Z3L3V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Kitchen Sink";
@@ -688,6 +689,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		409C08B23026005D00CD8BA6 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		55B64F3A2AC4C01C00AC21F5 /* FlightUI */ = {

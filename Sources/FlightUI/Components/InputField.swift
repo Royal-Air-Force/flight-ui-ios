@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-public struct InputField: View {
+public struct CustomInputField: View {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState var isFocused: Bool
@@ -22,6 +22,8 @@ public struct InputField: View {
     var validator: ((String) -> Void)?
     var filter: RegexFilter?
     var maxCharacterCount: Int?
+    var customKeyboard: UIInputViewController?
+    var keyboardType: UIKeyboardType
 
     public init(
         text: Binding<String>,
@@ -32,7 +34,9 @@ public struct InputField: View {
         formatter: ((String) -> String)? = nil,
         filter: RegexFilter? = nil,
         validator: ((String) -> Void)? = nil,
-        maxCharacterCount: Int? = nil
+        maxCharacterCount: Int? = nil,
+        customKeyboard: UIInputViewController? = nil,
+        keyboardType: UIKeyboardType = .default
     ) {
         self._text = text
         self.placeholder = placeholder
@@ -43,6 +47,8 @@ public struct InputField: View {
         self.validator = validator
         self.filter = filter
         self.maxCharacterCount = maxCharacterCount
+        self.customKeyboard = customKeyboard
+        self.keyboardType = keyboardType
     }
 
     public var body: some View {
@@ -68,12 +74,24 @@ public struct InputField: View {
 
     @ViewBuilder
     private func buildTextField() -> some View {
-        TextField(text: $text) {
-            if let placeholderText = placeholder {
-                Text(placeholderText)
-                    .foregroundColor(theme.color.primary.opacity(isEnabled ? InputFieldDefaults.hintOpacity : InputFieldDefaults.disabledOpacity))
+        Group {
+            if let customKeyboard = customKeyboard {
+                CustomUIKitTextField(
+                    text: $text,
+                    placeholder: placeholder,
+                    keyboardType: keyboardType,
+                    customKeyboard: customKeyboard
+                )
+            } else {
+                TextField(text: $text) {
+                    if let placeholderText = placeholder {
+                        Text(placeholderText)
+                            .foregroundColor(theme.color.primary.opacity(isEnabled ? InputFieldDefaults.hintOpacity : InputFieldDefaults.disabledOpacity))
+                    }
+                }
             }
         }
+        .keyboardType(keyboardType)
         .onReceive(Just(text)) { newValue in
             if let regex = filter?.regex {
                 let replaced = newValue.replacingOccurrences(
@@ -96,76 +114,68 @@ public struct InputField: View {
         .onChange(of: isFocused) { newFocus in
             if !newFocus {
                 if let format = formatter {
-                    text = format(
-                        text
-                    )
+                    text = format(text)
                 }
                 if let valid = validator {
-                    valid(
-                        text
-                    )
+                    valid(text)
                 }
             }
         }
+    }
+}
 
-// -- Alot Of Repeated Code!
+private class CustomInputTextField: UITextField {
+    var customInputViewController: UIInputViewController?
+    
+    override var inputViewController: UIInputViewController? {
+        return customInputViewController
+    }
+}
+
+private struct CustomUIKitTextField: UIViewRepresentable {
+    @Binding var text: String
+    var placeholder: String?
+    var keyboardType: UIKeyboardType
+    var customKeyboard: UIInputViewController
+    
+    func makeUIView(context: Context) -> CustomInputTextField {
+        let textField = CustomInputTextField()
+        textField.delegate = context.coordinator
+        textField.keyboardType = keyboardType
+        textField.placeholder = placeholder
         
-//        if let placeholderText = placeholder {
-//            TextField(text: $text) {
-//                Text(placeholderText)
-//                    .foregroundColor(theme.color.primary.opacity(isEnabled ? InputFieldDefaults.hintOpacity : InputFieldDefaults.disabledOpacity))
-//            }
-//            .onReceive(Just(text)) { newValue in
-//                if let regex = filter?.regex {
-//                    let replaced = newValue.replacingOccurrences(of: regex, with: "", options: .regularExpression)
-//                    if replaced != newValue {
-//                        self.text = replaced
-//                    }
-//                }
-//                // Limit character count
-//                if let maxCount = maxCharacterCount {
-//                    if text.count > maxCount {
-//                        text = String(text.prefix(maxCount))
-//                    }
-//                }
-//            }
-//            .focused($isFocused)
-//            .onChange(of: isFocused) { newFocus in
-//                if !newFocus {
-//                    if let format = formatter {
-//                        text = format(text)
-//                    }
-//                    if let valid = validator {
-//                        valid(text)
-//                    }
-//                }
-//            }
-//        } else {
-//            TextField("", text: $text)
-//                .onReceive(Just(text)) { newValue in
-//                    if let regex = filter?.regex {
-//                        let replaced = newValue.replacingOccurrences(of: regex, with: "", options: .regularExpression)
-//                        if replaced != newValue {
-//                            self.text = replaced
-//                        }
-//                        if let maxCount = maxCharacterCount {
-//                            if text.count > maxCount {
-//                                text = String(text.prefix(maxCount))
-//                            }
-//                        }
-//                    }
-//                }
-//                .focused($isFocused)
-//                .onChange(of: isFocused) { newFocus in
-//                    if !newFocus {
-//                        if let format = formatter {
-//                            text = format(text)
-//                        }
-//                        if let valid = validator {
-//                            valid(text)
-//                        }
-//                    }
-//                }
-//        }
+        textField.customInputViewController = customKeyboard
+        
+        textField.addTarget(
+            context.coordinator,
+            action: #selector(Coordinator.textFieldDidChange(_:)),
+            for: .editingChanged
+        )
+        
+        return textField
+    }
+    
+    func updateUIView(_ uiView: CustomInputTextField, context: Context) {
+        if uiView.text != text {
+            uiView.text = text
+        }
+        uiView.keyboardType = keyboardType
+        uiView.customInputViewController = customKeyboard
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, UITextFieldDelegate {
+        var parent: CustomUIKitTextField
+        
+        init(_ parent: CustomUIKitTextField) {
+            self.parent = parent
+        }
+        
+        @objc func textFieldDidChange(_ textField: UITextField) {
+            parent.text = textField.text ?? ""
+        }
     }
 }
