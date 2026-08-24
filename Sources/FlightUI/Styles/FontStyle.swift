@@ -47,21 +47,45 @@ struct FontStyleModifier: ViewModifier {
     @Environment(\.sizeCategory) var sizeCategory
 
     let style: FontStyle
+    
+    let size: CGFloat?
+    let weight: Font.Weight?
+    let design: Font.Design?
+    let isItalic: Bool?
+    let lineSpacing: CGFloat?
+    let charSpacing: CGFloat?
+    let foregroundColour: Color?
 
-    init(style: FontStyle) {
+    init(
+        style: FontStyle,
+        size: CGFloat? = nil,
+        weight: Font.Weight? = nil,
+        design: Font.Design? = nil,
+        isItalic: Bool? = nil,
+        lineSpacing: CGFloat? = nil,
+        charSpacing: CGFloat? = nil,
+        foregroundColour: Color? = nil
+    ) {
         self.style = style
+        self.size = size
+        self.weight = weight
+        self.design = design
+        self.isItalic = isItalic
+        self.lineSpacing = lineSpacing
+        self.charSpacing = charSpacing
+        self.foregroundColour = foregroundColour
     }
 
     func body(content: Content) -> some View {
         content
             .font(.system(
-                size: UIFontMetrics.default.scaledValue(for: style.size),
-                weight: style.weight,
-                design: style.design))
-            .italic(style.italic)
-            .lineSpacing(style.lineSpacing)
-            .tracking(style.charSpacing)
-            .foregroundColor(style.foregroundColor ?? theme.color.primary)
+                size: size ?? UIFontMetrics.default.scaledValue(for: style.size),
+                weight: weight ?? style.weight,
+                design: design ?? style.design))
+            .italic(isItalic ?? style.italic)
+            .lineSpacing(lineSpacing ?? style.lineSpacing)
+            .tracking(charSpacing ?? style.charSpacing)
+            .foregroundColor(foregroundColour ?? style.foregroundColor ?? theme.color.primary)
     }
 
 }
@@ -73,8 +97,17 @@ extension Font {
 }
 
 extension View {
-    public func fontStyle(_ style: FontStyle) -> some View {
-        modifier(FontStyleModifier(style: style))
+    public func fontStyle(
+        _ style: FontStyle,
+        size: CGFloat? = nil,
+        weight: Font.Weight? = nil,
+        design: Font.Design? = nil,
+        isItalic: Bool? = nil,
+        lineSpacing: CGFloat? = nil,
+        charSpacing: CGFloat? = nil,
+        foregroundColour: Color? = nil
+    ) -> some View {
+        modifier(FontStyleModifier(style: style, size: size, weight: weight, design: design, isItalic: isItalic, lineSpacing: lineSpacing, charSpacing: charSpacing, foregroundColour: foregroundColour))
     }
 }
 
