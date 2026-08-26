@@ -22,7 +22,7 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
     var validator: ((SelectionType) -> Void)?
 
     public init(
-        selection: Binding<SelectionType>,
+        selection: Binding<SelectionType?>,
         options: [SelectionType],
         placeholder: String? = nil,
         topLabel: String? = nil,
