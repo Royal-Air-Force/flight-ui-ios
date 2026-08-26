@@ -38,6 +38,39 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
         self.bottomLabelConfig = bottomLabelConfig
         self.validator = validator
     }
+    
+    public init(
+            selection: Binding<SelectionType>,
+            options: [SelectionType],
+            placeholder: String? = nil,
+            topLabel: String? = nil,
+            topLabelSpacer: Bool = false,
+            bottomLabelConfig: BottomLabelConfig = .init(
+                isVisible: false
+            ),
+            validator: (
+                (
+                    SelectionType
+                ) -> Void
+            )? = nil
+    ) {
+        self._selection = Binding<SelectionType?>(
+            get: {
+                selection.wrappedValue
+            },
+                set: { newValue in
+                    if let newValue {
+                        selection.wrappedValue = newValue
+                    }
+                }
+            )
+            self.options = options
+            self.placeholder = placeholder
+            self.topLabel = topLabel
+            self.topLabelSpacer = topLabelSpacer
+            self.bottomLabelConfig = bottomLabelConfig
+            self.validator = validator
+        }
 
     public var body: some View {
         VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
@@ -99,10 +132,11 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
 
     @ViewBuilder
     private func buildLabelText() -> some View {
-        Label(selection.description, image: "")
-            .labelStyle(MenuLabelStyle(textColor: style.getFontColor(theme, isPlaceholder: false, isEnabled: isEnabled)))
-            .fontStyle(style.config.fontStyle ?? theme.font.bodyBold)
-        if let placeholderText = placeholder {
+        if let selectedItem = selection?.description {
+            Label(selectedItem, image: "")
+                .labelStyle(MenuLabelStyle(textColor: style.getFontColor(theme, isPlaceholder: false, isEnabled: isEnabled)))
+                .fontStyle(style.config.fontStyle ?? theme.font.bodyBold)
+        } else if let placeholderText = placeholder {
             Label(placeholderText, image: "")
                 .labelStyle(MenuLabelStyle(textColor: style.getFontColor(theme, isPlaceholder: true, isEnabled: isEnabled)))
                 .fontStyle(style.config.fontStyle ?? theme.font.bodyBold)
