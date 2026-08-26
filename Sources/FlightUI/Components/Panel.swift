@@ -9,12 +9,12 @@ import SwiftUI
 
 // MARK: - Panel View -
 
-private enum PanelOptions {
+public enum PanelOptions {
     case fixed
     case expandable(expanded: Bool = false)
 }
 
-private struct Panel<Content: View, Subtitle: View>: View {
+public struct Panel<Content: View, Subtitle: View>: View {
     @EnvironmentObject var theme: Theme
     @State private var expanded: Bool
 
@@ -71,8 +71,8 @@ private struct Panel<Content: View, Subtitle: View>: View {
         }
         .frame(maxWidth: .infinity)
         .background(RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous)
-            .strokeBorder(theme.color.surfaceLow, lineWidth: theme.size.border)
-            .background(RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous).fill(theme.color.background)))
+        .strokeBorder(theme.color.surfaceLow, lineWidth: theme.size.border)
+        .background(RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous).fill(theme.color.background)))
     }
 
     private var panelHeaderView: some View {
@@ -107,7 +107,8 @@ private struct Panel<Content: View, Subtitle: View>: View {
         Text(title)
             .padding()
             .font(typography ?? Font.title2)
-            .foregroundColor(theme.color.surfaceLow)
+            .foregroundColor(theme.color.primary)
+//            .fontStyle(theme.font.title2)
     }
 
     private var expandIcon: some View {
