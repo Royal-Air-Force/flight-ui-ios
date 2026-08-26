@@ -19,14 +19,14 @@ public struct Panel<Content: View, Subtitle: View>: View {
     @State private var expanded: Bool
 
     private var title: String?
-    private var typography: Font?
+    private var fontStyle: FontStyle?
     private var expandable: Bool
 
     private var subtitle: () -> Subtitle
     private let content: () -> Content
 
     public init(title: String? = nil,
-                typography: Font? = nil,
+                fontStyle: FontStyle? = nil,
                 options: PanelOptions = .fixed,
                 subtitle: @escaping () -> Subtitle,
                 @ViewBuilder content: @escaping () -> Content) {
@@ -43,15 +43,15 @@ public struct Panel<Content: View, Subtitle: View>: View {
             self.expanded = false
         }
 
-        self.typography = typography
+        self.fontStyle = fontStyle
     }
 
     public init(title: String? = nil,
-                typography: Font? = nil,
+                fontStyle: FontStyle? = nil,
                 options: PanelOptions = .fixed,
                 @ViewBuilder content: @escaping () -> Content) where Subtitle == EmptyView {
         self.init(title: title,
-                  typography: typography,
+                  fontStyle: fontStyle,
                   options: options,
                   subtitle: { EmptyView() },
                   content: content)
@@ -106,9 +106,8 @@ public struct Panel<Content: View, Subtitle: View>: View {
     private func panelTitleTextView(_ title: String) -> some View {
         Text(title)
             .padding()
-            .font(typography ?? Font.title2)
             .foregroundColor(theme.color.primary)
-//            .fontStyle(theme.font.title2)
+            .fontStyle(fontStyle ?? theme.font.title2)
     }
 
     private var expandIcon: some View {
@@ -147,9 +146,9 @@ struct Panel_Previews: PreviewProvider {
                 content
             }
 
-            Panel(title: "Expandable Panel with subtitle", typography: .body, options: .expandable()) {
+            Panel(title: "Expandable Panel with subtitle", fontStyle: FontStyle.body, options: .expandable()) {
                 Text("This is a subtitle")
-                    .fontStyle(Theme().font.caption1)
+                    .fontStyle(FontStyle.caption1)
             } content: {
                 content
             }
@@ -166,7 +165,7 @@ struct Panel_Previews: PreviewProvider {
                 Panel {
                     HStack {
                         Text("Side by Side")
-                            .fontStyle(Theme().font.title1)
+                            .fontStyle(FontStyle.title1)
                             .padding()
 
                         Spacer()
