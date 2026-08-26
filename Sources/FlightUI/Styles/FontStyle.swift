@@ -42,7 +42,7 @@ public class FontStyle {
         self.foregroundColor = foregroundColor
     }
 
-    convenience init(
+    public convenience init(
         fontStyle: FontStyle,
         size: CGFloat? = nil,
         weight: Font.Weight? = nil,
