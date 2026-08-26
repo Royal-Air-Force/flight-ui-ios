@@ -13,7 +13,7 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
 
-    @Binding var selection: SelectionType
+    @Binding var selection: SelectionType?
     var options: [SelectionType]
     var placeholder: String?
     var topLabel: String?
@@ -68,9 +68,11 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
                     Text(item.description).tag(Optional(item))
                 }
             }
-//            .onChange(of: selection) { oldValue, newValue in
-//                validator(newValue)
-//            }
+            .onChange(of: selection) { newValue in
+                if let validator, let newValue {
+                    validator(newValue)
+                }
+            }
         } label: {
             HStack {
                 buildLabelText()
