@@ -13,20 +13,22 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
 
-    @Binding var selection: SelectionType?
+    @Binding var selection: SelectionType
     var options: [SelectionType]
     var placeholder: String?
     var topLabel: String?
     var topLabelSpacer: Bool
     var bottomLabelConfig: BottomLabelConfig
+    var validator: ((SelectionType) -> Void)?
 
     public init(
-        selection: Binding<SelectionType?>,
+        selection: Binding<SelectionType>,
         options: [SelectionType],
         placeholder: String? = nil,
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
-        bottomLabelConfig: BottomLabelConfig = .init(isVisible: false)
+        bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
+        validator: ((SelectionType) -> Void)? = nil
     ) {
         self._selection = selection
         self.options = options
@@ -34,6 +36,7 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
         self.topLabel = topLabel
         self.topLabelSpacer = topLabelSpacer
         self.bottomLabelConfig = bottomLabelConfig
+        self.validator = validator
     }
 
     public var body: some View {
@@ -65,6 +68,9 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
                     Text(item.description).tag(Optional(item))
                 }
             }
+//            .onChange(of: selection) { oldValue, newValue in
+//                validator(newValue)
+//            }
         } label: {
             HStack {
                 buildLabelText()
@@ -91,11 +97,10 @@ public struct MenuField<SelectionType: CustomStringConvertible & Hashable>: View
 
     @ViewBuilder
     private func buildLabelText() -> some View {
-        if let selectedItem = selection?.description {
-            Label(selectedItem, image: "")
-                .labelStyle(MenuLabelStyle(textColor: style.getFontColor(theme, isPlaceholder: false, isEnabled: isEnabled)))
-                .fontStyle(style.config.fontStyle ?? theme.font.bodyBold)
-        } else if let placeholderText = placeholder {
+        Label(selection.description, image: "")
+            .labelStyle(MenuLabelStyle(textColor: style.getFontColor(theme, isPlaceholder: false, isEnabled: isEnabled)))
+            .fontStyle(style.config.fontStyle ?? theme.font.bodyBold)
+        if let placeholderText = placeholder {
             Label(placeholderText, image: "")
                 .labelStyle(MenuLabelStyle(textColor: style.getFontColor(theme, isPlaceholder: true, isEnabled: isEnabled)))
                 .fontStyle(style.config.fontStyle ?? theme.font.bodyBold)
@@ -122,7 +127,7 @@ struct MenuField_Previews: PreviewProvider {
     static var previews: some View {
         VStack(alignment: .leading, spacing: theme.padding.grid2x) {
             HStack {
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                              placeholder: "Default Menu Field")
                 .menuFieldStyle(.default)
@@ -130,14 +135,14 @@ struct MenuField_Previews: PreviewProvider {
                              options: PreviewOptions.allCases,
                              placeholder: "Default Menu Field")
                 .menuFieldStyle(.default)
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                              placeholder: "Default Disabled")
                 .menuFieldStyle(.default)
                 .disabled(true)
             }
             HStack {
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                              placeholder: "Nominal Menu Field")
                 .menuFieldStyle(.nominal)
@@ -145,14 +150,14 @@ struct MenuField_Previews: PreviewProvider {
                              options: PreviewOptions.allCases,
                              placeholder: "Nominal Menu Field")
                 .menuFieldStyle(.nominal)
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                              placeholder: "Nominal Disabled")
                 .menuFieldStyle(.nominal)
                 .disabled(true)
             }
             HStack {
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                              placeholder: "Caution Menu Field")
                 .menuFieldStyle(.caution)
@@ -160,14 +165,14 @@ struct MenuField_Previews: PreviewProvider {
                              options: PreviewOptions.allCases,
                              placeholder: "Caution Menu Field")
                 .menuFieldStyle(.caution)
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                              placeholder: "Caution Disabled")
                 .menuFieldStyle(.caution)
                 .disabled(true)
             }
             HStack {
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                              placeholder: "Warning Menu Field")
                 .menuFieldStyle(.warning)
@@ -175,7 +180,7 @@ struct MenuField_Previews: PreviewProvider {
                              options: PreviewOptions.allCases,
                              placeholder: "Warning Menu Field")
                 .menuFieldStyle(.warning)
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                              placeholder: "Warning Disabled")
                 .menuFieldStyle(.warning)
@@ -183,29 +188,29 @@ struct MenuField_Previews: PreviewProvider {
             }
             Divider()
             HStack(alignment: .top) {
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                              placeholder: "Default Top Label", topLabel: "Top Label")
                 .menuFieldStyle(.default)
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                              placeholder: "Hidden Top Label", topLabelSpacer: true)
                 .menuFieldStyle(.default)
             }
             HStack(alignment: .top) {
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                              placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Default Label"))
                 .menuFieldStyle(.default)
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                           placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Nominal Label", state: .nominal))
                 .menuFieldStyle(.default)
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                           placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Caution Label", state: .caution))
                 .menuFieldStyle(.default)
-                MenuField(selection: .constant(nil),
+                MenuField(selection: .constant(PreviewOptions.defaultSelected),
                              options: PreviewOptions.allCases,
                           placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Warning Label", state: .warning))
                 .menuFieldStyle(.default)

@@ -11,7 +11,7 @@ import FlightUI
 
 class CrosswindCalculatorViewModel: ObservableObject {
 
-    @Published var runwayHeading: Int? = 1
+    @Published var runwayHeading: Int = 1
     @Published var windSpeed = ""
     @Published var windDirection = ""
     
@@ -30,10 +30,10 @@ class CrosswindCalculatorViewModel: ObservableObject {
         Publishers.CombineLatest3($runwayHeading, $windSpeed, $windDirection)
             .sink { [weak self] runwayHeading, windSpeed, windDirection in
 
-                guard !windSpeed.isEmpty, !windDirection.isEmpty, runwayHeading != nil,
+                guard !windSpeed.isEmpty, !windDirection.isEmpty,
                       let windSpeed = Double(windSpeed),
                       let windDirection = Double(windDirection),
-                      let runwayHeading = self?.runwayHeading?.toDouble()
+                      let runwayHeading = self?.runwayHeading.toDouble()
                 else {
                     self?.clearCalculations()
                     return
