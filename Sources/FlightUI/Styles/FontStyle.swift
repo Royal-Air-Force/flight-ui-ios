@@ -23,13 +23,14 @@ public class FontStyle {
     public var charSpacing: CGFloat
     public var foregroundColor: Color?
 
-    public init(size: CGFloat,
-                weight: Font.Weight = .regular,
-                design: Font.Design = .default,
-                italic: Bool = false,
-                lineSpacing: CGFloat,
-                charSpacing: CGFloat = 0,
-                foregroundColor: Color? = nil
+    public init(
+        size: CGFloat,
+        weight: Font.Weight = .regular,
+        design: Font.Design = .default,
+        italic: Bool = false,
+        lineSpacing: CGFloat,
+        charSpacing: CGFloat = 0,
+        foregroundColor: Color? = nil
     ) {
         self.id = UUID()
         self.size = size
@@ -39,6 +40,27 @@ public class FontStyle {
         self.lineSpacing = lineSpacing
         self.charSpacing = charSpacing
         self.foregroundColor = foregroundColor
+    }
+
+    convenience init(
+        fontStyle: FontStyle,
+        size: CGFloat? = nil,
+        weight: Font.Weight? = nil,
+        design: Font.Design? = nil,
+        italic: Bool? = nil,
+        lineSpacing: CGFloat? = nil,
+        charSpacing: CGFloat? = nil,
+        foregroundColor: Color? = nil
+    ) {
+        self.init(
+            size: size ?? fontStyle.size,
+            weight: weight ?? fontStyle.weight,
+            design: design ?? fontStyle.design,
+            italic: italic ?? fontStyle.italic,
+            lineSpacing: lineSpacing ?? fontStyle.lineSpacing,
+            charSpacing: charSpacing ?? fontStyle.charSpacing,
+            foregroundColor: foregroundColor ?? fontStyle.foregroundColor
+        )
     }
 }
 
