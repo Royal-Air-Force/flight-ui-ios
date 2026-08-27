@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-public struct InputField: View {
+public struct InputField<AccessoryView: View>: View {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState var isFocused: Bool
@@ -18,6 +18,7 @@ public struct InputField: View {
     var topLabel: String?
     var topLabelSpacer: Bool
     var bottomLabelConfig: BottomLabelConfig
+    var accessoryView: (()->AccessoryView)?
     var formatter: ((String) -> String)?
     var validator: ((String) -> Void)?
     var filter: RegexFilter?
@@ -31,6 +32,7 @@ public struct InputField: View {
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
         bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
+        accessoryView: (()->AccessoryView)? = nil,
         formatter: ((String) -> String)? = nil,
         filter: RegexFilter? = nil,
         validator: ((String) -> Void)? = nil,
@@ -42,6 +44,7 @@ public struct InputField: View {
         self.topLabel = topLabel
         self.topLabelSpacer = topLabelSpacer
         self.bottomLabelConfig = bottomLabelConfig
+        self.accessoryView = accessoryView
         self.formatter = formatter
         self.validator = validator
         self.filter = filter
@@ -52,7 +55,7 @@ public struct InputField: View {
         VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
             buildTopLabel()
             buildTextField()
-            BottomLabel(bottomLabelConfig)
+            BottomLabel(bottomLabelConfig, accessoryView: accessoryView)
         }
     }
 
@@ -118,6 +121,32 @@ public struct InputField: View {
                 }
             }
         }
+    }
+}
+
+extension InputField where AccessoryView == EmptyView {
+    public init(
+        text: Binding<String>,
+        placeholder: String? = nil,
+        topLabel: String? = nil,
+        topLabelSpacer: Bool = false,
+        bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
+        formatter: ((String) -> String)? = nil,
+        filter: RegexFilter? = nil,
+        validator: ((String) -> Void)? = nil,
+        maxCharacterCount: Int? = nil,
+        customKeyboard: UIInputViewController? = nil,
+    ) {
+        self._text = text
+        self.placeholder = placeholder
+        self.topLabel = topLabel
+        self.topLabelSpacer = topLabelSpacer
+        self.bottomLabelConfig = bottomLabelConfig
+        self.accessoryView = nil
+        self.formatter = formatter
+        self.validator = validator
+        self.filter = filter
+        self.maxCharacterCount = maxCharacterCount
     }
 }
 

@@ -22,24 +22,36 @@ public struct BottomLabelConfig {
     }
 }
 
-struct BottomLabel: View {
+struct BottomLabel<AccessoryView: View>: View {
     @EnvironmentObject var theme: Theme
     var config: BottomLabelConfig
+    var accessoryView: (()->AccessoryView)?
 
-    init(_ config: BottomLabelConfig = BottomLabelConfig()) {
+    init(_ config: BottomLabelConfig = BottomLabelConfig(), accessoryView: (()->AccessoryView)? = nil) {
         self.config = config
+        self.accessoryView = accessoryView
     }
 
     var body: some View {
-        if let label = config.label, config.isVisible {
-            Text(label)
-                .foregroundColor(getLabelColor())
-                .fontStyle(theme.font.caption1)
-                .padding(.horizontal, theme.padding.grid2x)
-        } else if config.isVisible {
-            Text("-")
-                .foregroundColor(theme.color.surfaceHigh.opacity(0))
-                .fontStyle(theme.font.caption1)
+        HStack {
+            if let label = config.label, config.isVisible {
+                Text(label)
+                    .foregroundColor(getLabelColor())
+                    .fontStyle(theme.font.caption1)
+                    .padding(.horizontal, theme.padding.grid2x)
+                if let accessoryView {
+                    Spacer()
+                    accessoryView()
+                }
+            } else if config.isVisible {
+                Text("-")
+                    .foregroundColor(theme.color.surfaceHigh.opacity(0))
+                    .fontStyle(theme.font.caption1)
+                if let accessoryView {
+                    Spacer()
+                    accessoryView()
+                }
+            }
         }
     }
 
@@ -56,6 +68,13 @@ struct BottomLabel: View {
         }
     }
 
+}
+
+extension BottomLabel where AccessoryView == EmptyView {
+    init(_ config: BottomLabelConfig = BottomLabelConfig()) {
+        self.config = config
+        self.accessoryView = nil
+    }
 }
 
 #if DEBUG
