@@ -25,11 +25,11 @@ public struct BottomLabelConfig {
 struct BottomLabel<AccessoryView: View>: View {
     @EnvironmentObject var theme: Theme
     var config: BottomLabelConfig
-    var accessoryView: (()->AccessoryView)?
+    var accessoryViewContext: AccessoryViewContext<AccessoryView>?
 
-    init(_ config: BottomLabelConfig = BottomLabelConfig(), accessoryView: (()->AccessoryView)? = nil) {
+    init(_ config: BottomLabelConfig = BottomLabelConfig(), accessoryViewContext: AccessoryViewContext<AccessoryView>? = nil) {
         self.config = config
-        self.accessoryView = accessoryView
+        self.accessoryViewContext = accessoryViewContext
     }
 
     var body: some View {
@@ -39,18 +39,15 @@ struct BottomLabel<AccessoryView: View>: View {
                     .foregroundColor(getLabelColor())
                     .fontStyle(theme.font.caption1)
                     .padding(.horizontal, theme.padding.grid2x)
-                if let accessoryView {
-                    Spacer()
-                    accessoryView()
-                }
+                Spacer()
             } else if config.isVisible {
                 Text("-")
                     .foregroundColor(theme.color.surfaceHigh.opacity(0))
                     .fontStyle(theme.font.caption1)
-                if let accessoryView {
-                    Spacer()
-                    accessoryView()
-                }
+                Spacer()
+            }
+            if let accessoryViewContext, accessoryViewContext.isVisible {
+                accessoryViewContext.view
             }
         }
     }
@@ -73,7 +70,7 @@ struct BottomLabel<AccessoryView: View>: View {
 extension BottomLabel where AccessoryView == EmptyView {
     init(_ config: BottomLabelConfig = BottomLabelConfig()) {
         self.config = config
-        self.accessoryView = nil
+        self.accessoryViewContext = nil
     }
 }
 

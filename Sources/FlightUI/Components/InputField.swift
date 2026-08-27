@@ -8,6 +8,19 @@
 import SwiftUI
 import Combine
 
+public struct AccessoryViewContext<AccessoryView: View> {
+    var isVisible: Bool
+    var view: AccessoryView
+    
+    public init(
+        isVisible: Bool = false,
+        view: AccessoryView
+    ){
+        self.isVisible = isVisible
+        self.view = view
+    }
+}
+
 public struct InputField<AccessoryView: View>: View {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -18,7 +31,7 @@ public struct InputField<AccessoryView: View>: View {
     var topLabel: String?
     var topLabelSpacer: Bool
     var bottomLabelConfig: BottomLabelConfig
-    var accessoryView: (()->AccessoryView)?
+    var accessoryViewContext: AccessoryViewContext<AccessoryView>?
     var formatter: ((String) -> String)?
     var validator: ((String) -> Void)?
     var filter: RegexFilter?
@@ -32,19 +45,19 @@ public struct InputField<AccessoryView: View>: View {
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
         bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
-        accessoryView: (()->AccessoryView)? = nil,
+        accessoryViewContext: AccessoryViewContext<AccessoryView>? = nil,
         formatter: ((String) -> String)? = nil,
         filter: RegexFilter? = nil,
         validator: ((String) -> Void)? = nil,
         maxCharacterCount: Int? = nil,
         customKeyboard: UIInputViewController? = nil,
-    ) {
+    ){
         self._text = text
         self.placeholder = placeholder
         self.topLabel = topLabel
         self.topLabelSpacer = topLabelSpacer
         self.bottomLabelConfig = bottomLabelConfig
-        self.accessoryView = accessoryView
+        self.accessoryViewContext = accessoryViewContext
         self.formatter = formatter
         self.validator = validator
         self.filter = filter
@@ -55,7 +68,7 @@ public struct InputField<AccessoryView: View>: View {
         VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
             buildTopLabel()
             buildTextField()
-            BottomLabel(bottomLabelConfig, accessoryView: accessoryView)
+            BottomLabel(bottomLabelConfig, accessoryViewContext: accessoryViewContext)
         }
     }
 
@@ -93,21 +106,19 @@ public struct InputField<AccessoryView: View>: View {
         }
         .keyboardType(keyboardType)
         .onReceive(Just(text)) { newValue in
-            if let regex = filter?.regex {
-                let replaced = newValue.replacingOccurrences(
-                    of: regex,
-                    with: "",
-                    options: .regularExpression
-                )
-                if replaced != newValue {
-                    self.text = replaced
+            if let filter = filter {
+                // Filter out unwanted characters using the RegexFilter
+                let filtered = newValue.filter { char in
+                    String(char).range(of: filter.regex, options: .regularExpression) != nil
+                }
+                if filtered != newValue {
+                    self.text = filtered
                 }
             }
+                
             // Limit character count
-            if let maxCount = maxCharacterCount {
-                if text.count > maxCount {
-                    text = String(text.prefix(maxCount))
-                }
+            if let maxCount = maxCharacterCount, text.count > maxCount {
+                text = String(text.prefix(maxCount))
             }
         }
         .focused($isFocused)
@@ -142,11 +153,66 @@ extension InputField where AccessoryView == EmptyView {
         self.topLabel = topLabel
         self.topLabelSpacer = topLabelSpacer
         self.bottomLabelConfig = bottomLabelConfig
-        self.accessoryView = nil
+        self.accessoryViewContext = nil
         self.formatter = formatter
         self.validator = validator
         self.filter = filter
         self.maxCharacterCount = maxCharacterCount
+    }
+}
+
+extension InputField where AccessoryView == Text {
+    public init(
+        text: Binding<String>,
+        placeholder: String? = nil,
+        topLabel: String? = nil,
+        topLabelSpacer: Bool = false,
+        bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
+        accessoryViewContext: AccessoryViewContext<Text>,
+        formatter: ((String) -> String)? = nil,
+        filter: RegexFilter? = nil,
+        validator: ((String) -> Void)? = nil,
+        maxCharacterCount: Int? = nil,
+        customKeyboard: UIInputViewController? = nil,
+    ) {
+        self._text = text
+        self.placeholder = placeholder
+        self.topLabel = topLabel
+        self.topLabelSpacer = topLabelSpacer
+        self.bottomLabelConfig = bottomLabelConfig
+        self.accessoryViewContext = accessoryViewContext
+        self.formatter = formatter
+        self.validator = validator
+        self.filter = filter
+        self.maxCharacterCount = maxCharacterCount
+    }
+}
+
+extension InputField {
+    public init<Label: View>(
+        text: Binding<String>,
+        placeholder: String? = nil,
+        topLabel: String? = nil,
+        topLabelSpacer: Bool = false,
+        bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
+        accessoryViewContext: AccessoryViewContext<Button<Label>>,
+        formatter: ((String) -> String)? = nil,
+        filter: RegexFilter? = nil,
+        validator: ((String) -> Void)? = nil,
+        maxCharacterCount: Int? = nil,
+        customKeyboard: UIInputViewController? = nil
+    ) where AccessoryView == Button<Label> {
+        self._text = text
+        self.placeholder = placeholder
+        self.topLabel = topLabel
+        self.topLabelSpacer = topLabelSpacer
+        self.bottomLabelConfig = bottomLabelConfig
+        self.accessoryViewContext = accessoryViewContext
+        self.formatter = formatter
+        self.filter = filter
+        self.validator = validator
+        self.maxCharacterCount = maxCharacterCount
+        self.customKeyboard = customKeyboard
     }
 }
 
