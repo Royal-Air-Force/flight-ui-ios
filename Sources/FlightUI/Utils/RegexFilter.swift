@@ -7,6 +7,7 @@
 
 public enum RegexFilter {
     case integerOnly, doubleOnly, letterOnly, noDigits
+    case signedIntegerOnly, signedDoubleOnly
     case custom(String)
 
     public var regex: String {
@@ -15,6 +16,10 @@ public enum RegexFilter {
             return "[0-9]"
         case .doubleOnly:
             return "[0-9.]"
+        case .signedIntegerOnly:
+            return "[-0-9]"
+        case .signedDoubleOnly:
+            return "[-0-9.]"
         case .letterOnly:
             return "[A-Za-z]"
         case .noDigits:
