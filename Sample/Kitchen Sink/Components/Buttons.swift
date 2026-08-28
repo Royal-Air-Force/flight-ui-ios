@@ -144,7 +144,7 @@ struct Buttons: View {
 
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
-                    .buttonStyle(.text)
+                    .buttonStyle(.text())
                     .padding([.trailing], theme.padding.grid2x)
 
                 Button {} label: {
@@ -152,17 +152,22 @@ struct Buttons: View {
                         Image(systemName: "plus")
                         Text("With Icon")
                     }
-                }.buttonStyle(.text)
-                    .padding([.trailing], theme.padding.grid2x)
+                }
+                .buttonStyle(.text())
+                .padding([.trailing], theme.padding.grid2x)
 
                 Button("Disabled", action: {})
-                    .buttonStyle(.text)
+                    .buttonStyle(.text())
                     .padding([.trailing], theme.padding.grid2x)
                     .disabled(true)
 
                 Button {} label: {
                     Image(systemName: "plus")
                 }.buttonStyle(.textIcon)
+
+                Button("With Padding", action: {})
+                    .buttonStyle(.text(padding: 8, edgeSets: [.leading, .trailing]))
+                
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, theme.padding.grid1x)
