@@ -22,24 +22,61 @@ public struct BottomLabelConfig {
     }
 }
 
-struct BottomLabel: View {
+struct BottomLabel<AccessoryView: View>: View {
     @EnvironmentObject var theme: Theme
     var config: BottomLabelConfig
+    var accessoryViewContext: AccessoryViewContext<AccessoryView>?
 
-    init(_ config: BottomLabelConfig = BottomLabelConfig()) {
+    init(
+        _ config: BottomLabelConfig = BottomLabelConfig(),
+        accessoryViewContext: AccessoryViewContext<AccessoryView>? = nil
+    ) {
         self.config = config
+        self.accessoryViewContext = accessoryViewContext
     }
 
     var body: some View {
-        if let label = config.label, config.isVisible {
-            Text(label)
-                .foregroundColor(getLabelColor())
-                .fontStyle(theme.font.caption1)
-                .padding(.horizontal, theme.padding.grid2x)
-        } else if config.isVisible {
-            Text("-")
-                .foregroundColor(theme.color.surfaceHigh.opacity(0))
-                .fontStyle(theme.font.caption1)
+        HStack(spacing: 0) {
+            if let label = config.label, config.isVisible {
+                if let image = getLabelImageSystemName() {
+                    Image(systemName: image)
+                        .foregroundColor(getLabelColor())
+                        .padding(.leading, theme.padding.grid1x)
+                    Text(label)
+                        .foregroundColor(getLabelColor())
+                        .fontStyle(theme.font.caption1)
+                        .padding(.leading, theme.padding.grid1x)
+                } else {
+                    Text(label)
+                        .foregroundColor(getLabelColor())
+                        .fontStyle(theme.font.caption1)
+                        .padding(.leading, theme.padding.grid0_5x)
+                }
+                Spacer()
+            } else if config.isVisible {
+                Text("-")
+                    .foregroundColor(theme.color.surfaceHigh.opacity(0))
+                    .fontStyle(theme.font.caption1)
+                Spacer()
+            }
+            if let accessoryViewContext, accessoryViewContext.isVisible {
+                accessoryViewContext.view
+            }
+        }
+    }
+    
+    private func getLabelImageSystemName() -> String? {
+        switch config.state {
+        case .default:
+            return nil
+        case .advisory:
+            return nil
+        case .nominal:
+            return nil
+        case .caution:
+            return "exclamationmark.circle"
+        case .warning:
+            return "xmark.circle"
         }
     }
 
@@ -56,6 +93,13 @@ struct BottomLabel: View {
         }
     }
 
+}
+
+extension BottomLabel where AccessoryView == EmptyView {
+    init(_ config: BottomLabelConfig = BottomLabelConfig()) {
+        self.config = config
+        self.accessoryViewContext = nil
+    }
 }
 
 #if DEBUG

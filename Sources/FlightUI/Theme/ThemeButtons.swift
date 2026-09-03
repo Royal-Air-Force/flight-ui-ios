@@ -23,7 +23,7 @@ public class ThemeButtons {
                 tonalIcon: TonalIconButtonStyle = .tonalIcon,
                 outline: OutlineButtonStyle = .outline,
                 outlineIcon: OutlineIconButtonStyle = .outlineIcon,
-                text: TextButtonStyle = .text,
+                text: TextButtonStyle = .text(),
                 textIcon: TextIconButtonStyle = .textIcon
     ) {
         self.filled = filled

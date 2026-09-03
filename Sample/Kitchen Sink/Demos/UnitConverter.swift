@@ -34,12 +34,20 @@ struct UnitConverter: View {
                 subTitle: UnitConverter.weightSubTitle)
 
             HStack(alignment: .top, spacing: theme.padding.grid1x) {
-                InputField(text: $viewModel.weightConversionInput,
-                           placeholder: viewModel.weightConversionInputPlaceholder,
-                           bottomLabelConfig: viewModel.weightInputBottomLabel,
-                           filter: .doubleOnly)
+                InputField(
+                    text: $viewModel.weightConversionInput,
+                    placeholder: viewModel.weightConversionInputPlaceholder,
+                    bottomLabelConfig: viewModel.weightInputBottomLabel,
+                    filter: .doubleOnly
+                )
                 .keyboardType(.numberPad)
                 .textFieldStyle(viewModel.weightInputFieldStyle)
+                .onSubmit {
+                    if viewModel.weightConversionInput.isEmpty {
+                        viewModel.weightInputFieldStyle = .init(.warning)
+                        viewModel.weightInputBottomLabel = .init("Required", state: .warning)
+                    }
+                }
                 
                 Button {
                     withAnimation(.easeInOut(duration: 0.3)) {
