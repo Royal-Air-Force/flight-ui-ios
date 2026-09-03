@@ -17,7 +17,7 @@ on:
         description: 'Defines the Xcode version to select when running on cloud runners'
         required: false
         type: string
-        default: '26.2
+        default: '26.2'
 
 jobs:
   lint:
