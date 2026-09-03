@@ -27,18 +27,31 @@ struct BottomLabel<AccessoryView: View>: View {
     var config: BottomLabelConfig
     var accessoryViewContext: AccessoryViewContext<AccessoryView>?
 
-    init(_ config: BottomLabelConfig = BottomLabelConfig(), accessoryViewContext: AccessoryViewContext<AccessoryView>? = nil) {
+    init(
+        _ config: BottomLabelConfig = BottomLabelConfig(),
+        accessoryViewContext: AccessoryViewContext<AccessoryView>? = nil
+    ) {
         self.config = config
         self.accessoryViewContext = accessoryViewContext
     }
 
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             if let label = config.label, config.isVisible {
-                Text(label)
-                    .foregroundColor(getLabelColor())
-                    .fontStyle(theme.font.caption1)
-                    .padding(.horizontal, theme.padding.grid2x)
+                if let image = getLabelImageSystemName() {
+                    Image(systemName: image)
+                        .foregroundColor(getLabelColor())
+                        .padding(.leading, theme.padding.grid1x)
+                    Text(label)
+                        .foregroundColor(getLabelColor())
+                        .fontStyle(theme.font.caption1)
+                        .padding(.leading, theme.padding.grid1x)
+                } else {
+                    Text(label)
+                        .foregroundColor(getLabelColor())
+                        .fontStyle(theme.font.caption1)
+                        .padding(.leading, theme.padding.grid0_5x)
+                }
                 Spacer()
             } else if config.isVisible {
                 Text("-")
@@ -49,6 +62,21 @@ struct BottomLabel<AccessoryView: View>: View {
             if let accessoryViewContext, accessoryViewContext.isVisible {
                 accessoryViewContext.view
             }
+        }
+    }
+    
+    private func getLabelImageSystemName() -> String? {
+        switch config.state {
+        case .default:
+            return nil
+        case .advisory:
+            return nil
+        case .nominal:
+            return nil
+        case .caution:
+            return "exclamationmark.circle"
+        case .warning:
+            return "xmark.circle"
         }
     }
 
