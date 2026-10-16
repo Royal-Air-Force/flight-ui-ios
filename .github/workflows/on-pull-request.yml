@@ -12,3 +12,4 @@ jobs:
     uses: ./.github/workflows/action-check.yml
     with:
       fail-on-lint-warning: 'false'
+      runner: 'self-hosted'
