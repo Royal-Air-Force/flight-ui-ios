@@ -185,11 +185,20 @@ public struct TextButtonStyle: ButtonStyle {
     @EnvironmentObject var theme: Theme
     @Environment(\.isEnabled) private var isEnabled: Bool
 
-    public init() {}
+    let padding: CGFloat
+    let edgeSets: Edge.Set
+    
+    public init(
+        padding: CGFloat,
+        edgeSets: Edge.Set
+    ) {
+        self.padding = padding
+        self.edgeSets = edgeSets
+    }
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding([.leading, .trailing], theme.padding.grid4x)
+            .padding(edgeSets, padding)
             .frame(minHeight: theme.size.medium)
             .foregroundColor(getTextForeground(theme, isEnabled: isEnabled))
             .fontStyle(theme.font.bodyBold)
@@ -408,9 +417,9 @@ struct TextButtonStyle_Previews: PreviewProvider {
         VStack(alignment: .leading, spacing: theme.padding.grid2x) {
             // Text Only Text
             Button("Default Text") {}
-                .buttonStyle(.text)
+                .buttonStyle(.text())
             Button("Disabled Text") {}
-                .buttonStyle(.text)
+                .buttonStyle(.text())
                 .disabled(true)
 
             // Text Only Icon
@@ -428,13 +437,13 @@ struct TextButtonStyle_Previews: PreviewProvider {
                     Image(systemName: "plus")
                     Text("Default Text With Icon")
                 }
-            }.buttonStyle(.text)
+            }.buttonStyle(.text())
             Button {} label: {
                 HStack {
                     Image(systemName: "plus")
                     Text("Disabled Text With Icon")
                 }
-            }.buttonStyle(.text)
+            }.buttonStyle(.text())
                 .disabled(true)
         }
         .environmentObject(theme)

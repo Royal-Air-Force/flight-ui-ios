@@ -32,11 +32,13 @@ struct Cards: View {
                 subTitle: "Displays a card surrounded by a shadow")
 
             VStack(alignment: .leading, spacing: theme.padding.grid1x) {
-                Image(uiImage: UIImage(named: "AppIcon")!)
-                    .resizable()
-                    .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
-                    .frame(width: 200, height: 200)
-
+//                Image(uiImage: UIImage(named: "AppIcon")!)
+                if let uiImage = UIImage.appIcon {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
+                        .frame(width: 200, height: 200)
+                }
                 Text("Elevated Card")
                     .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
@@ -59,11 +61,13 @@ struct Cards: View {
                 subTitle: "Displays a card with no border and no shadow")
 
             VStack(alignment: .leading, spacing: theme.padding.grid1x) {
-                Image(uiImage: UIImage(named: "AppIcon")!)
-                    .resizable()
-                    .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
-                    .frame(width: 200, height: 200)
-
+//                Image(uiImage: UIImage(named: "AppIcon")!)
+                if let uiImage = UIImage.appIcon {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
+                        .frame(width: 200, height: 200)
+                }
                 Text("Filled Card")
                     .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
@@ -86,11 +90,12 @@ struct Cards: View {
                 subTitle: "Displays a card with a border and no background color")
 
             VStack(alignment: .leading, spacing: theme.padding.grid1x) {
-                Image(uiImage: UIImage(named: "AppIcon")!)
-                    .resizable()
-                    .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
-                    .frame(width: 200, height: 200)
-
+                if let uiImage = UIImage.appIcon {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
+                        .frame(width: 200, height: 200)
+                }
                 Text("Outline Card")
                     .foregroundColor(theme.color.primary)
                     .fontStyle(.title1)
@@ -113,11 +118,12 @@ struct Cards: View {
                 subTitle: "Displays a card with custom styling such as the background colour and corner radius")
 
             VStack(alignment: .leading, spacing: theme.padding.grid1x) {
-                Image(uiImage: UIImage(named: "AppIcon")!)
-                    .resizable()
-                    .clipCorners(theme.radius.innerLarge(padding: theme.padding.grid1x), corners: [.allCorners])
-                    .frame(width: 200, height: 200)
-
+                if let uiImage = UIImage.appIcon {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .clipCorners(theme.radius.medium, corners: [.topLeft, .topRight])
+                        .frame(width: 200, height: 200)
+                }
                 Text("Custom Card")
                     .foregroundColor(theme.color.onCore)
                     .fontStyle(.title1)

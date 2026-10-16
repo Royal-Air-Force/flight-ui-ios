@@ -9,24 +9,24 @@ import SwiftUI
 
 // MARK: - Panel View -
 
-private enum PanelOptions {
+public enum PanelOptions {
     case fixed
     case expandable(expanded: Bool = false)
 }
 
-private struct Panel<Content: View, Subtitle: View>: View {
+public struct Panel<Content: View, Subtitle: View>: View {
     @EnvironmentObject var theme: Theme
     @State private var expanded: Bool
 
     private var title: String?
-    private var typography: Font?
+    private var fontStyle: FontStyle?
     private var expandable: Bool
 
     private var subtitle: () -> Subtitle
     private let content: () -> Content
 
     public init(title: String? = nil,
-                typography: Font? = nil,
+                fontStyle: FontStyle? = nil,
                 options: PanelOptions = .fixed,
                 subtitle: @escaping () -> Subtitle,
                 @ViewBuilder content: @escaping () -> Content) {
@@ -43,15 +43,15 @@ private struct Panel<Content: View, Subtitle: View>: View {
             self.expanded = false
         }
 
-        self.typography = typography
+        self.fontStyle = fontStyle
     }
 
     public init(title: String? = nil,
-                typography: Font? = nil,
+                fontStyle: FontStyle? = nil,
                 options: PanelOptions = .fixed,
                 @ViewBuilder content: @escaping () -> Content) where Subtitle == EmptyView {
         self.init(title: title,
-                  typography: typography,
+                  fontStyle: fontStyle,
                   options: options,
                   subtitle: { EmptyView() },
                   content: content)
@@ -71,8 +71,8 @@ private struct Panel<Content: View, Subtitle: View>: View {
         }
         .frame(maxWidth: .infinity)
         .background(RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous)
-            .strokeBorder(theme.color.surfaceLow, lineWidth: theme.size.border)
-            .background(RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous).fill(theme.color.background)))
+        .strokeBorder(theme.color.surfaceLow, lineWidth: theme.size.border)
+        .background(RoundedRectangle(cornerRadius: theme.radius.medium, style: .continuous).fill(theme.color.background)))
     }
 
     private var panelHeaderView: some View {
@@ -106,15 +106,15 @@ private struct Panel<Content: View, Subtitle: View>: View {
     private func panelTitleTextView(_ title: String) -> some View {
         Text(title)
             .padding()
-            .font(typography ?? Font.title2)
-            .foregroundColor(theme.color.surfaceLow)
+            .foregroundColor(theme.color.primary)
+            .fontStyle(fontStyle ?? theme.font.title2)
     }
 
     private var expandIcon: some View {
         Image(systemName: "chevron.down")
             .font(.title)
             .fontWeight(.regular)
-            .foregroundColor(theme.color.surfaceLow)
+            .foregroundColor(.white)
             .rotationEffect(.degrees(expanded ? -180.0 : 0.0))
             .padding()
     }
@@ -146,9 +146,9 @@ struct Panel_Previews: PreviewProvider {
                 content
             }
 
-            Panel(title: "Expandable Panel with subtitle", typography: .body, options: .expandable()) {
+            Panel(title: "Expandable Panel with subtitle", fontStyle: FontStyle.body, options: .expandable()) {
                 Text("This is a subtitle")
-                    .fontStyle(Theme().font.caption1)
+                    .fontStyle(FontStyle.caption1)
             } content: {
                 content
             }
@@ -165,7 +165,7 @@ struct Panel_Previews: PreviewProvider {
                 Panel {
                     HStack {
                         Text("Side by Side")
-                            .fontStyle(Theme().font.title1)
+                            .fontStyle(FontStyle.title1)
                             .padding()
 
                         Spacer()

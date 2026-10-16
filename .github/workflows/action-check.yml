@@ -3,6 +3,11 @@ on:
   workflow_dispatch:
   workflow_call:
     inputs:
+      runner:
+        description: 'The runner label to use (e.g., self-hosted or macos-15)'
+        required: false
+        type: string
+        default: 'self-hosted'
       fail-on-lint-warning:
         description: 'When true is provided, the lint stage will fail on lint warnings'
         required: false
@@ -12,14 +17,14 @@ on:
         description: 'Defines the Xcode version to select when running on cloud runners'
         required: false
         type: string
-        default: '14.3'
+        default: '26.2'
 
 jobs:
   lint:
-    runs-on: macos-13
+    runs-on: ${{ inputs.runner == 'self-hosted' && fromJSON('["self-hosted", "macOS", "ARM64"]') || inputs.runner }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         
       - name: Lenient Lint Check
         if: ${{ inputs.fail-on-lint-warning == 'false' }}

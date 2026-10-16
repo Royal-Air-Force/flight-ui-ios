@@ -9,6 +9,9 @@ jobs:
     uses: ./.github/workflows/action-check.yml
     with:
       fail-on-lint-warning: 'false'
+      runner: 'self-hosted'
   deploy:
     uses: ./.github/workflows/action-deploy.yml
     needs: check
+    with:
+      runner: 'self-hosted'

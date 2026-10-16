@@ -44,8 +44,11 @@ public extension ButtonStyle where Self == OutlineIconButtonStyle {
 }
 
 public extension ButtonStyle where Self == TextButtonStyle {
-    static var text: Self {
-        return .init()
+    static func text(
+        padding: CGFloat = 0,
+        edgeSets: Edge.Set = []
+    ) -> Self {
+        return .init(padding: padding, edgeSets: edgeSets)
     }
 }
 
