@@ -19,6 +19,7 @@ public struct InputField: View {
     var topLabelSpacer: Bool
     var bottomLabelConfig: BottomLabelConfig
     var formatter: ((String) -> String)?
+    var validator: ((String) -> Void)?
     var filter: RegexFilter?
     var maxCharacterCount: Int?
 
@@ -30,6 +31,7 @@ public struct InputField: View {
         bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
         formatter: ((String) -> String)? = nil,
         filter: RegexFilter? = nil,
+        validator: ((String) -> Void)? = nil,
         maxCharacterCount: Int? = nil
     ) {
         self._text = text
@@ -38,6 +40,7 @@ public struct InputField: View {
         self.topLabelSpacer = topLabelSpacer
         self.bottomLabelConfig = bottomLabelConfig
         self.formatter = formatter
+        self.validator = validator
         self.filter = filter
         self.maxCharacterCount = maxCharacterCount
     }
@@ -86,8 +89,13 @@ public struct InputField: View {
             }
             .focused($isFocused)
             .onChange(of: isFocused) { newFocus in
-                if !newFocus, let format = formatter {
-                    text = format(text)
+                if !newFocus {
+                    if let format = formatter {
+                        text = format(text)
+                    }
+                    if let valid = validator {
+                        valid(text)
+                    }
                 }
             }
         } else {
@@ -107,8 +115,13 @@ public struct InputField: View {
                 }
                 .focused($isFocused)
                 .onChange(of: isFocused) { newFocus in
-                    if !newFocus, let format = formatter {
-                        text = format(text)
+                    if !newFocus {
+                        if let format = formatter {
+                            text = format(text)
+                        }
+                        if let valid = validator {
+                            valid(text)
+                        }
                     }
                 }
         }
