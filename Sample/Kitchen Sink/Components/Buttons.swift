@@ -144,7 +144,7 @@ struct Buttons: View {
 
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
-                    .buttonStyle(.text())
+                    .buttonStyle(.text(padding: theme.padding.grid4x, edgeSets: [.leading, .trailing]))
                     .padding([.trailing], theme.padding.grid2x)
 
                 Button {} label: {

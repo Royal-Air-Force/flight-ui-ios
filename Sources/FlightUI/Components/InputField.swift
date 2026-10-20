@@ -62,6 +62,7 @@ public struct InputField<AccessoryView: View>: View {
         self.validator = validator
         self.filter = filter
         self.maxCharacterCount = maxCharacterCount
+        self.customKeyboard = customKeyboard
     }
 
     public var body: some View {
@@ -158,6 +159,7 @@ extension InputField where AccessoryView == EmptyView {
         self.validator = validator
         self.filter = filter
         self.maxCharacterCount = maxCharacterCount
+        self.customKeyboard = customKeyboard
     }
 }
 
@@ -185,6 +187,7 @@ extension InputField where AccessoryView == Text {
         self.validator = validator
         self.filter = filter
         self.maxCharacterCount = maxCharacterCount
+        self.customKeyboard = customKeyboard
     }
 }
 

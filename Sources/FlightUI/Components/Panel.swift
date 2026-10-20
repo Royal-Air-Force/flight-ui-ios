@@ -114,7 +114,7 @@ public struct Panel<Content: View, Subtitle: View>: View {
         Image(systemName: "chevron.down")
             .font(.title)
             .fontWeight(.regular)
-            .foregroundColor(.white)
+            .foregroundColor(Color.flightGrey900)
             .rotationEffect(.degrees(expanded ? -180.0 : 0.0))
             .padding()
     }
