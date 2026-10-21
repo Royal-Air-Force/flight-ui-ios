@@ -1,78 +1,71 @@
-//
-//  MenuFieldStyle.swift
-//  flight-ui-ios
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 
-public struct MenuFieldStyle {
-    var state: InputAlertingState
-    var config: MenuFieldConfig
+// MARK: - Menu Field Style
 
-    public init(_ state: InputAlertingState,
-                config: MenuFieldConfig = MenuFieldConfig()) {
+public struct MenuFieldStyle: Sendable {
+    public let state: InputAlertingState
+    public let config: MenuFieldConfig
+
+    public init(
+        _ state: InputAlertingState,
+        config: MenuFieldConfig = .standard
+    ) {
         self.state = state
         self.config = config
     }
 
-    func getFontColor(_ theme: Theme, isPlaceholder: Bool, isEnabled: Bool) -> Color {
+    // MARK: - Style Calculations (take ThemeData, not Theme)
+
+    public func getFontColor(_ theme: ThemeData, isPlaceholder: Bool, isEnabled: Bool) -> Color {
         if isPlaceholder {
-            return theme.color.primary.opacity(MenuFieldDefaults.hintOpacity)
+            return theme.color.primary.opacity(FieldDefaults.hintOpacity)
         } else if let overrideColor = config.fontColor {
-            return overrideColor.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+            return overrideColor.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         } else {
-            return theme.color.inputOutput.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+            return theme.color.inputOutput.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         }
     }
 
-    func getFieldBackgroundColor(_ theme: Theme, isEnabled: Bool) -> Color {
+    public func getFieldBackgroundColor(_ theme: ThemeData, isEnabled: Bool) -> Color {
         if !isEnabled {
-            return theme.color.surfaceHigh.opacity(MenuFieldDefaults.disabledOpacity)
+            return theme.color.surfaceHigh.opacity(FieldDefaults.disabledOpacity)
         }
-
         if let overrideColor = config.backgroundColor {
             return overrideColor
         }
-
         switch state {
         case .nominal:
-            return theme.color.nominal.opacity(MenuFieldDefaults.stateBackgroundOpacity)
+            return theme.color.nominal.opacity(FieldDefaults.stateBackgroundOpacity)
         case .caution:
-            return theme.color.caution.opacity(MenuFieldDefaults.stateBackgroundOpacity)
+            return theme.color.caution.opacity(FieldDefaults.stateBackgroundOpacity)
         case .warning:
-            return theme.color.warning.opacity(MenuFieldDefaults.stateBackgroundOpacity)
+            return theme.color.warning.opacity(FieldDefaults.stateBackgroundOpacity)
         default:
             return theme.color.surfaceHigh
         }
     }
 
-    func getCornerRadius(_ theme: Theme) -> CGFloat {
-        if let overrideRadius = config.cornerRadius {
-            return overrideRadius
-        }
-        return theme.radius.medium
+    public func getCornerRadius(_ theme: ThemeData) -> CGFloat {
+        config.cornerRadius ?? theme.radius.medium
     }
 
-    func getFieldBorderColor(_ theme: Theme, isEnabled: Bool) -> Color {
+    public func getFieldBorderColor(_ theme: ThemeData, isEnabled: Bool) -> Color {
         if let overrideColor = config.borderColor {
             return overrideColor
         }
-
         switch state {
         case .nominal:
-            return theme.color.nominal.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+            return theme.color.nominal.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         case .caution:
-            return theme.color.caution.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+            return theme.color.caution.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         case .warning:
-            return theme.color.warning.opacity(isEnabled ? 1 : MenuFieldDefaults.disabledOpacity)
+            return theme.color.warning.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         default:
             return theme.color.surfaceHigh
         }
     }
 
-    func getFieldBorderSize(_ theme: Theme) -> CGFloat {
+    public func getFieldBorderSize(_ theme: ThemeData) -> CGFloat {
         switch state {
         case .nominal, .caution, .warning:
             return theme.size.border
@@ -82,16 +75,40 @@ public struct MenuFieldStyle {
     }
 }
 
-public struct MenuFieldStyleEnvironmentKey: EnvironmentKey {
-    public static var defaultValue: MenuFieldStyle = .default
+// MARK: - MenuFieldStyle Factories
+
+extension MenuFieldStyle {
+    public static var `default`: MenuFieldStyle {
+        MenuFieldStyle(.default)
+    }
+
+    public static var nominal: MenuFieldStyle {
+        MenuFieldStyle(.nominal)
+    }
+
+    public static var caution: MenuFieldStyle {
+        MenuFieldStyle(.caution)
+    }
+
+    public static var warning: MenuFieldStyle {
+        MenuFieldStyle(.warning)
+    }
+}
+
+// MARK: - Environment Key
+
+private struct MenuFieldStyleEnvironmentKey: EnvironmentKey {
+    static let defaultValue: MenuFieldStyle = .default
 }
 
 extension EnvironmentValues {
-    var menuFieldStyle: MenuFieldStyle {
+    public var menuFieldStyle: MenuFieldStyle {
         get { self[MenuFieldStyleEnvironmentKey.self] }
         set { self[MenuFieldStyleEnvironmentKey.self] = newValue }
     }
 }
+
+// MARK: - View Extension
 
 extension View {
     public func menuFieldStyle(_ style: MenuFieldStyle) -> some View {
