@@ -1,10 +1,3 @@
-//
-//  CrossWindViewModel.swift
-//  flight-ui-ios
-//
-//  Created by Appivate 2023
-//
-
 import Foundation
 import Combine
 import FlightUI

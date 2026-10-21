@@ -1,12 +1,7 @@
-//
-//  DebounceViewModifier.swift
-//  flight-ui-ios
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 import Combine
+
+// MARK: - Debounce View Modifier
 
 struct DebounceViewModifier<Value>: ViewModifier where Value: Equatable {
     @State private var debounceTask: Task<Void, Never>?
@@ -16,7 +11,7 @@ struct DebounceViewModifier<Value>: ViewModifier where Value: Equatable {
     let delay: @Sendable () async throws -> Void
 
     func body(content: Content) -> some View {
-        content.onChange(of: observable) { value in
+        content.onChange(of: observable) { _, value in
             debounceTask?.cancel()
             debounceTask = Task {
                 do { try await delay() } catch { return }
@@ -25,6 +20,8 @@ struct DebounceViewModifier<Value>: ViewModifier where Value: Equatable {
         }
     }
 }
+
+// MARK: - View Extension
 
 extension View {
     public func onDebounce<Value>(

@@ -1,111 +1,103 @@
-//
-//  InputFieldStyle.swift
-//  flight-ui-ios
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 
-public struct InputFieldStyle: TextFieldStyle {
-    @EnvironmentObject var theme: Theme
-    @Environment(\.isEnabled) private var isEnabled: Bool
+// MARK: - Input Field Style
+
+public struct InputFieldStyle: @MainActor TextFieldStyle {
+    @Environment(\.theme) private var theme
+    @Environment(\.isEnabled) private var isEnabled
     @FocusState private var isFocused: Bool
 
-    var inputFieldState: InputAlertingState
-    var inputFieldConfig: InputFieldConfig
+    private let state: InputAlertingState
+    private let config: InputFieldConfig
 
     public init(
-        _ inputFieldState: InputAlertingState,
-        inputFieldConfig: InputFieldConfig = InputFieldConfig()
+        _ state: InputAlertingState,
+        config: InputFieldConfig = .standard
     ) {
-        self.inputFieldState = inputFieldState
-        self.inputFieldConfig = inputFieldConfig
+        self.state = state
+        self.config = config
     }
 
+    @MainActor
     public func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .foregroundColor(getFontColor())
-            .fontStyle(inputFieldConfig.fontStyle ?? theme.font.bodyBold)
+            .foregroundColor(fontColor)
+            .fontStyle(config.fontStyle ?? theme.typography.bodyBold)
             .frame(maxWidth: .infinity, minHeight: theme.size.large)
-            .padding(.horizontal, theme.padding.grid2x)
-            .background(getFieldBackgroundColor())
-            .cornerRadius(getCornerRadius())
+            .padding(.horizontal, theme.spacing.grid2x)
+            .background(fieldBackgroundColor)
+            .cornerRadius(cornerRadius)
             .overlay {
-                RoundedRectangle(cornerRadius: getCornerRadius(), style: .continuous)
-                    .strokeBorder(getFieldBorderColor(), lineWidth: getFieldBorderSize())
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .strokeBorder(borderColor, lineWidth: borderSize)
             }
-            .disabled(inputFieldState == .advisory)
+            .disabled(state == .advisory)
             .focused($isFocused)
             .onTapGesture {
                 isFocused = true
             }
     }
 
-    private func getFontColor() -> Color {
-        if let overrideColor = inputFieldConfig.fontColor {
+    @MainActor
+    private var fontColor: Color {
+        if let overrideColor = config.fontColor {
             return overrideColor
         }
-
-        switch inputFieldState {
+        switch state {
         case .advisory:
             return theme.color.primary
         default:
-            return theme.color.inputOutput.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
+            return theme.color.inputOutput.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         }
     }
 
-    private func getFieldBackgroundColor() -> Color {
+    @MainActor
+    private var fieldBackgroundColor: Color {
         if !isEnabled {
-            return theme.color.surfaceHigh.opacity(InputFieldDefaults.disabledOpacity)
+            return theme.color.surfaceHigh.opacity(FieldDefaults.disabledOpacity)
         }
-
-        if let overrideColor = inputFieldConfig.backgroundColor {
+        if let overrideColor = config.backgroundColor {
             return overrideColor
         }
+        switch state {
+        case .default, .advisory:
+            return theme.color.surfaceHigh
+        case .nominal:
+            return theme.color.nominal.opacity(FieldDefaults.stateBackgroundOpacity)
+        case .caution:
+            return theme.color.caution.opacity(FieldDefaults.stateBackgroundOpacity)
+        case .warning:
+            return theme.color.warning.opacity(FieldDefaults.stateBackgroundOpacity)
+        }
+    }
 
-        switch inputFieldState {
+    @MainActor
+    private var cornerRadius: CGFloat {
+        config.cornerRadius ?? theme.radius.medium
+    }
+
+    @MainActor
+    private var borderColor: Color {
+        if let overrideColor = config.borderColor {
+            return overrideColor
+        }
+        switch state {
         case .default:
             return theme.color.surfaceHigh
         case .advisory:
-            return theme.color.surfaceHigh
+            return theme.color.primary.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         case .nominal:
-            return theme.color.nominal.opacity(InputFieldDefaults.stateBackgroundOpacity)
+            return theme.color.nominal.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         case .caution:
-            return theme.color.caution.opacity(InputFieldDefaults.stateBackgroundOpacity)
+            return theme.color.caution.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         case .warning:
-            return theme.color.warning.opacity(InputFieldDefaults.stateBackgroundOpacity)
+            return theme.color.warning.opacity(isEnabled ? 1 : FieldDefaults.disabledOpacity)
         }
     }
 
-    private func getCornerRadius() -> CGFloat {
-        if let overrideRadius = inputFieldConfig.cornerRadius {
-            return overrideRadius
-        }
-        return theme.radius.medium
-    }
-
-    private func getFieldBorderColor() -> Color {
-        if let overrideColor = inputFieldConfig.borderColor {
-            return overrideColor
-        }
-
-        switch inputFieldState {
-        case .default:
-            return theme.color.surfaceHigh
-        case .advisory:
-            return theme.color.primary.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
-        case .nominal:
-            return theme.color.nominal.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
-        case .caution:
-            return theme.color.caution.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
-        case .warning:
-            return theme.color.warning.opacity(isEnabled ? 1 : InputFieldDefaults.disabledOpacity)
-        }
-    }
-
-    private func getFieldBorderSize() -> CGFloat {
-        switch inputFieldState {
+    @MainActor
+    private var borderSize: CGFloat {
+        switch state {
         case .nominal, .caution, .warning:
             return theme.size.border
         default:
@@ -114,48 +106,26 @@ public struct InputFieldStyle: TextFieldStyle {
     }
 }
 
-#if DEBUG
+// MARK: - TextFieldStyle Extensions
 
-struct InputFieldStyle_Previews: PreviewProvider {
-    static var theme: Theme = Theme(baseScheme: .dark)
+public extension TextFieldStyle where Self == InputFieldStyle {
+    static var `default`: InputFieldStyle {
+        InputFieldStyle(.default)
+    }
 
-    static var previews: some View {
-        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
-            HStack {
-                InputField(text: .constant("Disabled Style"))
-                    .textFieldStyle(.default)
-                InputField(text: .constant("Default Disabled Style"))
-                    .textFieldStyle(.default)
-                    .disabled(true)
-            }
-            InputField(text: .constant("Advisory Style"))
-                .textFieldStyle(.advisory)
-            HStack {
-                InputField(text: .constant("Nominal Style"))
-                    .textFieldStyle(.nominal)
-                InputField(text: .constant("Nominal Disabled Style"))
-                    .textFieldStyle(.nominal)
-                    .disabled(true)
-            }
-            HStack {
-                InputField(text: .constant("Caution Style"))
-                    .textFieldStyle(.caution)
-                InputField(text: .constant("Caution Disabled Style"))
-                    .textFieldStyle(.caution)
-                    .disabled(true)
-            }
-            HStack {
-                InputField(text: .constant("Warning Style"))
-                    .textFieldStyle(.warning)
-                InputField(text: .constant("Warning Disabled Style"))
-                    .textFieldStyle(.warning)
-                    .disabled(true)
-            }
-        }
-        .environmentObject(theme)
-        .previewDisplayName("Input Field Style")
-        .preferredColorScheme(theme.baseScheme)
+    static var advisory: InputFieldStyle {
+        InputFieldStyle(.advisory)
+    }
+
+    static var nominal: InputFieldStyle {
+        InputFieldStyle(.nominal)
+    }
+
+    static var caution: InputFieldStyle {
+        InputFieldStyle(.caution)
+    }
+
+    static var warning: InputFieldStyle {
+        InputFieldStyle(.warning)
     }
 }
-
-#endif

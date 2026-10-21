@@ -1,23 +1,18 @@
-//
-//  UnboundMenuField.swift
-//  flight-ui-ios
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 
+// MARK: - Unbound Menu Field
+
 public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
-    @EnvironmentObject var theme: Theme
-    @Environment(\.isEnabled) private var isEnabled: Bool
-    @Environment(\.menuFieldStyle) var style: MenuFieldStyle
+    @Environment(\.theme) var theme
+    @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.menuFieldStyle) var style
 
     @Binding var selection: SelectionType?
-    var options: [SelectionType]
+    let options: [SelectionType]
     let placeholder: String?
-    var topLabel: String?
-    var topLabelSpacer: Bool
-    var bottomLabelConfig: BottomLabelConfig
+    let topLabel: String?
+    let topLabelSpacer: Bool
+    let bottomLabelConfig: BottomLabelConfig
 
     @State private var isSheetShown = false
     @State private var queryString = ""
@@ -47,7 +42,7 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
+        VStack(alignment: .leading, spacing: theme.spacing.grid0_5x) {
             buildTopLabel()
             buildMenuField()
                 .onTapGesture {
@@ -72,11 +67,11 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
         if let top = topLabel {
             Text(top)
                 .foregroundColor(theme.color.primary)
-                .fontStyle(theme.font.subhead)
+                .fontStyle(theme.typography.subhead)
         } else if topLabelSpacer {
             Text("-")
                 .foregroundColor(theme.color.surfaceHigh.opacity(0))
-                .fontStyle(theme.font.subhead)
+                .fontStyle(theme.typography.subhead)
         }
     }
 
@@ -123,7 +118,7 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
             }
             .interactiveDismissDisabled()
         }
-        .padding(.horizontal, theme.padding.grid2x)
+        .padding(.horizontal, theme.spacing.grid2x)
         .frame(height: theme.size.large)
         .background(style.getFieldBackgroundColor(theme, isEnabled: isEnabled))
         .cornerRadius(style.getCornerRadius(theme))
@@ -138,11 +133,11 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
         if let selectedItem = selection?.description {
             Label(selectedItem, image: "")
                 .labelStyle(MenuLabelStyle(textColor: style.getFontColor(theme, isPlaceholder: false, isEnabled: isEnabled)))
-                .fontStyle(theme.font.bodyBold)
+                .fontStyle(theme.typography.bodyBold)
         } else if let placeholderText = placeholder {
             Label(placeholderText, image: "")
                 .labelStyle(MenuLabelStyle(textColor: style.getFontColor(theme, isPlaceholder: true, isEnabled: isEnabled)))
-                .fontStyle(theme.font.bodyBold)
+                .fontStyle(theme.typography.bodyBold)
         }
     }
 
@@ -173,139 +168,3 @@ public struct UnboundMenuField<SelectionType: UnboundSelectionEnum>: View {
         }
     }
 }
-
-#if DEBUG
-
-private enum UnboundPreviewOptions: UnboundSelectionEnum {
-    static var allCases: [UnboundPreviewOptions] {
-        return [.defaultSelected, .nominalSelected, .cautionSelected, .warningSelected]
-    }
-
-    case customSelected(String)
-    case defaultSelected
-    case nominalSelected
-    case cautionSelected
-    case warningSelected
-
-    var description: String {
-        switch self {
-        case .defaultSelected:
-            return "Default Selected"
-        case .nominalSelected:
-            return "Nominal Selected"
-        case .cautionSelected:
-            return "Caution Selected"
-        case .warningSelected:
-            return "Warning Selected"
-        case .customSelected(let customString):
-            return customString
-        }
-    }
-
-    static func custom(string: String) -> UnboundPreviewOptions {
-        return .customSelected(string)
-    }
-}
-
-struct UnboundMenuField_Previews: PreviewProvider {
-    static var theme: Theme = Theme(baseScheme: .dark)
-
-    static var previews: some View {
-        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
-            HStack {
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Default Unbound Menu")
-                .menuFieldStyle(.default)
-                UnboundMenuField(selection: .constant(UnboundPreviewOptions.defaultSelected),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Default Unbound Menu")
-                .menuFieldStyle(.default)
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Default Disabled")
-                .menuFieldStyle(.default)
-                .disabled(true)
-            }
-            HStack {
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Nominal Unbound Menu")
-                .menuFieldStyle(.nominal)
-                UnboundMenuField(selection: .constant(UnboundPreviewOptions.nominalSelected),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Nominal Unbound Menu")
-                .menuFieldStyle(.nominal)
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Nominal Disabled")
-                .menuFieldStyle(.nominal)
-                .disabled(true)
-            }
-            HStack {
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Caution Unbound Menu")
-                .menuFieldStyle(.caution)
-                UnboundMenuField(selection: .constant(UnboundPreviewOptions.cautionSelected),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Caution Unbound Menu")
-                .menuFieldStyle(.caution)
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Caution Disabled")
-                .menuFieldStyle(.caution)
-                .disabled(true)
-            }
-            HStack {
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Warning Unbound Menu")
-                .menuFieldStyle(.warning)
-                UnboundMenuField(selection: .constant(UnboundPreviewOptions.warningSelected),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Warning Unbound Menu")
-                .menuFieldStyle(.warning)
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Warning Disabled")
-                .menuFieldStyle(.warning)
-                .disabled(true)
-            }
-            Divider()
-            HStack(alignment: .top) {
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Default Top Label", topLabel: "Top Label")
-                .menuFieldStyle(.default)
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Hidden Top Label", topLabelSpacer: true)
-                .menuFieldStyle(.default)
-            }
-            HStack(alignment: .top) {
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                             placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Default Label"))
-                .menuFieldStyle(.default)
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                          placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Nominal Label", state: .nominal))
-                .menuFieldStyle(.default)
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                          placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Caution Label", state: .caution))
-                .menuFieldStyle(.default)
-                UnboundMenuField(selection: .constant(nil),
-                             options: UnboundPreviewOptions.allCases,
-                          placeholder: "Support Label", bottomLabelConfig: BottomLabelConfig("Warning Label", state: .warning))
-                .menuFieldStyle(.default)
-            }
-        }
-        .environmentObject(theme)
-        .previewDisplayName("Unbound Menu Field Style")
-        .preferredColorScheme(theme.baseScheme)
-    }
-}
-
-#endif
