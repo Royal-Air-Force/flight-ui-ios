@@ -140,6 +140,7 @@ struct Cards_Previews: PreviewProvider {
 
     static var previews: some View {
         Cards()
+            .flightTheme(theme)
             .previewDisplayName("Card Samples")
             .preferredColorScheme(theme.baseScheme)
     }
