@@ -1,10 +1,3 @@
-//
-//  UIImage+Extensions.swift
-//  Kitchen Sink
-//
-//  Created by Oli Wootton on 04/08/2026.
-//
-
 import Foundation
 import UIKit
 

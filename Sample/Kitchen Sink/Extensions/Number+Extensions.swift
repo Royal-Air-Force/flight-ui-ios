@@ -1,10 +1,3 @@
-//
-//  Number+Extensions.swift
-//  flight-ui-ios
-//
-//  Created by Appivate 2024
-//
-
 import Foundation
 
 public extension Int {

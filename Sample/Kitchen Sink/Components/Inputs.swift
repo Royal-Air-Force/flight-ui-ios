@@ -1,16 +1,9 @@
-//
-//  Inputs.swift
-//  Flight UI - Kitchen Sink Sample
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 import FlightUI
 
 struct Inputs: View {
-    @EnvironmentObject var theme: Theme
-    @StateObject private var viewModel = InputsViewModel()
+    @Environment(\.theme) var theme
+    @StateObject private var viewModel = ViewModel()
 
     var body: some View {
         ScrollView {
@@ -22,7 +15,7 @@ struct Inputs: View {
                 managedInput
                 selectionInput
             }
-            .padding(.horizontal, theme.padding.grid3x)
+            .padding(.horizontal, theme.spacing.grid3x)
         }
         .background(theme.color.background)
         .navigationBarTitle("Inputs")
@@ -41,16 +34,16 @@ struct Inputs: View {
 
                 InputField(text: $viewModel.generalHint, placeholder: "Hint")
                     .textFieldStyle(.default)
-                    .onChange(of: viewModel.generalHint) { newText in
-                        print("General hint changed to \(newText)")
+                    .onChange(of: viewModel.generalHint) { _, newValue in
+                        print("General hint changed to \(newValue)")
                     }
 
                 InputField(text: $viewModel.generalActive, placeholder: "General")
                     .textFieldStyle(.default)
             }
-            .padding(.top, theme.padding.grid2x)
+            .padding(.top, theme.spacing.grid2x)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.spacing.grid4x)
     }
 
     var advisoryInput: some View {
@@ -62,9 +55,9 @@ struct Inputs: View {
             InputField(text: $viewModel.advisoryText, placeholder: "Advisory")
                 .textFieldStyle(.advisory)
                 .frame(width: 240)
-                .padding(.top, theme.padding.grid2x)
+                .padding(.top, theme.spacing.grid2x)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.spacing.grid4x)
     }
 
     var stateInputs: some View {
@@ -84,9 +77,9 @@ struct Inputs: View {
                 InputField(text: $viewModel.warningStateInput, placeholder: "Warning", bottomLabelConfig: viewModel.warningAdvisory())
                     .textFieldStyle(InputFieldStyle(viewModel.warningState()))
             }
-            .padding(.top, theme.padding.grid2x)
+            .padding(.top, theme.spacing.grid2x)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.spacing.grid4x)
     }
 
     var labelInput: some View {
@@ -103,9 +96,9 @@ struct Inputs: View {
                 InputField(text: $viewModel.bottomLabel, placeholder: "Bottom Label", topLabelSpacer: true, bottomLabelConfig: BottomLabelConfig("Bottom Label information goes here"))
                     .textFieldStyle(.default)
             }
-            .padding(.top, theme.padding.grid2x)
+            .padding(.top, theme.spacing.grid2x)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.spacing.grid4x)
     }
 
     var managedInput: some View {
@@ -127,19 +120,19 @@ struct Inputs: View {
                 InputField(text: $viewModel.debounceInput, placeholder: "Debounce", bottomLabelConfig: BottomLabelConfig(viewModel.debounceAdvisoryLabel))
                     .textFieldStyle(.default)
                     .onChange(of: viewModel.debounceInput) { _ in
-                        viewModel.debounceAdvisoryLabel = InputsViewModel.defaultDebounceAdvisoryLabel
+                        viewModel.debounceAdvisoryLabel = viewModel.defaultDebounceAdvisoryLabel
                     }
                     .onDebounce(of: viewModel.debounceInput, duration: .seconds(2)) { debouncedValue in
                         if debouncedValue.isEmpty {
-                            viewModel.debounceAdvisoryLabel = InputsViewModel.defaultDebounceAdvisoryLabel
+                            viewModel.debounceAdvisoryLabel = viewModel.defaultDebounceAdvisoryLabel
                         } else {
                             viewModel.debounceAdvisoryLabel = debouncedValue
                         }
                     }
             }
-            .padding(.top, theme.padding.grid2x)
+            .padding(.top, theme.spacing.grid2x)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.spacing.grid4x)
     }
 
     var selectionInput: some View {
@@ -150,29 +143,28 @@ struct Inputs: View {
 
             HStack {
                 MenuField(selection: $viewModel.boundSelectionInput,
-                             options: InputsViewModel.BoundSelectionTypes.allCases,
+                             options: viewModel.BoundSelectionTypes.allCases,
                              placeholder: "Bound Selection Input")
                 .menuFieldStyle(MenuFieldStyle(viewModel.boundSelectionState()))
 
                 UnboundMenuField(selection: $viewModel.unboundSelectionInput,
-                                 options: InputsViewModel.UnboundDefaultSelectionTypes.allCases,
+                                 options: viewModel.UnboundDefaultSelectionTypes.allCases,
                                  placeholder: "Unbound Selection Input")
                 .menuFieldStyle(MenuFieldStyle(viewModel.unboundSelectionState()))
             }
-            .padding(.top, theme.padding.grid2x)
+            .padding(.top, theme.spacing.grid2x)
         }
-        .padding(.bottom, theme.padding.grid4x)
+        .padding(.bottom, theme.spacing.grid4x)
     }
 }
 
 #if DEBUG
 
 struct Inputs_Previews: PreviewProvider {
-    static var theme: Theme = Theme(baseScheme: .dark)
+    static var theme: ThemeData = .dark
 
     static var previews: some View {
         Inputs()
-            .environmentObject(theme)
             .previewDisplayName("Input Samples")
             .preferredColorScheme(theme.baseScheme)
     }
