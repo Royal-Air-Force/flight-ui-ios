@@ -112,6 +112,9 @@ public struct FlightButtonStyle: ButtonStyle {
 
         switch variant {
         case .filled:
+            if coreType == .advisory {
+                return theme.color.background
+            }
             return theme.color.onCore
         case .tonal, .outline, .text:
             return coreColor
