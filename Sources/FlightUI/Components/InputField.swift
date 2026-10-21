@@ -1,12 +1,10 @@
-//
-//  InputField.swift
-//  flight-ui-ios
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
-import Combine
+
+// MARK: - Input Field
+
+/// A themed text input field with support for labels, placeholders,
+/// filtering, formatting, and alerting states.
+///
 
 public struct AccessoryViewContext<AccessoryView: View> {
     var isVisible: Bool
@@ -21,23 +19,19 @@ public struct AccessoryViewContext<AccessoryView: View> {
     }
 }
 
-public struct InputField<AccessoryView: View>: View {
-    @EnvironmentObject var theme: Theme
-    @Environment(\.isEnabled) private var isEnabled: Bool
-    @FocusState var isFocused: Bool
+public struct InputField: View {
+    @Environment(\.theme) private var theme
+    @Environment(\.isEnabled) private var isEnabled
+    @FocusState private var isFocused: Bool
 
-    @Binding var text: String
-    var placeholder: String?
-    var topLabel: String?
-    var topLabelSpacer: Bool
-    var bottomLabelConfig: BottomLabelConfig
-    var accessoryViewContext: AccessoryViewContext<AccessoryView>?
-    var formatter: ((String) -> String)?
-    var validator: ((String) -> Void)?
-    var filter: RegexFilter?
-    var maxCharacterCount: Int?
-    var customKeyboard: UIInputViewController?
-    var keyboardType: UIKeyboardType = .default
+    @Binding public var text: String
+    public let placeholder: String?
+    public let topLabel: String?
+    public let topLabelSpacer: Bool
+    public let bottomLabelConfig: BottomLabelConfig
+    public let formatter: (@Sendable (String) -> String)?
+    public let filter: RegexFilter?
+    public let maxCharacterCount: Int?
 
     public init(
         text: Binding<String>,
@@ -45,31 +39,25 @@ public struct InputField<AccessoryView: View>: View {
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
         bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
-        accessoryViewContext: AccessoryViewContext<AccessoryView>? = nil,
-        formatter: ((String) -> String)? = nil,
+        formatter: (@Sendable (String) -> String)? = nil,
         filter: RegexFilter? = nil,
-        validator: ((String) -> Void)? = nil,
-        maxCharacterCount: Int? = nil,
-        customKeyboard: UIInputViewController? = nil,
-    ){
+        maxCharacterCount: Int? = nil
+    ) {
         self._text = text
         self.placeholder = placeholder
         self.topLabel = topLabel
         self.topLabelSpacer = topLabelSpacer
         self.bottomLabelConfig = bottomLabelConfig
-        self.accessoryViewContext = accessoryViewContext
         self.formatter = formatter
-        self.validator = validator
         self.filter = filter
         self.maxCharacterCount = maxCharacterCount
-        self.customKeyboard = customKeyboard
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: theme.padding.grid0_5x) {
+        VStack(alignment: .leading, spacing: theme.spacing.grid0_5x) {
             buildTopLabel()
             buildTextField()
-            BottomLabel(bottomLabelConfig, accessoryViewContext: accessoryViewContext)
+            BottomLabel(bottomLabelConfig)
         }
     }
 
@@ -78,199 +66,149 @@ public struct InputField<AccessoryView: View>: View {
         if let top = topLabel {
             Text(top)
                 .foregroundColor(theme.color.primary)
-                .fontStyle(theme.font.subhead)
+                .fontStyle(theme.typography.subhead)
         } else if topLabelSpacer {
             Text("-")
                 .foregroundColor(theme.color.surfaceHigh.opacity(0))
-                .fontStyle(theme.font.subhead)
+                .fontStyle(theme.typography.subhead)
         }
     }
 
     @ViewBuilder
     private func buildTextField() -> some View {
-        Group {
-            if let customKeyboard = customKeyboard {
-                UIKitTextField(
-                    text: $text,
-                    placeholder: placeholder,
-                    keyboardType: keyboardType,
-                    customKeyboard: customKeyboard
-                )
-            } else {
-                TextField(text: $text) {
-                    if let placeholderText = placeholder {
-                        Text(placeholderText)
-                            .foregroundColor(theme.color.primary.opacity(isEnabled ? InputFieldDefaults.hintOpacity : InputFieldDefaults.disabledOpacity))
-                    }
-                }
+        if let placeholderText = placeholder {
+            TextField(text: $text) {
+                Text(placeholderText)
+                    .foregroundColor(
+                        theme.color.primary.opacity(
+                            isEnabled ? FieldDefaults.hintOpacity : FieldDefaults.disabledOpacity
+                        )
+                    )
             }
-        }
-        .keyboardType(keyboardType)
-        .onReceive(Just(text)) { newValue in
-            if let filter = filter {
-                // Filter out unwanted characters using the RegexFilter
-                let filtered = newValue.filter { char in
-                    String(char).range(of: filter.regex, options: .regularExpression) != nil
-                }
-                if filtered != newValue {
-                    self.text = filtered
-                }
+            .focused($isFocused)
+            .onChange(of: text) { _, newValue in
+                applyFilters(newValue)
             }
-                
-            // Limit character count
-            if let maxCount = maxCharacterCount, text.count > maxCount {
-                text = String(text.prefix(maxCount))
-            }
-        }
-        .focused($isFocused)
-        .onChange(of: isFocused) { newFocus in
-            if !newFocus {
-                if let format = formatter {
+            .onChange(of: isFocused) { _, newFocus in
+                if !newFocus, let format = formatter {
                     text = format(text)
                 }
-                if let valid = validator {
-                    valid(text)
+            }
+        } else {
+            TextField("", text: $text)
+                .focused($isFocused)
+                .onChange(of: text) { _, newValue in
+                    applyFilters(newValue)
                 }
+                .onChange(of: isFocused) { _, newFocus in
+                    if !newFocus, let format = formatter {
+                        text = format(text)
+                    }
+                }
+        }
+    }
+
+    private func applyFilters(_ newValue: String) {
+        var modified = newValue
+
+        // Apply regex filter
+        if let regex = filter?.regex {
+            let replaced = modified.replacingOccurrences(
+                of: regex,
+                with: "",
+                options: .regularExpression
+            )
+            if replaced != modified {
+                modified = replaced
             }
         }
+
+        // Apply character limit
+        if let maxCount = maxCharacterCount, modified.count > maxCount {
+            modified = String(modified.prefix(maxCount))
+        }
+
+        // Only update if changed (prevents infinite loop)
+        if modified != text {
+            text = modified
+        }
     }
 }
 
-extension InputField where AccessoryView == EmptyView {
-    public init(
-        text: Binding<String>,
-        placeholder: String? = nil,
-        topLabel: String? = nil,
-        topLabelSpacer: Bool = false,
-        bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
-        formatter: ((String) -> String)? = nil,
-        filter: RegexFilter? = nil,
-        validator: ((String) -> Void)? = nil,
-        maxCharacterCount: Int? = nil,
-        customKeyboard: UIInputViewController? = nil,
-    ) {
-        self._text = text
-        self.placeholder = placeholder
-        self.topLabel = topLabel
-        self.topLabelSpacer = topLabelSpacer
-        self.bottomLabelConfig = bottomLabelConfig
-        self.accessoryViewContext = nil
-        self.formatter = formatter
-        self.validator = validator
-        self.filter = filter
-        self.maxCharacterCount = maxCharacterCount
-        self.customKeyboard = customKeyboard
-    }
-}
-
-extension InputField where AccessoryView == Text {
-    public init(
-        text: Binding<String>,
-        placeholder: String? = nil,
-        topLabel: String? = nil,
-        topLabelSpacer: Bool = false,
-        bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
-        accessoryViewContext: AccessoryViewContext<Text>,
-        formatter: ((String) -> String)? = nil,
-        filter: RegexFilter? = nil,
-        validator: ((String) -> Void)? = nil,
-        maxCharacterCount: Int? = nil,
-        customKeyboard: UIInputViewController? = nil,
-    ) {
-        self._text = text
-        self.placeholder = placeholder
-        self.topLabel = topLabel
-        self.topLabelSpacer = topLabelSpacer
-        self.bottomLabelConfig = bottomLabelConfig
-        self.accessoryViewContext = accessoryViewContext
-        self.formatter = formatter
-        self.validator = validator
-        self.filter = filter
-        self.maxCharacterCount = maxCharacterCount
-        self.customKeyboard = customKeyboard
-    }
-}
+// MARK: - InputField with Number Formatting
 
 extension InputField {
-    public init<Label: View>(
-        text: Binding<String>,
+    /// Creates an InputField configured for decimal number input.
+    ///
+    /// - Parameters:
+    ///   - value: Binding to the text value
+    ///   - placeholder: Placeholder text
+    ///   - topLabel: Label above the field
+    ///   - topLabelSpacer: Reserve vertical space for a top label when nil
+    ///   - bottomLabelConfig: Configuration for error/info bottom label
+    ///   - maxInteger: Maximum integer digits
+    ///   - fractionDigits: Number of decimal places
+    ///   - maxCharacterCount: Maximum total characters
+    ///
+    public static func decimal(
+        value: Binding<String>,
         placeholder: String? = nil,
         topLabel: String? = nil,
         topLabelSpacer: Bool = false,
         bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
-        accessoryViewContext: AccessoryViewContext<Button<Label>>,
-        formatter: ((String) -> String)? = nil,
-        filter: RegexFilter? = nil,
-        validator: ((String) -> Void)? = nil,
-        maxCharacterCount: Int? = nil,
-        customKeyboard: UIInputViewController? = nil
-    ) where AccessoryView == Button<Label> {
-        self._text = text
-        self.placeholder = placeholder
-        self.topLabel = topLabel
-        self.topLabelSpacer = topLabelSpacer
-        self.bottomLabelConfig = bottomLabelConfig
-        self.accessoryViewContext = accessoryViewContext
-        self.formatter = formatter
-        self.filter = filter
-        self.validator = validator
-        self.maxCharacterCount = maxCharacterCount
-        self.customKeyboard = customKeyboard
-    }
-}
-
-private class InputTextField: UITextField {
-    var customInputViewController: UIInputViewController?
-    
-    override var inputViewController: UIInputViewController? {
-        return customInputViewController
-    }
-}
-
-private struct UIKitTextField: UIViewRepresentable {
-    @Binding var text: String
-    var placeholder: String?
-    var keyboardType: UIKeyboardType
-    var customKeyboard: UIInputViewController
-    
-    func makeUIView(context: Context) -> InputTextField {
-        let textField = InputTextField()
-        textField.delegate = context.coordinator
-        textField.keyboardType = keyboardType
-        textField.placeholder = placeholder
-        
-        textField.customInputViewController = customKeyboard
-        
-        textField.addTarget(
-            context.coordinator,
-            action: #selector(Coordinator.textFieldDidChange(_:)),
-            for: .editingChanged
+        maxInteger: Int = 10,
+        fractionDigits: Int = 2,
+        maxCharacterCount: Int? = nil
+    ) -> InputField {
+        InputField(
+            text: value,
+            placeholder: placeholder,
+            topLabel: topLabel,
+            topLabelSpacer: topLabelSpacer,
+            bottomLabelConfig: bottomLabelConfig,
+            formatter: NumberFormatting.decimalFormatter(
+                maxInteger: maxInteger,
+                fractionDigits: fractionDigits
+            ),
+            filter: .doubleOnly,
+            maxCharacterCount: maxCharacterCount
         )
-        
-        return textField
     }
-    
-    func updateUIView(_ uiView: InputTextField, context: Context) {
-        if uiView.text != text {
-            uiView.text = text
-        }
-        uiView.keyboardType = keyboardType
-        uiView.customInputViewController = customKeyboard
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    class Coordinator: NSObject, UITextFieldDelegate {
-        var parent: UIKitTextField
-        
-        init(_ parent: UIKitTextField) {
-            self.parent = parent
-        }
-        
-        @objc func textFieldDidChange(_ textField: UITextField) {
-            parent.text = textField.text ?? ""
-        }
+
+    /// Creates an InputField configured for integer input.
+    ///
+    /// - Parameters:
+    ///   - value: Binding to the text value
+    ///   - placeholder: Placeholder text
+    ///   - topLabel: Label above the field
+    ///   - topLabelSpacer: Reserve vertical space for a top label when nil
+    ///   - bottomLabelConfig: Configuration for error/info bottom label
+    ///   - minDigits: Minimum integer digits
+    ///   - maxDigits: Maximum integer digits
+    ///   - maxCharacterCount: Maximum total characters
+    ///
+    public static func integer(
+        value: Binding<String>,
+        placeholder: String? = nil,
+        topLabel: String? = nil,
+        topLabelSpacer: Bool = false,
+        bottomLabelConfig: BottomLabelConfig = .init(isVisible: false),
+        minDigits: Int = 1,
+        maxDigits: Int = 10,
+        maxCharacterCount: Int? = nil
+    ) -> InputField {
+        InputField(
+            text: value,
+            placeholder: placeholder,
+            topLabel: topLabel,
+            topLabelSpacer: topLabelSpacer,
+            bottomLabelConfig: bottomLabelConfig,
+            formatter: NumberFormatting.integerFormatter(
+                minDigits: minDigits,
+                maxDigits: maxDigits
+            ),
+            filter: .integerOnly,
+            maxCharacterCount: maxCharacterCount ?? maxDigits
+        )
     }
 }

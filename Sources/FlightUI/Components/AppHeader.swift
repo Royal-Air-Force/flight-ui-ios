@@ -1,16 +1,9 @@
-//
-//  AppHeader.swift
-//  flight-ui-ios
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 
 // MARK: - AppHeader View -
 
 private struct AppHeader<Content: View>: View {
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) var theme
 
     private var content: () -> Content
     private var title: String?
@@ -21,13 +14,19 @@ private struct AppHeader<Content: View>: View {
 
     public init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
+        self.title = nil
+        self.imageName = nil
+        self.bundle = nil
+        self.typography = nil
         self.useContent = true
     }
 
-    public init (title: String? = nil,
-                 typography: Font? = nil,
-                 imageName: String? = nil,
-                 bundle: Bundle? = nil) where Content == EmptyView {
+    public init(
+            title: String? = nil,
+            typography: Font? = nil,
+            imageName: String? = nil,
+            bundle: Bundle? = nil
+        ) where Content == EmptyView {
         self.title = title
         self.typography = typography
         self.imageName = imageName
@@ -66,6 +65,7 @@ private struct AppHeader<Content: View>: View {
 #if DEBUG
 
 struct AppHeader_Previews: PreviewProvider {
+    @Environment(\.theme) var theme
     static var previews: some View {
         VStack {
             AppHeader {
@@ -85,7 +85,6 @@ struct AppHeader_Previews: PreviewProvider {
             Spacer()
         }
         .background(Color.flightGrey0)
-        .environmentObject(Theme())
         .previewDisplayName("Header")
         .preferredColorScheme(.dark)
     }

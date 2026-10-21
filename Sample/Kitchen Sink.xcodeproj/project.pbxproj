@@ -161,7 +161,6 @@
 			children = (
 				55B64F382AC4BEEF00AC21F5 /* Packages */,
 				83C93DC22986C53A00A911A9 /* Kitchen Sink */,
-				FB86F2022BA4657A00B51D99 /* KitchenSinkUnitTests */,
 				83C93DC12986C53A00A911A9 /* Products */,
 				837FC6D72986D2620076C720 /* Frameworks */,
 			);
@@ -172,6 +171,7 @@
 			children = (
 				83C93DC02986C53A00A911A9 /* Kitchen Sink.app */,
 				FB86F2012BA4657900B51D99 /* KitchenSinkUnitTests.xctest */,
+				FB86F2022BA4657A00B51D99 /* KitchenSinkUnitTests */,
 			);
 			name = Products;
 			sourceTree = "<group>";

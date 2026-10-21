@@ -110,28 +110,25 @@ fileprivate extension Color {
     static let customColors: [Color] = generalColors + coreColors + graphicsColors
 }
 
-struct Color_Previews: PreviewProvider {
-    static var theme: Theme = Theme(baseScheme: .dark)
+#Preview("All Colors") {
+    let theme = ThemeData.dark
 
-    static var previews: some View {
-        List(Color.customColors, id: \.self) { color in
-            HStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(Color.gray, lineWidth: 3.0)
-                    .background(color)
-                    .frame(width: 75, height: 75)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+    List(Color.customColors, id: \.self) { color in
+        HStack {
+            RoundedRectangle(cornerRadius: 10)
+                .strokeBorder(Color.gray, lineWidth: 3.0)
+                .background(color)
+                .frame(width: 75, height: 75)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
 
-                Text("\(color.name)")
-                    .fontStyle(Theme().font.title2)
-                    .padding()
-            }
+            Text(color.name)
+                .fontStyle(theme.typography.title2)
+                .padding()
         }
-        .environmentObject(theme)
-        .preferredColorScheme(theme.baseScheme)
-        .previewDisplayName("All Colors")
-        .padding()
     }
+    .flightTheme(theme)
+    .preferredColorScheme(.dark)
+    .padding()
 }
 
 #endif
