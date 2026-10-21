@@ -1,16 +1,9 @@
-//
-//  KitchenSinkApp.swift
-//  Flight UI - Kitchen Sink Sample
-//
-//  Created by Appivate 2023
-//
-
 import SwiftUI
 import FlightUI
 
 @main
 struct KitchenSinkApp: App {
-    @StateObject var themeManager = ThemeManager(current: .dark)
+    @State private var themeManager = ThemeManager(.dark)
     @State private var isDarkTheme = true
 
     var body: some Scene {
@@ -18,7 +11,7 @@ struct KitchenSinkApp: App {
             VStack(spacing: 0) {
                 AssuranceBanner()
                 
-                ToggleBanner()
+                ToggleBanner(isDarkTheme: $isDarkTheme, themeManager: themeManager)
                 
                 NavigationStack {
                     List {
@@ -58,46 +51,42 @@ struct KitchenSinkApp: App {
                     .toolbarBackground(themeManager.current.color.background, for: .navigationBar)
                 }
             }
-            .environmentObject(themeManager)
-            .environmentObject(themeManager.current)
+            .flightTheme(themeManager.current)
             .accentColor(themeManager.current.color.primary)
-            .environment(\.colorScheme, themeManager.current.baseScheme)
+            .preferredColorScheme(themeManager.current.baseScheme == .dark ? .dark : .light)
         }
     }
 }
 
 private struct ToggleBanner: View {
-    @EnvironmentObject var themeManager: ThemeManager
-    @State private var isDarkTheme = true
+    @Environment(\.theme) private var theme
+    @Binding var isDarkTheme: Bool
+    var themeManager: ThemeManager
 
     var body: some View {
         Toggle("Dark Theme", isOn: $isDarkTheme)
-            .onChange(of: isDarkTheme) { value in
-                if value {
-                    themeManager.updateTheme(.dark)
-                } else {
-                    themeManager.updateTheme(.light)
-                }
+            .onChange(of: isDarkTheme) { _, newValue in
+                themeManager.apply(newValue ? .dark : .light)
             }
             .toggleStyle(SwitchToggleStyle(tint: .green))
             .padding(20)
             .background(
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(themeManager.current.color.surfaceHigh)
+                    .fill(theme.color.surfaceHigh)
             )
             .padding([.horizontal, .top], 20)
-        }
+    }
 }
 
 private struct AssuranceBanner: View {
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) private var theme
     
     var body: some View {
         HStack {
             Text("TRIALS USE ONLY (NOT ASSURED) MUST NOT BE USED AS A PRIMARY REFERENCE")
                 .fontStyle(.subhead)
                 .fontWeight(.bold)
-                .padding(theme.padding.grid2x)
+                .padding(theme.spacing.grid2x)
                 .frame(maxWidth: .infinity)
         }
         .background(.red)
@@ -105,7 +94,7 @@ private struct AssuranceBanner: View {
 }
 
 private struct SampleScreenView<Destination: View>: View {
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) private var theme
 
     var title: String
     var destination: Destination

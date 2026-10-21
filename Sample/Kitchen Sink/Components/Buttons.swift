@@ -32,7 +32,7 @@ struct Buttons: View {
             HStack {
                 Button("Enabled", action: { showingAlert = true })
                     .buttonStyle(.filled)
-                    .padding([.trailing], theme.padding.grid2x)
+                    .padding([.trailing], theme.spacing.grid2x)
                     .alert("Important message", isPresented: $showingAlert) {
                         Button("OK", role: .cancel) { }
                     }
@@ -137,7 +137,7 @@ struct Buttons: View {
 
             HStack {
                 Button("Enabled", action: { print("Button tapped") })
-                    .buttonStyle(.text(padding: theme.spacing.grid4x, edgeSets: [.leading, .trailing]))
+//                    .buttonStyle(.text(padding: theme.spacing.grid4x, edgeSets: [.leading, .trailing]))
                     .padding([.trailing], theme.spacing.grid2x)
 
                 Button {} label: {
@@ -146,11 +146,11 @@ struct Buttons: View {
                         Text("With Icon")
                     }
                 }
-                .buttonStyle(.text())
+                .buttonStyle(.text)
                 .padding([.trailing], theme.spacing.grid2x)
 
                 Button("Disabled", action: {})
-                    .buttonStyle(.text())
+                    .buttonStyle(.text)
                     .padding([.trailing], theme.spacing.grid2x)
                     .disabled(true)
 
@@ -159,7 +159,7 @@ struct Buttons: View {
                 }.buttonStyle(.textIcon)
 
                 Button("With Padding", action: {})
-                    .buttonStyle(.text(padding: 8, edgeSets: [.leading, .trailing]))
+//                    .buttonStyle(.text(padding: 8, edgeSets: [.leading, .trailing]))
                 
             }
             .frame(maxWidth: .infinity, alignment: .leading)

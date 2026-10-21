@@ -119,12 +119,12 @@ struct Inputs: View {
 
                 InputField(text: $viewModel.debounceInput, placeholder: "Debounce", bottomLabelConfig: BottomLabelConfig(viewModel.debounceAdvisoryLabel))
                     .textFieldStyle(.default)
-                    .onChange(of: viewModel.debounceInput) { _ in
-                        viewModel.debounceAdvisoryLabel = viewModel.defaultDebounceAdvisoryLabel
+                    .onChange(of: viewModel.debounceInput) { _, _ in
+                        viewModel.debounceAdvisoryLabel = ViewModel.defaultDebounceAdvisoryLabel
                     }
                     .onDebounce(of: viewModel.debounceInput, duration: .seconds(2)) { debouncedValue in
                         if debouncedValue.isEmpty {
-                            viewModel.debounceAdvisoryLabel = viewModel.defaultDebounceAdvisoryLabel
+                            viewModel.debounceAdvisoryLabel = ViewModel.defaultDebounceAdvisoryLabel
                         } else {
                             viewModel.debounceAdvisoryLabel = debouncedValue
                         }
@@ -143,12 +143,12 @@ struct Inputs: View {
 
             HStack {
                 MenuField(selection: $viewModel.boundSelectionInput,
-                             options: viewModel.BoundSelectionTypes.allCases,
+                             options: ViewModel.BoundSelectionTypes.allCases,
                              placeholder: "Bound Selection Input")
                 .menuFieldStyle(MenuFieldStyle(viewModel.boundSelectionState()))
 
                 UnboundMenuField(selection: $viewModel.unboundSelectionInput,
-                                 options: viewModel.UnboundDefaultSelectionTypes.allCases,
+                                 options: ViewModel.UnboundDefaultSelectionTypes.allCases,
                                  placeholder: "Unbound Selection Input")
                 .menuFieldStyle(MenuFieldStyle(viewModel.unboundSelectionState()))
             }
