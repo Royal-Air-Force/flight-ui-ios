@@ -10,26 +10,26 @@ import Foundation
 import FlightUI
 
 struct CrossWindCalculator: View {
-    @EnvironmentObject var theme: Theme
+    @Environment(\.theme) var theme
     @StateObject var viewModel = CrosswindCalculatorViewModel(calculatorService: CalculatorService())
 
     var body: some View {
         ScrollView {
-            VStack(spacing: theme.padding.grid6x) {
+            VStack(spacing: theme.spacing.grid6x) {
                 windSpeedInput
                 windspeedOutput
             }
-            .padding(theme.padding.grid3x)
+            .padding(theme.spacing.grid3x)
         }
         .background(theme.color.background)
         .navigationBarTitle(CrossWindCalculator.crosswindTitle)
     }
 
     var windSpeedInput: some View {
-        VStack(alignment: .leading, spacing: theme.padding.grid2x) {
+        VStack(alignment: .leading, spacing: theme.spacing.grid2x) {
             HStack {
                 Text(CrossWindCalculator.runwayHeadingLabel)
-                    .fontStyle(theme.font.bodyBold)
+                    .fontStyle(theme.typography.bodyBold)
                     .frame(width: 200, alignment: .leading)
                 
                 MenuField(selection: $viewModel.runwayHeading,
@@ -39,7 +39,7 @@ struct CrossWindCalculator: View {
             
             HStack {
                 Text(CrossWindCalculator.windSpeedLabel)
-                    .fontStyle(theme.font.bodyBold)
+                    .fontStyle(theme.typography.bodyBold)
                     .frame(width: 200, alignment: .leading)
                 
                 InputField(text: $viewModel.windSpeed,
@@ -50,7 +50,7 @@ struct CrossWindCalculator: View {
             
             HStack {
                 Text(CrossWindCalculator.windDirectionLabel)
-                    .fontStyle(theme.font.bodyBold)
+                    .fontStyle(theme.typography.bodyBold)
                     .frame(width: 200, alignment: .leading)
                 
                 InputField(text: $viewModel.windDirection,
@@ -61,39 +61,39 @@ struct CrossWindCalculator: View {
                 .textFieldStyle(viewModel.windDirectionTextFieldStyle)
             }
         }
-        .padding([.all], theme.padding.grid3x)
+        .padding([.all], theme.spacing.grid3x)
         .cardStyle(.filled)
     }
 
     var windspeedOutput: some View {
-        VStack(spacing: theme.padding.grid2x) {
+        VStack(spacing: theme.spacing.grid2x) {
             Text(CrossWindCalculator.crosswindResultsTitle)
-                .fontStyle(theme.font.title1)
+                .fontStyle(theme.typography.title1)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            HStack(spacing: theme.padding.grid4x) {
+            HStack(spacing: theme.spacing.grid4x) {
                 VStack {
                     Text(CrossWindCalculator.crosswindLabel)
-                        .fontStyle(theme.font.headline)
+                        .fontStyle(theme.typography.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     InputField(text: $viewModel.crosswindOutput,
                                placeholder: "")
                     .textFieldStyle(.advisory)
                 }
-                .padding([.all], theme.padding.grid2x)
+                .padding([.all], theme.spacing.grid2x)
                 .cardStyle(.filled)
                 
                 VStack {
                     Text(CrossWindCalculator.headwindLabel)
-                        .fontStyle(theme.font.headline)
+                        .fontStyle(theme.typography.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     InputField(text: $viewModel.headwindOutput,
                                placeholder: "")
                     .textFieldStyle(.advisory)
                 }
-                .padding([.all], theme.padding.grid2x)
+                .padding([.all], theme.spacing.grid2x)
                 .cardStyle(.filled)
             }
         }
@@ -103,10 +103,9 @@ struct CrossWindCalculator: View {
 #if DEBUG
 
 struct CrosswindPreview: PreviewProvider {
-    static var theme: Theme = Theme(baseScheme: .dark)
+    static var theme: ThemeData = .dark
     static var previews: some View {
         CrossWindCalculator()
-            .environmentObject(theme)
             .previewDisplayName("CrossWind Calculator")
             .preferredColorScheme(theme.baseScheme)
     }
