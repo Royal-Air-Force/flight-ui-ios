@@ -18,6 +18,8 @@ struct KitchenSinkApp: App {
             VStack(spacing: 0) {
                 AssuranceBanner()
                 
+                ToggleBanner()
+                
                 NavigationStack {
                     List {
                         Section(
@@ -54,17 +56,6 @@ struct KitchenSinkApp: App {
                     .navigationBarTitle("FlightUI")
                     .navigationBarTitleDisplayMode(.large)
                     .toolbarBackground(themeManager.current.color.background, for: .navigationBar)
-                    .toolbar {
-                        Toggle("Dark Theme", isOn: $isDarkTheme)
-                            .onChange(of: isDarkTheme) { value in
-                                if value {
-                                    themeManager.updateTheme(.dark)
-                                } else {
-                                    themeManager.updateTheme(.light)
-                                }
-                            }
-                            .toggleStyle(SwitchToggleStyle(tint: .green))
-                    }
                 }
             }
             .environmentObject(themeManager)
@@ -73,6 +64,29 @@ struct KitchenSinkApp: App {
             .environment(\.colorScheme, themeManager.current.baseScheme)
         }
     }
+}
+
+private struct ToggleBanner: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    @State private var isDarkTheme = true
+
+    var body: some View {
+        Toggle("Dark Theme", isOn: $isDarkTheme)
+            .onChange(of: isDarkTheme) { value in
+                if value {
+                    themeManager.updateTheme(.dark)
+                } else {
+                    themeManager.updateTheme(.light)
+                }
+            }
+            .toggleStyle(SwitchToggleStyle(tint: .green))
+            .padding(20)
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(themeManager.current.color.surfaceHigh)
+            )
+            .padding([.horizontal, .top], 20)
+        }
 }
 
 private struct AssuranceBanner: View {

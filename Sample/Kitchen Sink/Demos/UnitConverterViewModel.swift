@@ -47,20 +47,20 @@ class UnitConverterViewModel: ObservableObject {
     // MARK: Length
     @Published var lengthConversionInput: String = ""
     @Published var lengthConversionOutput: String = ""
-    @Published var lengthSelectedInputType: LengthType? = .feet
-    @Published var lengthSelectedOutputType: LengthType? = .metres
+    @Published var lengthSelectedInputType: LengthType = .feet
+    @Published var lengthSelectedOutputType: LengthType = .metres
     @Published var lengthInputFieldStyle: InputFieldStyle = .init(.default)
     @Published var lengthInputBottomLabel: BottomLabelConfig = .init(isVisible: false)
     
     // MARK: Airspeed
     @Published var airspeedTemperature: String = ""
-    @Published var airspeedTemperatureType: TemperatureType? = .celcius
+    @Published var airspeedTemperatureType: TemperatureType = .celcius
     @Published var airspeedTemperatureBottomConfig: BottomLabelConfig = .init(isVisible: false)
     @Published var airspeedTemperatureTextFieldStyle: InputFieldStyle = .init(.default)
     
     @Published var airspeedInputValue: String = ""
     @Published var airspeedInputPlaceholder: String = ""
-    @Published var airspeedInputSelection: AirspeedType? = .tas
+    @Published var airspeedInputSelection: AirspeedType = .tas
     @Published var airspeedInputBottomConfig: BottomLabelConfig = .init(isVisible: false)
     @Published var airspeedInputTextFieldStyle: InputFieldStyle = .init(.default)
     @Published var airspeedOutputPlaceholder: String = ""
@@ -199,12 +199,9 @@ extension UnitConverterViewModel {
         } else {
             clearLengthValidation()
             
-            guard let lengthInputType = lengthSelectedInputType, 
-                    let lengthOutputType = lengthSelectedOutputType else { return }
-            
             lengthConversionOutput = calculatorService.convertLength(length: lengthConversionInput,
-                                                                     inputUnit: lengthInputType,
-                                                                     outputUnit: lengthOutputType)
+                                                                     inputUnit: lengthSelectedInputType,
+                                                                     outputUnit: lengthSelectedOutputType)
         }
     }
     
@@ -240,8 +237,8 @@ extension UnitConverterViewModel {
         $airspeedInputSelection
             .sink { [weak self] airspeedSelection in
                 self?.airspeedOutputValue = ""
-                self?.airspeedInputPlaceholder = airspeedSelection?.unitName ?? ""
-                self?.airspeedOutputPlaceholder = airspeedSelection?.inverse.unitName ?? ""
+                self?.airspeedInputPlaceholder = airspeedSelection.unitName
+                self?.airspeedOutputPlaceholder = airspeedSelection.inverse.unitName
                 self?.clearAirspeedValidation()
             }
             .store(in: &cancellables)
@@ -264,13 +261,10 @@ extension UnitConverterViewModel {
             return
         }
         
-        guard let tempType = airspeedTemperatureType, 
-                let airspeedType = airspeedInputSelection else { return }
-        
         airspeedOutputValue = calculatorService.convertAirspeed(temperature: airspeedTemperature,
-                                                                temperatureUnit: tempType,
+                                                                temperatureUnit: airspeedTemperatureType,
                                                                 airspeed: airspeedInputValue,
-                                                                airspeedUnit: airspeedType)
+                                                                airspeedUnit: airspeedInputSelection)
     }
     
     private func setTemperatureWarningValidation(message: String = UnitConverter.required) {

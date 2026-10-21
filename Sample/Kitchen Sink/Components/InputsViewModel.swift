@@ -25,7 +25,7 @@ class InputsViewModel: ObservableObject {
     @Published var debounceAdvisoryLabel = defaultDebounceAdvisoryLabel
     @Published var keyboardInput = ""
 
-    @Published var boundSelectionInput: BoundSelectionTypes?
+    @Published var boundSelectionInput: BoundSelectionTypes = .defaultSelection
     @Published var unboundSelectionInput: UnboundDefaultSelectionTypes?
 
     func nominalState() -> InputAlertingState {

@@ -1,9 +1,16 @@
 name: Deploy
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: 'The runner label to use'
+        required: false
+        type: string
+        default: 'self-hosted'
 
 jobs:
   release-build:
-    runs-on: Ubuntu-latest
+    runs-on: ${{ inputs.runner == 'self-hosted' && fromJSON('["self-hosted", "macOS", "ARM64"]') || inputs.runner }}
     steps:
       - name: Publish to GitHub Releases
         uses: ncipollo/release-action@v1
