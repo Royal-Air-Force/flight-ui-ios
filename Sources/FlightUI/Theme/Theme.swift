@@ -64,8 +64,9 @@ extension View {
     }
     
     /// Applies FlightUI theme from a ThemeManager to this view hierarchy
-       /// This also observes the manager for changes
-       @MainActor
-       public func flightTheme(_ manager: ThemeManager) -> some View {
-           environment(\.theme, manager.current)
-       }
+    /// This also observes the manager for changes
+    @MainActor
+    public func flightTheme(_ manager: ThemeManager) -> some View {
+        environment(\.theme, manager.current)
+    }
+}
